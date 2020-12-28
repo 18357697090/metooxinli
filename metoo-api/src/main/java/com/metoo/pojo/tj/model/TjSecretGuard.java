@@ -5,8 +5,10 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.io.Serializable;
@@ -20,13 +22,11 @@ import java.time.LocalDateTime;
  * @author loongya
  * @since 2020-12-28
  */
-@Entity
-@Table(name = "tj_secret_guard")
-@EntityListeners(AuditingEntityListener.class)
 @Data
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value="TjSecretGuard对象", description="用户密保问题")
-public class TjSecretGuard extends Model<TjSecretGuard> {
+@NoArgsConstructor
+@AllArgsConstructor
+public class TjSecretGuardModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
