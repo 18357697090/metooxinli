@@ -1,17 +1,15 @@
 package com.metoo.user.comm.generator;
 
 import com.baomidou.mybatisplus.core.exceptions.MybatisPlusException;
-import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
-import com.baomidou.mybatisplus.generator.InjectionConfig;
-import com.baomidou.mybatisplus.generator.config.*;
-import com.baomidou.mybatisplus.generator.config.po.TableInfo;
+import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
+import com.baomidou.mybatisplus.generator.config.GlobalConfig;
+import com.baomidou.mybatisplus.generator.config.PackageConfig;
+import com.baomidou.mybatisplus.generator.config.StrategyConfig;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 // 演示例子，执行 main 方法控制台输入模块表名回车自动生成对应项目目录中
@@ -57,10 +55,10 @@ public class LiuHaiLongCodeGenerator {
 
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://localhost:3306/eachvi?allowPublicKeyRetrieval=true&useSSL=false&useUnicode=true&characterEncoding=UTF8&serverTimezone=GMT");
+        dsc.setUrl("jdbc:mysql://47.111.98.218:3306/metoo?allowPublicKeyRetrieval=true&useSSL=false&useUnicode=true&characterEncoding=UTF8&serverTimezone=GMT");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("root");
-        dsc.setPassword("tiger");
+        dsc.setPassword("@Jy940327");
         mpg.setDataSource(dsc);
 
         // 包配置

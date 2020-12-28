@@ -1,17 +1,16 @@
 package com.metoo.user.tj.dao.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.metoo.user.tj.dao.entity.TjUser;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
  * <p>
- *  Mapper 接口
+ * 用户表 Mapper 接口
  * </p>
  *
  * @author loongya
- * @since 2020-12-15
+ * @since 2020-12-28
  */
 public interface TjUserMapper extends BaseMapper<TjUser> {
 
-    TjUser getTjUserById(Integer id);
 }

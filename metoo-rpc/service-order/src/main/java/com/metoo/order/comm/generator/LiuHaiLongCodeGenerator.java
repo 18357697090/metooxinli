@@ -60,7 +60,7 @@ public class LiuHaiLongCodeGenerator {
         dsc.setUrl("jdbc:mysql://localhost:3306/eachvi?allowPublicKeyRetrieval=true&useSSL=false&useUnicode=true&characterEncoding=UTF8&serverTimezone=GMT");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("root");
-        dsc.setPassword("tiger");
+        dsc.setPassword("@Jy940327");
         mpg.setDataSource(dsc);
 
         // 包配置
