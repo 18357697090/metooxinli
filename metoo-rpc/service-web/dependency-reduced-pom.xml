@@ -96,7 +96,7 @@
             </goals>
             <configuration>
               <outputDirectory>${project.build.directory}/metooweblib</outputDirectory>
-              <excludeArtifactIds>metoo-api, metoo-core</excludeArtifactIds>
+              <excludeArtifactIds>metoo-api, metoo-core, metoo-comm</excludeArtifactIds>
               <excludeTransitive>false</excludeTransitive>
               <stripVersion>false</stripVersion>
             </configuration>
@@ -126,6 +126,7 @@
                 <includes>
                   <include>com.metoo:metoo-api</include>
                   <include>com.metoo:metoo-core</include>
+                  <include>com.metoo:metoo-comm</include>
                 </includes>
               </artifactSet>
               <transformers />

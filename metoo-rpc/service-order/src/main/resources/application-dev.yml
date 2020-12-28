@@ -1,8 +1,8 @@
 server:
-  port: 8083
+  port: 8085
 spring:
   application:
-    name: metoo-user
+    name: metoo-order
   datasource:
     druid:
       username: root
@@ -34,7 +34,7 @@ spring:
 
 
 mybatis-plus:
-  mapper-locations: classpath:com/metoo/user/**/dao/mapper/mapping/*.xml
+  mapper-locations: classpath:com/metoo/order/**/dao/mapper/mapping/*.xml
   configLocation: classpath:/mybatis-config.xml
   global-config:
     banner: true # 是否控制台 print mybatis-plus 的 LOGO

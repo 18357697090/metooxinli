@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>service-user</artifactId>
+    <artifactId>service-order</artifactId>
 
     <dependencies>
         <dependency>
@@ -92,12 +92,12 @@
                         <!--指定程序入口-->
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <classpathPrefix>eachviuser/</classpathPrefix>
-                            <mainClass>com.metoo.user.MetooUserApplication</mainClass>
+                            <classpathPrefix>metooorder/</classpathPrefix>
+                            <mainClass>com.metoo.order.MetooOrderApplication</mainClass>
                         </manifest>
                         <!-- (配置文件外置目录) -->
                         <manifestEntries>
-                            <Class-Path>metoouserconfig/</Class-Path>
+                            <Class-Path>metooOrderconfig/</Class-Path>
                         </manifestEntries>
                     </archive>
                     <excludes>
@@ -124,7 +124,7 @@
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${project.build.directory}/metoouserconfig</outputDirectory>
+                            <outputDirectory>${project.build.directory}/metooorderconfig</outputDirectory>
                             <resources>
                                 <resource>
                                     <directory>src/main/resources</directory>
@@ -157,8 +157,8 @@
                             <goal>copy-dependencies</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${project.build.directory}/metoouserlib</outputDirectory>
-                            <excludeArtifactIds>metoo-api, metoo-core, metoo-comm</excludeArtifactIds>
+                            <outputDirectory>${project.build.directory}/metooorderlib</outputDirectory>
+                            <excludeArtifactIds>metoo-api, metoo-core, metooorder</excludeArtifactIds>
                             <!-- 是否不包含间接依赖 -->
                             <excludeTransitive>false</excludeTransitive>
                             <!-- 忽略版本 -->
@@ -193,7 +193,7 @@
                                     <!-- 这里只是随便拿了几个模块来作为例子，实际上如下模块是不应该打包在一起的 -->
                                     <include>com.metoo:metoo-api</include>
                                     <include>com.metoo:metoo-core</include>
-                                    <include>com.metoo:metoo-comm</include>
+                                    <include>com.metoo:metoo-order</include>
                                 </includes>
                             </artifactSet>
                             <transformers>
