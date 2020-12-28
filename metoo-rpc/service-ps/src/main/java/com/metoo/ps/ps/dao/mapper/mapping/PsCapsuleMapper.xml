@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.metoo.ps.ps.dao.mapper.PsCapsuleMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.metoo.ps.ps.dao.entity.PsCapsule">
+        <id column="id" property="id" />
+        <result column="attribute" property="attribute" />
+        <result column="be_watched" property="beWatched" />
+        <result column="capsule_id" property="capsuleId" />
+        <result column="content" property="content" />
+        <result column="creation_time" property="creationTime" />
+        <result column="picture1" property="picture1" />
+        <result column="picture2" property="picture2" />
+        <result column="picture3" property="picture3" />
+        <result column="picture4" property="picture4" />
+        <result column="picture5" property="picture5" />
+        <result column="picture6" property="picture6" />
+        <result column="picture7" property="picture7" />
+        <result column="picture8" property="picture8" />
+        <result column="picture9" property="picture9" />
+        <result column="prices" property="prices" />
+        <result column="title" property="title" />
+        <result column="type" property="type" />
+        <result column="uid" property="uid" />
+        <result column="state" property="state" />
+    </resultMap>
+
+</mapper>
