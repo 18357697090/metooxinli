@@ -6,14 +6,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
- * 用户账户表 前端控制器
+ * 用户消费记录表 前端控制器
  * </p>
  *
  * @author loongya
  * @since 2020-12-28
  */
 @RestController
-@RequestMapping("/tj/tj-user-account")
-public class TjUserAccountController {
+@RequestMapping("/tj/tj-user-account-detail")
+public class TjUserAccountDetailController {
 
 }

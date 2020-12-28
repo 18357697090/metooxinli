@@ -1,5 +1,6 @@
 package com.metoo.ps.ps.service;
 
+import com.loongya.core.util.RE;
 import com.metoo.ps.ps.dao.entity.PsScale;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -13,4 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface PsScaleService extends IService<PsScale> {
 
+    RE cl(Integer page);
 }

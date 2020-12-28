@@ -1,11 +1,16 @@
 package com.metoo.pojo.vo.ps;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Data
-public class MeDTO {
+@NoArgsConstructor
+@AllArgsConstructor
+public class MeDTO implements Serializable {
     private BigDecimal balance;
     private Integer activeIntegral;
     private Integer psychologyIntegral;
