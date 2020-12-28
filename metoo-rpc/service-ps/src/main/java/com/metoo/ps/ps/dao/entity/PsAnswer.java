@@ -9,6 +9,10 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import javax.persistence.*;
 
 /**
  * <p>
@@ -19,12 +23,16 @@ import lombok.EqualsAndHashCode;
  * @since 2020-12-28
  */
 @Data
+@Entity
+@EntityListeners(AuditingEntityListener.class)
 @EqualsAndHashCode(callSuper = false)
 @ApiModel(value="PsAnswer对象", description="心理测量题目答案表")
 public class PsAnswer extends Model<PsAnswer> {
 
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
@@ -37,6 +45,7 @@ public class PsAnswer extends Model<PsAnswer> {
     @ApiModelProperty(value = "用户id")
     private Integer uid;
 
+    @CreatedDate
     @ApiModelProperty(value = "创建时间")
     private LocalDateTime creationTime;
 

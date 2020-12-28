@@ -9,6 +9,10 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import javax.persistence.*;
 
 /**
  * <p>
@@ -19,12 +23,16 @@ import lombok.EqualsAndHashCode;
  * @since 2020-12-28
  */
 @Data
+@Entity
+@EntityListeners(AuditingEntityListener.class)
 @EqualsAndHashCode(callSuper = false)
 @ApiModel(value="PsCapsule对象", description="心理倾诉胶囊（备忘录功能）表")
 public class PsCapsule extends Model<PsCapsule> {
 
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
@@ -40,6 +48,7 @@ public class PsCapsule extends Model<PsCapsule> {
     @ApiModelProperty(value = "胶囊内容")
     private String content;
 
+    @CreatedDate
     @ApiModelProperty(value = "创建时间")
     private LocalDateTime creationTime;
 
