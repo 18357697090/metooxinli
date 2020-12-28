@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.metoo.xy.xy.dao.mapper.XyJoinCityMessageMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.metoo.xy.xy.dao.entity.XyJoinCityMessage">
+        <id column="id" property="id" />
+        <result column="creation_time" property="creationTime" />
+        <result column="city_host_id" property="cityHostId" />
+        <result column="message" property="message" />
+        <result column="state" property="state" />
+        <result column="uid" property="uid" />
+        <result column="city_name" property="cityName" />
+    </resultMap>
+
+</mapper>
