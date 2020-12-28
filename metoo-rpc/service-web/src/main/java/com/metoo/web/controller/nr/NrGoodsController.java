@@ -1,8 +1,11 @@
 package com.metoo.web.controller.nr;
 
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * <p>
@@ -15,5 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/nr/nr-goods")
 public class NrGoodsController {
+
+    @GetMapping("/goods")
+    public List<Goods> shop(){
+        return goodsDao.findAll();
+    }
+
 
 }

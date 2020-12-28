@@ -1,8 +1,8 @@
 package com.metoo.web.controller.ps;
 
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -15,5 +15,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/ps/ps-comment")
 public class PsCommentController {
+    @ApiOperation("量表评论")
+    @PostMapping("/comment")
+    public String comment(@RequestBody CommentsTool commentsTool, @RequestHeader("UID") Integer uid){
+        Comment comment=new Comment();
+        comment.setComment(commentsTool.getComment());
+        comment.setScaleId(commentsTool.getScaleId());
+        comment.setUid(uid);
+        commentDao.save(comment);
+        return "success";
+    }
 
 }
