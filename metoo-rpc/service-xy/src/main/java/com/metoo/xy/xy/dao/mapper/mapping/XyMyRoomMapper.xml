@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.metoo.xy.xy.dao.mapper.XyMyRoomMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.metoo.xy.xy.dao.entity.XyMyRoom">
+        <id column="id" property="id" />
+        <result column="creation_time" property="creationTime" />
+        <result column="is_host" property="isHost" />
+        <result column="state" property="state" />
+        <result column="type" property="type" />
+        <result column="uid" property="uid" />
+        <result column="my_room_id" property="myRoomId" />
+        <result column="notice" property="notice" />
+    </resultMap>
+
+</mapper>

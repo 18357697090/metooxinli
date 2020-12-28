@@ -8,6 +8,9 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import javax.persistence.*;
 
 /**
  * <p>
@@ -18,12 +21,17 @@ import lombok.EqualsAndHashCode;
  * @since 2020-12-28
  */
 @Data
+@Entity
+@Table(name = "in_swiper")
+@EntityListeners(AuditingEntityListener.class)
 @EqualsAndHashCode(callSuper = false)
 @ApiModel(value="InSwiper对象", description="首页轮播图")
 public class InSwiper extends Model<InSwiper> {
 
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
