@@ -1,4 +1,4 @@
-package com.metoo.api.model.tj;
+package com.metoo.pojo.model.tj;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

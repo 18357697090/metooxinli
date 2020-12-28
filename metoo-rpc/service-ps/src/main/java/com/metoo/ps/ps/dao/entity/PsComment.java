@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
 import java.io.Serializable;
+import java.util.Date;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -41,7 +43,7 @@ public class PsComment extends Model<PsComment> {
 
     @CreatedDate
     @ApiModelProperty(value = "评论时间")
-    private LocalDateTime creationTime;
+    private Date creationTime;
 
     @ApiModelProperty(value = "量表id")
     private Integer scaleId;
