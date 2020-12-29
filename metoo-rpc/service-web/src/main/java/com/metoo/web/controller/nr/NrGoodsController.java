@@ -1,6 +1,9 @@
 package com.metoo.web.controller.nr;
 
 
+import com.loongya.core.util.RE;
+import com.metoo.api.nr.NrGoodsApi;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,12 +19,16 @@ import java.util.List;
  * @since 2020-12-28
  */
 @RestController
-@RequestMapping("/nr/nr-goods")
+@RequestMapping("/nr/nrGoods")
 public class NrGoodsController {
 
+    @DubboReference
+    private NrGoodsApi nrGoodsApi;
+
     @GetMapping("/goods")
-    public List<Goods> shop(){
-        return goodsDao.findAll();
+    public RE shop(){
+
+        return nrGoodsApi.findAll();
     }
 
 

@@ -2,9 +2,13 @@ package com.metoo.order.nr.service.impl;
 
 import com.metoo.order.nr.dao.entity.NrBackpack;
 import com.metoo.order.nr.dao.mapper.NrBackpackMapper;
+import com.metoo.order.nr.dao.repository.NrBackpackRepository;
 import com.metoo.order.nr.service.NrBackpackService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -17,4 +21,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class NrBackpackServiceImpl extends ServiceImpl<NrBackpackMapper, NrBackpack> implements NrBackpackService {
 
+    @Autowired
+    private NrBackpackRepository nrBackpackRepository;
+
+    @Override
+    public List<NrBackpack> findByUid(Integer uid) {
+        return nrBackpackRepository.findByUid(uid);
+    }
+
+    @Override
+    public void updateGoodsNumber(Integer i, Integer uid, Integer type) {
+        nrBackpackRepository.updateGoodsNumber(i, uid, type);
+    }
 }

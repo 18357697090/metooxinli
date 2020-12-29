@@ -1,6 +1,9 @@
 package com.metoo.web.controller.order;
 
 
+import com.loongya.core.util.RE;
+import com.metoo.api.order.PsUserBuyCapsuleApi;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,26 +20,17 @@ import java.math.BigDecimal;
  * @since 2020-12-28
  */
 @RestController
-@RequestMapping("/ps/ps-user-buy-capsule")
+@RequestMapping("/ps/psUserBuyCapsule")
 public class PsUserBuyCapsuleController {
 
 
+    @DubboReference
+    private PsUserBuyCapsuleApi psUserBuyCapsuleApi;
+
     @GetMapping("/pay")
-    public String pay(@RequestHeader("UID") Integer uid, Integer capsuleId){
-        Zh zh = zhDao.findByUid(uid);
-        Capsule capsule = capsuleDao.findByCapsuleId(capsuleId);
-        BigDecimal prices = capsule.getPrices();
-        int x = zh.getBalance().compareTo(prices);
-        if(x >= 0){
-            zhDao.updateBalance(zh.getBalance().subtract(prices),uid);
-            UserBuyCapsule userBuyCapsule = new UserBuyCapsule();
-            userBuyCapsule.setCapsuleId(capsuleId);
-            userBuyCapsule.setUid(uid);
-            userBuyCapsuleDao.save(userBuyCapsule);
-            return "success";
-        }else {
-            return "error";
-        }
+    public RE pay(@RequestHeader("UID") Integer uid, Integer capsuleId){
+        return psUserBuyCapsuleApi.pay(uid, capsuleId);
+
     }
 
 }

@@ -3,6 +3,8 @@ package com.metoo.user.tj.service;
 import com.metoo.user.tj.dao.entity.TjUserAccount;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.math.BigDecimal;
+
 /**
  * <p>
  * 用户账户表 服务类
@@ -13,4 +15,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface TjUserAccountService extends IService<TjUserAccount> {
 
+    void updateBalance(BigDecimal subtract, Integer uid);
+
+    TjUserAccount findByUid(Integer uid);
 }

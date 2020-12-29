@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2020-12-28
  */
 @RestController
-@RequestMapping("/im/im-gift-record")
+@RequestMapping("/im/imGiftRecord")
 public class ImGiftRecordController {
 
 }

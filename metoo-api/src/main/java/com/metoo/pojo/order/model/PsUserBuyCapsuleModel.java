@@ -1,11 +1,13 @@
 package com.metoo.pojo.order.model;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -19,6 +21,12 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 public class PsUserBuyCapsuleModel implements Serializable {
+    private Long id;
 
+    private Integer capsuleId;
+
+    private Integer uid;
+
+    private Date creationTime;
 
 }
