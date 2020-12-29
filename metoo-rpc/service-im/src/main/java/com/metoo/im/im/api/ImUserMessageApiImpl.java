@@ -5,7 +5,9 @@ import com.loongya.core.util.RE;
 import com.metoo.api.im.ImUserMessageApi;
 import com.metoo.im.im.dao.entity.ImUserMessage;
 import com.metoo.im.im.service.ImUserMessageService;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -17,6 +19,8 @@ import java.util.List;
  * @author loongya
  * @since 2020-12-28
  */
+@Component
+@DubboService
 public class ImUserMessageApiImpl implements ImUserMessageApi {
 
     @Autowired

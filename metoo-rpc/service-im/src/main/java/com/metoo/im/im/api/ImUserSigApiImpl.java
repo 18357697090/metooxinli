@@ -7,7 +7,9 @@ import com.metoo.api.im.ImUserSigApi;
 import com.metoo.im.im.dao.entity.ImUserSig;
 import com.metoo.im.im.service.ImUserSigService;
 import com.tencentyun.TLSSigAPIv2;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
@@ -19,6 +21,8 @@ import java.util.Date;
  * @author loongya
  * @since 2020-12-28
  */
+@Component
+@DubboService
 public class ImUserSigApiImpl implements ImUserSigApi {
 
     private final TLSSigAPIv2 api = new TLSSigAPIv2(
