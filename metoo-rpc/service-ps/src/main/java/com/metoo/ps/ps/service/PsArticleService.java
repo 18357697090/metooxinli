@@ -2,6 +2,9 @@ package com.metoo.ps.ps.service;
 
 import com.metoo.ps.ps.dao.entity.PsArticle;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.springframework.data.domain.Pageable;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface PsArticleService extends IService<PsArticle> {
 
+    List<PsArticle> findArticleRand4();
+
+    List<PsArticle> findByState(Integer i, Pageable pageable);
+
+    PsArticle findByArticleId(Integer articleId);
 }

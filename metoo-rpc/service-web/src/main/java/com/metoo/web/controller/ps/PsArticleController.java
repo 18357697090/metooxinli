@@ -1,6 +1,9 @@
 package com.metoo.web.controller.ps;
 
 
+import com.loongya.core.util.RE;
+import com.metoo.api.ps.PsArticleApi;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,24 +20,23 @@ import java.util.List;
  * @since 2020-12-28
  */
 @RestController
-@RequestMapping("/ps/ps-article")
+@RequestMapping("/ps/psArticle")
 public class PsArticleController {
 
+    @DubboReference
+    private PsArticleApi psArticleApi;
+
     @GetMapping("/more")
-    public List<ArticleDTO> more(Integer page){
-        Pageable pageable = PageRequest.of(page,5, Sort.Direction.DESC,"sort");
-        List<Article>  articles = articleDao.findByState(1,pageable);
-        List<ArticleDTO> articleDTOS = new ArrayList<>();
-        for (Article article : articles){
-            ArticleDTO articleDTO = mapper.map(article,ArticleDTO.class);
-            articleDTOS.add(articleDTO);
-        }
-        return articleDTOS;
+    public RE more(Integer page){
+        return psArticleApi.more(page);
+
     }
 
     @GetMapping("/content")
-    public String content(Integer articleId){
-        return articleDao.findByArticleId(articleId).getContent();
+    public RE content(Integer articleId){
+        return psArticleApi.content(articleId);
+
+
     }
 
 
