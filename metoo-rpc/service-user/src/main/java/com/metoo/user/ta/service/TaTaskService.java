@@ -2,6 +2,9 @@ package com.metoo.user.ta.service;
 
 import com.metoo.user.ta.dao.entity.TaTask;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.springframework.data.domain.Pageable;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface TaTaskService extends IService<TaTask> {
 
+    List<TaTask> findOrdinaryTask(Pageable pageable);
 }

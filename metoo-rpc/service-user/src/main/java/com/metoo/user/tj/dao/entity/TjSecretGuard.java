@@ -49,7 +49,7 @@ public class TjSecretGuard extends Model<TjSecretGuard> {
     private String secretGuard;
 
     @ApiModelProperty(value = "创建时间")
-    private LocalDateTime creationTime;
+    private Date creationTime;
 
 
     @Override

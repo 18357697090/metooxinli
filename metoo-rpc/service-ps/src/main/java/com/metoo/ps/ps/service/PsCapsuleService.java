@@ -13,4 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface PsCapsuleService extends IService<PsCapsule> {
 
+    PsCapsule findByCapsuleId(Integer capsuleId);
 }

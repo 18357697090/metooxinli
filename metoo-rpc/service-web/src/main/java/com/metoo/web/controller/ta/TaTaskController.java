@@ -1,8 +1,13 @@
 package com.metoo.web.controller.ta;
 
 
+import com.loongya.core.util.RE;
+import com.metoo.api.ta.TaTaskApi;
+import org.apache.dubbo.config.annotation.DubboReference;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.print.Pageable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,23 +21,17 @@ import java.util.List;
  * @since 2020-12-28
  */
 @RestController
-@RequestMapping("/ta/ta-task")
+@RequestMapping("/ta/taTask")
 public class TaTaskController {
+
+    @DubboReference
+    private TaTaskApi taTaskApi;
+
     //任务大厅
     @GetMapping("/taskList")
-    public List<TaskDTO> taskList(Integer page) {
-        Pageable pageable = PageRequest.of(page, 7, Sort.Direction.DESC, "taskPrices");
-        List<TaskDTO> TaskDTOs = new ArrayList<>();
-        List<Task> tasks = taskDao.findOrdinaryTask(pageable);
-        for (Task task : tasks) {
-            TaskDTO taskDTO = mapper.map(task, TaskDTO.class);
-            int uid = task.getUid();
-            UserInfo userInfo = userInfoDao.findByUid(uid);
-            taskDTO.setName(userInfo.getName());
-            taskDTO.setPicture(userInfo.getPicture());
-            TaskDTOs.add(taskDTO);
-        }
-        return TaskDTOs;
+    public RE taskList(Integer page) {
+        return taTaskApi.taskList(page);
+
     }
 
     //教程任务任务大厅

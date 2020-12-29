@@ -55,7 +55,7 @@ public class TjUser extends Model<TjUser> {
     private String spare;
 
     @ApiModelProperty(value = "创建时间")
-    private LocalDateTime creationTime;
+    private Date creationTime;
 
 
     @Override

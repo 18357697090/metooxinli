@@ -61,7 +61,7 @@ public class TjUserInfo extends Model<TjUserInfo> {
     private String motto;
 
     @ApiModelProperty(value = "创建时间")
-    private LocalDateTime creationTime;
+    private Date creationTime;
 
 
     @Override

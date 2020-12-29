@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * <p>
@@ -42,7 +43,7 @@ public class TaTaskModel implements Serializable {
 
     private Integer type;
 
-    private LocalDateTime creationTime;
+    private Date creationTime;
 
     private String picture;
 

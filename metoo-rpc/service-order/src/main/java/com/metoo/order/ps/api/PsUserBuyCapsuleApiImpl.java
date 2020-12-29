@@ -4,6 +4,7 @@ import com.loongya.core.util.RE;
 import com.metoo.api.order.PsUserBuyCapsuleApi;
 import com.metoo.api.ps.PsCapsuleApi;
 import com.metoo.api.tj.TjUserAccountApi;
+import com.metoo.order.ps.dao.entity.PsUserBuyCapsule;
 import com.metoo.order.ps.service.PsUserBuyCapsuleService;
 import com.metoo.pojo.order.model.PsUserBuyCapsuleModel;
 import com.metoo.pojo.ps.model.PsCapsuleModel;
@@ -41,7 +42,7 @@ public class PsUserBuyCapsuleApiImpl implements PsUserBuyCapsuleApi {
         int x = zh.getBalance().compareTo(prices);
         if(x >= 0){
             tjUserAccountApi.updateBalance(zh.getBalance().subtract(prices),uid);
-            PsUserBuyCapsuleModel userBuyCapsule = new PsUserBuyCapsuleModel();
+            PsUserBuyCapsule userBuyCapsule = new PsUserBuyCapsule();
             userBuyCapsule.setCapsuleId(capsuleId);
             userBuyCapsule.setUid(uid);
             psUserBuyCapsuleService.save(userBuyCapsule);

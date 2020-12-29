@@ -55,7 +55,7 @@ public class TjUserAccountDetail extends Model<TjUserAccountDetail> {
     private Integer uid;
 
     @ApiModelProperty(value = "创建时间")
-    private LocalDateTime creationTime;
+    private Date creationTime;
 
 
     @Override
