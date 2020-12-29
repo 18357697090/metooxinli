@@ -15,4 +15,7 @@ public interface ImAddFriendMessageApi {
 
     RE AddFriend(Integer uid,Integer friendId,String message);
 
+    RE FriendRequest(Integer uid);
+
+    RE HandlerFriendRequest(Integer uid, Integer sendId, Integer handle);
 }
