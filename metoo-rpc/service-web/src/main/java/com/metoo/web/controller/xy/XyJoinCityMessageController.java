@@ -1,6 +1,10 @@
 package com.metoo.web.controller.xy;
 
 
+import com.loongya.core.util.RE;
+import com.metoo.api.xy.XyJoinCityMessageApi;
+import com.metoo.pojo.xy.vo.XyJoinCityMessageVo;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -12,23 +16,17 @@ import org.springframework.web.bind.annotation.*;
  * @since 2020-12-28
  */
 @RestController
-@RequestMapping("/xy/xy-join-city-message")
+@RequestMapping("/xy/xyJoinCityMessage")
 public class XyJoinCityMessageController {
+
+    @DubboReference
+    private XyJoinCityMessageApi xyJoinCityMessageApi;
 
     //加入国度
     @GetMapping("/joinCity")
-    public ReturnMessage joinCity(@RequestHeader("UID")Integer uid, @RequestBody JoinCityMessage cityMessage){
-        ReturnMessage returnMessage = new ReturnMessage();
-        if (cityMessage.getCityHostId()==null||cityMessage.getMessage()==null){
-            returnMessage.setExplain("填写信息不完全");
-        }else {
-            cityMessage.setUid(uid);
-            cityMessage.setCityName(cityDao.findByCityId(cityMessage.getCityHostId()).getName());
-            cityMessage.setCityHostId(myRoomDao.findByMyRoomIdAndIsHost(cityMessage.getCityHostId()).getUid());
-            joinCityMessageDao.save(cityMessage);
-            returnMessage.setExplain("申请加入成功");
-        }
-        return returnMessage;
+    public RE joinCity(@RequestHeader("UID")Integer uid, @RequestBody XyJoinCityMessageVo vo){
+        return xyJoinCityMessageApi.joinCity(uid, vo);
+
     }
 
 

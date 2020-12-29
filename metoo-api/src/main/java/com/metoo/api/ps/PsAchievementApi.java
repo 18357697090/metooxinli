@@ -1,5 +1,7 @@
 package com.metoo.api.ps;
 
+import com.metoo.pojo.old.model.Result;
+
 /**
  * <p>
  * 心理测量成绩表 服务类
@@ -10,4 +12,5 @@ package com.metoo.api.ps;
  */
 public interface PsAchievementApi {
 
+    String result(Result results, Integer uid);
 }

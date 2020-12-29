@@ -1,5 +1,7 @@
 package com.metoo.api.xy;
 
+import com.loongya.core.util.RE;
+
 /**
  * <p>
  * 国度，族表 服务类
@@ -10,4 +12,5 @@ package com.metoo.api.xy;
  */
 public interface XyRaceApi {
 
+    RE getRace(Integer uid);
 }

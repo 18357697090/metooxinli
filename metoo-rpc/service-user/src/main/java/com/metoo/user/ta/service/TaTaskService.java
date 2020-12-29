@@ -17,4 +17,10 @@ import java.util.List;
 public interface TaTaskService extends IService<TaTask> {
 
     List<TaTask> findOrdinaryTask(Pageable pageable);
+
+    List<TaTask> findTutorialTask(Pageable pageable);
+
+    TaTask findByTaskId(Integer taskId);
+
+    void updateTaskState(Integer taskId);
 }

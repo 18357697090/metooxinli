@@ -30,8 +30,8 @@ public class PsCapsuleApiImpl implements PsCapsuleApi {
         if(OU.isBlack(pojo)){
             return null;
         }
-        PsCapsuleModel model = new PsCapsuleModel();
-        mapper.map(pojo, model);
+        PsCapsuleModel model = mapper.map(pojo, PsCapsuleModel.class);
+
         return model;
 
     }

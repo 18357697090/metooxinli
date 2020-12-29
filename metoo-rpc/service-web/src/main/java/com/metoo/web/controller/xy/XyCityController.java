@@ -1,7 +1,10 @@
 package com.metoo.web.controller.xy;
 
 
+import com.loongya.core.util.RE;
+import com.metoo.api.xy.XyCityApi;
 import io.swagger.annotations.ApiOperation;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,9 +22,11 @@ import java.util.List;
  * @since 2020-12-28
  */
 @RestController
-@RequestMapping("/xy/xy-city")
+@RequestMapping("/xy/xyCity")
 public class XyCityController {
 
+    @DubboReference
+    private XyCityApi xyCityApi;
 
     //@ApiOperation("创建城")
     //创建城或者馆
@@ -110,18 +115,10 @@ public class XyCityController {
     @ApiOperation("获取城列表")
     //获取城
     @GetMapping("/getCity")
-    public List<ReturnCityDTO> getCity(@RequestHeader("UID")Integer uid, Integer countryId){
-        List<City> cities = cityDao.findByCountryId(countryId);
-        Country country = countryDao.findByCountryId(countryId);
-        ReturnCityDTO returnCityDTO1 = new ReturnCityDTO();
-        returnCityDTO1.setCityId(countryId);
-        List<ReturnCityDTO> returnCityDTOS = new ArrayList<>();
-        for (City city : cities){
-            ReturnCityDTO returnCityDTO = mapper.map(city,ReturnCityDTO.class);
-            returnCityDTO.setUsername(userInfoDao.findByUid(myRoomDao.findByMyRoomIdAndIsHost(city.getCityId()).getUid()).getName());
-            returnCityDTOS.add(returnCityDTO);
-        }
-        return returnCityDTOS;
+    public RE getCity(@RequestHeader("UID")Integer uid, Integer countryId){
+        return xyCityApi.getCity(uid, countryId);
+
+
     }
 
 }

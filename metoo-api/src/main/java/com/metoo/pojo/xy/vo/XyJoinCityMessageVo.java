@@ -1,10 +1,13 @@
 package com.metoo.pojo.xy.vo;
 
 import com.loongya.core.util.vo.BaseVo;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
+import java.util.Date;
 
 /**
  * <p>
@@ -18,6 +21,18 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 public class XyJoinCityMessageVo extends BaseVo {
+    private Long id;
 
+    private Date creationTime;
+
+    private Integer cityHostId;
+
+    private String message;
+
+    private Integer state;
+
+    private Integer uid;
+
+    private String cityName;
 
 }

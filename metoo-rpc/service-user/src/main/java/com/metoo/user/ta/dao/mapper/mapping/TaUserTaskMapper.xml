@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.metoo.user.ta.dao.mapper.TaUserTaskMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.metoo.user.ta.dao.entity.TaUserTask">
+        <id column="id" property="id" />
+        <result column="accept_id" property="acceptId" />
+        <result column="accept_state" property="acceptState" />
+        <result column="publish_id" property="publishId" />
+        <result column="publish_state" property="publishState" />
+        <result column="state" property="state" />
+        <result column="task_id" property="taskId" />
+        <result column="type" property="type" />
+    </resultMap>
+
+</mapper>

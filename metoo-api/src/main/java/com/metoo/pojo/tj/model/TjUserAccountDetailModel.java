@@ -1,11 +1,13 @@
 package com.metoo.pojo.tj.model;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -19,6 +21,20 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 public class TjUserAccountDetailModel implements Serializable {
+    private Long id;
 
+    private String content;
+
+    private String orderNumber;
+
+    private Integer prices;
+
+    private String spare;
+
+    private String type;
+
+    private Integer uid;
+
+    private Date creationTime;
 
 }

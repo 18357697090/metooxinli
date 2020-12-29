@@ -8,8 +8,8 @@ import java.util.List;
 
 @Data
 public class JoinAudioRoomDTO {
-    private List<TjUserInfoPojoModel> userInfos;
-    private TjUserInfoPojoModel hostUserInfo;
+    private List<TjUserInfoModel> userInfos;
+    private TjUserInfoModel hostUserInfo;
     private String content;
 
 }

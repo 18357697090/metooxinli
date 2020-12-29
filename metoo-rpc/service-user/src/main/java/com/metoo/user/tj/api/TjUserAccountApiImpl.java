@@ -32,8 +32,7 @@ public class TjUserAccountApiImpl implements TjUserAccountApi {
     @Override
     public TjUserAccountModel findByUid(Integer uid) {
         TjUserAccount pojo = tjUserAccountService.findByUid(uid);
-        TjUserAccountModel model = new TjUserAccountModel();
-        dozerBeanMapper.map(pojo, model);
+        TjUserAccountModel model = dozerBeanMapper.map(pojo, TjUserAccountModel.class);
         return model;
     }
 
