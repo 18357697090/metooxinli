@@ -1,6 +1,9 @@
 package com.metoo.web.controller.im;
 
 
+import com.loongya.core.util.RE;
+import com.metoo.api.im.ImFriendApi;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,56 +24,29 @@ import java.util.List;
 @RequestMapping("/im/im-friend")
 public class ImFriendController {
 
+    @DubboReference
+    private ImFriendApi imFriendApi;
 
     //好友列表
     @GetMapping("/friendList")
-    public List<FriendListDto> friendList(@RequestHeader("UID")Integer uid){
-        List<Friend> friends = friendDao.findByUid(uid);
-        List<FriendListDto> friendListDtos = new ArrayList<>();
-        for (Friend friend : friends){
-            if(friend.getState()==1||friend.getState()==3){
-                int fid = friend.getFriendId();
-                UserInfo userInfo = userInfoDao.findByUid(fid);
-                FriendListDto friendListDto = mapper.map(userInfo,FriendListDto.class);
-                friendListDto.setState(friend.getState());
-                friendListDtos.add(friendListDto);
-            }
-        }
-        return friendListDtos;
+    public RE friendList(@RequestHeader("UID")Integer uid){
+        return imFriendApi.friendList(uid);
     }
 
     @GetMapping("/deleteFriend")
-    public String deleteFriend(@RequestHeader("UID")Integer uid,Integer friendId){
-        friendDao.deleteFriendState(uid,friendId);
-        return "success";
+    public RE deleteFriend(@RequestHeader("UID")Integer uid,Integer friendId){
+        return imFriendApi.deleteFriend(uid,friendId);
     }
 
 
     @GetMapping("/blackFriends")
-    public String blackFriends(@RequestHeader("UID")Integer uid,Integer friendId){
-        Friend friend = friendDao.findByUidAndFriendId(uid,friendId);
-        if (friend.getState()==1){
-            Integer i =friendDao.blackFriends(3,uid,friendId);
-            if(i==1){
-                return "success";
-            }else {
-                return "error";
-            }
-        }else if (friend.getState()==3){
-            Integer i =friendDao.blackFriends(1,uid,friendId);
-            if(i==1){
-                return "success";
-            }else {
-                return "error";
-            }
-        }else {
-            return "error";
-        }
+    public RE blackFriends(@RequestHeader("UID")Integer uid,Integer friendId){
+        return imFriendApi.blackFriends(uid,friendId);
     }
 
     @GetMapping("/findBlackFriends")
-    public Integer findBlackFriends(@RequestHeader("UID")Integer uid,Integer friendId){
-        return friendDao.findByUidAndFriendId(uid,friendId).getState();
+    public RE findBlackFriends(@RequestHeader("UID")Integer uid,Integer friendId){
+        return imFriendApi.findBlackFriends(uid,friendId);
     }
 
 }

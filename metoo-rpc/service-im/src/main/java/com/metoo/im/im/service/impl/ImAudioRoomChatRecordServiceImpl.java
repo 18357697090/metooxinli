@@ -2,9 +2,14 @@ package com.metoo.im.im.service.impl;
 
 import com.metoo.im.im.dao.entity.ImAudioRoomChatRecord;
 import com.metoo.im.im.dao.mapper.ImAudioRoomChatRecordMapper;
+import com.metoo.im.im.dao.repository.ImAudioRoomChatRecordRepository;
 import com.metoo.im.im.service.ImAudioRoomChatRecordService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -17,4 +22,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class ImAudioRoomChatRecordServiceImpl extends ServiceImpl<ImAudioRoomChatRecordMapper, ImAudioRoomChatRecord> implements ImAudioRoomChatRecordService {
 
+    @Autowired
+    private ImAudioRoomChatRecordRepository imAudioRoomChatRecordRepository;
+
+    @Override
+    public List<ImAudioRoomChatRecord> findByAudioRoomId(Integer audioRoomId, Pageable pageable) {
+        return imAudioRoomChatRecordRepository.findByAudioRoomId(audioRoomId,pageable);
+    }
 }

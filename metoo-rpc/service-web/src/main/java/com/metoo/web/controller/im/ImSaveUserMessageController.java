@@ -1,6 +1,9 @@
 package com.metoo.web.controller.im;
 
 
+import com.loongya.core.util.RE;
+import com.metoo.api.im.ImSaveUserMessageApi;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,10 +23,13 @@ import java.util.List;
 @RequestMapping("/im/im-save-user-message")
 public class ImSaveUserMessageController {
 
+    @DubboReference
+    private ImSaveUserMessageApi imSaveUserMessageApi;
+
     //查看聊天记录
-    @GetMapping("/chatRecord")
-    public List<saveUserMessage> chatRecord(@RequestHeader("UID")Integer uid, Integer sendId){
-        return saveUserMessageDao.findByUidAndSendId(uid,sendId);
-    }
+        @GetMapping("/chatRecord")
+        public RE chatRecord(@RequestHeader("UID")Integer uid, Integer sendId){
+            return imSaveUserMessageApi.findByUidAndSendId(uid,sendId);
+        }
 
 }
