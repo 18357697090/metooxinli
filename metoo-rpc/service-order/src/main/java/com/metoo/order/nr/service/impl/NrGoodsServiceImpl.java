@@ -2,8 +2,10 @@ package com.metoo.order.nr.service.impl;
 
 import com.metoo.order.nr.dao.entity.NrGoods;
 import com.metoo.order.nr.dao.mapper.NrGoodsMapper;
+import com.metoo.order.nr.dao.repository.NrGoodsRepository;
 import com.metoo.order.nr.service.NrGoodsService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,4 +19,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class NrGoodsServiceImpl extends ServiceImpl<NrGoodsMapper, NrGoods> implements NrGoodsService {
 
+    @Autowired
+    private NrGoodsRepository nrGoodsRepository;
+
+    @Override
+    public NrGoods findByType(Integer type) {
+        return nrGoodsRepository.findByType(type);
+    }
 }

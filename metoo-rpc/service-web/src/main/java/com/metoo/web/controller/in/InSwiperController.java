@@ -1,6 +1,10 @@
 package com.metoo.web.controller.in;
 
 
+import com.loongya.core.util.RE;
+import com.metoo.api.in.InSwiperApi;
+import com.metoo.pojo.in.vo.InSwiperVo;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,21 +20,23 @@ import java.util.List;
  * @since 2020-12-28
  */
 @RestController
-@RequestMapping("/in/in-swiper")
+@RequestMapping("/in/inSwiper")
 public class InSwiperController {
+
+    @DubboReference
+    private InSwiperApi inSwiperApi;
 
     //轮播图
     @RequestMapping("/swiper")
-    public List<Swiper> swiper(){
-        return swiperDao.findAll();
+    public RE swiper(){
+        return inSwiperApi.swiper();
     }
 
 
     //发布轮播图
     @RequestMapping("/jhxksave")
-    public void save(@RequestBody Swiper swiper){
-        System.out.println(swiper);
-        swiperDao.save(swiper);
+    public RE save(@RequestBody InSwiperVo vo){
+        return inSwiperApi.save(vo);
     }
 
 

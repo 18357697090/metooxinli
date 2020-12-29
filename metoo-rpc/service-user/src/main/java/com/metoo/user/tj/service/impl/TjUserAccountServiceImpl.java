@@ -2,9 +2,13 @@ package com.metoo.user.tj.service.impl;
 
 import com.metoo.user.tj.dao.entity.TjUserAccount;
 import com.metoo.user.tj.dao.mapper.TjUserAccountMapper;
+import com.metoo.user.tj.dao.repository.TjUserAccountRepository;
 import com.metoo.user.tj.service.TjUserAccountService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
 
 /**
  * <p>
@@ -17,4 +21,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class TjUserAccountServiceImpl extends ServiceImpl<TjUserAccountMapper, TjUserAccount> implements TjUserAccountService {
 
+
+    @Autowired
+    private TjUserAccountRepository tjUserAccountRepository;
+
+    @Override
+    public void updateBalance(BigDecimal subtract, Integer uid) {
+        tjUserAccountRepository.updateBalance(subtract, uid);
+    }
+
+    @Override
+    public TjUserAccount findByUid(Integer uid) {
+        return tjUserAccountRepository.findByUid(uid);
+    }
 }

@@ -1,5 +1,8 @@
 package com.metoo.api.in;
 
+import com.loongya.core.util.RE;
+import com.metoo.pojo.in.vo.InSwiperVo;
+
 /**
  * <p>
  * 首页轮播图 服务类
@@ -10,4 +13,7 @@ package com.metoo.api.in;
  */
 public interface InSwiperApi {
 
+    RE swiper();
+
+    RE save(InSwiperVo vo);
 }

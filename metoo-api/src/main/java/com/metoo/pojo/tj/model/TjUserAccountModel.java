@@ -1,11 +1,13 @@
 package com.metoo.pojo.tj.model;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * <p>
@@ -18,7 +20,15 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
-public class TjUserAccountdModel implements Serializable {
+public class TjUserAccountModel implements Serializable {
 
+    private Long id;
 
+    private Integer uid;
+
+    private Integer activeIntegral;
+
+    private BigDecimal balance;
+
+    private Integer psychologyIntegral;
 }

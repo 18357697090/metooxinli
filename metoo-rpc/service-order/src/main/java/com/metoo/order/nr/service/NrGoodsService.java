@@ -13,4 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface NrGoodsService extends IService<NrGoods> {
 
+    NrGoods findByType(Integer type);
 }

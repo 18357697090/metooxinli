@@ -1,6 +1,7 @@
 package com.metoo.pojo.in.vo;
 
 import com.loongya.core.util.vo.BaseVo;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -21,5 +22,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class InSwiperVo extends BaseVo {
 
+    private String address;
 
+    private String swiper;
 }
