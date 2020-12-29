@@ -2,6 +2,7 @@ package com.metoo.order.ps.service;
 
 import com.metoo.order.ps.dao.entity.PsUserBuyCapsule;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.metoo.pojo.order.model.PsUserBuyCapsuleModel;
 
 /**
  * <p>
@@ -13,4 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface PsUserBuyCapsuleService extends IService<PsUserBuyCapsule> {
 
+    PsUserBuyCapsuleModel findByUidAndCapsuleId(Integer uid, Integer capsuleId);
 }
