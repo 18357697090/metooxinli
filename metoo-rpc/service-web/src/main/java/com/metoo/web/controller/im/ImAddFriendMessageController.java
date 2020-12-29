@@ -1,10 +1,12 @@
 package com.metoo.web.controller.im;
 
 
+import com.loongya.core.util.RE;
+import com.metoo.api.im.ImAddFriendMessageApi;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * <p>
@@ -18,11 +20,19 @@ import java.util.List;
 @RequestMapping("/im/im-add-friend-message")
 public class ImAddFriendMessageController {
 
+    @DubboReference
+    private ImAddFriendMessageApi imAddFriendMessageApi;
 
     //添加好友请求
     @PostMapping("/AddFriend")
-    public String AddFriend(@RequestHeader("UID")Integer uid, @RequestParam(value = "friendId") Integer friendId,
-                            @RequestParam(value = "message")String message){
+    public RE AddFriend(@RequestHeader("UID")Integer uid, @RequestParam(value = "friendId") Integer friendId,
+                        @RequestParam(value = "message")String message){
+        return imAddFriendMessageApi.AddFriend(uid,friendId,message);
+
+
+
+
+
         Friend friend = friendDao.findByUidAndFriendId(uid,friendId);
         if (friend!=null){
             if(friend.getState()==1){

@@ -2,6 +2,8 @@ package com.metoo.im.im.api;
 
 
 import com.metoo.api.im.ImAddFriendMessageApi;
+import org.apache.dubbo.config.annotation.DubboService;
+import org.springframework.stereotype.Component;
 
 /**
  * <p>
@@ -11,6 +13,8 @@ import com.metoo.api.im.ImAddFriendMessageApi;
  * @author loongya
  * @since 2020-12-28
  */
+@Component
+@DubboService
 public class ImAddFriendMessageApiImpl implements ImAddFriendMessageApi {
 
 }

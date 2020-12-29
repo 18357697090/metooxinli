@@ -2,6 +2,7 @@ package com.metoo.web.controller.ps;
 
 
 import com.loongya.core.util.RE;
+import com.metoo.api.ps.PsScaleApi;
 import io.swagger.annotations.ApiOperation;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.GetMapping;
