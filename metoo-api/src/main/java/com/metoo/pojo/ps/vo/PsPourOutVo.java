@@ -17,7 +17,6 @@ import lombok.NoArgsConstructor;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
-@AllArgsConstructor
 public class PsPourOutVo extends BaseVo {
 
 }

@@ -18,7 +18,26 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
-@AllArgsConstructor
 public class PsPourOutModel implements Serializable {
+    private Long id;
 
+    private String label;
+
+    private String level;
+
+    private String name;
+
+    private Integer uid;
+
+    private String content;
+
+    private Integer prices;
+
+    private String picture;
+
+    private Integer sort;
+
+    private String spare;
+
+    private Integer onLine;
 }

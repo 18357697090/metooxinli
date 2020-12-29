@@ -18,6 +18,17 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
-@AllArgsConstructor
 public class PsProblemModel implements Serializable {
+
+    private Long id;
+
+    private Integer factorType;
+
+    private Integer pid;
+
+    private String problem;
+
+    private Integer scaleId;
+
+    private Integer type;
 }

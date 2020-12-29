@@ -18,6 +18,5 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
-@AllArgsConstructor
 public class PsAnswerModel implements Serializable {
 }

@@ -18,7 +18,6 @@ import lombok.NoArgsConstructor;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
-@AllArgsConstructor
 public class TjLevelPictureVo extends BaseVo {
 
 

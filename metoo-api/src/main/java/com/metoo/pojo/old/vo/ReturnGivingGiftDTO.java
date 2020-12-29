@@ -1,6 +1,6 @@
 package com.metoo.pojo.old.vo;
 
-import com.metoo.metoo.entity.Gift;
+import com.metoo.pojo.im.model.ImGiftModel;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -10,5 +10,5 @@ public class ReturnGivingGiftDTO {
     private BigDecimal balance;
     private String state;
     private String explain;
-    private Gift gift;
+    private ImGiftModel gift;
 }

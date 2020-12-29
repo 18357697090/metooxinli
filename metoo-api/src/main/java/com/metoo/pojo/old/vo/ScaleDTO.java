@@ -2,16 +2,13 @@ package com.metoo.pojo.old.vo;
 
 import lombok.Data;
 
-import javax.persistence.Column;
 import java.math.BigDecimal;
 
 @Data
 public class ScaleDTO {
     private int scaleId;
-    @Column(nullable = false,columnDefinition="mediumtext")
     //表示该量表有多少人测量了
     private int number;
-    @Column(nullable = false,columnDefinition="mediumtext")
     private String picture;
     private BigDecimal prices=new BigDecimal(0);
     private String name;

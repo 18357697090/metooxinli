@@ -2,14 +2,16 @@ package com.metoo.pojo.old.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(callSuper = false)
+@NoArgsConstructor
 public class MeDTO implements Serializable {
     private BigDecimal balance;
     private Integer activeIntegral;

@@ -18,7 +18,6 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
-@AllArgsConstructor
 public class XyCountryModel implements Serializable{
 
 

@@ -1,13 +1,13 @@
 package com.metoo.pojo.old.model;
 
-import com.metoo.metoo.psychology.Options;
-import com.metoo.metoo.psychology.Problem;
+import com.metoo.pojo.ps.model.PsOptionsModel;
+import com.metoo.pojo.ps.model.PsProblemModel;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
 public class Problems {
-    private List<Problem> problems;
-    private Options options;
+    private List<PsProblemModel> problems;
+    private PsOptionsModel options;
 }

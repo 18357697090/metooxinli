@@ -5,7 +5,6 @@ import com.loongya.core.util.RE;
 import com.metoo.ps.ps.dao.entity.PsScale;
 import com.metoo.ps.ps.dao.mapper.PsScaleMapper;
 import com.metoo.ps.ps.dao.repository.PsScaleRepository;
-import com.metoo.ps.ps.dao.repository.ScaleDao;
 import com.metoo.ps.ps.service.PsScaleService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.data.domain.PageRequest;

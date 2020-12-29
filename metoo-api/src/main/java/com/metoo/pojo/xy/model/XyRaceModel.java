@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -18,8 +19,17 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
-@AllArgsConstructor
 public class XyRaceModel implements Serializable {
+    private Long id;
 
+    private Date creationTime;
+
+    private String introduction;
+
+    private String name;
+
+    private Integer raceId;
+
+    private String picture;
 
 }

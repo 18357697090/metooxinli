@@ -6,6 +6,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * <p>
@@ -18,8 +20,17 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
-@AllArgsConstructor
 public class ImGiftModel implements Serializable {
 
+    private Long id;
 
+    private Date creationTime;
+
+    private Integer giftId;
+
+    private BigDecimal prices;
+
+    private String name;
+
+    private String picture;
 }

@@ -1,6 +1,5 @@
 package com.metoo.pojo.ps.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -18,7 +17,32 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
-@AllArgsConstructor
 public class PsScaleModel implements Serializable {
+    private Long id;
 
+    private String content;
+
+    private Integer dw;
+
+    private String name;
+
+    private String number;
+
+    private Integer numberOfProblem;
+
+    private String picture;
+
+    private Integer prices;
+
+    private Integer scaleGatherId;
+
+    private Integer scaleId;
+
+    private Integer sort;
+
+    private Integer spare;
+
+    private Integer state;
+
+    private Integer type;
 }

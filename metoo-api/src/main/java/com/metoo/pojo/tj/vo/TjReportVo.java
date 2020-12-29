@@ -19,7 +19,6 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
-@AllArgsConstructor
 public class TjReportVo extends BaseVo {
 
 

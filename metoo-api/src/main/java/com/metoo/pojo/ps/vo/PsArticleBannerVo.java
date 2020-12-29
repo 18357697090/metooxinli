@@ -17,6 +17,5 @@ import lombok.NoArgsConstructor;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
-@AllArgsConstructor
 public class PsArticleBannerVo extends BaseVo {
 }

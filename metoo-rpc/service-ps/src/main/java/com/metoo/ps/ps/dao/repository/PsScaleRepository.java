@@ -12,7 +12,9 @@ import java.util.List;
 @Transactional
 public interface PsScaleRepository extends JpaRepository<PsScale,Integer> {
     PsScale findByScaleId(Integer scaleId);
+
     List<PsScale> findByScaleGatherId(int scaleGatherId);
+
     List<PsScale> findAllBySpare(int spare, Pageable pageable);
 
     @Modifying

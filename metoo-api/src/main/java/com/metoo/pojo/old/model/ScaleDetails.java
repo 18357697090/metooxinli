@@ -15,7 +15,7 @@ public class ScaleDetails {
     private int numberOfPeople;
     private int numberOfProblem;
     private String contentPicture;
-    private List<com.metoo.metoo.pojo.Comments> comments;
+    private List<Comments> comments;
     private String scaleNeedToKnow;
     private String state;
     private BigDecimal accountBalance;

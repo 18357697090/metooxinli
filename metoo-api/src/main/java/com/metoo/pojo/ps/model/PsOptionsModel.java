@@ -18,7 +18,11 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
-@AllArgsConstructor
 public class PsOptionsModel implements Serializable {
 
+    private Long id;
+
+    private String options;
+
+    private Integer scaleId;
 }

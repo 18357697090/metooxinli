@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -18,8 +19,31 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
-@AllArgsConstructor
 public class TaTaskModel implements Serializable {
+    private Long id;
 
+    private String spare;
+
+    private Integer state;
+
+    private Integer taskAppoint;
+
+    private String taskContent;
+
+    private Integer taskId;
+
+    private Integer taskLevel;
+
+    private Integer taskPrices;
+
+    private String taskTitle;
+
+    private Integer uid;
+
+    private Integer type;
+
+    private LocalDateTime creationTime;
+
+    private String picture;
 
 }

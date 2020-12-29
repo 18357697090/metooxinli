@@ -1,11 +1,11 @@
 package com.metoo.pojo.old.model;
 
-import com.metoo.metoo.psychology.Capsule;
+import com.metoo.pojo.ps.model.PsCapsuleModel;
 import lombok.Data;
 
 @Data
 public class CapsulesPojo {
-    private Capsule capsules;
+    private PsCapsuleModel capsules;
     private String name;
     private String picture;
 }

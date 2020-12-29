@@ -12,5 +12,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BaseVo implements Serializable {
+    private long pagenum;
+    private long pagesize;
 
 }

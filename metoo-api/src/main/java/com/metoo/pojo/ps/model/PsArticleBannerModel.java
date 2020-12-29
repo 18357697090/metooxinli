@@ -18,6 +18,10 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
-@AllArgsConstructor
 public class PsArticleBannerModel implements Serializable {
+    private Integer articleId;
+
+    private String picture;
+
+    private String title;
 }

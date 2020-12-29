@@ -5,9 +5,15 @@
       <configuration>
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
-        <datasource-mapping />
+        <datasource-mapping>
+          <factory-entry name="entityManagerFactory" value="a187b89a-890f-4c77-82ce-0f0c7036bd3f" />
+          <factory-entry name="service-user" />
+        </datasource-mapping>
         <naming-strategy-map />
       </configuration>
+    </facet>
+    <facet type="Spring" name="Spring">
+      <configuration />
     </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
@@ -108,6 +114,13 @@
     <orderEntry type="module" module-name="metoo-core" />
     <orderEntry type="library" name="Maven: org.projectlombok:lombok:1.18.16" level="project" />
     <orderEntry type="library" name="Maven: com.alibaba:fastjson:1.2.68" level="project" />
+    <orderEntry type="library" name="Maven: net.sf.dozer:dozer:5.4.0" level="project" />
+    <orderEntry type="library" name="Maven: commons-beanutils:commons-beanutils:1.8.3" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:jcl-over-slf4j:1.7.30" level="project" />
+    <orderEntry type="library" name="Maven: commons-io:commons-io:2.6" level="project" />
+    <orderEntry type="library" name="Maven: com.github.tencentyun:tls-sig-api-v2:1.1" level="project" />
+    <orderEntry type="library" name="Maven: org.json:json:20180130" level="project" />
+    <orderEntry type="library" name="Maven: net.coobird:thumbnailator:0.4.11" level="project" />
     <orderEntry type="library" name="Maven: com.baomidou:mybatis-plus-boot-starter:3.4.1" level="project" />
     <orderEntry type="library" name="Maven: com.baomidou:mybatis-plus:3.4.1" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-autoconfigure:2.3.5.RELEASE" level="project" />
