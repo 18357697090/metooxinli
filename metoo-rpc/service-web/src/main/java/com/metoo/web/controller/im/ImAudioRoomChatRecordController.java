@@ -1,6 +1,9 @@
 package com.metoo.web.controller.im;
 
 
+import com.loongya.core.util.RE;
+import com.metoo.api.im.ImAudioRoomChatRecordApi;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,17 +23,14 @@ import java.util.List;
 @RequestMapping("/im/im-audio-room-chat-record")
 public class ImAudioRoomChatRecordController {
 
+    @DubboReference
+    private ImAudioRoomChatRecordApi imAudioRoomChatRecordApi;
+
     //查看群的聊天记录
     @GetMapping("/audioRoomChatRecord")
-    public List<String> audioRoomChatRecord(Integer audioRoomId, Integer page){
-        Pageable pageable = PageRequest.of(page,20, Sort.Direction.DESC,"id");
-        List<AudioRoomChatRecord> audioRoomChatRecords=  audioRoomChatRecordDao.findByAudioRoomId(audioRoomId,pageable);
-        List<String> strings = new ArrayList<>();
-        for (AudioRoomChatRecord audioRoomChatRecord : audioRoomChatRecords){
-            String content = audioRoomChatRecord.getContent();
-            strings.add(content);
-        }
-        return strings;
+    public RE audioRoomChatRecord(Integer audioRoomId, Integer page){
+        return imAudioRoomChatRecordApi.audioRoomChatRecord(audioRoomId,page);
+
     }
 
 }

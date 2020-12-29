@@ -12,5 +12,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2020-12-28
  */
 public interface ImGiftService extends IService<ImGift> {
-
+    ImGift findByGiftId(Integer giftId);
 }

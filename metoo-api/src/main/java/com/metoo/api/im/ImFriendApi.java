@@ -1,6 +1,8 @@
 package com.metoo.api.im;
 
 
+import com.loongya.core.util.RE;
+
 /**
  * <p>
  * 好友列表 服务类
@@ -10,5 +12,14 @@ package com.metoo.api.im;
  * @since 2020-12-28
  */
 public interface ImFriendApi {
+
+    RE friendList(Integer uid);
+
+    RE deleteFriend(Integer uid, Integer friendId);
+
+    RE blackFriends(Integer uid, Integer friendId);
+
+    RE findBlackFriends(Integer uid, Integer friendId);
+
 
 }

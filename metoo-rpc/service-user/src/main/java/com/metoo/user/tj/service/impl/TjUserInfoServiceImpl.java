@@ -36,7 +36,6 @@ public class TjUserInfoServiceImpl extends ServiceImpl<TjUserInfoMapper, TjUserI
         }
         TjUserInfoModel model = new TjUserInfoModel();
         mapper.map(pojo, model);
-
         return model;
     }
 }

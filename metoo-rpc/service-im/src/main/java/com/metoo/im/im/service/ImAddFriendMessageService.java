@@ -3,6 +3,10 @@ package com.metoo.im.im.service;
 import com.loongya.core.util.RE;
 import com.metoo.im.im.dao.entity.ImAddFriendMessage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,8 +17,17 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2020-12-28
  */
 public interface ImAddFriendMessageService extends IService<ImAddFriendMessage> {
-    RE AddFriend(Integer uid,Integer friendId,String message);
-    RE FriendRequest(Integer uid);
-    RE HandlerFriendRequest(Integer uid, Integer sendId, Integer handle);
+
+    ImAddFriendMessage findByUidAndSendId(Integer uid,Integer sendId);
+
+
+    List<ImAddFriendMessage> ByUidAndState(Integer uid);
+
+
+    ImAddFriendMessage UidSendIdState(Integer uid,Integer friendId);
+
+    int againRequest(String message,int uid, int sendId);
+
+    int updateState(int uid, int sendId);
 
 }
