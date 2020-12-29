@@ -1,5 +1,7 @@
 package com.metoo.api.order;
 
+import com.metoo.pojo.order.model.ImGiftRecordModel;
+
 /**
  * <p>
  * 礼物记录表 服务类
@@ -10,4 +12,5 @@ package com.metoo.api.order;
  */
 public interface ImGiftRecordApi {
 
+    void save(ImGiftRecordModel giftRecord);
 }

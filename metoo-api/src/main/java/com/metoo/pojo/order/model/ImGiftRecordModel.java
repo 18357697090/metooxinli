@@ -1,11 +1,13 @@
 package com.metoo.pojo.order.model;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -20,5 +22,14 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class ImGiftRecordModel implements Serializable {
 
+    private Long id;
+
+    private Integer uid;
+
+    private Date creationTime;
+
+    private Integer accepted;
+
+    private Integer giftId;
 
 }

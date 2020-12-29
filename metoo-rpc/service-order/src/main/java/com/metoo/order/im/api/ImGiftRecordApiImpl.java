@@ -1,6 +1,11 @@
 package com.metoo.order.im.api;
 
 import com.metoo.api.order.ImGiftRecordApi;
+import com.metoo.order.im.dao.entity.ImGiftRecord;
+import com.metoo.order.im.service.ImGiftRecordService;
+import com.metoo.pojo.order.model.ImGiftRecordModel;
+import org.dozer.Mapper;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * <p>
@@ -12,4 +17,14 @@ import com.metoo.api.order.ImGiftRecordApi;
  */
 public class ImGiftRecordApiImpl implements ImGiftRecordApi {
 
+    @Autowired
+    private ImGiftRecordService imGiftRecordService;
+    @Autowired
+    private Mapper mapper;
+
+    @Override
+    public void save(ImGiftRecordModel giftRecord) {
+        ImGiftRecord imGiftRecord = mapper.map(giftRecord,ImGiftRecord.class);
+        imGiftRecordService.save(imGiftRecord);
+    }
 }

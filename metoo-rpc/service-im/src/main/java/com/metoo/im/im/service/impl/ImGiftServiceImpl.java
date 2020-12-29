@@ -8,6 +8,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  * 礼物表 服务实现类
@@ -25,5 +27,10 @@ public class ImGiftServiceImpl extends ServiceImpl<ImGiftMapper, ImGift> impleme
     @Override
     public ImGift findByGiftId(Integer giftId) {
         return imGiftRepository.findByGiftId(giftId);
+    }
+
+    @Override
+    public List<ImGift> findAll() {
+        return imGiftRepository.findAll();
     }
 }
