@@ -4,7 +4,9 @@ import com.metoo.api.ps.PsAchievementApi;
 import com.metoo.pojo.old.model.Result;
 import com.metoo.ps.ps.service.PsAchievementService;
 import com.metoo.ps.ps.service.PsUserAndMeasureService;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * <p>
@@ -14,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author loongya
  * @since 2020-12-28
  */
+@Component
+@DubboService
 public class PsAchievementApiImpl implements PsAchievementApi {
 
     @Autowired
@@ -26,7 +30,8 @@ public class PsAchievementApiImpl implements PsAchievementApi {
     public String result(Result results, Integer uid) {
 
         psUserAndMeasureService.updateMeasure(uid,results.getScaleId());
-        String achievement=CalculateTheScore.calculate(results);
+        String achievement= "";
+//        String achievement=CalculateTheScore.calculate(results); todo.
 //        Achievement achievement1=new Achievement();
 //        achievement1.setAchievement(achievement);
 //        achievement1.setUid(uid);

@@ -16,7 +16,7 @@ import java.util.List;
  * @since 2020-12-28
  */
 @RestController
-@RequestMapping("/ps/ps-capsule")
+@RequestMapping("/ps/psCapsule")
 public class PsCapsuleController {
     @GetMapping("/mycapsule")
     public List<PourOutCapsulePojo> mycapsule(@RequestHeader("UID") Integer uid, Integer page){
