@@ -1,5 +1,7 @@
 package com.metoo.api.xy;
 
+import com.loongya.core.util.RE;
+
 /**
  * <p>
  * 城表 服务类
@@ -10,4 +12,5 @@ package com.metoo.api.xy;
  */
 public interface XyCityApi {
 
+    RE getCity(Integer uid, Integer countryId);
 }

@@ -13,4 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface XyRaceService extends IService<XyRace> {
 
+    XyRace findByRaceId(Integer raceId);
 }

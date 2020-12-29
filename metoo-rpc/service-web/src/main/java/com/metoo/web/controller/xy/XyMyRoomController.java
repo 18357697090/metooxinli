@@ -1,7 +1,11 @@
 package com.metoo.web.controller.xy;
 
 
+import com.loongya.core.util.RE;
+import com.metoo.api.xy.XyMyRoomApi;
+import com.metoo.pojo.old.vo.ReturnMyCityList;
 import io.swagger.annotations.ApiOperation;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,56 +23,30 @@ import java.util.List;
  * @since 2020-12-28
  */
 @RestController
-@RequestMapping("/xy/xy-my-room")
+@RequestMapping("/xy/xyMyRoom")
 public class XyMyRoomController {
 
+    @DubboReference
+    private XyMyRoomApi xyMyRoomApi;
 
     @ApiOperation("我加入的国家或城的聊天室房间")
     //我的聊天室
     @GetMapping("/myRoom")
-    public List<MyRoomDTO> myRoom(@RequestHeader("UID")Integer uid){
-        List<MyRoom> myRooms = myRoomDao.findByUidAndState(uid);
-        List<MyRoomDTO> myRoomDTOS = new ArrayList<>();
-        for (MyRoom myRoom : myRooms){
-            MyRoomDTO myRoomDTO = new MyRoomDTO();
-            myRoomDTO.setRoomId(myRoom.getMyRoomId());
-            switch (myRoom.getType()){
-                case 1 :
-                    Race race = raceDao.findByRaceId(myRoom.getMyRoomId());
-                    myRoomDTO.setName(race.getName());
-                    myRoomDTO.setPicture(race.getPicture());
-                    myRoomDTO.setIntroduction(race.getIntroduction());
-                    break;
-                case 2 :
-                    Country country = countryDao.findByCountryId(myRoom.getMyRoomId());
-                    myRoomDTO.setName(country.getName());
-                    myRoomDTO.setPicture(country.getPicture());
-                    myRoomDTO.setIntroduction(country.getIntroduction());
-                    break;
-                case 3 :
-                    City city =  cityDao.findByCityId(myRoom.getMyRoomId());
-                    myRoomDTO.setName(city.getName());
-                    myRoomDTO.setPicture(city.getPicture());
-                    myRoomDTO.setIntroduction(city.getIntroduction());
-                    break;
-            }
-            myRoomDTOS.add(myRoomDTO);
-        }
-        return myRoomDTOS;
+    public RE myRoom(@RequestHeader("UID")Integer uid){
+        return xyMyRoomApi.myRoom(uid);
     }
 
     //创建国度所需要的国家
     @GetMapping("/getMyCountryList")
-    public List<ReturnMyCityList> getMyCountryList(@RequestHeader("UID")Integer uid){
-        List<MyRoom> myCities = myRoomDao.findBMyCityList(uid);
-        List<ReturnMyCityList> returnMyCityLists =  new ArrayList<>();
-        for (MyRoom myRoom : myCities){
-            ReturnMyCityList returnMyCityList = new ReturnMyCityList();
-            returnMyCityList.setMyCityId(myRoom.getMyRoomId());
-            returnMyCityList.setName(countryDao.findByCountryId(myRoom.getMyRoomId()).getName());
-            returnMyCityLists.add(returnMyCityList);
-        }
-        return returnMyCityLists;
+    public RE getMyCountryList(@RequestHeader("UID")Integer uid){
+        return xyMyRoomApi.getMyCountryList(uid);
+    }
+
+    //加入聊天室返回的数据
+    @GetMapping("/joinAudioRoom")
+    public RE joinAudioRoom(@RequestHeader("UID")Integer uid,Integer audioRoomId){
+        return xyMyRoomApi.joinAudioRoom(uid, audioRoomId);
+
     }
 
 
@@ -151,23 +129,6 @@ public class XyMyRoomController {
 //        return returnMessage;
 //    }
 
-
-    //加入聊天室返回的数据
-    @GetMapping("/joinAudioRoom")
-    public JoinAudioRoomDTO joinAudioRoom(@RequestHeader("UID")Integer uid,Integer audioRoomId){
-        JoinAudioRoomDTO joinAudioRoomDTO = new JoinAudioRoomDTO();
-        List<MyRoom> myRooms = myRoomDao.findByMyRoomId(audioRoomId);
-        List<UserInfo> userInfos = new ArrayList<>();
-        for (int i = 0;i<3;i++){
-            UserInfo userInfo = userInfoDao.findByUid(myRooms.get(i).getUid());
-            userInfos.add(userInfo);
-        }
-        MyRoom myRoom = myRoomDao.findByMyRoomIdAndIsHost(audioRoomId);
-        joinAudioRoomDTO.setHostUserInfo(userInfoDao.findByUid(myRoom.getUid()));
-        joinAudioRoomDTO.setUserInfos(userInfos);
-        joinAudioRoomDTO.setContent(myRoom.getNotice());
-        return joinAudioRoomDTO;
-    }
 
     //聊天室详情
 //    @GetMapping("/detailAudioRoom")

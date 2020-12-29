@@ -34,9 +34,7 @@ public class TjUserInfoServiceImpl extends ServiceImpl<TjUserInfoMapper, TjUserI
         if(OU.isBlack(pojo)){
             return null;
         }
-        TjUserInfoModel model = new TjUserInfoModel();
-        mapper.map(pojo, model);
-
+        TjUserInfoModel model = mapper.map(pojo, TjUserInfoModel.class);
         return model;
     }
 }

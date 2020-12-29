@@ -1,5 +1,8 @@
 package com.metoo.api.xy;
 
+import com.loongya.core.util.RE;
+import com.metoo.pojo.old.vo.BuildCountryDTO;
+
 /**
  * <p>
  * 国度表 服务类
@@ -10,4 +13,7 @@ package com.metoo.api.xy;
  */
 public interface XyCountryApi {
 
+    RE buildCountry(BuildCountryDTO buildCountryDTO, Integer uid);
+
+    RE getCountry(Integer uid, Integer raceId);
 }

@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.math.BigDecimal;
-
 /**
  * <p>
  * 用户购买胶囊记录表 前端控制器
@@ -30,7 +28,6 @@ public class PsUserBuyCapsuleController {
     @GetMapping("/pay")
     public RE pay(@RequestHeader("UID") Integer uid, Integer capsuleId){
         return psUserBuyCapsuleApi.pay(uid, capsuleId);
-
     }
 
 }

@@ -1,5 +1,7 @@
 package com.metoo.api.tj;
 
+import com.metoo.pojo.tj.model.TjUserAccountDetailModel;
+
 /**
  * <p>
  * 用户消费记录表 服务类
@@ -10,4 +12,5 @@ package com.metoo.api.tj;
  */
 public interface TjUserAccountDetailApi {
 
+    void save(TjUserAccountDetailModel zhRecord);
 }

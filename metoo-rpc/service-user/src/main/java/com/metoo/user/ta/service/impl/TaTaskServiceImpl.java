@@ -29,4 +29,19 @@ public class TaTaskServiceImpl extends ServiceImpl<TaTaskMapper, TaTask> impleme
     public List<TaTask> findOrdinaryTask(Pageable pageable) {
         return taTaskRepository.findOrdinaryTask(pageable);
     }
+
+    @Override
+    public List<TaTask> findTutorialTask(Pageable pageable) {
+        return taTaskRepository.findTutorialTask(pageable);
+    }
+
+    @Override
+    public TaTask findByTaskId(Integer taskId) {
+        return taTaskRepository.findByTaskId(taskId);
+    }
+
+    @Override
+    public void updateTaskState(Integer taskId) {
+        taTaskRepository.updateTaskState(taskId);
+    }
 }
