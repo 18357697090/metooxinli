@@ -51,4 +51,10 @@ public class PsUserBuyCapsuleApiImpl implements PsUserBuyCapsuleApi {
             return RE.serviceFail("error");
         }
     }
+
+    @Override
+    public PsUserBuyCapsuleModel findByUidAndCapsuleId(Integer uid, Integer capsuleId) {
+
+        return psUserBuyCapsuleService.findByUidAndCapsuleId(uid, capsuleId);
+    }
 }
