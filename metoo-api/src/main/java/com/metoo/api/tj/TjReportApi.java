@@ -1,5 +1,8 @@
 package com.metoo.api.tj;
 
+import com.loongya.core.util.RE;
+import com.metoo.pojo.tj.vo.TjReportVo;
+
 /**
  * <p>
  * 用户举报表 服务类
@@ -10,4 +13,5 @@ package com.metoo.api.tj;
  */
 public interface TjReportApi {
 
+    RE report(TjReportVo report, Integer uid);
 }

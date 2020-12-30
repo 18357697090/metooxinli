@@ -1,12 +1,14 @@
 package com.metoo.pojo.tj.vo;
 
 import com.loongya.core.util.vo.BaseVo;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -20,6 +22,20 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 public class TjReportVo extends BaseVo {
+    private Long id;
 
+    private Date creationTime;
+
+    private String content;
+
+    private String picture;
+
+    private Integer uid;
+
+    private Integer state;
+
+    private String type;
+
+    private Integer reportId;
 
 }

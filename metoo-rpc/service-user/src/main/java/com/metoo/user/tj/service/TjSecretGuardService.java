@@ -13,4 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface TjSecretGuardService extends IService<TjSecretGuard> {
 
+    TjSecretGuard findByUsername(String username);
 }
