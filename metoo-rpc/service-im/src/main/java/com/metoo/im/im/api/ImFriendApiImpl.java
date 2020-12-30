@@ -10,8 +10,10 @@ import com.metoo.im.im.service.ImFriendService;
 import com.metoo.pojo.old.vo.FriendListDto;
 import com.metoo.pojo.tj.model.TjUserInfoModel;
 import org.apache.dubbo.config.annotation.DubboReference;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +26,8 @@ import java.util.List;
  * @author loongya
  * @since 2020-12-28
  */
+@Component
+@DubboService
 public class ImFriendApiImpl implements ImFriendApi {
 
     @DubboReference

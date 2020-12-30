@@ -5,10 +5,12 @@ import com.loongya.core.util.RE;
 import com.metoo.api.im.ImAudioRoomChatRecordApi;
 import com.metoo.im.im.dao.entity.ImAudioRoomChatRecord;
 import com.metoo.im.im.service.ImAudioRoomChatRecordService;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +23,8 @@ import java.util.List;
  * @author loongya
  * @since 2020-12-28
  */
+@Component
+@DubboService
 public class ImAudioRoomChatRecordApiImpl implements ImAudioRoomChatRecordApi {
 
     @Autowired
