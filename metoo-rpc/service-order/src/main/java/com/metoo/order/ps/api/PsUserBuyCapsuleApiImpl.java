@@ -52,7 +52,7 @@ public class PsUserBuyCapsuleApiImpl implements PsUserBuyCapsuleApi {
             psUserBuyCapsuleService.save(userBuyCapsule);
             return RE.ok();
         }else {
-            return RE.serviceFail("error");
+            return RE.fail("error");
         }
     }
 

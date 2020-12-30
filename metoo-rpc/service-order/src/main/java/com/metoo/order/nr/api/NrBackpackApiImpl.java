@@ -68,7 +68,7 @@ public class NrBackpackApiImpl implements NrBackpackApi {
         NrBackpack backpack01 = null;
         int i =zh.getBalance().compareTo(new BigDecimal(goods.getPrices()));
         if(i < 0){
-            return RE.serviceFail("notEnoughMoney");
+            return RE.fail("notEnoughMoney");
         }else {
             tjUserAccountApi.updateBalance(zh.getBalance().subtract(new BigDecimal(goods.getPrices())),uid);
             if(backpack==null){
@@ -105,7 +105,7 @@ public class NrBackpackApiImpl implements NrBackpackApi {
         NrBackpack backpack01 = null;
         int i =zh.getBalance().compareTo(new BigDecimal(goods.getPrices()));
         if(i < 0){
-            return RE.serviceFail("notEnoughMoney");
+            return RE.fail("notEnoughMoney");
         }else {
             tjUserAccountApi.updateBalance(zh.getBalance().subtract(new BigDecimal(goods.getPrices())),uid);
             if(backpack==null){

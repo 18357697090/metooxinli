@@ -1,4 +1,6 @@
 package com.metoo.tools;
 
-public class HandleAppMessage {
+import java.io.Serializable;
+
+public class HandleAppMessage  implements Serializable {
 }

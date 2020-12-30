@@ -1,6 +1,5 @@
 package com.metoo.web.config;
 
-import com.metoo.metoo.tools.AuthInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -11,9 +10,6 @@ import javax.annotation.Resource;
 
 @Configuration
 public class WebMVCConfig implements WebMvcConfigurer {
-
-    @Resource
-    AuthInterceptor authInterceptor;
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -29,10 +25,5 @@ public class WebMVCConfig implements WebMvcConfigurer {
                 .setViewName("forward:/swagger-ui/index.html");
     }
 
-
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(authInterceptor).addPathPatterns("/**");
-    }
 
 }

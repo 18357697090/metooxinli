@@ -12,6 +12,7 @@ import com.metoo.pojo.old.vo.FriendListDto;
 import com.metoo.pojo.tj.model.TjUserInfoModel;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.DubboService;
+import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -37,7 +38,7 @@ public class ImFriendApiImpl implements ImFriendApi {
     @Autowired
     private ImFriendService imFriendService;
     @Autowired
-    private Mapper mapper;
+    private DozerBeanMapper mapper;
 
     @Override
     public RE friendList(Integer uid) {
@@ -70,19 +71,19 @@ public class ImFriendApiImpl implements ImFriendApi {
         if (friend.getState().equals("1")){
             Integer i =imFriendService.blackFriends(3,uid,friendId);
             if(i==1){
-                return RE.serviceFail("error");
+                return RE.fail("error");
             }else {
-                return RE.serviceFail("error");
+                return RE.fail("error");
             }
         }else if (friend.getState().equals("3")){
             Integer i =imFriendService.blackFriends(1,uid,friendId);
             if(i==1){
-                return RE.serviceFail("success");
+                return RE.fail("success");
             }else {
-                return RE.serviceFail("error");
+                return RE.fail("error");
             }
         }else {
-            return RE.serviceFail("error");
+            return RE.fail("error");
         }
     }
 

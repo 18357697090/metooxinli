@@ -2,10 +2,11 @@ package com.metoo.pojo.old.model;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Data
-public class PourOutCapsulePojo {
+public class PourOutCapsulePojo implements Serializable {
     private Integer capsuleId;
     private String creationTime;
     private String title;

@@ -13,8 +13,11 @@ import com.metoo.tools.ReturnMessage;
 import com.metoo.user.tj.dao.entity.TjUserInfo;
 import com.metoo.user.tj.service.TjUserInfoService;
 import org.apache.dubbo.config.annotation.DubboReference;
+import org.apache.dubbo.config.annotation.DubboService;
+import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,12 +31,16 @@ import org.springframework.web.bind.annotation.RequestHeader;
  * @author loongya
  * @since 2020-12-28
  */
+@Component
+@DubboService
 public class TjUserInfoApiImpl implements TjUserInfoApi {
 
     @Autowired
     private TjUserInfoService tjUserInfoService;
+
     @Autowired
-    private Mapper mapper;
+    private DozerBeanMapper mapper;
+
     @DubboReference
     private ImFriendApi imFriendApi;
 
@@ -85,7 +92,7 @@ public class TjUserInfoApiImpl implements TjUserInfoApi {
             return RE.ok();
         }
         else {
-            return RE.serviceFail("error");
+            return RE.fail("error");
         }
     }
 }

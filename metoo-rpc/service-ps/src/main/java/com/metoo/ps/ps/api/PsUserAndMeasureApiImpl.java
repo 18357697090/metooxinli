@@ -66,7 +66,7 @@ public class PsUserAndMeasureApiImpl implements PsUserAndMeasureApi {
             psScaleService.updateNumber(number,scaleId);
             return RE.ok("success");
         }else {
-            return RE.serviceFail("error");//error表示余额不足
+            return RE.fail("error");//error表示余额不足
         }
     }
 }

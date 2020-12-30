@@ -2,10 +2,11 @@ package com.metoo.pojo.old.vo;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Data
-public class RwDTO {
+public class RwDTO implements Serializable {
     //标题
     private String title;
     //内容

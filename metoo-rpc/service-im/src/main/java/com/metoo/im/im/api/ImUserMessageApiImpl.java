@@ -7,6 +7,7 @@ import com.metoo.im.im.dao.entity.ImUserMessage;
 import com.metoo.im.im.service.ImUserMessageService;
 import com.metoo.pojo.im.model.ImUserMessageModel;
 import org.apache.dubbo.config.annotation.DubboService;
+import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -31,7 +32,7 @@ public class ImUserMessageApiImpl implements ImUserMessageApi {
     @Autowired
     private ImUserMessageService imUserMessageService;
     @Autowired
-    private Mapper mapper;
+    private DozerBeanMapper mapper;
 
     @Override
     public RE uid(Integer uid) {

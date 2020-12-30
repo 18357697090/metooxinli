@@ -7,6 +7,7 @@ import com.metoo.im.im.dao.entity.ImSaveUserMessage;
 import com.metoo.im.im.service.ImSaveUserMessageService;
 import com.metoo.pojo.im.model.ImSaveUserMessageModel;
 import org.apache.dubbo.config.annotation.DubboService;
+import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -28,7 +29,7 @@ public class ImSaveUserMessageApiImpl implements ImSaveUserMessageApi {
     @Autowired
     private ImSaveUserMessageService imSaveUserMessageService;
     @Autowired
-    private Mapper mapper;
+    private DozerBeanMapper mapper;
 
     @Override
     public RE findByUidAndSendId(Integer uid, Integer sendId) {

@@ -3,9 +3,8 @@ package com.metoo.web.controller.tj;
 
 import com.loongya.core.util.RE;
 import com.metoo.api.tj.TjUserApi;
-import com.metoo.pojo.old.model.LoginPojo;
-import com.metoo.pojo.old.model.SecretGuardPojo;
-import com.metoo.pojo.old.model.signInPojo;
+import com.metoo.pojo.tj.model.TjUserModel;
+import com.metoo.web.config.tools.ThreadLocal;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,30 +28,18 @@ public class TjUserController {
     @GetMapping("/findFriend")
     public RE fendFriend(@RequestHeader("UID")Integer uid, String name){
         return tjUserApi.fendFriend(uid, name);
+    }
 
+    /**
+     * 获取用户信息
+     * @return
+     */
+    @GetMapping("/getUserInfo")
+    public RE getUserInfo(){
+        return tjUserApi.findUserById(ThreadLocal.getUserId());
     }
 
 
-    //注册功能
-    @PostMapping("/register")
-    public RE register(@RequestBody LoginPojo loginPojo){
-        return tjUserApi.register(loginPojo);
-    }
 
-
-
-    //登录
-    @PostMapping("/logIn")
-    public RE logIn(@RequestBody signInPojo signInPojo){
-        return tjUserApi.logIn(signInPojo);
-
-    }
-
-    //修改密码
-    @PostMapping("/modifyPassword")
-    public RE modifyPassword(@RequestBody SecretGuardPojo secretGuardPojo){
-        return tjUserApi.modifyPassword(secretGuardPojo);
-
-    }
 
 }

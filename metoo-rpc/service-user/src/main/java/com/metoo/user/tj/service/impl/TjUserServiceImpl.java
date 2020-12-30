@@ -1,5 +1,8 @@
 package com.metoo.user.tj.service.impl;
 
+import com.metoo.pojo.login.model.LoginModel;
+import com.metoo.pojo.login.vo.LoginVo;
+import com.metoo.pojo.tj.model.TjUserInfoModel;
 import com.metoo.user.tj.dao.entity.TjUser;
 import com.metoo.user.tj.dao.entity.TjUserInfo;
 import com.metoo.user.tj.dao.mapper.TjUserMapper;
@@ -9,6 +12,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -25,6 +29,9 @@ public class TjUserServiceImpl extends ServiceImpl<TjUserMapper, TjUser> impleme
     @Autowired
     private TjUserRepository tjUserRepository;
 
+    @Resource
+    private TjUserMapper tjUserMapper;
+
     @Override
     public TjUser findByUsername(String username) {
         return tjUserRepository.findByUsername(username);
@@ -38,5 +45,10 @@ public class TjUserServiceImpl extends ServiceImpl<TjUserMapper, TjUser> impleme
     @Override
     public void updateUserPassword(String newPassword, String username) {
         tjUserRepository.updateUserPassword(newPassword,username);
+    }
+
+    @Override
+    public LoginModel login(LoginVo vo) {
+        return tjUserMapper.login(vo);
     }
 }

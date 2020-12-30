@@ -3,8 +3,10 @@ package com.metoo.tools;
 import com.metoo.pojo.old.model.TjUserInfoPojoModel;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class AudioRoomChatMessage {
+public class AudioRoomChatMessage  implements Serializable {
     //表示消息类型 AudioRoom 表示聊天室 Friend 表示好友聊天
     private String type;
     //类型

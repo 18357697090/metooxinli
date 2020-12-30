@@ -2,11 +2,12 @@ package com.metoo.pojo.old.model;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
 @Data
-public class ScaleDetails {
+public class ScaleDetails implements Serializable {
 
     private String topPicture;
     private String title;

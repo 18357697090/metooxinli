@@ -13,6 +13,7 @@ import com.metoo.pojo.old.vo.FriendListDto;
 import com.metoo.pojo.tj.model.TjUserInfoModel;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.DubboService;
+import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -40,7 +41,7 @@ public class ImAddFriendMessageApiImpl implements ImAddFriendMessageApi {
     @Autowired
     private ImFriendService imFriendService;
     @Autowired
-    private Mapper mapper;
+    private DozerBeanMapper mapper;
 
     @Override
     public RE AddFriend(Integer uid, Integer friendId, String message) {
@@ -49,14 +50,14 @@ public class ImAddFriendMessageApiImpl implements ImAddFriendMessageApi {
         ImAddFriendMessage ImAddFriendMessage= imAddFriendMessageService.findByUidAndSendId(friendId,uid);
         if (friend!=null){
             if(friend.getState().equals("1")){
-                return RE.serviceFail("exist");
+                return RE.fail("exist");
             }else if (friend.getState().equals("2")){
                 if(ImAddFriendMessage!=null){
                     if (ImAddFriendMessage.getState().equals(1)){
-                        return RE.serviceFail("error");
+                        return RE.fail("error");
                     }else {
                         imAddFriendMessageService.againRequest(message,friendId,uid);
-                        return RE.serviceFail("success");
+                        return RE.fail("success");
                     }
                 }else {
                     ImAddFriendMessage addFriendMessage1 = new ImAddFriendMessage();
@@ -65,18 +66,18 @@ public class ImAddFriendMessageApiImpl implements ImAddFriendMessageApi {
                     addFriendMessage1.setMessage(message);
                     addFriendMessage1.setState(1);
                     imAddFriendMessageService.save(addFriendMessage1);
-                    return RE.serviceFail("success");
+                    return RE.fail("success");
                 }
             }else if(friend.getState().equals("3")){
-                return RE.serviceFail("error");
+                return RE.fail("error");
             }
         }else {
             if(ImAddFriendMessage!=null){
                 if (ImAddFriendMessage.getState().equals(1)){
-                    return RE.serviceFail("error");
+                    return RE.fail("error");
                 }else {
                     imAddFriendMessageService.againRequest(message,uid,friendId);
-                    return RE.serviceFail("success");
+                    return RE.fail("success");
                 }
             }else {
                 ImAddFriendMessage addFriendMessage1 = new ImAddFriendMessage();
@@ -85,10 +86,10 @@ public class ImAddFriendMessageApiImpl implements ImAddFriendMessageApi {
                 addFriendMessage1.setMessage(message);
                 addFriendMessage1.setState(1);
                 imAddFriendMessageService.save(addFriendMessage1);
-                return RE.serviceFail("success");
+                return RE.fail("success");
             }
         }
-        return RE.serviceFail("success");
+        return RE.fail("success");
     }
 
     @Override

@@ -2,10 +2,11 @@ package com.metoo.pojo.old.vo;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Data
-public class PublishTaskDTO {
+public class PublishTaskDTO implements Serializable {
     //任务标题
     private String taskTitle;
     //任务内容

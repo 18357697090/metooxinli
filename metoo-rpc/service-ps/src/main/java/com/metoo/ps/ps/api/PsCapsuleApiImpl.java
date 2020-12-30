@@ -88,7 +88,7 @@ public class PsCapsuleApiImpl implements PsCapsuleApi {
         if(x == 1){
             return RE.ok("success");
         }else {
-            return RE.serviceFail("error");
+            return RE.fail("error");
         }
     }
 
@@ -102,7 +102,7 @@ public class PsCapsuleApiImpl implements PsCapsuleApi {
     @Override
     public RE saveCapsule(SaveCapsulePojo saveCapsulePojo, Integer uid) {
         if(uid==null){
-            return RE.serviceFail("error");
+            return RE.fail("error");
         }
         int capsuleId = CreateID.create();
         PsCapsule capsule1=psCapsuleService.findByCapsuleId(capsuleId);

@@ -6,12 +6,9 @@ import sun.misc.BASE64Decoder;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 
-public class Base64Tool {
+public class Base64Tool implements Serializable {
     public static BufferedImage base64String2BufferedImage(String base64string) {
         BufferedImage image = null;
         try {

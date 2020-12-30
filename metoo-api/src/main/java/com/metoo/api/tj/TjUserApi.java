@@ -1,9 +1,9 @@
 package com.metoo.api.tj;
 
 import com.loongya.core.util.RE;
+import com.metoo.pojo.login.vo.LoginVo;
 import com.metoo.pojo.old.model.LoginPojo;
 import com.metoo.pojo.old.model.SecretGuardPojo;
-import com.metoo.pojo.old.model.signInPojo;
 
 /**
  * <p>
@@ -19,7 +19,9 @@ public interface TjUserApi {
 
     RE register(LoginPojo loginPojo);
 
-    RE logIn(signInPojo signInPojo);
+    RE logIn(LoginVo vo);
 
     RE modifyPassword(SecretGuardPojo secretGuardPojo);
+
+    RE findUserById(Integer userId);
 }

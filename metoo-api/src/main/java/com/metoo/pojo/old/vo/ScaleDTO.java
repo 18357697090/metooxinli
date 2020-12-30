@@ -2,10 +2,11 @@ package com.metoo.pojo.old.vo;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Data
-public class ScaleDTO {
+public class ScaleDTO implements Serializable {
     private int scaleId;
     //表示该量表有多少人测量了
     private int number;

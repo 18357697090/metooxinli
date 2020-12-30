@@ -2,8 +2,10 @@ package com.metoo.pojo.old.model;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class RoomMessage {
+public class RoomMessage  implements Serializable {
 
     //发送数据类型   word为文字,  image为图片,  gift为刷礼物的信息, system为系统消息, user为用户进入房间,
     // out为用户离开房间, microphone 为上麦信息 , unmicrophone为下麦消息

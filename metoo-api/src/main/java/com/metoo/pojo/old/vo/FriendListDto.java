@@ -2,8 +2,10 @@ package com.metoo.pojo.old.vo;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class FriendListDto {
+public class FriendListDto implements Serializable {
     private Integer uid;
     private String name;
     private String picture;

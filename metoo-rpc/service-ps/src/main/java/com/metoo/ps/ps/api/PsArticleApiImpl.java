@@ -6,11 +6,13 @@ import com.metoo.api.ps.PsArticleApi;
 import com.metoo.pojo.old.vo.ArticleDTO;
 import com.metoo.ps.ps.dao.entity.PsArticle;
 import com.metoo.ps.ps.service.PsArticleService;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +25,9 @@ import java.util.List;
  * @author loongya
  * @since 2020-12-28
  */
-public class PsArticleImpl implements PsArticleApi {
+@Component
+@DubboService
+public class PsArticleApiImpl implements PsArticleApi {
 
     @Autowired
     private PsArticleService psArticleService;

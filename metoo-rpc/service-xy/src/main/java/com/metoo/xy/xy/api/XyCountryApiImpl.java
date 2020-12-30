@@ -74,21 +74,21 @@ public class XyCountryApiImpl implements XyCountryApi {
 
             TjUserInfoModel userInfo = tjUserInfoApi.findByUid(uid);
             if (userInfo.getDw()<4){
-                return RE.serviceFail("等级不够，需要钻石段位及以上才可以创建国度");
+                return RE.fail("等级不够，需要钻石段位及以上才可以创建国度");
             }
             BigDecimal bigDecimal = new BigDecimal("5000");
             TjUserAccountModel zh = tjUserAccountApi.findByUid(uid);
             BigDecimal balance = zh.getBalance().subtract(bigDecimal);
             if(balance.compareTo(BigDecimal.ZERO)<0){
-                return RE.serviceFail("你的活跃积分不足");
+                return RE.fail("你的活跃积分不足");
             }else {
                 String name = buildCountryDTO.getName();
                 if (name.length() > 6) {
-                    return RE.serviceFail("填写名称太长");
+                    return RE.fail("填写名称太长");
                 }
                 XyCountry country2 = xyCountryService.findByName(buildCountryDTO.getName());
                 if (country2 != null) {
-                    return RE.serviceFail("国度名字已存在");
+                    return RE.fail("国度名字已存在");
                 }
                 tjUserAccountApi.updateBalance(balance, uid);
                 XyCountry country = mapper.map(buildCountryDTO, XyCountry.class);

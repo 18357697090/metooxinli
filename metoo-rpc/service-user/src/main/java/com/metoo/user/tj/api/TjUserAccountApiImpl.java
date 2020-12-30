@@ -69,7 +69,7 @@ public class TjUserAccountApiImpl implements TjUserAccountApi {
     public RE findzh(Integer uid) {
         TjUserAccount byUid = tjUserAccountService.findByUid(uid);
         if(OU.isBlack(byUid)){
-            return RE.serviceFail("没有数据");
+            return RE.fail("没有数据");
         }
         return RE.ok(dozerBeanMapper.map(byUid, TjUserAccountModel.class));
     }
@@ -78,7 +78,7 @@ public class TjUserAccountApiImpl implements TjUserAccountApi {
     public RE findBalance(Integer uid) {
         TjUserAccount zh=tjUserAccountService.findByUid(uid);
         if(OU.isBlack(zh)){
-            return RE.serviceFail("没有对象");
+            return RE.fail("没有对象");
         }
         return RE.ok(zh.getBalance());
     }

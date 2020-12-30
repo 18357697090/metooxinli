@@ -7,6 +7,7 @@ import com.metoo.im.im.dao.entity.ImAudioRoomChatRecord;
 import com.metoo.im.im.service.ImAudioRoomChatRecordService;
 import com.metoo.pojo.im.model.ImAudioRoomChatRecordModel;
 import org.apache.dubbo.config.annotation.DubboService;
+import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -32,7 +33,7 @@ public class ImAudioRoomChatRecordApiImpl implements ImAudioRoomChatRecordApi {
     @Autowired
     private ImAudioRoomChatRecordService imAudioRoomChatRecordService;
     @Autowired
-    private Mapper mapper;
+    private DozerBeanMapper mapper;
 
     @Override
     public RE audioRoomChatRecord(Integer audioRoomId, Integer page) {

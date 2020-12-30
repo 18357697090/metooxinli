@@ -39,7 +39,7 @@ public class XyJoinCityMessageApiImpl implements XyJoinCityMessageApi {
     @Override
     public RE joinCity(Integer uid, XyJoinCityMessageVo vo) {
         if (vo.getCityHostId()==null||vo.getMessage()==null){
-            return RE.serviceFail("填写信息不完全");
+            return RE.fail("填写信息不完全");
         }
 
         XyJoinCityMessage cityMessage = mapper.map(vo, XyJoinCityMessage.class);

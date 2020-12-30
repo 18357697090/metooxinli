@@ -20,7 +20,7 @@ import java.math.BigDecimal;
  * @since 2020-12-28
  */
 @RestController
-@RequestMapping("/ps/psUserAndMeasureOrder")
+@RequestMapping("/ps/psUserAndMeasure")
 public class PsUserAndMeasureController {
 
 

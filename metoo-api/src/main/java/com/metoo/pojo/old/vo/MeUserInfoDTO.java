@@ -2,9 +2,11 @@ package com.metoo.pojo.old.vo;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 
 @Data
-public class MeUserInfoDTO {
+public class MeUserInfoDTO implements Serializable {
 
     private Integer uid;
     private String name;

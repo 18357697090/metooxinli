@@ -12,8 +12,8 @@ import java.io.Serializable;
 @Setter
 public class RE<M> implements Serializable {
     //返回状态 [0-成功,1-currentService.999-系统异常.-4-没有数据,列表为空.-1-参数有误]
-    private int errcode;
-    private String errmsg;
+    private int code;
+    private String msg;
     private M data;
     private RE(){}
 
@@ -31,45 +31,48 @@ public class RE<M> implements Serializable {
     }
     public static<M> RE ok(int status, M data, String msg){
         RE RE = new RE();
-        RE.setErrcode(status);
+        RE.setCode(status);
         RE.setData(data);
-        RE.setErrmsg(msg);
+        RE.setMsg(msg);
         return RE;
     }
     public static<M> RE noData(M data){
         RE RE = new RE();
-        RE.setErrcode(0);
+        RE.setCode(0);
         RE.setData(data);
-        RE.setErrmsg("暂无数据!");
+        RE.setMsg("暂无数据!");
         return RE;
     }
     public static<M> RE noData(){
         RE RE = new RE();
-        RE.setErrcode(0);
-        RE.setErrmsg("暂无数据!");
+        RE.setCode(0);
+        RE.setMsg("暂无数据!");
         return RE;
     }
 
-    public static<M> RE systemError(String msg){
+    public static<M> RE error(String msg){
         RE RE = new RE();
-        RE.setErrcode(999);
-        RE.setErrmsg(msg);
+        RE.setCode(999);
+        RE.setMsg(msg);
         return RE;
     }
 
-    public static<M> RE serviceFail(String msg){
-        return serviceFail(1,msg);
+    public static<M> RE fail(String msg){
+        return fail(1,msg);
     }
-    public static<M> RE serviceFail(int status, String msg){
+    public static<M> RE fail(){
+        return fail(1,"error");
+    }
+    public static<M> RE fail(int status, String msg){
         RE RE = new RE();
-        RE.setErrcode(status);
-        RE.setErrmsg(msg);
+        RE.setCode(status);
+        RE.setMsg(msg);
         return RE;
     }
     public static<M> RE paramError(String msg){
         RE RE = new RE();
-        RE.setErrcode(-1);
-        RE.setErrmsg(msg);
+        RE.setCode(-1);
+        RE.setMsg(msg);
         return RE;
     }
 }

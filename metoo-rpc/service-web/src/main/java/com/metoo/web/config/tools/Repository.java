@@ -22,6 +22,7 @@ import com.metoo.tools.AppMessage;
 import com.metoo.tools.AudioRoomChatMessage;
 import com.metoo.tools.AudioRoomMessage;
 import org.apache.dubbo.config.annotation.DubboReference;
+import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -56,7 +57,7 @@ public class Repository {
     @DubboReference
     private ImFriendApi imFriendApi;
     @Autowired
-    private Mapper mapper;
+    private DozerBeanMapper mapper;
 
     public static Repository repository;
 

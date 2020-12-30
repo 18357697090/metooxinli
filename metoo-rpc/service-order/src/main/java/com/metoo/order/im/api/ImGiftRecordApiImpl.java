@@ -5,6 +5,7 @@ import com.metoo.order.im.dao.entity.ImGiftRecord;
 import com.metoo.order.im.service.ImGiftRecordService;
 import com.metoo.pojo.order.model.ImGiftRecordModel;
 import org.apache.dubbo.config.annotation.DubboService;
+import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -24,7 +25,7 @@ public class ImGiftRecordApiImpl implements ImGiftRecordApi {
     @Autowired
     private ImGiftRecordService imGiftRecordService;
     @Autowired
-    private Mapper mapper;
+    private DozerBeanMapper mapper;
 
     @Override
     public void save(ImGiftRecordModel giftRecord) {

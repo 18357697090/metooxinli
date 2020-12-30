@@ -2,8 +2,10 @@ package com.metoo.tools;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class AppMessage {
+public class AppMessage implements Serializable {
     //表示消息类型 AudioRoom 表示聊天室 Friend 表示好友聊天
     private String type;
     //类型

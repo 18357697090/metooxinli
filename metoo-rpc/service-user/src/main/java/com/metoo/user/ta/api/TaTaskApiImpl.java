@@ -105,7 +105,7 @@ public class TaTaskApiImpl implements TaTaskApi {
         TjUserAccount zh = tjUserAccountService.findByUid(uid);
         int x = zh.getBalance().compareTo(new BigDecimal(task.getTaskPrices()));
         if(x<0){
-            return RE.serviceFail("你的余额不足");
+            return RE.fail("你的余额不足");
         }else {
             BigDecimal balance = zh.getBalance().subtract(new BigDecimal(task.getTaskPrices()));
             tjUserAccountService.updateBalance(balance,uid);
@@ -138,14 +138,14 @@ public class TaTaskApiImpl implements TaTaskApi {
     public RE acceptTask(Integer uid, Integer taskId) {
         TaTask task = taTaskService.findByTaskId(taskId);
         if(task.getUid().equals(uid)){
-            return RE.serviceFail("自己的任务，不能接受");
+            return RE.fail("自己的任务，不能接受");
         }
         TjUserAccount zh = tjUserAccountService.findByUid(uid);
         BigDecimal bigDecimal = new BigDecimal("10");
         BigDecimal y = new BigDecimal(task.getTaskPrices()).divide(bigDecimal,2);
         int x = zh.getBalance().compareTo(y);
         if(x<0){
-            return RE.serviceFail("余额不足");
+            return RE.fail("余额不足");
         }else {
             BigDecimal ye = zh.getBalance().subtract(y);
             tjUserAccountService.updateBalance(ye,uid);
@@ -166,7 +166,7 @@ public class TaTaskApiImpl implements TaTaskApi {
         if(taUserTaskService.updateAcceptState(taskId,uid)==1){
             return RE.ok();
         }else {
-            return RE.serviceFail("error");
+            return RE.fail("error");
         }
     }
 }

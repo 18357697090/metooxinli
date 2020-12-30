@@ -6,7 +6,7 @@ spring:
 
 dubbo:
   scan:
-    base-packages: com.metoo.api
+    base-packages: com.metoo.web
   protocol:
     name: dubbo
     port: 20881

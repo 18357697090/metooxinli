@@ -3,9 +3,11 @@ package com.metoo.user.tj.api;
 import com.loongya.core.util.OU;
 import com.loongya.core.util.RE;
 import com.metoo.api.tj.TjUserApi;
+import com.metoo.pojo.login.model.LoginModel;
+import com.metoo.pojo.login.model.LoginUserInfoModel;
+import com.metoo.pojo.login.vo.LoginVo;
 import com.metoo.pojo.old.model.LoginPojo;
 import com.metoo.pojo.old.model.SecretGuardPojo;
-import com.metoo.pojo.old.model.signInPojo;
 import com.metoo.pojo.old.vo.FriendListDto;
 import com.metoo.pojo.tj.model.TjUserInfoModel;
 import com.metoo.tools.CreateID;
@@ -108,34 +110,16 @@ public class TjUserApiImpl implements TjUserApi {
     }
 
     @Override
-    public RE logIn(signInPojo signInPojo) {
-        zc zc=new zc();
-        String username= signInPojo.getUsername();
-        String password= signInPojo.getPassword();
-        TjUser user1=tjUserService.findByUsername(username);
+    public RE logIn(LoginVo vo) {
+        LoginModel loginModel = tjUserService.login(vo);
 
-        if (user1.getState()!=1){
-            zc.setState("blocked");
-            return RE.ok(zc);
+        if(OU.isBlack(loginModel)){
+            return RE.fail("账号或密码错误！");
         }
-        Integer uid = user1.getUid();
-        String p1=user1.getPassword();
-        if(p1.equals(password)){
-            TjUserInfoModel userInfo = tjUserInfoService.findByUid(uid);
-            if (userInfo==null){
-                zc.setUid(uid);
-                zc.setState("noInfo");
-            }else {
-                zc.setUid(uid);
-                zc.setState("success");
-                zc.setName(userInfo.getName());
-                zc.setPicture(userInfo.getPicture());
-            }
-            return RE.ok(zc);
-        }else {
-            zc.setState("error");
+        if (loginModel.getState()!=0){
+            return RE.fail("账号异常");
         }
-        return RE.ok(zc);
+        return RE.ok(loginModel);
     }
 
     @Override
@@ -148,7 +132,22 @@ public class TjUserApiImpl implements TjUserApi {
             tjUserService.updateUserPassword(secretGuardPojo.getNewPassword(),secretGuardPojo.getUsername());
             return RE.ok();
         }else {
-            return RE.serviceFail("error");
+            return RE.fail("error");
         }
+    }
+
+    @Override
+    public RE findUserById(Integer userId) {
+        if(OU.isBlack(userId)){
+            return RE.fail("请重新登录！");
+        }
+        TjUser userPojo  = tjUserService.getById(userId);
+        if(OU.isBlack(userPojo)){
+            return RE.fail("没有该用户信息！");
+        }
+        TjUserInfoModel byUid1 = tjUserInfoService.findByUid(userId);
+        LoginUserInfoModel model = mapper.map(userPojo, LoginUserInfoModel.class);
+        model.setTjUserInfoModel(byUid1);
+        return RE.ok(model);
     }
 }

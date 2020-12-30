@@ -42,10 +42,10 @@ mybatis-plus:
 
 dubbo:
   scan:
-    base-packages: com.metoo.api
+    base-packages: com.metoo.im
   protocol:
     name: dubbo
-    port: 20880
+    port: 20889
   consumer:
     timeout: 6000
     check: false

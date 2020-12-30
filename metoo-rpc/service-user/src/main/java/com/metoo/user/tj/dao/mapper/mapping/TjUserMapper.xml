@@ -14,4 +14,17 @@
         <result column="creation_time" property="creationTime" />
     </resultMap>
 
+    <select id="login" resultType="com.metoo.pojo.login.model.LoginModel" parameterType="com.metoo.pojo.login.vo.LoginVo">
+        SELECT
+            tu.id AS userId,
+            tu.username AS username,
+            tu.password as pwd,
+            tu.state AS state
+        FROM
+            tj_user tu
+        WHERE
+            tu.username = #{username}
+        AND tu.`password` = #{password}
+    </select>
+
 </mapper>
