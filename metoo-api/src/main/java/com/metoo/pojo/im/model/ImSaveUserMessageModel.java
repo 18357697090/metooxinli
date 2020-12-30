@@ -19,6 +19,9 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 public class ImSaveUserMessageModel implements Serializable {
-
+    //用户离线消息
+    private Integer uid;
+    private Integer sendId;
+    private String message;
 
 }

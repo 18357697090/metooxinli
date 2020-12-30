@@ -1,6 +1,7 @@
 package com.metoo.api.im;
 
 import com.loongya.core.util.RE;
+import com.metoo.pojo.im.model.ImUserMessageModel;
 
 /**
  * <p>
@@ -13,4 +14,10 @@ import com.loongya.core.util.RE;
 public interface ImUserMessageApi {
 
     RE uid(Integer uid);
+
+    void save(ImUserMessageModel userMessage);
+
+    void updateState(Integer uid);
+
+    void deleteByUid(Integer uid);
 }

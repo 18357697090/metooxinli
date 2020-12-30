@@ -1,6 +1,9 @@
 package com.metoo.api.ps;
 
 import com.loongya.core.util.RE;
+import com.metoo.pojo.ps.model.PsProblemModel;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,6 @@ import com.loongya.core.util.RE;
 public interface PsProblemApi {
 
     RE problem(Integer scaleId);
+
+    List<PsProblemModel> findByScaleId(Integer scaleId);
 }

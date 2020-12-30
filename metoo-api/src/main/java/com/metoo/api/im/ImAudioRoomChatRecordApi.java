@@ -1,6 +1,7 @@
 package com.metoo.api.im;
 
 import com.loongya.core.util.RE;
+import com.metoo.pojo.im.model.ImAudioRoomChatRecordModel;
 
 
 /**
@@ -14,4 +15,6 @@ import com.loongya.core.util.RE;
 public interface ImAudioRoomChatRecordApi {
 
     RE audioRoomChatRecord(Integer audioRoomId, Integer page);
+
+    void save(ImAudioRoomChatRecordModel imAudioRoomChatRecordModel);
 }

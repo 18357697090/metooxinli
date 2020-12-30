@@ -93,4 +93,13 @@ public class ImGiftApiImpl implements ImGiftApi {
         }
         return RE.ok(imGifts);
     }
+
+    @Override
+    public RE findByGiftId(Integer giftId) {
+        ImGift imGift = imGiftService.findByGiftId(giftId);
+        if(OU.isBlack(imGift)){
+            return RE.noData();
+        }
+        return RE.ok(imGift);
+    }
 }

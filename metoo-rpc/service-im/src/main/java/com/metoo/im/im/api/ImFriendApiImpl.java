@@ -7,6 +7,7 @@ import com.metoo.api.im.ImFriendApi;
 import com.metoo.api.tj.TjUserInfoApi;
 import com.metoo.im.im.dao.entity.ImFriend;
 import com.metoo.im.im.service.ImFriendService;
+import com.metoo.pojo.im.model.ImFriendModel;
 import com.metoo.pojo.old.vo.FriendListDto;
 import com.metoo.pojo.tj.model.TjUserInfoModel;
 import org.apache.dubbo.config.annotation.DubboReference;
@@ -92,5 +93,11 @@ public class ImFriendApiImpl implements ImFriendApi {
             return RE.noData();
         }
         return RE.ok(x);
+    }
+
+    @Override
+    public ImFriendModel findByUidAndFriendId(Integer uid, Integer firendId) {
+        ImFriend imFriend = imFriendService.findByUidAndFriendId(uid,firendId);
+        return mapper.map(imFriend,ImFriendModel.class);
     }
 }

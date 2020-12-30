@@ -3,9 +3,12 @@ package com.metoo.ps.ps.api;
 import com.loongya.core.util.RE;
 import com.metoo.api.ps.PsProblemApi;
 import com.metoo.pojo.old.model.Problems;
+import com.metoo.pojo.ps.model.PsProblemModel;
 import com.metoo.ps.ps.service.PsOptionsService;
 import com.metoo.ps.ps.service.PsProblemService;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 /**
  * <p>
@@ -29,5 +32,10 @@ public class PsProblemApiImpl implements PsProblemApi {
         problems.setOptions(psOptionsService.findByScaleId(scaleId));
         problems.setProblems(psProblemService.findByScaleId(scaleId));
         return RE.ok(problems);
+    }
+
+    @Override
+    public List<PsProblemModel> findByScaleId(Integer scaleId) {
+        return psProblemService.findByScaleId(scaleId);
     }
 }

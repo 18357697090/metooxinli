@@ -5,7 +5,9 @@ import com.loongya.core.util.RE;
 import com.metoo.api.im.ImAudioRoomChatRecordApi;
 import com.metoo.im.im.dao.entity.ImAudioRoomChatRecord;
 import com.metoo.im.im.service.ImAudioRoomChatRecordService;
+import com.metoo.pojo.im.model.ImAudioRoomChatRecordModel;
 import org.apache.dubbo.config.annotation.DubboService;
+import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -29,6 +31,8 @@ public class ImAudioRoomChatRecordApiImpl implements ImAudioRoomChatRecordApi {
 
     @Autowired
     private ImAudioRoomChatRecordService imAudioRoomChatRecordService;
+    @Autowired
+    private Mapper mapper;
 
     @Override
     public RE audioRoomChatRecord(Integer audioRoomId, Integer page) {
@@ -43,5 +47,11 @@ public class ImAudioRoomChatRecordApiImpl implements ImAudioRoomChatRecordApi {
             return RE.noData();
         }
         return RE.ok(strings);
+    }
+
+    @Override
+    public void save(ImAudioRoomChatRecordModel imAudioRoomChatRecordModel) {
+        ImAudioRoomChatRecord imAudioRoomChatRecord = mapper.map(imAudioRoomChatRecordModel,ImAudioRoomChatRecord.class);
+        imAudioRoomChatRecordService.save(imAudioRoomChatRecord);
     }
 }

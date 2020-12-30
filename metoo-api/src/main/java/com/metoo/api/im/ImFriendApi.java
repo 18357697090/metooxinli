@@ -2,6 +2,7 @@ package com.metoo.api.im;
 
 
 import com.loongya.core.util.RE;
+import com.metoo.pojo.im.model.ImFriendModel;
 
 /**
  * <p>
@@ -20,6 +21,7 @@ public interface ImFriendApi {
     RE blackFriends(Integer uid, Integer friendId);
 
     RE findBlackFriends(Integer uid, Integer friendId);
+    ImFriendModel findByUidAndFriendId(Integer uid, Integer firendId);
 
 
 }

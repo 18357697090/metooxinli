@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -19,6 +20,14 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 public class ImAudioRoomChatRecordModel implements Serializable {
+    private long id;
+
+
+    private Date creationTime;
+
+    private Integer AudioRoomId;
+
+    private String content;
 
 
 }

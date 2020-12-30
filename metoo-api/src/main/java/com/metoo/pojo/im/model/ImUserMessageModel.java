@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -19,6 +20,14 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 public class ImUserMessageModel implements Serializable{
+    private long id;
+    private Date creationTime;
+    private Integer uid;
+    private Integer sendId;
+    private String message;
+    //0表示已读，1表示未读
+    private Integer state;
+    private String spare;
 
 
 }

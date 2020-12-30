@@ -1,6 +1,7 @@
 package com.metoo.api.im;
 
 import com.loongya.core.util.RE;
+import com.metoo.pojo.im.model.ImSaveUserMessageModel;
 
 /**
  * <p>
@@ -13,4 +14,6 @@ import com.loongya.core.util.RE;
 public interface ImSaveUserMessageApi {
 
     RE findByUidAndSendId(Integer uid, Integer sendId);
+
+    void save(ImSaveUserMessageModel imSaveUserMessageModel);
 }

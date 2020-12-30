@@ -16,4 +16,6 @@ public interface ImGiftApi {
     RE givingGift(Integer uid, Integer acceptedId, Integer giftId, String number);
 
     RE getGiftList();
+
+    RE findByGiftId(Integer giftId);
 }
