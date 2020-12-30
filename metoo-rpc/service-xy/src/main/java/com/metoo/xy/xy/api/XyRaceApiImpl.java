@@ -6,7 +6,6 @@ import com.metoo.api.xy.XyRaceApi;
 import com.metoo.pojo.old.vo.ReturnRaceDTO;
 import com.metoo.pojo.xy.model.XyRaceModel;
 import com.metoo.xy.xy.dao.entity.XyRace;
-import com.metoo.xy.xy.dao.repository.XyMyRoomRepository;
 import com.metoo.xy.xy.service.XyMyRoomService;
 import com.metoo.xy.xy.service.XyRaceService;
 import org.apache.dubbo.config.annotation.DubboReference;

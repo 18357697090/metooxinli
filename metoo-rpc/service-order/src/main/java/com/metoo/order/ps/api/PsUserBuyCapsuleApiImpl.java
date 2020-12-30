@@ -10,7 +10,9 @@ import com.metoo.pojo.order.model.PsUserBuyCapsuleModel;
 import com.metoo.pojo.ps.model.PsCapsuleModel;
 import com.metoo.pojo.tj.model.TjUserAccountModel;
 import org.apache.dubbo.config.annotation.DubboReference;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 
@@ -22,6 +24,8 @@ import java.math.BigDecimal;
  * @author loongya
  * @since 2020-12-28
  */
+@Component
+@DubboService
 public class PsUserBuyCapsuleApiImpl implements PsUserBuyCapsuleApi {
 
     @DubboReference

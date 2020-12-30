@@ -6,8 +6,10 @@ import com.metoo.api.ps.PsMeasureRecordApi;
 import com.metoo.pojo.old.vo.MeasureRecordDTO;
 import com.metoo.ps.ps.dao.entity.PsMeasureRecord;
 import com.metoo.ps.ps.service.PsMeasureRecordService;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +22,8 @@ import java.util.List;
  * @author loongya
  * @since 2020-12-28
  */
+@Component
+@DubboService
 public class PsMeasureRecordApiImpl implements PsMeasureRecordApi {
 
 

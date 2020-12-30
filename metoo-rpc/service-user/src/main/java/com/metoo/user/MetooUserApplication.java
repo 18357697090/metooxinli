@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 @EnableDubbo
-@SpringBootApplication(scanBasePackages = {"com.metoo.user", "com.metoo.comm"})
+@SpringBootApplication(scanBasePackages = {"com.metoo.user", "com.metoo.comm.config"})
 public class MetooUserApplication {
 
     public static void main(String[] args) {

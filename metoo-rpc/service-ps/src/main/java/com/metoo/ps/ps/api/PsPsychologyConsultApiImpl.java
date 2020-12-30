@@ -6,11 +6,13 @@ import com.metoo.api.ps.PsPsychologyConsultApi;
 import com.metoo.pojo.ps.model.PsPsychologyConsultModel;
 import com.metoo.ps.ps.dao.entity.PsPsychologyConsult;
 import com.metoo.ps.ps.service.PsPsychologyConsultService;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,6 +26,8 @@ import java.util.stream.Stream;
  * @author loongya
  * @since 2020-12-28
  */
+@Component
+@DubboService
 public class PsPsychologyConsultApiImpl implements PsPsychologyConsultApi {
 
     @Autowired

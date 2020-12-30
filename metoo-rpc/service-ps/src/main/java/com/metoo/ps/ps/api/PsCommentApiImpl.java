@@ -5,7 +5,9 @@ import com.metoo.api.ps.PsCommentApi;
 import com.metoo.ps.ps.dao.entity.PsComment;
 import com.metoo.ps.ps.service.PsCommentService;
 import com.metoo.tools.CommentsTool;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * <p>
@@ -15,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author loongya
  * @since 2020-12-28
  */
+@Component
+@DubboService
 public class PsCommentApiImpl implements PsCommentApi {
 
     @Autowired

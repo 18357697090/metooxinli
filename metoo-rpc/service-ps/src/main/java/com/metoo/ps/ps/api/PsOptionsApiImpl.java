@@ -4,8 +4,10 @@ import com.metoo.api.ps.PsOptionsApi;
 import com.metoo.pojo.ps.model.PsOptionsModel;
 import com.metoo.ps.ps.dao.entity.PsOptions;
 import com.metoo.ps.ps.service.PsOptionsService;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -17,6 +19,8 @@ import java.util.List;
  * @author loongya
  * @since 2020-12-28
  */
+@Component
+@DubboService
 public class PsOptionsApiImpl implements PsOptionsApi {
 
     @Autowired

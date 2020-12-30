@@ -1,6 +1,8 @@
 package com.metoo.ps.ps.api;
 
 import com.metoo.api.ps.PsAnswerApi;
+import org.apache.dubbo.config.annotation.DubboService;
+import org.springframework.stereotype.Component;
 
 /**
  * <p>
@@ -10,6 +12,8 @@ import com.metoo.api.ps.PsAnswerApi;
  * @author loongya
  * @since 2020-12-28
  */
+@Component
+@DubboService
 public class PsAnswerApiImpl implements PsAnswerApi {
 
 }

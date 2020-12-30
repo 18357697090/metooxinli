@@ -10,10 +10,12 @@ import com.metoo.pojo.tj.model.TjUserInfoModel;
 import com.metoo.ps.ps.service.PsCapsuleService;
 import com.metoo.ps.ps.service.PsPourOutService;
 import org.apache.dubbo.config.annotation.DubboReference;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -28,6 +30,8 @@ import java.util.List;
  * @author loongya
  * @since 2020-12-28
  */
+@Component
+@DubboService
 public class PsPourOutApiImpl implements PsPourOutApi {
 
     @Autowired

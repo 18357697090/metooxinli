@@ -5,8 +5,10 @@ import com.metoo.api.tj.TjLevelPictureApi;
 import com.metoo.pojo.tj.model.TjLevelPictureModel;
 import com.metoo.user.tj.dao.entity.TjLevelPicture;
 import com.metoo.user.tj.service.TjLevelPictureService;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * <p>
@@ -16,6 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author loongya
  * @since 2020-12-28
  */
+@Component
+@DubboService
 public class TjLevelPictureApiImpl implements TjLevelPictureApi {
 
     @Autowired

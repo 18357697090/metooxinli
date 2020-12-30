@@ -13,8 +13,10 @@ import com.metoo.xy.xy.service.XyCityService;
 import com.metoo.xy.xy.service.XyCountryService;
 import com.metoo.xy.xy.service.XyMyRoomService;
 import org.apache.dubbo.config.annotation.DubboReference;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +29,8 @@ import java.util.List;
  * @author loongya
  * @since 2020-12-28
  */
+@Component
+@DubboService
 public class XyCityApiImpl implements XyCityApi {
 
     @Autowired

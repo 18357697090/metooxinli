@@ -9,8 +9,10 @@ import com.metoo.pojo.tj.model.TjUserInfoModel;
 import com.metoo.ps.ps.dao.entity.PsScaleGather;
 import com.metoo.ps.ps.service.PsScaleGatherService;
 import org.apache.dubbo.config.annotation.DubboReference;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +27,8 @@ import java.util.stream.Stream;
  * @author loongya
  * @since 2020-12-28
  */
+@Component
+@DubboService
 public class PsScaleGatherApiImpl implements PsScaleGatherApi {
 
     @Autowired

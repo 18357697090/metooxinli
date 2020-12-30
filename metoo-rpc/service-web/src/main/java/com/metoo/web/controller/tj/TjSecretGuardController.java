@@ -1,6 +1,9 @@
 package com.metoo.web.controller.tj;
 
 
+import com.loongya.core.util.RE;
+import com.metoo.api.tj.TjSecretGuardApi;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,18 +17,17 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2020-12-28
  */
 @RestController
-@RequestMapping("/tj/tj-secret-guard")
+@RequestMapping("/tj/tjSecretGuard")
 public class TjSecretGuardController {
 
+    @DubboReference
+    private TjSecretGuardApi tjSecretGuardApi;
 
     //密保问题
     @GetMapping("/findSecretGuard")
-    public String findSecretGuard(String username){
-        secretGuard a= secretGuardDao.findByUsername(username);
-        if(a==null){
-            return "asd!!@@##";
-        }
-        return a.getSecretGuard();
+    public RE findSecretGuard(String username){
+        return tjSecretGuardApi.findSecretGuard(username);
+
     }
 
 

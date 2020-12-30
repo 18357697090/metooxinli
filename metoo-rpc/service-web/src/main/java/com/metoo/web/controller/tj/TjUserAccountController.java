@@ -1,6 +1,9 @@
 package com.metoo.web.controller.tj;
 
 
+import com.loongya.core.util.RE;
+import com.metoo.api.tj.TjUserAccountApi;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,37 +21,30 @@ import java.util.List;
  * @since 2020-12-28
  */
 @RestController
-@RequestMapping("/tj/tj-user-account")
+@RequestMapping("/tj/tjUserAccount")
 public class TjUserAccountController {
 
+    @DubboReference
+    private TjUserAccountApi tjUserAccountApi;
+
     @GetMapping("/me")
-    public MeDTO me(@RequestHeader("UID")Integer uid){
-        System.out.println(uid);
-        Zh zh = zhDao.findByUid(uid);
-        UserInfo userInfo = userInfoDao.findByUid(uid);
-        MeDTO meDTO = new MeDTO();
-        meDTO.setMotto(userInfo.getMotto());
-        meDTO.setPicture(userInfo.getPicture());
-        meDTO.setLevel(userInfo.getDw());
-        meDTO.setName(userInfo.getName());
-        meDTO.setActiveIntegral(zh.getActiveIntegral());
-        meDTO.setPsychologyIntegral(zh.getPsychologyIntegral());
-        meDTO.setBalance(zh.getBalance());
-        return meDTO;
+    public RE me(@RequestHeader("UID")Integer uid){
+        return tjUserAccountApi.me(uid);
+
     }
 
     //获取个人账户信息
     @GetMapping("/findzh")
-    public Zh findzh(Integer uid){
-        return zhDao.findByUid(uid);
+    public RE findzh(Integer uid){
+        return tjUserAccountApi.findzh(uid);
     }
 
 
     //查找账户余额
     @GetMapping("/findBalance")
-    public BigDecimal findBalance(@RequestHeader("UID") Integer uid){
-        Zh zh=zhDao.findByUid(uid);
-        return zh.getBalance();
+    public RE findBalance(@RequestHeader("UID") Integer uid){
+        return tjUserAccountApi.findBalance(uid);
+
     }
 
 

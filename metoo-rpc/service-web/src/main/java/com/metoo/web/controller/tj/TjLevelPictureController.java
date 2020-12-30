@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2020-12-28
  */
 @RestController
-@RequestMapping("/tj/tj-level-picture")
+@RequestMapping("/tj/tjLevelPicture")
 public class TjLevelPictureController {
 
 }
