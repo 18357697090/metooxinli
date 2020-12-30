@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 @EnableDubbo
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.metoo.order", "com.metoo.comm"})
 public class MetooOrderApplication {
 
     public static void main(String[] args) {
