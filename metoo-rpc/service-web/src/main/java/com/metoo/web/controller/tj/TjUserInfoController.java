@@ -1,6 +1,14 @@
 package com.metoo.web.controller.tj;
 
 
+import com.loongya.core.util.RE;
+import com.metoo.api.tj.TjUserInfoApi;
+import com.metoo.pojo.old.model.TjUserInfoPojoModel;
+import com.metoo.pojo.old.vo.MeUserInfoDTO;
+import com.metoo.pojo.old.vo.ModifyUserIfoDTO;
+import com.metoo.pojo.tj.model.TjUserInfoModel;
+import org.dozer.Mapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -15,65 +23,39 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/tj/tj-user-info")
 public class TjUserInfoController {
 
+    @Deprecated
+    private TjUserInfoApi tjUserInfoApi;
+
+
+
     @GetMapping("/userInfo")
-    public MeUserInfoDTO userInfo(@RequestHeader("UID")Integer uid1, Integer uid){
-        MeUserInfoDTO meUserInfoDTO = mapper.map(userInfoDao.findByUid(uid),MeUserInfoDTO.class);
-        Friend friend = friendDao.findByUidAndFriendId(uid1,uid);
-        if (friend!=null){
-            meUserInfoDTO.setState(friend.getState());
-        }
-        return meUserInfoDTO;
+    public RE userInfo(@RequestHeader("UID")Integer uid1, Integer uid){
+        return tjUserInfoApi.userInfo(uid1,uid);
     }
 
     //修改个人信息
     @PostMapping("/modifyUserInfo")
-    public ReturnMessage modifyUserInfo(@RequestBody ModifyUserIfoDTO modifyUserIfoDTO,@RequestHeader("UID")Integer uid){
-        ReturnMessage returnMessage = new ReturnMessage();
-        int i = userInfoDao.updateUserInfo(modifyUserIfoDTO.getName(),modifyUserIfoDTO.getPicture(),modifyUserIfoDTO.getCity(),modifyUserIfoDTO.getMotto(),uid);
-        if(i==1){
-            returnMessage.setState("success");
-            returnMessage.setExplain("修改成功");
-        }else {
-            returnMessage.setState("error");
-            returnMessage.setExplain("修改失败");
-        }
-        return returnMessage;
+    public RE modifyUserInfo(@RequestBody ModifyUserIfoDTO modifyUserIfoDTO, @RequestHeader("UID")Integer uid){
+        return tjUserInfoApi.modifyUserInfo(uid,modifyUserIfoDTO);
     }
 
     //上传个人信息
-    @PostMapping("/userInfo")
-    public String userInfo(@RequestBody UserInfoPojo userInfo,@RequestHeader("UID") Integer uid){
-        System.out.println(uid);
-        System.out.println(userInfo);
-        UserInfo a= userInfoDao.findByUid(uid);
-        UserInfo b= new UserInfo();
-        if(a==null){
-            b.setUid(uid);
-            b.setAge(userInfo.getAge());
-            b.setCity(userInfo.getCity());
-            b.setDw(1);
-            b.setGender(userInfo.getGender());
-            b.setName(userInfo.getName());
-            b.setPicture(userInfo.getPicture());
-            userInfoDao.save(b);
-            return "success";
-        }
-        else {
-            return "error";
-        }
+    @PostMapping("/upLoadUserInfo")
+    public RE upLoadUserInfo(@RequestBody TjUserInfoPojoModel userInfo, @RequestHeader("UID") Integer uid){
+        return tjUserInfoApi.upLoadUserInfo(userInfo,uid);
     }
 
 
     //查找个人信息
     @GetMapping("/findUserInfo")
-    public UserInfo findUserInfo(int uid){
-        return userInfoDao.findByUid(uid);
+    public TjUserInfoModel findUserInfo(int uid){
+        return tjUserInfoApi.findByUid(uid);
     }
 
     //获取个人段位
     @GetMapping("/finddw")
     public Integer finddw(Integer uid){
-        UserInfo a = userInfoDao.findByUid(uid);
+        TjUserInfoModel a = tjUserInfoApi.findByUid(uid);
         if(a==null){
             return -1;
         }else {

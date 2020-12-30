@@ -37,4 +37,9 @@ public class TjUserInfoServiceImpl extends ServiceImpl<TjUserInfoMapper, TjUserI
         TjUserInfoModel model = mapper.map(pojo, TjUserInfoModel.class);
         return model;
     }
+
+    @Override
+    public int updateUserInfo(String name, String picture, String city, String motto, Integer uid) {
+        return tjUserInfoRepository.updateUserInfo(name, picture, city, motto, uid);
+    }
 }

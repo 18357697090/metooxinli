@@ -15,4 +15,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface TjUserInfoService extends IService<TjUserInfo> {
 
     TjUserInfoModel findByUid(Integer uid);
+
+    int updateUserInfo(String name, String picture, String city, String motto, Integer uid);
 }

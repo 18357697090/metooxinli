@@ -1,5 +1,8 @@
 package com.metoo.api.tj;
 
+import com.loongya.core.util.RE;
+import com.metoo.pojo.old.model.TjUserInfoPojoModel;
+import com.metoo.pojo.old.vo.ModifyUserIfoDTO;
 import com.metoo.pojo.tj.model.TjUserInfoModel;
 
 /**
@@ -12,5 +15,13 @@ import com.metoo.pojo.tj.model.TjUserInfoModel;
  */
 public interface TjUserInfoApi {
 
+
+
+    RE modifyUserInfo(Integer uid, ModifyUserIfoDTO modifyUserIfoDTO);
+
+    RE userInfo(Integer uid1, Integer uid);
+
     TjUserInfoModel findByUid(Integer uid);
+
+    RE upLoadUserInfo(TjUserInfoPojoModel userInfo, Integer uid);
 }
