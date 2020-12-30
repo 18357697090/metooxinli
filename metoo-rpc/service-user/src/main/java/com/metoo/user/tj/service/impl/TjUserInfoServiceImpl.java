@@ -11,6 +11,8 @@ import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  * 用户个人信息表 服务实现类
@@ -41,5 +43,10 @@ public class TjUserInfoServiceImpl extends ServiceImpl<TjUserInfoMapper, TjUserI
     @Override
     public int updateUserInfo(String name, String picture, String city, String motto, Integer uid) {
         return tjUserInfoRepository.updateUserInfo(name, picture, city, motto, uid);
+    }
+
+    @Override
+    public List<TjUserInfo> findByNameLike(String name) {
+        return tjUserInfoRepository.findByNameLike("%" + name + "%");
     }
 }
