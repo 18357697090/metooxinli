@@ -1,6 +1,11 @@
 package com.metoo.ps.ps.api;
 
+import com.loongya.core.util.RE;
 import com.metoo.api.ps.PsCommentApi;
+import com.metoo.ps.ps.dao.entity.PsComment;
+import com.metoo.ps.ps.service.PsCommentService;
+import com.metoo.tools.CommentsTool;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * <p>
@@ -12,4 +17,16 @@ import com.metoo.api.ps.PsCommentApi;
  */
 public class PsCommentApiImpl implements PsCommentApi {
 
+    @Autowired
+    private PsCommentService psCommentService;
+
+    @Override
+    public RE comment(CommentsTool commentsTool, Integer uid) {
+        PsComment comment=new PsComment();
+        comment.setComment(commentsTool.getComment());
+        comment.setScaleId(commentsTool.getScaleId());
+        comment.setUid(uid);
+        psCommentService.save(comment);
+        return RE.ok();
+    }
 }

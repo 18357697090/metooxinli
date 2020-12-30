@@ -13,4 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface PsScaleDetailService extends IService<PsScaleDetail> {
 
+    PsScaleDetail findByScaleId(Integer scaleId);
 }

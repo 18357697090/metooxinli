@@ -8,7 +8,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class indexDTO {
+public class IndexDTO {
     private List<PsScaleModel> scales;
     private List<PsPourOutModel> pourOuts;
     private List<PsPsychologyConsultModel> psychologyConsults;

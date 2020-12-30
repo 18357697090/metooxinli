@@ -3,6 +3,8 @@ package com.metoo.ps.ps.service;
 import com.metoo.ps.ps.dao.entity.PsMeasureRecord;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  * 用户心理测量量表记录表 服务类
@@ -13,4 +15,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface PsMeasureRecordService extends IService<PsMeasureRecord> {
 
+    List<PsMeasureRecord> findBytime(String time, Integer uid);
 }

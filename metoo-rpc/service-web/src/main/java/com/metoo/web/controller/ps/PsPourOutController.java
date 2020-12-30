@@ -1,6 +1,9 @@
 package com.metoo.web.controller.ps;
 
 
+import com.loongya.core.util.RE;
+import com.metoo.api.ps.PsPourOutApi;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,64 +22,18 @@ import java.util.List;
  * @since 2020-12-28
  */
 @RestController
-@RequestMapping("/ps/ps-pour-out")
+@RequestMapping("/ps/psPourOut")
 public class PsPourOutController {
 
+    @DubboReference
+    private PsPourOutApi psPourOutApi;
+
     @GetMapping("/capsule")
-    public PourOutPojo capsule(){
-        PourOutPojo pourOutPojo = new PourOutPojo();
-        Pageable pageable = PageRequest.of(0,5, Sort.Direction.DESC,"prices");
-        pourOutPojo.setPourOuts(pourOutDao.findByOnLine(1,pageable));
-        List<Object[]> capsule= capsuleDao.findCapsule();
-        pourOutPojo.setPourOutCapsulePojos(this.tool(capsule));
-        return pourOutPojo;
+    public RE capsule(){
+        return psPourOutApi.capsule();
+
     }
 
-    private List<PourOutCapsulePojo> tool(List<Object[]> capsules){
-        List<PourOutCapsulePojo> pourOutCapsulePojos = new ArrayList<>();
-        for (Object[] objects : capsules) {
-            PourOutCapsulePojo pourOutCapsulePojo = new PourOutCapsulePojo();
-            String x = Arrays.toString(objects);
-            String y = x.substring(1, x.length() - 1);
-            String[] str = y.split(",");
-            for (int j = 0; j < str.length; j++) {
-                String b = str[j];
-                String c = b;
-                if (j != 0) {
-                    c = b.substring(1);
-                }
-                switch (j) {
-                    case 0:
-                        pourOutCapsulePojo.setCapsuleId(Integer.parseInt(c));
-                        break;
-                    case 1:
-                        pourOutCapsulePojo.setCreationTime(c);
-                        break;
-                    case 2:
-                        pourOutCapsulePojo.setBeWatched(Integer.parseInt(c));
-                        break;
-                    case 3:
-                        pourOutCapsulePojo.setPrices(new BigDecimal(c));
-                        break;
-                    case 4:
-                        pourOutCapsulePojo.setTitle(c);
-                        break;
-                    case 5:
-                        pourOutCapsulePojo.setUid(Integer.parseInt(c));
-                        break;
-                    case 6:
-                        pourOutCapsulePojo.setAttribute(Integer.parseInt(c));
-                        break;
-                }
-            }
-            UserInfo userInfo = userInfoDao.findByUid(pourOutCapsulePojo.getUid());
-            pourOutCapsulePojo.setUid(null);
-            pourOutCapsulePojo.setName(userInfo.getName());
-            pourOutCapsulePojo.setPicture(userInfo.getPicture());
-            pourOutCapsulePojos.add(pourOutCapsulePojo);
-        }
-        return pourOutCapsulePojos;
-    }
 
 
 }

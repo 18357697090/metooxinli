@@ -31,19 +31,9 @@ public class PsScaleController {
     }
 
     @GetMapping("/index")
-    public indexDTO index(){
-        indexDTO indexDTO = new indexDTO();
-        indexDTO.setScales(scaleDao.findScaleRand());
-        List<Article> articles =articleDao.findArticleRand();
-        List<ArticleDTO> articleDTOS = new ArrayList<>();
-        for (Article article : articles) {
-            ArticleDTO articleDTO = mapper.map(article,ArticleDTO.class);
-            articleDTOS.add(articleDTO);
-        }
-        indexDTO.setArticleDTOS(articleDTOS);
-        indexDTO.setPourOuts(pourOutDao.findPourOutRand());
-        indexDTO.setPsychologyConsults(psychologyConsultDao.findPsychologyConsultRand());
-        return indexDTO;
+    public RE index(){
+        return psScaleApi.index();
+
     }
 
 

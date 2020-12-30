@@ -1,5 +1,8 @@
 package com.metoo.api.ps;
 
+import com.loongya.core.util.RE;
+import com.metoo.tools.CommentsTool;
+
 /**
  * <p>
  * 心理测量量表用户评论表 服务类
@@ -10,4 +13,5 @@ package com.metoo.api.ps;
  */
 public interface PsCommentApi {
 
+    RE comment(CommentsTool commentsTool, Integer uid);
 }

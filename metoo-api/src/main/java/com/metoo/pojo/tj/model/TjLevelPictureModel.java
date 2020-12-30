@@ -1,5 +1,6 @@
 package com.metoo.pojo.tj.model;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -19,6 +20,10 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 public class TjLevelPictureModel implements Serializable {
+    private Long id;
 
+    private String levelPicture;
+
+    private Integer level;
 
 }

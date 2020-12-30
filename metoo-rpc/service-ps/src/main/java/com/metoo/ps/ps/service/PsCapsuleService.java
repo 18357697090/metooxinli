@@ -24,4 +24,6 @@ public interface PsCapsuleService extends IService<PsCapsule> {
     Integer updataState(Integer capsuleId);
 
     List<Object[]> findCapsules(Integer page);
+
+    List<Object[]> findCapsule();
 }

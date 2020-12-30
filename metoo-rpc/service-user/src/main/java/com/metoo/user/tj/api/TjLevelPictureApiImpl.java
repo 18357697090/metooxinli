@@ -1,6 +1,12 @@
 package com.metoo.user.tj.api;
 
+import com.loongya.core.util.OU;
 import com.metoo.api.tj.TjLevelPictureApi;
+import com.metoo.pojo.tj.model.TjLevelPictureModel;
+import com.metoo.user.tj.dao.entity.TjLevelPicture;
+import com.metoo.user.tj.service.TjLevelPictureService;
+import org.dozer.DozerBeanMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * <p>
@@ -12,4 +18,19 @@ import com.metoo.api.tj.TjLevelPictureApi;
  */
 public class TjLevelPictureApiImpl implements TjLevelPictureApi {
 
+    @Autowired
+    private TjLevelPictureService tjLevelPictureService;
+
+    @Autowired
+    private DozerBeanMapper mapper;
+
+    @Override
+    public TjLevelPictureModel findByLevel(Integer dw) {
+        TjLevelPicture pojo = tjLevelPictureService.findByLevel(dw);
+        if(OU.isBlack(pojo)){
+            return null;
+        }
+        return mapper.map(pojo, TjLevelPictureModel.class);
+
+    }
 }

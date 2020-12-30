@@ -1,6 +1,9 @@
 package com.metoo.web.controller.ps;
 
 
+import com.loongya.core.util.RE;
+import com.metoo.api.ps.PsPsychologyConsultApi;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,12 +19,16 @@ import java.util.List;
  * @since 2020-12-28
  */
 @RestController
-@RequestMapping("/ps/ps-psychology-consult")
+@RequestMapping("/ps/psPsychologyConsult")
 public class PsPsychologyConsultController {
+
+    @DubboReference
+    private PsPsychologyConsultApi psPsychologyConsultApi;
+
     @GetMapping("/psychologyConslut")
-    public List<PsychologyConsult> psychologyConsults(){
-        Pageable pageable = PageRequest.of(0,5, Sort.Direction.DESC,"prices");
-        return psychologyConsultDao.findByOnLine(1,pageable);
+    public RE psychologyConsults(){
+        return psPsychologyConsultApi.psychologyConsults();
+
     }
 
 }

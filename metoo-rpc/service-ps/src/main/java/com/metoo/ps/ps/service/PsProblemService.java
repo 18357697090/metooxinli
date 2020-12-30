@@ -1,7 +1,10 @@
 package com.metoo.ps.ps.service;
 
+import com.metoo.pojo.ps.model.PsProblemModel;
 import com.metoo.ps.ps.dao.entity.PsProblem;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface PsProblemService extends IService<PsProblem> {
 
+    List<PsProblemModel> findByScaleId(Integer scaleId);
 }

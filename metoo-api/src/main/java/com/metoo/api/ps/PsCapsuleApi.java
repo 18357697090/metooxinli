@@ -1,8 +1,11 @@
 package com.metoo.api.ps;
 
 import com.loongya.core.util.RE;
+import com.metoo.pojo.old.model.PourOutCapsulePojo;
 import com.metoo.pojo.old.model.SaveCapsulePojo;
 import com.metoo.pojo.ps.model.PsCapsuleModel;
+
+import java.util.List;
 
 /**
  * <p>
@@ -25,4 +28,5 @@ public interface PsCapsuleApi {
     RE saveCapsule(SaveCapsulePojo saveCapsulePojo, Integer uid);
 
     RE capsule(Integer capsuleId, Integer uid);
+
 }

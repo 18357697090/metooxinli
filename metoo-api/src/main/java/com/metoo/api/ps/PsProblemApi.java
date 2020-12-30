@@ -1,5 +1,7 @@
 package com.metoo.api.ps;
 
+import com.loongya.core.util.RE;
+
 /**
  * <p>
  * 心理测量量表题目表 服务类
@@ -10,4 +12,5 @@ package com.metoo.api.ps;
  */
 public interface PsProblemApi {
 
+    RE problem(Integer scaleId);
 }

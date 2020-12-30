@@ -39,4 +39,14 @@ public class PsArticleServiceImpl extends ServiceImpl<PsArticleMapper, PsArticle
     public PsArticle findByArticleId(Integer articleId) {
         return psArticleRepository.findByArticleId(articleId);
     }
+
+    @Override
+    public List<PsArticle> findArticleRand() {
+        return psArticleRepository.findArticleRand();
+    }
+
+    @Override
+    public void updateNumber(Integer articleId) {
+        psArticleRepository.updateNumber(articleId);
+    }
 }

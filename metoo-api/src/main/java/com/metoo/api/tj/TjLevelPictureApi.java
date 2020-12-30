@@ -1,5 +1,7 @@
 package com.metoo.api.tj;
 
+import com.metoo.pojo.tj.model.TjLevelPictureModel;
+
 /**
  * <p>
  * 用户等级图标表 服务类
@@ -10,4 +12,5 @@ package com.metoo.api.tj;
  */
 public interface TjLevelPictureApi{
 
+    TjLevelPictureModel findByLevel(Integer dw);
 }

@@ -1,5 +1,6 @@
 package com.metoo.ps.ps.service;
 
+import com.metoo.pojo.ps.model.PsOptionsModel;
 import com.metoo.ps.ps.dao.entity.PsOptions;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -13,4 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface PsOptionsService extends IService<PsOptions> {
 
+    PsOptionsModel findByScaleId(Integer scaleId);
 }

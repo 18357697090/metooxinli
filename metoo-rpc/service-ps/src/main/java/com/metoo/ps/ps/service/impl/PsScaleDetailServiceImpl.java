@@ -2,8 +2,10 @@ package com.metoo.ps.ps.service.impl;
 
 import com.metoo.ps.ps.dao.entity.PsScaleDetail;
 import com.metoo.ps.ps.dao.mapper.PsScaleDetailMapper;
+import com.metoo.ps.ps.dao.repository.PsScaleDetailRepository;
 import com.metoo.ps.ps.service.PsScaleDetailService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,4 +19,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class PsScaleDetailServiceImpl extends ServiceImpl<PsScaleDetailMapper, PsScaleDetail> implements PsScaleDetailService {
 
+    @Autowired
+    private PsScaleDetailRepository psScaleDetailRepository;
+
+    @Override
+    public PsScaleDetail findByScaleId(Integer scaleId) {
+        return psScaleDetailRepository.findByScaleId(scaleId);
+    }
 }

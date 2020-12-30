@@ -13,4 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface TjLevelPictureService extends IService<TjLevelPicture> {
 
+    TjLevelPicture findByLevel(Integer dw);
 }

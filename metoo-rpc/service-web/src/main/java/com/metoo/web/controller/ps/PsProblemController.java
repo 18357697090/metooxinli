@@ -1,7 +1,11 @@
 package com.metoo.web.controller.ps;
 
 
+import com.loongya.core.util.RE;
+import com.metoo.api.ps.PsProblemApi;
 import io.swagger.annotations.ApiOperation;
+import org.apache.dubbo.config.annotation.DubboReference;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,16 +19,17 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2020-12-28
  */
 @RestController
-@RequestMapping("/ps/ps-problem")
+@RequestMapping("/ps/psProblem")
 public class PsProblemController {
+
+    @DubboReference
+    private PsProblemApi psProblemApi;
+
     //测量的题目
     @ApiOperation("量表题目")
     @GetMapping("/problem")
-    public Problems problem(Integer scaleId){
-        Problems problems=new Problems();
-        problems.setOptions(optionsDao.findByScaleId(scaleId));
-        problems.setProblems(problemDao.findByScaleId(scaleId));
-        return problems;
+    public RE problem(Integer scaleId){
+        return psProblemApi.problem(scaleId);
     }
 
 }

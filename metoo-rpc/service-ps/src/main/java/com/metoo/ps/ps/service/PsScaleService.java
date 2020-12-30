@@ -1,8 +1,11 @@
 package com.metoo.ps.ps.service;
 
 import com.loongya.core.util.RE;
+import com.metoo.pojo.ps.model.PsScaleModel;
 import com.metoo.ps.ps.dao.entity.PsScale;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
  * <p>
@@ -15,4 +18,12 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface PsScaleService extends IService<PsScale> {
 
     RE cl(Integer page);
+
+    List<PsScaleModel> findScaleRand();
+
+    PsScale findByScaleId(Integer scaleId);
+
+    List<PsScale> findByScaleGatherId(Integer clgatherid);
+
+    void updateNumber(Integer number, Integer scaleId);
 }

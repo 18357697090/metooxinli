@@ -14,4 +14,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface PsUserAndMeasureService extends IService<PsUserAndMeasure> {
 
     void updateMeasure(Integer uid, int scaleId);
+
+    PsUserAndMeasure findByUidAndScaleId(Integer uid, Integer scaleId);
+
+    void updateCount(Integer i, Integer uid, Integer scaleId);
 }

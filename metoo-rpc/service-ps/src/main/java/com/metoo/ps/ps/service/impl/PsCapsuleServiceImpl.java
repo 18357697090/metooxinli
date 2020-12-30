@@ -49,4 +49,9 @@ public class PsCapsuleServiceImpl extends ServiceImpl<PsCapsuleMapper, PsCapsule
     public List<Object[]> findCapsules(Integer page) {
         return psCapsuleRepository.findCapsules(page);
     }
+
+    @Override
+    public List<Object[]> findCapsule() {
+        return psCapsuleRepository.findCapsule();
+    }
 }

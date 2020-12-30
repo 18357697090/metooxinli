@@ -1,7 +1,11 @@
 package com.metoo.ps.ps.service;
 
+import com.metoo.pojo.ps.model.PsPsychologyConsultModel;
 import com.metoo.ps.ps.dao.entity.PsPsychologyConsult;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.springframework.data.domain.Pageable;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +17,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface PsPsychologyConsultService extends IService<PsPsychologyConsult> {
 
+    List<PsPsychologyConsult> findByOnLine(Integer i, Pageable pageable);
+
+    List<PsPsychologyConsultModel> findPsychologyConsultRand();
 }

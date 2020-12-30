@@ -13,4 +13,8 @@ import com.loongya.core.util.RE;
 public interface PsScaleApi {
 
     RE cl(Integer page);
+
+    RE index();
+
+    RE findbyclgatherid(Integer clgatherid);
 }

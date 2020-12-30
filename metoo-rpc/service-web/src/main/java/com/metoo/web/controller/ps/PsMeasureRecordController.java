@@ -1,6 +1,10 @@
 package com.metoo.web.controller.ps;
 
 
+import com.loongya.core.util.RE;
+import com.metoo.api.ps.PsMeasureRecordApi;
+import com.metoo.api.ps.PsUserAndMeasureApi;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,18 +22,17 @@ import java.util.List;
  * @since 2020-12-28
  */
 @RestController
-@RequestMapping("/ps/ps-measure-record")
+@RequestMapping("/ps/psMeasureRecord")
 public class PsMeasureRecordController {
 
+    @DubboReference
+    private PsMeasureRecordApi psMeasureRecordApi;
+
+
     @GetMapping("/measureRecord")
-    public List<MeasureRecordDTO> measureRecord(@RequestHeader("UID")Integer uid, String time){
-        List<MeasureRecord> measureRecords = measureRecordDao.findBytime(time,uid);
-        List<MeasureRecordDTO> measureRecordDTOS = new ArrayList<>();
-        for (MeasureRecord measureRecord : measureRecords){
-            MeasureRecordDTO measureRecordDTO = mapper.map(measureRecord,MeasureRecordDTO.class);
-            measureRecordDTOS.add(measureRecordDTO);
-        }
-        return measureRecordDTOS;
+    public RE measureRecord(@RequestHeader("UID")Integer uid, String time){
+        return psMeasureRecordApi.measureRecord(uid, time);
+
     }
 
 }

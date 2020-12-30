@@ -1,6 +1,9 @@
 package com.metoo.web.controller.ps;
 
 
+import com.loongya.core.util.RE;
+import com.metoo.api.ps.PsWatchArticleApi;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,19 +18,16 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2020-12-28
  */
 @RestController
-@RequestMapping("/ps/ps-watch-article")
+@RequestMapping("/ps/psWatchArticle")
 public class PsWatchArticleController {
 
+    @DubboReference
+    private PsWatchArticleApi psWatchArticleApi;
+
     @GetMapping("/watchArticle")
-    public void watchArticle(@RequestHeader("UID")Integer uid, Integer articleId){
-        WatchArticle watchArticle = watchArticleDao.findByUid(uid);
-        if (watchArticle==null){
-            WatchArticle watchArticle1 = new WatchArticle();
-            watchArticle1.setArticleId(articleId);
-            watchArticle1.setUid(uid);
-            watchArticleDao.save(watchArticle1);
-            articleDao.updateNumber(articleId);
-        }
+    public RE watchArticle(@RequestHeader("UID")Integer uid, Integer articleId){
+        return psWatchArticleApi.watchArticle(uid, articleId);
+
     }
 
 }

@@ -1,7 +1,11 @@
 package com.metoo.web.controller.ps;
 
 
+import com.loongya.core.util.RE;
+import com.metoo.api.ps.PsCommentApi;
+import com.metoo.tools.CommentsTool;
 import io.swagger.annotations.ApiOperation;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -13,17 +17,18 @@ import org.springframework.web.bind.annotation.*;
  * @since 2020-12-28
  */
 @RestController
-@RequestMapping("/ps/ps-comment")
+@RequestMapping("/ps/psComment")
 public class PsCommentController {
+
+    @DubboReference
+    private PsCommentApi psCommentApi;
+
+
     @ApiOperation("量表评论")
     @PostMapping("/comment")
-    public String comment(@RequestBody CommentsTool commentsTool, @RequestHeader("UID") Integer uid){
-        Comment comment=new Comment();
-        comment.setComment(commentsTool.getComment());
-        comment.setScaleId(commentsTool.getScaleId());
-        comment.setUid(uid);
-        commentDao.save(comment);
-        return "success";
+    public RE comment(@RequestBody CommentsTool commentsTool, @RequestHeader("UID") Integer uid){
+        return psCommentApi.comment(commentsTool, uid);
+
     }
 
 }

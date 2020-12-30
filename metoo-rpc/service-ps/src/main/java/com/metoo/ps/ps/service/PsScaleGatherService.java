@@ -3,6 +3,8 @@ package com.metoo.ps.ps.service;
 import com.metoo.ps.ps.dao.entity.PsScaleGather;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  * 心理测量量表集合表 服务类
@@ -13,4 +15,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface PsScaleGatherService extends IService<PsScaleGather> {
 
+    PsScaleGather findByScaleGatherId(Integer dw);
+
+    List<PsScaleGather> findByScaleGatherIdAll();
 }

@@ -21,4 +21,8 @@ public interface PsArticleService extends IService<PsArticle> {
     List<PsArticle> findByState(Integer i, Pageable pageable);
 
     PsArticle findByArticleId(Integer articleId);
+
+    List<PsArticle> findArticleRand();
+
+    void updateNumber(Integer articleId);
 }
