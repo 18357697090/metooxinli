@@ -5,7 +5,9 @@ import com.metoo.api.ps.PsWatchArticleApi;
 import com.metoo.ps.ps.dao.entity.PsWatchArticle;
 import com.metoo.ps.ps.service.PsArticleService;
 import com.metoo.ps.ps.service.PsWatchArticleService;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * <p>
@@ -15,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author loongya
  * @since 2020-12-28
  */
+@Component
+@DubboService
 public class PsWatchArticleApiImpl implements PsWatchArticleApi {
 
     @Autowired

@@ -6,7 +6,9 @@ import com.metoo.pojo.old.model.Problems;
 import com.metoo.pojo.ps.model.PsProblemModel;
 import com.metoo.ps.ps.service.PsOptionsService;
 import com.metoo.ps.ps.service.PsProblemService;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -18,6 +20,8 @@ import java.util.List;
  * @author loongya
  * @since 2020-12-28
  */
+@Component
+@DubboService
 public class PsProblemApiImpl implements PsProblemApi {
 
     @Autowired

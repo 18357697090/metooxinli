@@ -7,8 +7,10 @@ import com.metoo.xy.xy.dao.entity.XyJoinCityMessage;
 import com.metoo.xy.xy.service.XyCityService;
 import com.metoo.xy.xy.service.XyJoinCityMessageService;
 import com.metoo.xy.xy.service.XyMyRoomService;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * <p>
@@ -18,6 +20,8 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author loongya
  * @since 2020-12-28
  */
+@Component
+@DubboService
 public class XyJoinCityMessageApiImpl implements XyJoinCityMessageApi {
 
     @Autowired
