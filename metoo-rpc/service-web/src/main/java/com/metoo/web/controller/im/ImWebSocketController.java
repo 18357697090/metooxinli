@@ -15,6 +15,8 @@ import com.metoo.tools.SeatInfo;
 import com.metoo.web.config.tools.Repository;
 import net.sf.json.JSONObject;
 import org.springframework.stereotype.Component;
+import org.springframework.web.socket.handler.TextWebSocketHandler;
+
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
@@ -23,7 +25,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Component
 @ServerEndpoint("/app/{uid}")
-public class ImWebSocketController {
+public class ImWebSocketController extends TextWebSocketHandler {
     //<用户uid，用户的session>
     private static final Map<Integer,Session> userSession = new ConcurrentHashMap<>();
 
