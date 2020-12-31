@@ -36,7 +36,6 @@ public class LoginController {
     @PostMapping("/modifyPassword")
     public RE modifyPassword(@RequestBody SecretGuardPojo secretGuardPojo){
         return tjUserApi.modifyPassword(secretGuardPojo);
-
     }
 
 }

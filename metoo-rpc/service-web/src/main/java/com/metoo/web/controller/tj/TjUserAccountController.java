@@ -30,7 +30,6 @@ public class TjUserAccountController {
     @GetMapping("/me")
     public RE me(@RequestHeader("UID")Integer uid){
         return tjUserAccountApi.me(uid);
-
     }
 
     //获取个人账户信息
@@ -44,7 +43,6 @@ public class TjUserAccountController {
     @GetMapping("/findBalance")
     public RE findBalance(@RequestHeader("UID") Integer uid){
         return tjUserAccountApi.findBalance(uid);
-
     }
 
 

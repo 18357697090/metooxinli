@@ -19,6 +19,7 @@
         <module>service-ps</module>
         <module>service-comm</module>
         <module>service-web</module>
+        <module>service-websocket</module>
     </modules>
 
     <properties>

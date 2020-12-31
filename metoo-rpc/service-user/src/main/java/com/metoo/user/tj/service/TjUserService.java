@@ -21,8 +21,6 @@ public interface TjUserService extends IService<TjUser> {
 
     TjUser findByUsername(String username);
 
-    TjUser findByUid(Integer x);
-
     void updateUserPassword(String newPassword, String username);
 
     LoginModel login(LoginVo vo);

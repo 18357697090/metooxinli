@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -22,10 +23,10 @@ public class LoginUserInfoModel implements Serializable {
 
     private String username;
 
-    private Integer phoneNumber;
-
-    private String spare;
+    private String phone;
 
     private TjUserInfoModel tjUserInfoModel;
+
+    private List<String> list;
 
 }

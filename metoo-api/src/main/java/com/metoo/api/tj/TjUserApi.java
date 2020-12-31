@@ -23,5 +23,5 @@ public interface TjUserApi {
 
     RE modifyPassword(SecretGuardPojo secretGuardPojo);
 
-    RE findUserById(Integer userId);
+    RE getUserInfo(Integer userId);
 }

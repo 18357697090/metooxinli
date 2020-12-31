@@ -36,7 +36,7 @@ public class TjUserInfo extends Model<TjUserInfo> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
     @ApiModelProperty(value = "年龄")
     private Integer age;
@@ -63,7 +63,10 @@ public class TjUserInfo extends Model<TjUserInfo> {
     private String motto;
 
     @ApiModelProperty(value = "创建时间")
-    private Date creationTime;
+    private Date createTime;
+
+    @ApiModelProperty(value = "修改时间")
+    private Date updateTime;
 
 
     @Override

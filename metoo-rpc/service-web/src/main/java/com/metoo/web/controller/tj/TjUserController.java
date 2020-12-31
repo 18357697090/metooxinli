@@ -32,11 +32,12 @@ public class TjUserController {
 
     /**
      * 获取用户信息
+     * ok
      * @return
      */
     @PostMapping("/getUserInfo")
     public RE getUserInfo(){
-        return tjUserApi.findUserById(ThreadLocal.getUserId());
+        return tjUserApi.getUserInfo(ThreadLocal.getUserId());
     }
 
 

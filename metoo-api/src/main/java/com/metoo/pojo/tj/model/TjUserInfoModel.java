@@ -23,7 +23,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class TjUserInfoModel implements Serializable {
 
-    private Long id;
+    private Integer id;
 
     private Integer age;
 
@@ -35,17 +35,14 @@ public class TjUserInfoModel implements Serializable {
 
     private String name;
 
-    private String username;
-
-    private String password;
-
     private Integer uid;
 
     private String picture;
 
     private String motto;
 
-    private Date creationTime;
+    private Date createTime;
 
-    private Integer status;
+    private Date updateTime;
+
 }

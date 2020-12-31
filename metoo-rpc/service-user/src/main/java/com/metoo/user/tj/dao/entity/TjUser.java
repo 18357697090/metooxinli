@@ -36,7 +36,7 @@ public class TjUser extends Model<TjUser> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
     @ApiModelProperty(value = "密码")
     private String password;
@@ -44,20 +44,17 @@ public class TjUser extends Model<TjUser> {
     @ApiModelProperty(value = "用户账号状态，1表示正常，0表示被封")
     private Integer state;
 
-    @ApiModelProperty(value = "全局唯一的uid")
-    private Integer uid;
-
     @ApiModelProperty(value = "登录账号")
     private String username;
 
     @ApiModelProperty(value = "手机号")
-    private Integer phoneNumber;
-
-    @ApiModelProperty(value = "备用字段")
-    private String spare;
+    private String phone;
 
     @ApiModelProperty(value = "创建时间")
-    private Date creationTime;
+    private Date createTime;
+
+    @ApiModelProperty(value = "修改时间")
+    private Date updateTime;
 
 
     @Override

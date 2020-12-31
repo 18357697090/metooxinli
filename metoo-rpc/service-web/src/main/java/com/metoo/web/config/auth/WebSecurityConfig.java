@@ -12,6 +12,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+
     // 设置 HTTP 验证规则
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -21,9 +22,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 // 所有 / 的所有请求 都放行
                 .antMatchers("/").permitAll()
-                .antMatchers("/app/").permitAll()
                 // 所有 /login 的POST请求 都放行
                 .antMatchers(HttpMethod.POST, "/login").permitAll()
+                .antMatchers(HttpMethod.POST, "/register").permitAll()
                 // 权限检查
 //                .antMatchers("/hello").hasAuthority("AUTH_WRITE")
                 // 角色检查

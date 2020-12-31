@@ -41,6 +41,11 @@ public class TjUserInfoServiceImpl extends ServiceImpl<TjUserInfoMapper, TjUserI
     }
 
     @Override
+    public TjUserInfo findUserInfoByUserId(Integer userId) {
+        return tjUserInfoRepository.findByUid(userId);
+    }
+
+    @Override
     public int updateUserInfo(String name, String picture, String city, String motto, Integer uid) {
         return tjUserInfoRepository.updateUserInfo(name, picture, city, motto, uid);
     }

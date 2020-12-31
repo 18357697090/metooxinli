@@ -18,6 +18,8 @@ public interface TjUserInfoService extends IService<TjUserInfo> {
 
     TjUserInfoModel findByUid(Integer uid);
 
+    TjUserInfo findUserInfoByUserId(Integer userId);
+
     int updateUserInfo(String name, String picture, String city, String motto, Integer uid);
 
     List<TjUserInfo> findByNameLike(String name);

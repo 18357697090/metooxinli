@@ -38,11 +38,6 @@ public class TjUserServiceImpl extends ServiceImpl<TjUserMapper, TjUser> impleme
     }
 
     @Override
-    public TjUser findByUid(Integer x) {
-        return tjUserRepository.findByUid(x);
-    }
-
-    @Override
     public void updateUserPassword(String newPassword, String username) {
         tjUserRepository.updateUserPassword(newPassword,username);
     }

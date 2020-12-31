@@ -85,15 +85,14 @@ public class TjUserApiImpl implements TjUserApi {
         }
         String password=loginPojo.getPassword();
         int x= CreateID.create();
-        TjUser b=tjUserService.findByUid(x);
+        TjUser b=tjUserService.getById(x);
         while (b!=null){
             x= CreateID.create();
-            b=tjUserService.findByUid(x);
+            b=tjUserService.getById(x);
         }
         zc.setUid(x);
         TjUser user=new TjUser();
         user.setPassword(password);
-        user.setUid(x);
         user.setUsername(username);
         tjUserService.save(user);
         TjUserAccount zh=new TjUserAccount();
@@ -137,17 +136,19 @@ public class TjUserApiImpl implements TjUserApi {
     }
 
     @Override
-    public RE findUserById(Integer userId) {
+    public RE getUserInfo(Integer userId) {
         if(OU.isBlack(userId)){
-            return RE.fail("请重新登录！");
+            return RE.fail("token已失效，请重新登录！");
         }
-        TjUser userPojo  = tjUserService.getById(userId);
-        if(OU.isBlack(userPojo)){
+        TjUser tjUser  = tjUserService.getById(userId);
+        if(OU.isBlack(tjUser)){
             return RE.fail("没有该用户信息！");
         }
-        TjUserInfoModel byUid1 = tjUserInfoService.findByUid(userId);
-        LoginUserInfoModel model = mapper.map(userPojo, LoginUserInfoModel.class);
-        model.setTjUserInfoModel(byUid1);
+        TjUserInfo tjUserInfo = tjUserInfoService.findUserInfoByUserId(userId);
+        LoginUserInfoModel model = mapper.map(tjUser, LoginUserInfoModel.class);
+        model.setTjUserInfoModel(mapper.map(tjUserInfo, TjUserInfoModel.class));
+        model.setUserId(tjUser.getId());
+        model.setList(null);
         return RE.ok(model);
     }
 }

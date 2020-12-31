@@ -12,8 +12,6 @@ public interface TjUserRepository extends JpaRepository<TjUser,Integer>{
 
         TjUser findByUsername(String username);
 
-        TjUser findByUid(int uid);
-
         @Modifying
         @Query(value = "update tj_user set password=? where username=?",nativeQuery = true)
         int updateUserPassword(String password,String username);
