@@ -13,6 +13,13 @@
 
 
     <dependencies>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+            <version>2.3.3.RELEASE</version>
+        </dependency>
+
         <dependency>
             <groupId>com.metoo</groupId>
             <artifactId>service-comm</artifactId>
