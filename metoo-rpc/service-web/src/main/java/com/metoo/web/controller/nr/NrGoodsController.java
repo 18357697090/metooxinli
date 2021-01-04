@@ -2,7 +2,9 @@ package com.metoo.web.controller.nr;
 
 
 import com.loongya.core.util.RE;
+import com.metoo.api.im.ImUserMessageApi;
 import com.metoo.api.nr.NrGoodsApi;
+import com.metoo.pojo.im.model.ImUserMessageModel;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,12 +26,14 @@ public class NrGoodsController {
 
     @DubboReference
     private NrGoodsApi nrGoodsApi;
+    @DubboReference
+    private ImUserMessageApi imUserMessageApi;
 
     @GetMapping("/goods")
     public RE shop(){
-
         return nrGoodsApi.findAll();
     }
+
 
 
 }

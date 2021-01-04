@@ -8,11 +8,9 @@ import com.metoo.im.im.service.ImUserMessageService;
 import com.metoo.pojo.im.model.ImUserMessageModel;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.dozer.DozerBeanMapper;
-import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -63,6 +61,7 @@ public class ImUserMessageApiImpl implements ImUserMessageApi {
 
     @Override
     public List<ImUserMessageModel> uidx(Integer uid) {
+        System.out.println("-------------uid="+uid);
         List<ImUserMessage> imUserMessages = imUserMessageService.uid(uid);
         List<ImUserMessageModel> imUserMessageModels = imUserMessages.stream().flatMap(e->{
             return Stream.of(mapper.map(e, ImUserMessageModel.class));
