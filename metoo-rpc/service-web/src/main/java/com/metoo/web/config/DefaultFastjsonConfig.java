@@ -81,4 +81,14 @@ public class DefaultFastjsonConfig {
         return fastJsonConfig;
     }
 
+    /**
+     * 支持的mediaType类型
+     */
+    public List<MediaType> getSupportedMediaType() {
+        ArrayList<MediaType> mediaTypes = new ArrayList<>();
+        mediaTypes.add(MediaType.APPLICATION_JSON);
+        return mediaTypes;
+    }
+
+
 }

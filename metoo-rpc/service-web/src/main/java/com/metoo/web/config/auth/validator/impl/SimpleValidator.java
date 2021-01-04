@@ -1,7 +1,7 @@
 package com.metoo.web.config.auth.validator.impl;
 
-import com.stylefeng.guns.rest.modular.auth.validator.IReqValidator;
-import com.stylefeng.guns.rest.modular.auth.validator.dto.Credence;
+import com.metoo.web.config.auth.validator.IReqValidator;
+import com.metoo.web.config.auth.validator.dto.Credence;
 import org.springframework.stereotype.Service;
 
 /**

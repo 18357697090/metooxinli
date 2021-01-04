@@ -23,7 +23,7 @@ public class LoongyaException extends RuntimeException {
 
     public LoongyaException(ServiceExceptionEnum serviceExceptionEnum) {
         this.code = serviceExceptionEnum.getCode();
-        this.message = serviceExceptionEnum.getMessage();
+        this.message = serviceExceptionEnum.getMsg();
     }
 
 }
