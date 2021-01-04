@@ -3,8 +3,6 @@ package com.metoo.web.controller.tj;
 
 import com.loongya.core.util.RE;
 import com.metoo.api.tj.TjUserApi;
-import com.metoo.pojo.tj.model.TjUserModel;
-import com.metoo.web.config.tools.ThreadLocal;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,7 +35,8 @@ public class TjUserController {
      */
     @PostMapping("/getUserInfo")
     public RE getUserInfo(){
-        return tjUserApi.getUserInfo(ThreadLocal.getUserId());
+//        return tjUserApi.getUserInfo(ThreadLocal.getUserId());
+        return null;
     }
 
 
