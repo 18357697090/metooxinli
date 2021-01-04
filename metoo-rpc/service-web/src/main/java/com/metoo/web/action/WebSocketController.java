@@ -1,4 +1,4 @@
-package com.metoo.web.controller.websocket;
+package com.metoo.web.action;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
