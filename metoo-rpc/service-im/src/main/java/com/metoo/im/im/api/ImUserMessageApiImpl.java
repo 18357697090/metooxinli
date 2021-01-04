@@ -60,4 +60,13 @@ public class ImUserMessageApiImpl implements ImUserMessageApi {
     public void deleteByUid(Integer uid) {
         imUserMessageService.deleteByUid(uid);
     }
+
+    @Override
+    public List<ImUserMessageModel> uidx(Integer uid) {
+        List<ImUserMessage> imUserMessages = imUserMessageService.uid(uid);
+        List<ImUserMessageModel> imUserMessageModels = imUserMessages.stream().flatMap(e->{
+            return Stream.of(mapper.map(e, ImUserMessageModel.class));
+        }).collect(Collectors.toList());
+        return imUserMessageModels;
+    }
 }

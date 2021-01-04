@@ -3,6 +3,8 @@ package com.metoo.api.im;
 import com.loongya.core.util.RE;
 import com.metoo.pojo.im.model.ImUserMessageModel;
 
+import java.util.List;
+
 /**
  * <p>
  * 用户聊天记录表 服务类
@@ -20,4 +22,6 @@ public interface ImUserMessageApi {
     void updateState(Integer uid);
 
     void deleteByUid(Integer uid);
+
+    List<ImUserMessageModel> uidx(Integer uid);
 }
