@@ -50,6 +50,9 @@ public class TjUser extends Model<TjUser> {
     @ApiModelProperty(value = "手机号")
     private String phone;
 
+    @ApiModelProperty(value = "拓展id")
+    private String extendId;
+
     @ApiModelProperty(value = "创建时间")
     private Date createTime;
 

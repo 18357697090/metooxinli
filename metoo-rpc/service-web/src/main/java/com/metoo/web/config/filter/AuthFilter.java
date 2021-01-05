@@ -2,7 +2,7 @@ package com.metoo.web.config.filter;
 
 import com.loongya.core.base.tips.ErrorTip;
 import com.loongya.core.util.RenderUtil;
-import com.metoo.web.config.auth.CurrentUser;
+import com.metoo.web.config.auth.ThreadLocal;
 import com.metoo.web.config.exception.BizExceptionEnum;
 import com.metoo.web.config.properties.JwtProperties;
 import com.metoo.web.config.tools.JwtTokenUtil;
@@ -61,7 +61,7 @@ public class AuthFilter extends OncePerRequestFilter {
             if(userId == null){
                 return;
             } else {
-                CurrentUser.saveUserId(userId);
+                ThreadLocal.saveUserId(userId);
             }
 
             //验证token是否过期,包含了验证jwt是否正确

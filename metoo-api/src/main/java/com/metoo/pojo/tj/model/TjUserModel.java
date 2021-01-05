@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -19,6 +20,19 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 public class TjUserModel implements Serializable {
+    private Integer id;
 
+    private Integer state;
 
+    private String username;
+
+    private String phone;
+
+    private String extendId;
+
+    private Date createTime;
+
+    private Date updateTime;
+
+    private TjUserInfoModel tjUserInfoModel;
 }

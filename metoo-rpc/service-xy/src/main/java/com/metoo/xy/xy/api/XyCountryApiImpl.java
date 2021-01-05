@@ -118,7 +118,7 @@ public class XyCountryApiImpl implements XyCountryApi {
                 return RE.ok("创建成功");
             }
         }
-        return RE.paramError("参数缺失");
+        return RE.fail("参数缺失");
     }
 
     @Override

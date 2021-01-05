@@ -1,5 +1,6 @@
 package com.metoo.user.tj.api;
 
+import com.loongya.core.util.AssertUtils;
 import com.loongya.core.util.OU;
 import com.loongya.core.util.RE;
 import com.metoo.api.tj.TjUserApi;
@@ -10,6 +11,7 @@ import com.metoo.pojo.old.model.LoginPojo;
 import com.metoo.pojo.old.model.SecretGuardPojo;
 import com.metoo.pojo.old.vo.FriendListDto;
 import com.metoo.pojo.tj.model.TjUserInfoModel;
+import com.metoo.pojo.tj.model.TjUserModel;
 import com.metoo.tools.CreateID;
 import com.metoo.tools.zc;
 import com.metoo.user.tj.dao.entity.TjSecretGuard;
@@ -71,19 +73,20 @@ public class TjUserApiImpl implements TjUserApi {
     }
 
     @Override
-    public RE register(LoginPojo loginPojo) {
-        zc zc=new zc();
-        if(loginPojo.getAnswer().equals("")&&loginPojo.getPassword().equals("")&&loginPojo.getSecret().equals("")&&loginPojo.getUsername().equals("")){
-            zc.setState("error");
-            return RE.ok(zc);
+    public RE register(LoginVo vo) {
+        RE re = AssertUtils.checkParam(vo.getUsername(), vo.getPassword(), vo.getRepeatPassword());
+        if(re.isFail()){
+            return re;
         }
-        String username=loginPojo.getUsername();
+        zc zc=new zc();
+
+        String username=vo.getUsername();
         TjUser a = tjUserService.findByUsername(username);
         if(a!=null){
             zc.setState("exist");
             return RE.ok(zc);
         }
-        String password=loginPojo.getPassword();
+        String password=vo.getPassword();
         int x= CreateID.create();
         TjUser b=tjUserService.getById(x);
         while (b!=null){
@@ -99,8 +102,8 @@ public class TjUserApiImpl implements TjUserApi {
         zh.setUid(x);
         tjUserAccountService.save(zh);
         TjSecretGuard secretGuard=new TjSecretGuard();
-        secretGuard.setSecretGuard(loginPojo.getSecret());
-        secretGuard.setAnswer(loginPojo.getAnswer());
+        secretGuard.setSecretGuard(vo.getSecret());
+        secretGuard.setAnswer(vo.getAnswer());
         secretGuard.setUid(x);
         secretGuard.setUsername(username);
         tjSecretGuardService.save(secretGuard);
@@ -137,18 +140,22 @@ public class TjUserApiImpl implements TjUserApi {
 
     @Override
     public RE getUserInfo(Integer userId) {
-        if(OU.isBlack(userId)){
-            return RE.fail("token已失效，请重新登录！");
-        }
-        TjUser tjUser  = tjUserService.getById(userId);
-        if(OU.isBlack(tjUser)){
+        TjUserModel model  = getUserInfoInner(userId);
+        if(OU.isBlack(model))
             return RE.fail("没有该用户信息！");
-        }
-        TjUserInfo tjUserInfo = tjUserInfoService.findUserInfoByUserId(userId);
-        LoginUserInfoModel model = mapper.map(tjUser, LoginUserInfoModel.class);
-        model.setTjUserInfoModel(mapper.map(tjUserInfo, TjUserInfoModel.class));
-        model.setUserId(tjUser.getId());
-        model.setList(null);
         return RE.ok(model);
     }
+
+    private TjUserModel getUserInfoInner(Integer userId) {
+        TjUser tjUser  = tjUserService.getById(userId);
+        if(OU.isBlack(tjUser)){
+            return null;
+        }
+        TjUserInfo tjUserInfo = tjUserInfoService.findUserInfoByUserId(userId);
+        TjUserModel model = mapper.map(tjUser, TjUserModel.class);
+        model.setTjUserInfoModel(mapper.map(tjUserInfo, TjUserInfoModel.class));
+        model.setId(null);
+        return model;
+    }
+
 }

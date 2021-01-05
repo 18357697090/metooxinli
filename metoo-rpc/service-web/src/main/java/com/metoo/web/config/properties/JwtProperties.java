@@ -35,5 +35,13 @@ public class JwtProperties {
 
     private String ignoreUrl = "";
 
+    public static void main(String[] args) {
+        String exp = "31104000L";
+        long l = Long.parseLong(exp);
+
+
+        System.out.println(l);
+    }
+
 
 }

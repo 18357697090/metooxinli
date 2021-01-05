@@ -1,78 +1,73 @@
 package com.loongya.core.util;
 
-
-
-
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
 
 @Getter
 @Setter
-public class RE<M> implements Serializable {
-    //返回状态 [0-成功,1-currentService.999-系统异常.-4-没有数据,列表为空.-1-参数有误]
-    private int code;
+@NoArgsConstructor
+public class RE<T> implements Serializable {
+    private String code;
     private String msg;
-    private M data;
-    private RE(){}
+    private T data;
+    private boolean fail = true;
 
-    public static<M> RE ok(M data){
-        return ok(0,data,"操作成功");
-    }
-    public static<M> RE ok(){
-        return ok(0,null,"操作成功");
-    }
-    public static<M> RE ok(M data, String msg){
-        if(OU.isBlack(msg)){
-            msg = "操作成功";
+    private RE(CommEnum commEnum, T data){
+        this.code = commEnum.getCode();
+        if(commEnum.getCode().equals("0")){
+            this.fail = false;
         }
-        return ok(0,data,msg);
+        this.msg = commEnum.getMsg();
+        this.data = data;
     }
-    public static<M> RE ok(int status, M data, String msg){
-        RE RE = new RE();
-        RE.setCode(status);
-        RE.setData(data);
-        RE.setMsg(msg);
-        return RE;
+    private RE(String code, String msg, T data){
+        this.code = code;
+        if(code.equals("0")){
+            this.fail = false;
+        }
+        this.msg = msg;
+        this.data = data;
     }
-    public static<M> RE noData(M data){
-        RE RE = new RE();
-        RE.setCode(0);
-        RE.setData(data);
-        RE.setMsg("暂无数据!");
-        return RE;
-    }
-    public static<M> RE noData(){
-        RE RE = new RE();
-        RE.setCode(0);
-        RE.setMsg("暂无数据!");
-        return RE;
+    private RE(CommEnum commEnum){
+        this.code = commEnum.getCode();
+        if(commEnum.getCode().equals("0")){
+            this.fail = false;
+        }
+        this.msg = commEnum.getMsg();
+        this.data = null;
     }
 
-    public static<M> RE error(String msg){
-        RE RE = new RE();
-        RE.setCode(999);
-        RE.setMsg(msg);
-        return RE;
+    public static<T> RE ok(){
+        return ok(CommsEnum.SUCCESS,"ok");
+    }
+    public static<T> RE ok(T data){
+        return ok(CommsEnum.SUCCESS,data);
     }
 
-    public static<M> RE fail(String msg){
-        return fail(1,msg);
+    public static<T> RE ok(CommEnum commEnum,T data){
+        return new RE(commEnum, data);
     }
-    public static<M> RE fail(){
-        return fail(1,"error");
+
+    public static<T> RE noData(T data){
+        return new RE(CommsEnum.NO_DATA,data);
     }
-    public static<M> RE fail(int status, String msg){
-        RE RE = new RE();
-        RE.setCode(status);
-        RE.setMsg(msg);
-        return RE;
+    public static<T> RE noData(){
+        return new RE(CommsEnum.NO_DATA,null);
     }
-    public static<M> RE paramError(String msg){
-        RE RE = new RE();
-        RE.setCode(-1);
-        RE.setMsg(msg);
-        return RE;
+
+    public static<T> RE fail(CommEnum commEnum, T data){
+        return new RE(commEnum, data);
+    }
+    public static<T> RE fail(CommEnum commEnum){
+        return new RE(commEnum);
+    }
+    public static<T> RE fail(String msg){
+        return new RE("1", msg, null);
+    }
+    public static<T> RE fail(String code, String msg){
+        return new RE(code, msg, null);
     }
 }

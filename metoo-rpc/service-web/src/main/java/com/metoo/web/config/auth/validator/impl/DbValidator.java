@@ -29,10 +29,10 @@ public class DbValidator implements IReqValidator {
         vo.setUsername(credence.getCredenceName());
         vo.setPassword(credence.getCredenceCode());
         RE result = tjUserApi.logIn(vo);
-        if (result.getCode() == 0) {
-            return true;
-        } else {
+        if (result.isFail()) {
             return false;
+        } else {
+            return true;
         }
     }
 

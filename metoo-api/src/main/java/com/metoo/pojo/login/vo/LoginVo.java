@@ -15,4 +15,7 @@ public class LoginVo implements Serializable {
 
     private String username;
     private String password;
+    private String repeatPassword;
+    private String secret;
+    private String answer;
 }

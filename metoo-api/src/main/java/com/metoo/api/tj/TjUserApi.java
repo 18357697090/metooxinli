@@ -15,11 +15,13 @@ import com.metoo.pojo.old.model.SecretGuardPojo;
  */
 public interface TjUserApi {
 
-    RE fendFriend(Integer uid, String name);
-
-    RE register(LoginPojo loginPojo);
-
     RE logIn(LoginVo vo);
+
+    RE register(LoginVo vo);
+
+
+
+    RE fendFriend(Integer uid, String name);
 
     RE modifyPassword(SecretGuardPojo secretGuardPojo);
 
