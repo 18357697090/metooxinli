@@ -33,7 +33,7 @@ public class TaUserTask extends Model<TaUserTask> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
     @ApiModelProperty(value = "接受任务的用户的id")
     private Integer acceptId;

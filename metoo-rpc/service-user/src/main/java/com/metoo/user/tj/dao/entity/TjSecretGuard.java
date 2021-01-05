@@ -36,7 +36,7 @@ public class TjSecretGuard extends Model<TjSecretGuard> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
     @ApiModelProperty(value = "用户uid")
     private Integer uid;
@@ -51,7 +51,7 @@ public class TjSecretGuard extends Model<TjSecretGuard> {
     private String secretGuard;
 
     @ApiModelProperty(value = "创建时间")
-    private Date creationTime;
+    private Date createTime;
 
 
     @Override

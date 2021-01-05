@@ -32,7 +32,7 @@ public class PsWatchArticle extends Model<PsWatchArticle> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
     @ApiModelProperty(value = "文章id")
     private Integer articleId;

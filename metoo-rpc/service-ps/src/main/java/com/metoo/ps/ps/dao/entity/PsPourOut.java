@@ -32,7 +32,7 @@ public class PsPourOut extends Model<PsPourOut> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
     @ApiModelProperty(value = "倾诉师标签")
     private String label;

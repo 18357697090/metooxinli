@@ -7,7 +7,7 @@
         <id column="id" property="id" />
         <result column="audio_room_id" property="audioRoomId" />
         <result column="content" property="content" />
-        <result column="creation_time" property="creationTime" />
+        <result column="create_time" property="createTime" />
     </resultMap>
 
 </mapper>

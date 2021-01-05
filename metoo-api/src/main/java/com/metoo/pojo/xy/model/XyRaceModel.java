@@ -22,7 +22,7 @@ import java.util.Date;
 public class XyRaceModel implements Serializable {
     private Long id;
 
-    private Date creationTime;
+    private Date createTime;
 
     private String introduction;
 

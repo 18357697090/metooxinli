@@ -25,6 +25,6 @@ public class PsUserBuyCapsuleModel implements Serializable {
 
     private Integer uid;
 
-    private Date creationTime;
+    private Date createTime;
 
 }

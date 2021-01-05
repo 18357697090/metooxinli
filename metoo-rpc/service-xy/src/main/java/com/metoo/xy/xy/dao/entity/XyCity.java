@@ -37,11 +37,11 @@ public class XyCity extends Model<XyCity> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
     @CreatedDate
     @ApiModelProperty(value = "创建时间")
-    private Date creationTime;
+    private Date createTime;
 
     @ApiModelProperty(value = "城id")
     private Integer cityId;

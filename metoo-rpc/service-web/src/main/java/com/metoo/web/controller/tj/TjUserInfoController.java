@@ -7,6 +7,9 @@ import com.metoo.pojo.old.model.TjUserInfoPojoModel;
 import com.metoo.pojo.old.vo.MeUserInfoDTO;
 import com.metoo.pojo.old.vo.ModifyUserIfoDTO;
 import com.metoo.pojo.tj.model.TjUserInfoModel;
+import com.metoo.pojo.tj.vo.TjUserInfoVo;
+import com.metoo.web.config.auth.ThreadLocal;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,12 +23,22 @@ import org.springframework.web.bind.annotation.*;
  * @since 2020-12-28
  */
 @RestController
-@RequestMapping("/tj/tj-user-info")
+@RequestMapping("/tj/tjUserInfo")
 public class TjUserInfoController {
 
-    @Deprecated
+    @DubboReference
     private TjUserInfoApi tjUserInfoApi;
 
+
+    /**
+     * 完善个人资料
+     * @return
+     */
+    @PostMapping("/upLoadUserInfo")
+    public RE upLoadUserInfo(TjUserInfoVo vo){
+        vo.setUserId(ThreadLocal.getUserId());
+        return tjUserInfoApi.upLoadUserInfo(vo);
+    }
 
 
     @GetMapping("/userInfo")
@@ -37,12 +50,6 @@ public class TjUserInfoController {
     @PostMapping("/modifyUserInfo")
     public RE modifyUserInfo(@RequestBody ModifyUserIfoDTO modifyUserIfoDTO, @RequestHeader("UID")Integer uid){
         return tjUserInfoApi.modifyUserInfo(uid,modifyUserIfoDTO);
-    }
-
-    //上传个人信息
-    @PostMapping("/upLoadUserInfo")
-    public RE upLoadUserInfo(@RequestBody TjUserInfoPojoModel userInfo, @RequestHeader("UID") Integer uid){
-        return tjUserInfoApi.upLoadUserInfo(userInfo,uid);
     }
 
 

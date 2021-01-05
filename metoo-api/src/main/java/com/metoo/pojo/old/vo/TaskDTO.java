@@ -23,6 +23,6 @@ public class TaskDTO  implements Serializable {
     //任务段位
     private Integer taskLevel;
     //发布时间
-    private String creationTime;
+    private String createTime;
 
 }

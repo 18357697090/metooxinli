@@ -75,7 +75,7 @@ public class PsPourOutApiImpl implements PsPourOutApi {
                         pourOutCapsulePojo.setCapsuleId(Integer.parseInt(c));
                         break;
                     case 1:
-                        pourOutCapsulePojo.setCreationTime(c);
+                        pourOutCapsulePojo.setCreateTime(c);
                         break;
                     case 2:
                         pourOutCapsulePojo.setBeWatched(Integer.parseInt(c));
@@ -97,7 +97,7 @@ public class PsPourOutApiImpl implements PsPourOutApi {
             TjUserInfoModel userInfo = tjUserInfoApi.findByUid(pourOutCapsulePojo.getUid());
             pourOutCapsulePojo.setUid(null);
             pourOutCapsulePojo.setName(userInfo.getName());
-            pourOutCapsulePojo.setPicture(userInfo.getPicture());
+            pourOutCapsulePojo.setPicture(userInfo.getHeadImg());
             pourOutCapsulePojos.add(pourOutCapsulePojo);
         }
         return pourOutCapsulePojos;

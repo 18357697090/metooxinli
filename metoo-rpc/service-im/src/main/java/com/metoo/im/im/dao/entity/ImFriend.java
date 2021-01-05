@@ -37,7 +37,7 @@ public class ImFriend extends Model<ImFriend> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
     @ApiModelProperty(value = "用户id")
     private Integer uid;
@@ -53,7 +53,7 @@ public class ImFriend extends Model<ImFriend> {
 
     @CreatedDate
     @ApiModelProperty(value = "创建时间")
-    private Date creationTime;
+    private Date createTime;
 
 
     @Override

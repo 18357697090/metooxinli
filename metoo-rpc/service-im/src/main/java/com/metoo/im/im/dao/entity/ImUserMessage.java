@@ -37,9 +37,10 @@ public class ImUserMessage extends Model<ImUserMessage> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
     @ApiModelProperty(value = "消息")
+    @Column(name = "message", columnDefinition = "text")
     private String message;
 
     @ApiModelProperty(value = "发送用户的uid")
@@ -56,7 +57,7 @@ public class ImUserMessage extends Model<ImUserMessage> {
 
     @CreatedDate
     @ApiModelProperty(value = "创建时间")
-    private Date creationTime;
+    private Date createTime;
 
 
     @Override

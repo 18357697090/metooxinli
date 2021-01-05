@@ -21,7 +21,7 @@ import java.util.Date;
 public class XyJoinCityMessageVo extends BaseVo {
     private Long id;
 
-    private Date creationTime;
+    private Date createTime;
 
     private Integer cityHostId;
 

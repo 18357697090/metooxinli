@@ -37,7 +37,7 @@ public class NrBackpack extends Model<NrBackpack> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
     @ApiModelProperty(value = "用户拥有商品数量")
     private Integer number;
@@ -62,7 +62,7 @@ public class NrBackpack extends Model<NrBackpack> {
 
     @CreatedDate
     @ApiModelProperty(value = "创建时间")
-    private Date creationTime;
+    private Date createTime;
 
 
     @Override

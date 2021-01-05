@@ -46,7 +46,7 @@ public class ImUserSigApiImpl implements ImUserSigApi {
             }
             return RE.ok(userSig);
         }else {
-            long a = userSig.getUpdatetime().getTime();
+            long a = userSig.getUpdateTime().getTime();
             Date date=new Date();
             long b=date.getTime()-a;
             long c= 2292000000L;

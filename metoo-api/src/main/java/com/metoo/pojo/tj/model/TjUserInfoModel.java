@@ -34,7 +34,7 @@ public class TjUserInfoModel implements Serializable {
 
     private Integer uid;
 
-    private String picture;
+    private String headImg;
 
     private String motto;
 

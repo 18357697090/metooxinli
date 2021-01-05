@@ -36,7 +36,7 @@ public class TaTask extends Model<TaTask> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
     @ApiModelProperty(value = "备用字段")
     private String spare;
@@ -69,7 +69,7 @@ public class TaTask extends Model<TaTask> {
     private Integer type;
 
     @ApiModelProperty(value = "创建时间")
-    private Date creationTime;
+    private Date createTime;
 
     @ApiModelProperty(value = "图片")
     private String picture;

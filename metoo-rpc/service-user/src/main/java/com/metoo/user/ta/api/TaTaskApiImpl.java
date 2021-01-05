@@ -68,7 +68,7 @@ public class TaTaskApiImpl implements TaTaskApi {
             int uid = task.getUid();
             TjUserInfoModel userInfo = tjUserInfoService.findByUid(uid);
             taskDTO.setName(userInfo.getName());
-            taskDTO.setPicture(userInfo.getPicture());
+            taskDTO.setPicture(userInfo.getHeadImg());
             TaskDTOs.add(taskDTO);
         }
         if(OU.isBlack(TaskDTOs)){
@@ -87,7 +87,7 @@ public class TaTaskApiImpl implements TaTaskApi {
             int uid = task.getUid();
             TjUserInfoModel userInfo = tjUserInfoService.findByUid(uid);
             taskDTO.setName(userInfo.getName());
-            taskDTO.setPicture(userInfo.getPicture());
+            taskDTO.setPicture(userInfo.getHeadImg());
             TaskDTOs.add(taskDTO);
         }
         if(OU.isBlack(TaskDTOs)){

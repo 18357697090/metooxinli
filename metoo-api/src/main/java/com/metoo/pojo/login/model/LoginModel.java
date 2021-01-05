@@ -15,7 +15,7 @@ import java.io.Serializable;
 public class LoginModel implements Serializable {
 
     private Integer userId;
-    private Integer extendId;
+    private String extendId;
     private String username;
     private String pwd;
     private Integer state;

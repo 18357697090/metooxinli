@@ -33,7 +33,7 @@ public class TjLevelPicture extends Model<TjLevelPicture> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
     @ApiModelProperty(value = "等级图片")
     private String levelPicture;

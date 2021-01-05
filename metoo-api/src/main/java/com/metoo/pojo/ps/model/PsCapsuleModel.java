@@ -30,7 +30,7 @@ public class PsCapsuleModel implements Serializable {
 
     private String content;
 
-    private Date creationTime;
+    private Date createTime;
 
     private String picture1;
 

@@ -1,6 +1,7 @@
 package com.metoo.api.tj;
 
 import com.loongya.core.util.RE;
+import com.metoo.pojo.login.vo.LoginUploadPasswordVo;
 import com.metoo.pojo.login.vo.LoginVo;
 import com.metoo.pojo.old.model.LoginPojo;
 import com.metoo.pojo.old.model.SecretGuardPojo;
@@ -15,15 +16,16 @@ import com.metoo.pojo.old.model.SecretGuardPojo;
  */
 public interface TjUserApi {
 
+
     RE logIn(LoginVo vo);
 
     RE register(LoginVo vo);
 
+    RE modifyPassword(LoginUploadPasswordVo vo);
+
+    RE getUserInfo(Integer userId);
+
 
 
     RE fendFriend(Integer uid, String name);
-
-    RE modifyPassword(SecretGuardPojo secretGuardPojo);
-
-    RE getUserInfo(Integer userId);
 }

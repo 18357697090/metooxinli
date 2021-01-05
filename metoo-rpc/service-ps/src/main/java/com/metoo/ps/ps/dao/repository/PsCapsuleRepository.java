@@ -28,15 +28,15 @@ public interface PsCapsuleRepository extends JpaRepository<PsCapsule,Integer> {
     int updataAttribute(Integer attribute,Integer capsuleId);
 
 
-    @Query(nativeQuery = true,value = "SELECT capsule_id,creation_time,be_watched,prices,title,uid,attribute FROM ps_capsule WHERE uid = ? and state = 1 ORDER BY id DESC LIMIT ?,7")
+    @Query(nativeQuery = true,value = "SELECT capsule_id,create_time,be_watched,prices,title,uid,attribute FROM ps_capsule WHERE uid = ? and state = 1 ORDER BY id DESC LIMIT ?,7")
     List<Object[]> findmyCapsules(Integer uid,Integer page);
 
-    @Query(nativeQuery = true,value = "SELECT capsule_id,creation_time,be_watched,prices,title,uid FROM ps_capsule WHERE attribute=1 and state = 1 ORDER BY id DESC LIMIT ?,7")
+    @Query(nativeQuery = true,value = "SELECT capsule_id,create_time,be_watched,prices,title,uid FROM ps_capsule WHERE attribute=1 and state = 1 ORDER BY id DESC LIMIT ?,7")
     List<Object[]> findCapsules(Integer page);
 //    @Query(nativeQuery = true,value = "SELECT * FROM ps_capsule WHERE attribute=1 ORDER BY RAND() LIMIT 4")
 //    List<PsCapsule> findCapsule();
 
-    @Query(nativeQuery = true,value = "SELECT capsule_id,creation_time,be_watched,prices,title,uid FROM ps_capsule WHERE attribute=1 and state = 1 ORDER BY RAND() LIMIT 4")
+    @Query(nativeQuery = true,value = "SELECT capsule_id,create_time,be_watched,prices,title,uid FROM ps_capsule WHERE attribute=1 and state = 1 ORDER BY RAND() LIMIT 4")
     List<Object[]> findCapsule();
 
 

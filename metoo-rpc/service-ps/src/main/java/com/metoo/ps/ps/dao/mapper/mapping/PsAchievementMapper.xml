@@ -8,7 +8,7 @@
         <result column="achievement" property="achievement" />
         <result column="scale_id" property="scaleId" />
         <result column="uid" property="uid" />
-        <result column="creation_time" property="creationTime" />
+        <result column="create_time" property="createTime" />
     </resultMap>
 
 </mapper>

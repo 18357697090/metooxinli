@@ -36,7 +36,7 @@ public class PsAchievement extends Model<PsAchievement> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
     @ApiModelProperty(value = "用户测量成绩")
     private Integer achievement;
@@ -49,7 +49,7 @@ public class PsAchievement extends Model<PsAchievement> {
 
     @CreatedDate
     @ApiModelProperty(value = "创建时间")
-    private Date creationTime;
+    private Date createTime;
 
 
     @Override

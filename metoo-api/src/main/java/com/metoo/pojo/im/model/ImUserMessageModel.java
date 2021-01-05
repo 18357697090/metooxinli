@@ -21,7 +21,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class ImUserMessageModel implements Serializable{
     private long id;
-    private Date creationTime;
+    private Date createTime;
     private Integer uid;
     private Integer sendId;
     private String message;

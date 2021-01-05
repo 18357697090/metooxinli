@@ -1,11 +1,13 @@
 package com.metoo.user.tj.api;
 
-import com.loongya.core.util.AssertUtils;
-import com.loongya.core.util.OU;
-import com.loongya.core.util.RE;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.baomidou.mybatisplus.core.toolkit.IdWorker;
+import com.loongya.core.util.*;
+import com.loongya.core.util.aliyun.OSSUtil;
 import com.metoo.api.tj.TjUserApi;
 import com.metoo.pojo.login.model.LoginModel;
 import com.metoo.pojo.login.model.LoginUserInfoModel;
+import com.metoo.pojo.login.vo.LoginUploadPasswordVo;
 import com.metoo.pojo.login.vo.LoginVo;
 import com.metoo.pojo.old.model.LoginPojo;
 import com.metoo.pojo.old.model.SecretGuardPojo;
@@ -27,7 +29,9 @@ import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -74,41 +78,50 @@ public class TjUserApiImpl implements TjUserApi {
 
     @Override
     public RE register(LoginVo vo) {
-        RE re = AssertUtils.checkParam(vo.getUsername(), vo.getPassword(), vo.getRepeatPassword());
-        if(re.isFail()){
-            return re;
+        if(!vo.getPassword().equals(vo.getRepeatPassword())){
+            return RE.fail("密码不相同,请重新输入密码！");
         }
-        zc zc=new zc();
+        TjUser tjUser = tjUserService.findByUsername(vo.getUsername());
+        if(OU.isNotBlack(tjUser)){
+            return RE.fail("账号已存在，请重新输入账号！");
+        }
 
-        String username=vo.getUsername();
-        TjUser a = tjUserService.findByUsername(username);
-        if(a!=null){
-            zc.setState("exist");
-            return RE.ok(zc);
+        // 创建用户表
+        TjUser pojo = new TjUser();
+        pojo.setPassword(vo.getPassword());
+        pojo.setUpdateTime(new Date());
+        pojo.setExtendId(IdGenerator.getId());
+        pojo.setCreateTime(new Date());
+        pojo.setUsername(vo.getUsername());
+        pojo.setState(ConstantUtil.TjUserState.COMM.getCode());
+        tjUserService.save(pojo);
+        // 创建账户表
+        TjUserAccount tjUserAccount = new TjUserAccount();
+        tjUserAccount.setUid(pojo.getId());
+        tjUserAccount.setBalance(new BigDecimal(0));
+        tjUserAccount.setPsychologyIntegral(new BigDecimal(0));
+        tjUserAccount.setActiveIntegral(new BigDecimal(0));
+        tjUserAccountService.save(tjUserAccount);
+        // 创建用户详细表
+        TjUserInfo tjUserInfo = new TjUserInfo();
+        tjUserInfo.setUid(pojo.getId());
+        tjUserInfo.setHeadImg(ConstantUtil.HEAD_IMG_DEFAULT);
+        tjUserInfo.setLevel(ConstantUtil.TjUserInfoLevel.ONE.getCode());
+        tjUserInfo.setUpdateTime(new Date());
+        tjUserInfo.setCreateTime(new Date());
+        tjUserInfoService.save(tjUserInfo);
+        if(OU.isNotBlack(vo.getSecret())){
+            TjSecretGuard secretGuard=new TjSecretGuard();
+            secretGuard.setSecretGuard(vo.getSecret());
+            secretGuard.setAnswer(vo.getAnswer());
+            secretGuard.setUid(pojo.getId());
+            secretGuard.setUsername(pojo.getUsername());
+            tjSecretGuardService.save(secretGuard);
         }
-        String password=vo.getPassword();
-        int x= CreateID.create();
-        TjUser b=tjUserService.getById(x);
-        while (b!=null){
-            x= CreateID.create();
-            b=tjUserService.getById(x);
-        }
-        zc.setUid(x);
-        TjUser user=new TjUser();
-        user.setPassword(password);
-        user.setUsername(username);
-        tjUserService.save(user);
-        TjUserAccount zh=new TjUserAccount();
-        zh.setUid(x);
-        tjUserAccountService.save(zh);
-        TjSecretGuard secretGuard=new TjSecretGuard();
-        secretGuard.setSecretGuard(vo.getSecret());
-        secretGuard.setAnswer(vo.getAnswer());
-        secretGuard.setUid(x);
-        secretGuard.setUsername(username);
-        tjSecretGuardService.save(secretGuard);
-        zc.setState("success");
-        return RE.ok(zc);
+        LoginModel model = new LoginModel();
+        model.setUserId(pojo.getId());
+        model.setExtendId(pojo.getExtendId());
+        return RE.ok(model);
     }
 
     @Override
@@ -125,16 +138,25 @@ public class TjUserApiImpl implements TjUserApi {
     }
 
     @Override
-    public RE modifyPassword(SecretGuardPojo secretGuardPojo) {
+    public RE modifyPassword(LoginUploadPasswordVo vo) {
 
-        TjSecretGuard secretGuard=tjSecretGuardService.findByUsername(secretGuardPojo.getUsername());
-        String p1=secretGuardPojo.getAnswer();
-        String p2=secretGuard.getAnswer();
-        if(p1.equals(p2)){
-            tjUserService.updateUserPassword(secretGuardPojo.getNewPassword(),secretGuardPojo.getUsername());
-            return RE.ok();
+        TjSecretGuard tjSecretGuard = tjSecretGuardService.findByUsername(vo.getUsername());
+        if(OU.isBlack(tjSecretGuard)){
+            return RE.fail("您没有设置密保问题，无法找回密码，请联系客服人员！");
+        }
+        if(!vo.getPassword().equals(vo.getRepeatPassword())){
+            return RE.fail("密码不相同，请重新输入！");
+        }
+        if(vo.getAnswer().equals(tjSecretGuard.getAnswer()) && vo.getQuestion().equals(tjSecretGuard.getSecretGuard())){
+            LambdaUpdateWrapper<TjUser> luw = new LambdaUpdateWrapper<>();
+            luw.eq(TjUser::getId, tjSecretGuard.getUid());
+            TjUser tjUser = new TjUser();
+            tjUser.setPassword(vo.getPassword());
+            tjUser.setUpdateTime(new Date());
+            tjUserService.update(tjUser, luw);
+            return RE.ok("密码修改成功，您可以重新登录啦！");
         }else {
-            return RE.fail("error");
+            return RE.fail("密保答案不正确，如您忘记密保，请联系客服人员！！");
         }
     }
 
@@ -154,6 +176,7 @@ public class TjUserApiImpl implements TjUserApi {
         TjUserInfo tjUserInfo = tjUserInfoService.findUserInfoByUserId(userId);
         TjUserModel model = mapper.map(tjUser, TjUserModel.class);
         model.setTjUserInfoModel(mapper.map(tjUserInfo, TjUserInfoModel.class));
+        model.getTjUserInfoModel().setHeadImg(OSSUtil.fillPath(model.getTjUserInfoModel().getHeadImg()));
         model.setId(null);
         return model;
     }

@@ -38,10 +38,10 @@ public class ImGift extends Model<ImGift> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
     @CreatedDate
-    private Date creationTime;
+    private Date createTime;
 
     @ApiModelProperty(value = "礼物id")
     private Integer giftId;

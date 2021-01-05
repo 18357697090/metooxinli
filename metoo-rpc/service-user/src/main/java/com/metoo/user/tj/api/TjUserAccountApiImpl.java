@@ -56,7 +56,7 @@ public class TjUserAccountApiImpl implements TjUserAccountApi {
         TjUserInfoModel userInfo = tjUserInfoService.findByUid(uid);
         MeDTO meDTO = new MeDTO();
         meDTO.setMotto(userInfo.getMotto());
-        meDTO.setPicture(userInfo.getPicture());
+        meDTO.setPicture(userInfo.getHeadImg());
         meDTO.setLevel(userInfo.getDw());
         meDTO.setName(userInfo.getName());
         meDTO.setActiveIntegral(zh.getActiveIntegral());

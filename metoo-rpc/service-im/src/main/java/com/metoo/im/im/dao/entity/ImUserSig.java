@@ -37,20 +37,20 @@ public class ImUserSig extends Model<ImUserSig> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
     @ApiModelProperty(value = "用户uid")
     private Integer uid;
 
     @ApiModelProperty(value = "sig更新时间")
-    private Date updatetime;
+    private Date updateTime;
 
     @ApiModelProperty(value = "用户聊天室语音登录sig")
     private String usersig;
 
     @CreatedDate
     @ApiModelProperty(value = "创建时间")
-    private Date creationTime;
+    private Date createTime;
 
 
     @Override

@@ -24,7 +24,7 @@ public class ImGiftRecordModel implements Serializable {
 
     private Integer uid;
 
-    private Date creationTime;
+    private Date createTime;
 
     private Integer accepted;
 

@@ -162,8 +162,8 @@ public class PsCapsuleApiImpl implements PsCapsuleApi {
         int x = capsule.getUid();
         TjUserInfoModel userInfo = tjUserInfoApi.findByUid(x);
         findCapsuleByIdPojo.setName(userInfo.getName());
-        findCapsuleByIdPojo.setPicture(userInfo.getPicture());
-        capsule.setId(1L);
+        findCapsuleByIdPojo.setPicture(userInfo.getHeadImg());
+        capsule.setId(1);
         PsUserBuyCapsuleModel userBuyCapsule = psUserBuyCapsuleApi.findByUidAndCapsuleId(uid,capsuleId);
         if(userBuyCapsule!=null){
             capsule.setUid(null);
@@ -215,7 +215,7 @@ public class PsCapsuleApiImpl implements PsCapsuleApi {
                         pourOutCapsulePojo.setCapsuleId(Integer.parseInt(c));
                         break;
                     case 1:
-                        pourOutCapsulePojo.setCreationTime(c);
+                        pourOutCapsulePojo.setCreateTime(c);
                         break;
                     case 2:
                         pourOutCapsulePojo.setBeWatched(Integer.parseInt(c));
@@ -237,7 +237,7 @@ public class PsCapsuleApiImpl implements PsCapsuleApi {
             TjUserInfoModel userInfo = tjUserInfoApi.findByUid(pourOutCapsulePojo.getUid());
             pourOutCapsulePojo.setUid(null);
             pourOutCapsulePojo.setName(userInfo.getName());
-            pourOutCapsulePojo.setPicture(userInfo.getPicture());
+            pourOutCapsulePojo.setPicture(userInfo.getHeadImg());
             pourOutCapsulePojos.add(pourOutCapsulePojo);
         }
         return pourOutCapsulePojos;

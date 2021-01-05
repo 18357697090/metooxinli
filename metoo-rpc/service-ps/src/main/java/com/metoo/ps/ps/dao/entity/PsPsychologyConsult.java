@@ -32,7 +32,7 @@ public class PsPsychologyConsult extends Model<PsPsychologyConsult> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
     @ApiModelProperty(value = "咨询师内容介绍")
     private String content;

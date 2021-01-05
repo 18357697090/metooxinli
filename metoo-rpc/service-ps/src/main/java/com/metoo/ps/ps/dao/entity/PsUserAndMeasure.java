@@ -36,7 +36,7 @@ public class PsUserAndMeasure extends Model<PsUserAndMeasure> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
     @ApiModelProperty(value = "购买过几次")
     private Integer count;
@@ -52,7 +52,7 @@ public class PsUserAndMeasure extends Model<PsUserAndMeasure> {
 
     @CreatedDate
     @ApiModelProperty(value = "创建时间")
-    private Date creationTime;
+    private Date createTime;
 
 
     @Override

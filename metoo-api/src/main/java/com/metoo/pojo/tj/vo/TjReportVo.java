@@ -21,7 +21,7 @@ import java.util.Date;
 public class TjReportVo extends BaseVo {
     private Long id;
 
-    private Date creationTime;
+    private Date createTime;
 
     private String content;
 

@@ -21,5 +21,29 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class TjUserInfoVo extends BaseVo {
 
+    private Integer userId;
+
+    private String headImg;
+
+    private String nickName;
+
+    private Integer gender;
+
+    private String motto;
+
+    private String birthday;
+
+    private String prov;
+
+    private String provCode;
+
+    private String city;
+
+    private String cityCode;
+
+    private String area;
+
+    private String areaCode;
+
 
 }

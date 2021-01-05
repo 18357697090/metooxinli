@@ -36,7 +36,7 @@ public class PsAnswer extends Model<PsAnswer> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
     @ApiModelProperty(value = "测量量表id")
     private Integer scaleId;
@@ -49,7 +49,7 @@ public class PsAnswer extends Model<PsAnswer> {
 
     @CreatedDate
     @ApiModelProperty(value = "创建时间")
-    private Date creationTime;
+    private Date createTime;
 
 
     @Override

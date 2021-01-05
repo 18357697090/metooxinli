@@ -3,12 +3,15 @@ package com.metoo.web.controller.login;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.loongya.core.util.AssertUtils;
+import com.loongya.core.util.CommsEnum;
 import com.loongya.core.util.OU;
 import com.loongya.core.util.RE;
 import com.metoo.api.login.LoginApi;
 import com.metoo.api.tj.TjUserApi;
 import com.metoo.pojo.login.model.LoginModel;
 import com.metoo.pojo.login.model.LoginUserInfoModel;
+import com.metoo.pojo.login.vo.LoginUploadPasswordVo;
 import com.metoo.pojo.login.vo.LoginVo;
 import com.metoo.pojo.old.model.LoginPojo;
 import com.metoo.pojo.old.model.SecretGuardPojo;
@@ -40,37 +43,41 @@ public class LoginController {
 
     @RequestMapping(value = "${jwt.auth-path}")
     public RE createAuthenticationToken(LoginVo vo) {
-        RE re =  tjUserApi.logIn(vo);
-        if(re.isFail()){
-           return re;
-        }
-        LoginModel loginModel = (LoginModel) re.getData();
-        // randomKey和token已经生成完毕
-        final String randomKey = jwtTokenUtil.getRandomKey();
-        final String token = jwtTokenUtil.generateToken(loginModel.getUserId()+"", randomKey);
-//        LoginUserInfoModel model = new LoginUserInfoModel();
-//        model.setAccessToken(token);
-//        model.setRandomKey(randomKey);
-//        RE result = tjUserApi.getUserInfo(loginModel.getUserId());
-//        if(result.isSuccess()){
-//            model.setTjUserModel((TjUserModel) result.getData());
-//        }
-//        model.setUserId(loginModel.getUserId());
-        // 返回值
-        return RE.ok(new AuthResponse(token, randomKey));
+        return getToken(tjUserApi.logIn(vo));
     }
 
     //注册功能
     @PostMapping("/register")
     public RE register(LoginVo vo){
-        return tjUserApi.register(vo);
+        RE re = AssertUtils.checkParam(vo.getUsername(), vo.getPassword(), vo.getRepeatPassword());
+        if(re.isFail()){
+            return RE.fail(CommsEnum.PARAM_ERR);
+        }
+        return getToken(tjUserApi.register(vo));
     }
 
 
     //修改密码
     @PostMapping("/modifyPassword")
-    public RE modifyPassword(@RequestBody SecretGuardPojo secretGuardPojo){
-        return tjUserApi.modifyPassword(secretGuardPojo);
+    public RE modifyPassword(LoginUploadPasswordVo vo){
+        RE re = AssertUtils.checkParam(vo.getUsername(), vo.getPassword(), vo.getRepeatPassword(), vo.getAnswer());
+        if(re.isFail()){
+            return RE.fail(CommsEnum.PARAM_ERR);
+        }
+        return tjUserApi.modifyPassword(vo);
     }
+
+
+    public RE getToken(RE re){
+        if(re.isFail()){
+            return re;
+        }
+        LoginModel loginModel = (LoginModel) re.getData();
+        // randomKey和token已经生成完毕
+        final String randomKey = jwtTokenUtil.getRandomKey();
+        final String token = jwtTokenUtil.generateToken(loginModel.getUserId()+"", randomKey);
+        return RE.ok(new AuthResponse(token, randomKey));
+    }
+
 
 }
