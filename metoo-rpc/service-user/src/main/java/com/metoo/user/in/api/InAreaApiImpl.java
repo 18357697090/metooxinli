@@ -14,6 +14,8 @@ import com.metoo.user.in.service.InSwiperService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.io.BufferedReader;
@@ -32,6 +34,7 @@ import java.util.Map;
  */
 @Component
 @DubboService
+@Transactional
 @Slf4j
 public class InAreaApiImpl implements InAreaApi {
 

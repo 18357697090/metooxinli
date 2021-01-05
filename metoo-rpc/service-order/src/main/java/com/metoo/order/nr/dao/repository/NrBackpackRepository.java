@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import javax.transaction.Transactional;
 import java.util.List;
 
-@Transactional
+
 public interface NrBackpackRepository extends JpaRepository<NrBackpack,Integer> {
     List<NrBackpack> findByUid(Integer uid);
 

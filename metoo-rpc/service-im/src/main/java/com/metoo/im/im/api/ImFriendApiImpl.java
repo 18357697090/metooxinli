@@ -16,6 +16,7 @@ import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +31,7 @@ import java.util.List;
  */
 @Component
 @DubboService
+@Transactional
 public class ImFriendApiImpl implements ImFriendApi {
 
     @DubboReference

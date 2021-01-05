@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public abstract class Tip {
 
-    protected int code;
+    protected String code;
     protected String msg;
 
 }

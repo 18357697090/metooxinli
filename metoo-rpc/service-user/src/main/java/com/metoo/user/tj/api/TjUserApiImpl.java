@@ -2,6 +2,7 @@ package com.metoo.user.tj.api;
 
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
+import com.loongya.core.exception.LoongyaException;
 import com.loongya.core.util.*;
 import com.loongya.core.util.aliyun.OSSUtil;
 import com.metoo.api.tj.TjUserApi;
@@ -28,6 +29,8 @@ import org.apache.dubbo.config.annotation.DubboService;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -44,6 +47,7 @@ import java.util.List;
  */
 @Component
 @DubboService
+@Transactional
 public class TjUserApiImpl implements TjUserApi {
 
     @Autowired
@@ -70,6 +74,9 @@ public class TjUserApiImpl implements TjUserApi {
                 friendListDtos.add(friendListDto);
             }
         }
+
+
+
         if (OU.isBlack(userInfos)){
             return RE.noData();
         }
@@ -177,6 +184,7 @@ public class TjUserApiImpl implements TjUserApi {
         TjUserModel model = mapper.map(tjUser, TjUserModel.class);
         model.setTjUserInfoModel(mapper.map(tjUserInfo, TjUserInfoModel.class));
         model.getTjUserInfoModel().setHeadImg(OSSUtil.fillPath(model.getTjUserInfoModel().getHeadImg()));
+        model.getTjUserInfoModel().setUid(null);
         model.setId(null);
         return model;
     }

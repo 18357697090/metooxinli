@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import javax.transaction.Transactional;
 
-@Transactional
+
 public interface TjUserRepository extends JpaRepository<TjUser,Integer>{
 
         TjUser findByUsername(String username);

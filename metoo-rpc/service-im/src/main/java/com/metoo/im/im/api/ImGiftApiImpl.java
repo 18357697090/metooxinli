@@ -19,6 +19,7 @@ import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -33,6 +34,7 @@ import java.util.List;
  */
 @Component
 @DubboService
+@Transactional
 public class ImGiftApiImpl implements ImGiftApi {
 
     @Autowired

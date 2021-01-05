@@ -13,6 +13,7 @@ import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 
@@ -26,6 +27,7 @@ import java.math.BigDecimal;
  */
 @Component
 @DubboService
+@Transactional
 public class PsUserBuyCapsuleApiImpl implements PsUserBuyCapsuleApi {
 
     @DubboReference

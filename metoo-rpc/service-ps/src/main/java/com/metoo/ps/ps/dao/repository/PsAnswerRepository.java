@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import javax.transaction.Transactional;
 
-@Transactional
+
 public interface PsAnswerRepository extends JpaRepository<PsAnswer,Integer> {
 
 

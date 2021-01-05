@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import javax.transaction.Transactional;
 import java.util.List;
 
-@Transactional
+
 public interface TjUserInfoRepository extends JpaRepository<TjUserInfo,Integer> {
     TjUserInfo findByUid(Integer uid);
 

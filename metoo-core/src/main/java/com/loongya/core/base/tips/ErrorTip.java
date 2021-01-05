@@ -12,14 +12,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ErrorTip extends Tip {
 
-    public ErrorTip(int code, String msg) {
+    public ErrorTip(String code, String msg) {
         super();
-        if(code == 700){
+        if(code == "700"){
             this.code = code;
             this.msg = msg;
         }else{
             log.error("系统出现异常，异常Code={}，异常信息={}",code,msg);
-            this.code = 999;
+            this.code = "999";
             this.msg = "系统出现异常，请联系管理员";
         }
     }

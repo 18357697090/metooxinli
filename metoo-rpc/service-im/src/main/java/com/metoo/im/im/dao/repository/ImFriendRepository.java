@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import javax.transaction.Transactional;
 import java.util.List;
 
-@Transactional
+
 public interface ImFriendRepository extends JpaRepository<ImFriend,Integer> {
     List<ImFriend> findByUid(Integer uid);
     @Query(nativeQuery = true,value = "select * from im_friend where uid=?1 and friend_id=?2 and state=1")

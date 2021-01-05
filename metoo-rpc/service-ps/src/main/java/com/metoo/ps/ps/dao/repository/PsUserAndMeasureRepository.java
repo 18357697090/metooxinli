@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import javax.transaction.Transactional;
 
-@Transactional
+
 public interface PsUserAndMeasureRepository extends JpaRepository<PsUserAndMeasure,Integer> {
     PsUserAndMeasure findByUidAndScaleId(int uid,int scaleId);
 

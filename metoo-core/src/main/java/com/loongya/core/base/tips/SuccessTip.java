@@ -9,7 +9,7 @@ package com.loongya.core.base.tips;
 public class SuccessTip extends Tip {
 	
 	public SuccessTip(){
-		super.code = 200;
+		super.code = "200";
 		super.msg = "操作成功";
 	}
 }

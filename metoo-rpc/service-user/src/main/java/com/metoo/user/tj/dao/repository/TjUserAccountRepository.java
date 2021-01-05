@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
 
-@Transactional
+
 public interface TjUserAccountRepository extends JpaRepository<TjUserAccount,Integer> {
 
     TjUserAccount findByUid(Integer uid);

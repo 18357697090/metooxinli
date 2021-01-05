@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import javax.transaction.Transactional;
 import java.util.List;
 
-@Transactional
+
 public interface PsScaleRepository extends JpaRepository<PsScale,Integer> {
     PsScale findByScaleId(Integer scaleId);
 

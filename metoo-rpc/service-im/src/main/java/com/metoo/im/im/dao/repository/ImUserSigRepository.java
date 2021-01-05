@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import javax.transaction.Transactional;
 import java.util.Date;
 
-@Transactional
+
 public interface ImUserSigRepository extends JpaRepository<ImUserSig,Integer> {
     ImUserSig findByUid(Integer uid);
 
