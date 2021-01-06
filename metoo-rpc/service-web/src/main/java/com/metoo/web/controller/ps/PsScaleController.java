@@ -33,7 +33,6 @@ public class PsScaleController {
     @GetMapping("/index")
     public RE index(){
         return psScaleApi.index();
-
     }
 
 
