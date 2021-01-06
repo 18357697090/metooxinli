@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface PsScaleGatherRepository extends JpaRepository<PsScaleGather,Integer> {
+
     PsScaleGather findByScaleGatherId(int ScaleGatherId);
 
     @Query(value = "FROM PsScaleGather WHERE scaleGatherId>10")

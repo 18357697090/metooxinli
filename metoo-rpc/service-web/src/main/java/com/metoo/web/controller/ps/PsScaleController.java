@@ -24,11 +24,7 @@ public class PsScaleController {
     @DubboReference
     private PsScaleApi psScaleApi;
 
-    @ApiOperation("精品测量")
-    @GetMapping("/cl")
-    public RE cl(Integer page){
-        return psScaleApi.cl(page);
-    }
+
 
     @GetMapping("/index")
     public RE index(){

@@ -24,13 +24,11 @@ public class TjUserInfoModel implements Serializable {
 
     private Integer age;
 
-    private String city;
-
-    private Integer dw;
+    private Integer level;
 
     private Integer gender;
 
-    private String name;
+    private String nickName;
 
     private Integer uid;
 
@@ -38,8 +36,16 @@ public class TjUserInfoModel implements Serializable {
 
     private String motto;
 
-    private Date createTime;
+    private String prov;
 
-    private Date updateTime;
+    private String provCode;
+
+    private String city;
+
+    private String cityCode;
+
+    private String area;
+
+    private String areaCode;
 
 }

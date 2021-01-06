@@ -4,7 +4,9 @@ import com.loongya.core.util.OU;
 import com.loongya.core.util.RE;
 import com.metoo.api.ps.PsScaleGatherApi;
 import com.metoo.api.tj.TjUserInfoApi;
+import com.metoo.pojo.login.enums.AuthEnum;
 import com.metoo.pojo.ps.model.PsScaleGatherModel;
+import com.metoo.pojo.ps.vo.PsScaleVo;
 import com.metoo.pojo.tj.model.TjUserInfoModel;
 import com.metoo.ps.ps.dao.entity.PsScaleGather;
 import com.metoo.ps.ps.service.PsScaleGatherService;
@@ -45,14 +47,14 @@ public class PsScaleGatherApiImpl implements PsScaleGatherApi {
     private DozerBeanMapper mapper;
 
     @Override
-    public RE clgather(Integer uid) {
-        TjUserInfoModel userInfo = tjUserInfoApi.findByUid(uid);
-        int dw=1;
-        if(userInfo !=null){
-            dw= userInfo.getDw();
+    public RE clgather(PsScaleVo vo) {
+        TjUserInfoModel userInfo = tjUserInfoApi.findByUid(vo.getUserId());
+        if(OU.isBlack(userInfo)){
+            return RE.fail(AuthEnum.LOGIN_TIMEOUT);
         }
+        int level=OU.isBlack(userInfo.getLevel()) ? 1 : userInfo.getLevel();
         List<PsScaleGather> scaleGathers =new ArrayList<>();
-        scaleGathers.add(psScaleGatherService.findByScaleGatherId(dw));
+        scaleGathers.add(psScaleGatherService.findByScaleGatherId(level));
         scaleGathers.add(psScaleGatherService.findByScaleGatherId(101));
         scaleGathers.add(psScaleGatherService.findByScaleGatherId(102));
         if(OU.isBlack(scaleGathers)){

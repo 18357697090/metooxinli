@@ -34,18 +34,9 @@ public class PsScaleGatherController {
     @DubboReference
     private PsScaleApi psScaleApi;
 
-    @GetMapping("/clgather")
-    @ApiOperation("推荐测量")
-    public RE clgather(Integer uid){
-        return psScaleGatherApi.clgather(uid);
-    }
 
-    //所有测量集合
-    @GetMapping("/clgatherall")
-    @ApiOperation("更多推荐测量")
-    public RE clgaherall(){
-        return psScaleGatherApi.clgaherall();
-    }
+
+
 
     @GetMapping("/findbyclgatherid")
     @ApiOperation("推荐测量集合内容")

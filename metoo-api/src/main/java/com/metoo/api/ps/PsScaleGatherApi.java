@@ -1,6 +1,7 @@
 package com.metoo.api.ps;
 
 import com.loongya.core.util.RE;
+import com.metoo.pojo.ps.vo.PsScaleVo;
 
 /**
  * <p>
@@ -12,7 +13,7 @@ import com.loongya.core.util.RE;
  */
 public interface PsScaleGatherApi {
 
-    RE clgather(Integer uid);
+    RE clgather(PsScaleVo vo);
 
     RE clgaherall();
 }

@@ -18,5 +18,5 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 public class PsScaleVo extends BaseVo {
-
+    private Integer userId;
 }
