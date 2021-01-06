@@ -70,6 +70,7 @@
                     <include>**/*.yml</include>
                     <include>**/*.properties</include>
                     <include>**/*.json</include>
+                    <include>**/*.txt</include>
                 </includes>
             </resource>
         </resources>
@@ -93,12 +94,12 @@
                         <!--指定程序入口-->
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <classpathPrefix>eachvibusiness/</classpathPrefix>
+                            <classpathPrefix>metoobusinesslib/</classpathPrefix>
                             <mainClass>com.metoo.business.MetooBusinessApplication</mainClass>
                         </manifest>
                         <!-- (配置文件外置目录) -->
                         <manifestEntries>
-                            <Class-Path>metooBusinessconfig/</Class-Path>
+                            <Class-Path>metoobusinessconfig/</Class-Path>
                         </manifestEntries>
                     </archive>
                     <excludes>
@@ -108,6 +109,7 @@
                         <exclude>**/*.properties</exclude>
                         <exclude>**/*.json</exclude>
                         <exclude>**/*.p12</exclude>
+                        <exclude>**/*.txt</exclude>
                     </excludes>
                 </configuration>
             </plugin>
@@ -136,6 +138,7 @@
                                         <exclude>**/*.properties</exclude>
                                         <exclude>**/*.json</exclude>
                                         <exclude>**/*.p12</exclude>
+                                        <exclude>**/*.txt</exclude>
                                     </includes>
                                     <filtering>true</filtering>
                                 </resource>
@@ -158,7 +161,7 @@
                             <goal>copy-dependencies</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${project.build.directory}/metoouserlib</outputDirectory>
+                            <outputDirectory>${project.build.directory}/metoobusinesslib</outputDirectory>
                             <excludeArtifactIds>metoo-api, metoo-core, metoo-comm</excludeArtifactIds>
                             <!-- 是否不包含间接依赖 -->
                             <excludeTransitive>false</excludeTransitive>

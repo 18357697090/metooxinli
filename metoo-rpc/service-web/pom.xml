@@ -79,7 +79,7 @@
                         <!--指定程序入口-->
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <classpathPrefix>metooweb/</classpathPrefix>
+                            <classpathPrefix>metooweblib/</classpathPrefix>
                             <mainClass>com.metoo.web.MetooWebApplication</mainClass>
                         </manifest>
                         <!-- (配置文件外置目录) -->

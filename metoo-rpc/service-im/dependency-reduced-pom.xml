@@ -44,7 +44,7 @@
           <archive>
             <manifest>
               <addClasspath>true</addClasspath>
-              <classpathPrefix>metooim/</classpathPrefix>
+              <classpathPrefix>metooimlib/</classpathPrefix>
               <mainClass>com.metoo.im.MetooImApplication</mainClass>
             </manifest>
             <manifestEntries>

@@ -95,7 +95,7 @@
                         <!--指定程序入口-->
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <classpathPrefix>metooim/</classpathPrefix>
+                            <classpathPrefix>metooimlib/</classpathPrefix>
                             <mainClass>com.metoo.im.MetooImApplication</mainClass>
                         </manifest>
                         <!-- (配置文件外置目录) -->

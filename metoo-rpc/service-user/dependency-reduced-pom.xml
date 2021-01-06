@@ -44,7 +44,7 @@
           <archive>
             <manifest>
               <addClasspath>true</addClasspath>
-              <classpathPrefix>eachviuser/</classpathPrefix>
+              <classpathPrefix>metoouserlib/</classpathPrefix>
               <mainClass>com.metoo.user.MetooUserApplication</mainClass>
             </manifest>
             <manifestEntries>

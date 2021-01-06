@@ -93,7 +93,7 @@
                         <!--指定程序入口-->
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <classpathPrefix>metooorder/</classpathPrefix>
+                            <classpathPrefix>metooorderlib/</classpathPrefix>
                             <mainClass>com.metoo.order.MetooOrderApplication</mainClass>
                         </manifest>
                         <!-- (配置文件外置目录) -->
