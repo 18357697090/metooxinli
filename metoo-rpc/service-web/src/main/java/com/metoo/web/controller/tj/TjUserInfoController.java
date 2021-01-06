@@ -66,7 +66,7 @@ public class TjUserInfoController {
         if(a==null){
             return -1;
         }else {
-            return a.getDw();
+            return a.getLevel();
         }
     }
 

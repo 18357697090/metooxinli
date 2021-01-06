@@ -50,7 +50,7 @@ public class XyRaceApiImpl implements XyRaceApi {
 
         List<XyRace> races = xyRaceService.list();
         List<ReturnRaceDTO> returnRaceDTOS = new ArrayList<>();
-        int dw = tjUserInfoApi.findByUid(uid).getDw();
+        int dw = tjUserInfoApi.findByUid(uid).getLevel();
         for (XyRace race : races){
             ReturnRaceDTO returnRaceDTO = new ReturnRaceDTO();
 
@@ -58,7 +58,7 @@ public class XyRaceApiImpl implements XyRaceApi {
             if (dw>1){
                 returnRaceDTO.setState(1);
             }
-            returnRaceDTO.setUserName(tjUserInfoApi.findByUid(xyMyRoomService.findByMyRoomIdAndIsHost(race.getRaceId()).getUid()).getName());
+            returnRaceDTO.setUserName(tjUserInfoApi.findByUid(xyMyRoomService.findByMyRoomIdAndIsHost(race.getRaceId()).getUid()).getNickName());
             returnRaceDTOS.add(returnRaceDTO);
         }
         if(dw<4){

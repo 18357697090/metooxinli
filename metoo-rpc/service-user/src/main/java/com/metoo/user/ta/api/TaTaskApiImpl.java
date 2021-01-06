@@ -70,7 +70,7 @@ public class TaTaskApiImpl implements TaTaskApi {
             TaskDTO taskDTO = mapper.map(task, TaskDTO.class);
             int uid = task.getUid();
             TjUserInfoModel userInfo = tjUserInfoService.findByUid(uid);
-            taskDTO.setName(userInfo.getName());
+            taskDTO.setName(userInfo.getNickName());
             taskDTO.setPicture(userInfo.getHeadImg());
             TaskDTOs.add(taskDTO);
         }
@@ -89,7 +89,7 @@ public class TaTaskApiImpl implements TaTaskApi {
             TaskDTO taskDTO = mapper.map(task, TaskDTO.class);
             int uid = task.getUid();
             TjUserInfoModel userInfo = tjUserInfoService.findByUid(uid);
-            taskDTO.setName(userInfo.getName());
+            taskDTO.setName(userInfo.getNickName());
             taskDTO.setPicture(userInfo.getHeadImg());
             TaskDTOs.add(taskDTO);
         }

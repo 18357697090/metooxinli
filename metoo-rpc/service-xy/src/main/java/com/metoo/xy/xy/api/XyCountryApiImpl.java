@@ -76,7 +76,7 @@ public class XyCountryApiImpl implements XyCountryApi {
                 &&buildCountryDTO.getIntroduction()!=null&&!buildCountryDTO.getIntroduction().equals("")) {
 
             TjUserInfoModel userInfo = tjUserInfoApi.findByUid(uid);
-            if (userInfo.getDw()<4){
+            if (userInfo.getLevel()<4){
                 return RE.fail("等级不够，需要钻石段位及以上才可以创建国度");
             }
             BigDecimal bigDecimal = new BigDecimal("5000");
@@ -131,13 +131,13 @@ public class XyCountryApiImpl implements XyCountryApi {
         ReturnCountryDTO returnCountryDTO = mapper.map(race,ReturnCountryDTO.class);
         returnCountryDTO.setCountryId(raceId);
         returnCountryDTO.setStatusBar(2);
-        returnCountryDTO.setUserName(tjUserInfoApi.findByUid(xyMyRoomService.findByMyRoomIdAndIsHost(raceId).getUid()).getName());
+        returnCountryDTO.setUserName(tjUserInfoApi.findByUid(xyMyRoomService.findByMyRoomIdAndIsHost(raceId).getUid()).getNickName());
         List<ReturnCountryDTO> returnCountryDTOS = new ArrayList<>();
         returnCountryDTOS.add(returnCountryDTO);
         List<XyCountry> countries = xyCountryService.findByRaceId(raceId);
         for (XyCountry country : countries) {
             ReturnCountryDTO returnCountryDTO1 = mapper.map(country,ReturnCountryDTO.class);
-            returnCountryDTO1.setUserName(tjUserInfoApi.findByUid(xyMyRoomService.findByMyRoomIdAndIsHost(country.getCountryId()).getUid()).getName());
+            returnCountryDTO1.setUserName(tjUserInfoApi.findByUid(xyMyRoomService.findByMyRoomIdAndIsHost(country.getCountryId()).getUid()).getNickName());
             returnCountryDTOS.add(returnCountryDTO1);
         }
         if(OU.isBlack(returnCountryDTOS)){

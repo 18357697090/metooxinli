@@ -61,7 +61,7 @@ public class XyCityApiImpl implements XyCityApi {
         List<ReturnCityDTO> returnCityDTOS = new ArrayList<>();
         for (XyCity city : cities){
             ReturnCityDTO returnCityDTO = mapper.map(city,ReturnCityDTO.class);
-            returnCityDTO.setUsername(tjUserInfoApi.findByUid(xyMyRoomService.findByMyRoomIdAndIsHost(city.getCityId()).getUid()).getName());
+            returnCityDTO.setUsername(tjUserInfoApi.findByUid(xyMyRoomService.findByMyRoomIdAndIsHost(city.getCityId()).getUid()).getNickName());
             returnCityDTOS.add(returnCityDTO);
         }
         if(OU.isBlack(returnCityDTOS)){

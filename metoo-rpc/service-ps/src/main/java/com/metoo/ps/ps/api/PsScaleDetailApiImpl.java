@@ -94,9 +94,9 @@ public class PsScaleDetailApiImpl implements PsScaleDetailApi {
             Comments comments2=new Comments();
             TjUserInfoModel userInfo = tjUserInfoApi.findByUid(a.getUid());
             comments2.setComment(a.getComment());
-            comments2.setUsername(userInfo.getName());
+            comments2.setUsername(userInfo.getNickName());
             comments2.setUserPicture(userInfo.getHeadImg());
-            comments2.setLevelPicture(tjLevelPictureApi.findByLevel(userInfo.getDw()).getLevelPicture());
+            comments2.setLevelPicture(tjLevelPictureApi.findByLevel(userInfo.getLevel()).getLevelPicture());
             comments2.setCreateTime(a.getCreateTime());
             comments1.add(comments2);
         }

@@ -98,7 +98,7 @@ public class PsPourOutApiImpl implements PsPourOutApi {
             }
             TjUserInfoModel userInfo = tjUserInfoApi.findByUid(pourOutCapsulePojo.getUid());
             pourOutCapsulePojo.setUid(null);
-            pourOutCapsulePojo.setName(userInfo.getName());
+            pourOutCapsulePojo.setName(userInfo.getNickName());
             pourOutCapsulePojo.setPicture(userInfo.getHeadImg());
             pourOutCapsulePojos.add(pourOutCapsulePojo);
         }

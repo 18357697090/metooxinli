@@ -163,7 +163,7 @@ public class PsCapsuleApiImpl implements PsCapsuleApi {
         FindCapsuleByIdPojo findCapsuleByIdPojo = new FindCapsuleByIdPojo();
         int x = capsule.getUid();
         TjUserInfoModel userInfo = tjUserInfoApi.findByUid(x);
-        findCapsuleByIdPojo.setName(userInfo.getName());
+        findCapsuleByIdPojo.setName(userInfo.getNickName());
         findCapsuleByIdPojo.setPicture(userInfo.getHeadImg());
         capsule.setId(1);
         PsUserBuyCapsuleModel userBuyCapsule = psUserBuyCapsuleApi.findByUidAndCapsuleId(uid,capsuleId);
@@ -238,7 +238,7 @@ public class PsCapsuleApiImpl implements PsCapsuleApi {
             }
             TjUserInfoModel userInfo = tjUserInfoApi.findByUid(pourOutCapsulePojo.getUid());
             pourOutCapsulePojo.setUid(null);
-            pourOutCapsulePojo.setName(userInfo.getName());
+            pourOutCapsulePojo.setName(userInfo.getNickName());
             pourOutCapsulePojo.setPicture(userInfo.getHeadImg());
             pourOutCapsulePojos.add(pourOutCapsulePojo);
         }

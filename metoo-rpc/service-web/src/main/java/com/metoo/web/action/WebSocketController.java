@@ -98,16 +98,16 @@ public class WebSocketController extends TextWebSocketHandler {
                     switch (appMessage.getType1()) {
                         case "join":  //进入聊天室
                             //房间内用户的uid
-                            System.out.println("--------用户"+uid+userInfo.get(uid).getName()+"加入房间"+AudioRoomId+"--房间内信息"+rooms+"-----");
+                            System.out.println("--------用户"+uid+userInfo.get(uid).getNickName()+"加入房间"+AudioRoomId+"--房间内信息"+rooms+"-----");
                             if (!rooms.containsKey(AudioRoomId)) {
-                                System.out.println("--------用户"+uid+userInfo.get(uid).getName()+"----创建房间");
+                                System.out.println("--------用户"+uid+userInfo.get(uid).getNickName()+"----创建房间");
                                 Set<Integer> room = new HashSet<>();
                                 // 添加用户
                                 room.add(uid);
                                 rooms.put(AudioRoomId, room);
                             } else {
                                 // 房间已存在，直接添加用户到相应的房间
-                                System.out.println("--------用户"+uid+userInfo.get(uid).getName()+"----进入"+AudioRoomId+"房间，房间信息"+rooms+"--------");
+                                System.out.println("--------用户"+uid+userInfo.get(uid).getNickName()+"----进入"+AudioRoomId+"房间，房间信息"+rooms+"--------");
                                 rooms.get(AudioRoomId).add(uid);
                             }
                             //判断是否在其他房间进入，移除该房间的信息
@@ -119,7 +119,7 @@ public class WebSocketController extends TextWebSocketHandler {
                                     System.out.println("--------用户"+uid+"在房间"+AudioRoomId1+"内，从之前的房间中退出来--------");
                                     Map<Integer,Integer> seatExit = microphone.get(AudioRoomId1);
                                     if(seatExit.containsValue(uid)){
-                                        System.out.println("--------用户"+uid+userInfo.get(uid).getName()+"在房间"+AudioRoomId+"内，并且在麦上"+seatExit+"--------");
+                                        System.out.println("--------用户"+uid+userInfo.get(uid).getNickName()+"在房间"+AudioRoomId+"内，并且在麦上"+seatExit+"--------");
                                         for (int i=1;i<9;i++){
                                             if(seatExit.containsKey(i)){
                                                 if (seatExit.get(i).equals(uid)) {
@@ -127,7 +127,7 @@ public class WebSocketController extends TextWebSocketHandler {
                                                     appMessage.setType1("unMicrophone");
                                                     appMessage.setMessage("" + (i - 1));
                                                     microphone.get(AudioRoomId1).remove(i);
-                                                    System.out.println("--------用户" + uid + userInfo.get(uid).getName() + "在房间" + AudioRoomId + "内，并且在" + i + "麦上--------");
+                                                    System.out.println("--------用户" + uid + userInfo.get(uid).getNickName() + "在房间" + AudioRoomId + "内，并且在" + i + "麦上--------");
                                                     broadcastAll(AudioRoomId1, HandleAppMessage(appMessage));
                                                 }
                                             }
@@ -137,20 +137,20 @@ public class WebSocketController extends TextWebSocketHandler {
                                     System.out.println("------用户"+uid+"进入到同一个房间");
                                 }
                             }
-                            System.out.println("--------用户"+uid+userInfo.get(uid).getName()+"没有在房间内，为用户添加房间号"+AudioRoomId+"--------");
+                            System.out.println("--------用户"+uid+userInfo.get(uid).getNickName()+"没有在房间内，为用户添加房间号"+AudioRoomId+"--------");
                             userAudioRoomId.put(uid,AudioRoomId);
 
                             //发送麦上信息
                             if(microphone.containsKey(AudioRoomId)){
                                 //map<麦序，uid>
-                                System.out.println("--------用户"+uid+userInfo.get(uid).getName()+"在房间"+AudioRoomId+"内，有麦上信息，为用户推送麦上人的信息--------");
+                                System.out.println("--------用户"+uid+userInfo.get(uid).getNickName()+"在房间"+AudioRoomId+"内，有麦上信息，为用户推送麦上人的信息--------");
                                 Map<Integer,Integer> seat = microphone.get(AudioRoomId);
                                 AudioRoomMessage audioRoomMessage = repository.handleAppMessage(appMessage);
                                 List<SeatInfo> seatInfos = new ArrayList<>();
                                 for (int i =1;i<9;i++){
                                     Integer uid1 = seat.get(i);
                                     if(uid1!=null){
-                                        System.out.println("--------用户"+uid1+userInfo.get(uid1).getName()+"在房间"+AudioRoomId+"内的"+i+"麦上，添加入seatInfos信息--------");
+                                        System.out.println("--------用户"+uid1+userInfo.get(uid1).getNickName()+"在房间"+AudioRoomId+"内的"+i+"麦上，添加入seatInfos信息--------");
                                         SeatInfo seatInfo = new SeatInfo();
                                         seatInfo.setSeat(i);
                                         seatInfo.setUserInfo(repository.userInfoModel(userInfo.get(uid1)));
@@ -163,7 +163,7 @@ public class WebSocketController extends TextWebSocketHandler {
                                 audioRoomMessage.setObject(objectTool);
                                 audioRoomMessage.setSeatInfos(seatInfos);
                                 audioRoomMessage.setType1("microphoneInfo");
-                                System.out.println("------"+uid+userInfo.get(uid).getName()+"进入房间"+AudioRoomId+"为他推送seatInfo------"+HandleAudioRoomMessage(audioRoomMessage));
+                                System.out.println("------"+uid+userInfo.get(uid).getNickName()+"进入房间"+AudioRoomId+"为他推送seatInfo------"+HandleAudioRoomMessage(audioRoomMessage));
                                 session.getBasicRemote().sendText(HandleAudioRoomMessage(audioRoomMessage));
                             }else {
                                 System.out.println("--------用户"+uid+"在房间"+AudioRoomId+"内，没有麦上信息--------");
@@ -179,12 +179,12 @@ public class WebSocketController extends TextWebSocketHandler {
                                 audioRoomMessage.setSeatInfos(seatInfos);
                                 audioRoomMessage.setType1("microphoneInfo");
                                 session.getBasicRemote().sendText(HandleAudioRoomMessage(audioRoomMessage));
-                                System.out.println("------"+uid+userInfo.get(uid).getName()+"进入房间"+AudioRoomId+"为他推送seatInfo------"+HandleAudioRoomMessage(audioRoomMessage));
+                                System.out.println("------"+uid+userInfo.get(uid).getNickName()+"进入房间"+AudioRoomId+"为他推送seatInfo------"+HandleAudioRoomMessage(audioRoomMessage));
                             }
                             break;
                         case "chat":
                         case "picture":
-                            System.out.println("------收到用户"+uid+userInfo.get(uid).getName()+"的群发信息，内容为"+appMessage.getMessage());
+                            System.out.println("------收到用户"+uid+userInfo.get(uid).getNickName()+"的群发信息，内容为"+appMessage.getMessage());
                             JSONObject json = JSONObject.fromObject(appMessage.getObject());
                             ObjectMapper mapper1 = new ObjectMapper();
                             ObjectTool objectTool = mapper1.convertValue(json,ObjectTool.class);
