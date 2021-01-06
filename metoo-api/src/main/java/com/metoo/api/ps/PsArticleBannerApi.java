@@ -12,5 +12,5 @@ import com.loongya.core.util.RE;
  */
 public interface PsArticleBannerApi {
 
-    RE index();
+    RE getBannerList();
 }

@@ -1,8 +1,11 @@
 package com.metoo.web.controller.ps;
 
 
+import com.loongya.core.util.OU;
 import com.loongya.core.util.RE;
 import com.metoo.api.ps.PsScaleDetailApi;
+import com.metoo.pojo.login.enums.AuthEnum;
+import com.metoo.web.config.auth.ThreadLocal;
 import io.swagger.annotations.ApiOperation;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,11 +32,17 @@ public class PsScaleDetailController {
     private PsScaleDetailApi psScaleDetailApi;
 
 
-    //测量详情
+    /**
+     * 测量详情
+     */
     @ApiOperation("测量详情")
     @GetMapping("/gaugedetails")
-    public RE gaugedetails(Integer scaleId, @RequestHeader("UID") Integer uid){
-        return psScaleDetailApi.gaugedetails(scaleId, uid);
+    public RE gaugedetails(Integer scaleId){
+        Integer userId = ThreadLocal.getUserId();
+        if(OU.isBlack(userId)){
+            return RE.fail(AuthEnum.LOGIN_TIMEOUT);
+        }
+        return psScaleDetailApi.gaugedetails(scaleId, userId);
 
     }
 

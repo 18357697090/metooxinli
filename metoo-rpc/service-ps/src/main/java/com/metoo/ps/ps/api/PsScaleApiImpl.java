@@ -1,11 +1,14 @@
 package com.metoo.ps.ps.api;
 
+import com.loongya.core.util.CopyUtils;
 import com.loongya.core.util.OU;
 import com.loongya.core.util.RE;
+import com.loongya.core.util.aliyun.OSSUtil;
 import com.metoo.api.ps.PsScaleApi;
 import com.metoo.pojo.old.vo.ArticleDTO;
 import com.metoo.pojo.old.vo.IndexDTO;
 import com.metoo.pojo.ps.model.PsScaleModel;
+import com.metoo.pojo.ps.vo.PsScaleVo;
 import com.metoo.ps.ps.dao.entity.PsArticle;
 import com.metoo.ps.ps.dao.entity.PsScale;
 import com.metoo.ps.ps.service.PsArticleService;
@@ -45,15 +48,29 @@ public class PsScaleApiImpl implements PsScaleApi {
     private DozerBeanMapper mapper;
 
     @Override
-    public RE cl(Integer page) {
-        return psScaleService.cl(page);
+    public RE getBoutiqueClgatherList(PsScaleVo vo) {
+        return psScaleService.getBoutiqueClgatherList(vo);
+    }
+
+
+    @Override
+    public RE findPsScaleListbyclgatherid(PsScaleVo vo) {
+        List<PsScale> list = psScaleService.findPsScaleListbyclgatherid(vo.getClgatherId());
+        if(OU.isBlack(list)){
+            return RE.noData();
+        }
+        return RE.ok(list.stream().flatMap(e->{
+            PsScaleModel model = CopyUtils.copy(e, new PsScaleModel());
+            model.setPicture(OSSUtil.fillPath(model.getPicture()));
+            return Stream.of(model);
+        }).collect(Collectors.toList()));
     }
 
     @Override
     public RE index() {
         IndexDTO indexDTO = new IndexDTO();
         indexDTO.setScales(psScaleService.findScaleRand());
-        List<PsArticle> articles =psArticleService.findArticleRand();
+        List<PsArticle> articles =psArticleService.findArticleRand(6);
         List<ArticleDTO> articleDTOS = new ArrayList<>();
         for (PsArticle article : articles) {
             ArticleDTO articleDTO = mapper.map(article,ArticleDTO.class);
@@ -66,14 +83,4 @@ public class PsScaleApiImpl implements PsScaleApi {
         return RE.ok(indexDTO);
     }
 
-    @Override
-    public RE findbyclgatherid(Integer clgatherid) {
-        List<PsScale> list = psScaleService.findByScaleGatherId(clgatherid);
-        if(OU.isBlack(list)){
-            return RE.noData();
-        }
-        return RE.ok(list.stream().flatMap(e->{
-            return Stream.of(mapper.map(e, PsScaleModel.class));
-        }).collect(Collectors.toList()));
-    }
 }

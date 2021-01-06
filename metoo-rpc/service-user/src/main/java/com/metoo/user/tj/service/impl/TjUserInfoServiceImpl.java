@@ -1,6 +1,7 @@
 package com.metoo.user.tj.service.impl;
 
 import com.loongya.core.util.OU;
+import com.loongya.core.util.aliyun.OSSUtil;
 import com.metoo.pojo.tj.model.TjUserInfoModel;
 import com.metoo.user.tj.dao.entity.TjUserInfo;
 import com.metoo.user.tj.dao.mapper.TjUserInfoMapper;
@@ -37,6 +38,7 @@ public class TjUserInfoServiceImpl extends ServiceImpl<TjUserInfoMapper, TjUserI
             return null;
         }
         TjUserInfoModel model = mapper.map(pojo, TjUserInfoModel.class);
+        model.setHeadImg(OSSUtil.fillPath(model.getHeadImg()));
         return model;
     }
 

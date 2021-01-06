@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
+import java.math.BigDecimal;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -44,7 +46,7 @@ public class PsScale extends Model<PsScale> {
     private String name;
 
     @ApiModelProperty(value = "量表多少个人测过")
-    private String number;
+    private Integer number;
 
     @ApiModelProperty(value = "多少道题目")
     private Integer numberOfProblem;
@@ -53,7 +55,7 @@ public class PsScale extends Model<PsScale> {
     private String picture;
 
     @ApiModelProperty(value = "价格")
-    private Integer prices;
+    private BigDecimal prices;
 
     @ApiModelProperty(value = "属于的量表集合id")
     private Integer scaleGatherId;
@@ -67,7 +69,7 @@ public class PsScale extends Model<PsScale> {
     @ApiModelProperty(value = "备用")
     private Integer spare;
 
-    @ApiModelProperty(value = "1正常，0不展示")
+    @ApiModelProperty(value = "0正常，1不展示")
     private Integer state;
 
     @ApiModelProperty(value = "量表类型")

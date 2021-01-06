@@ -19,4 +19,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PsScaleVo extends BaseVo {
     private Integer userId;
+    private Integer clgatherId;
 }

@@ -1,18 +1,31 @@
 package com.loongya.core.util.vo;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import com.loongya.core.util.OU;
+import lombok.*;
 
 import java.io.Serializable;
 
-@Data
-@EqualsAndHashCode(callSuper = false)
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class BaseVo implements Serializable {
-    private long pagenum;
-    private long pagesize;
+    private int pagenum = 1;
+    private int pagesize = 10;
+
+    public void setPagenum(Integer pagenum){
+        if(OU.isBlack(pagenum)){
+            this.pagenum = 1;
+        }else {
+            this.pagenum = pagenum;
+        }
+    }
+
+    public void setPagesize(Integer pagesize){
+        if(OU.isBlack(pagesize)){
+            this.pagesize = 10;
+        }else {
+            this.pagesize = pagesize;
+        }
+    }
 
 }

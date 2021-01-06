@@ -26,8 +26,8 @@ public class PsArticleServiceImpl extends ServiceImpl<PsArticleMapper, PsArticle
     private PsArticleRepository psArticleRepository;
 
     @Override
-    public List<PsArticle> findArticleRand4() {
-        return psArticleRepository.findArticleRand4();
+    public List<PsArticle> findArticleRand(Integer count) {
+        return psArticleRepository.findArticleRand(count);
     }
 
     @Override
@@ -41,8 +41,8 @@ public class PsArticleServiceImpl extends ServiceImpl<PsArticleMapper, PsArticle
     }
 
     @Override
-    public List<PsArticle> findArticleRand() {
-        return psArticleRepository.findArticleRand();
+    public void addClickCount(Integer articleId) {
+        psArticleRepository.addClickCount(articleId);
     }
 
     @Override

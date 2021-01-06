@@ -1,9 +1,12 @@
 package com.metoo.ps.ps.api;
 
+import com.loongya.core.util.CommsEnum;
+import com.loongya.core.util.OU;
 import com.loongya.core.util.RE;
 import com.metoo.api.ps.PsArticleBannerApi;
 import com.metoo.pojo.old.vo.ArticleDTO;
 import com.metoo.pojo.old.vo.ArticleIndexDTO;
+import com.metoo.pojo.ps.model.PsArticleBannerModel;
 import com.metoo.ps.ps.dao.entity.PsArticle;
 import com.metoo.ps.ps.service.PsArticleBannerService;
 import com.metoo.ps.ps.service.PsArticleService;
@@ -35,35 +38,12 @@ public class PsArticleBannerApiImpl implements PsArticleBannerApi {
     @Autowired
     private PsArticleBannerService psArticleBannerService;
 
-    @Autowired
-    private PsArticleService psArticleService;
-
-    @Autowired
-    private DozerBeanMapper mapper;
-
     @Override
-    public RE index() {
-
-        ArticleIndexDTO articleIndexDTO = new ArticleIndexDTO();
-        articleIndexDTO.setArticleBanners(psArticleBannerService.findAll());
-        List<PsArticle> boutiqueArticles = psArticleService.findArticleRand4();
-        List<ArticleDTO> boutiqueArticle = new ArrayList<>();
-        for (PsArticle article : boutiqueArticles) {
-            ArticleDTO articleDTO = mapper.map(article,ArticleDTO.class);
-            boutiqueArticle.add(articleDTO);
+    public RE getBannerList() {
+        List<PsArticleBannerModel> list = psArticleBannerService.findAll();
+        if(OU.isNotBlack(list)){
+            return RE.ok(list);
         }
-
-        Pageable pageable = PageRequest.of(0,4, Sort.Direction.DESC,"sort");
-        List<PsArticle>  moreArticles = psArticleService.findByState(1,pageable);
-        List<ArticleDTO> moreArticlesDTO = new ArrayList<>();
-        for (PsArticle article : moreArticles){
-            ArticleDTO articleDTO = mapper.map(article,ArticleDTO.class);
-            moreArticlesDTO.add(articleDTO);
-        }
-        articleIndexDTO.setMoreArticles(moreArticlesDTO);
-        articleIndexDTO.setBoutiqueArticle(boutiqueArticle);
-
-
-        return RE.ok(articleIndexDTO);
+        return RE.fail(CommsEnum.NO_DATA);
     }
 }

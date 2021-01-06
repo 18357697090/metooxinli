@@ -3,7 +3,6 @@ package com.metoo.pojo.im.enums;
 import com.loongya.core.util.CommEnum;
 import lombok.Getter;
 
-@Getter
 public enum CommsEnum implements CommEnum {
 
     /** 成功 */
@@ -31,5 +30,15 @@ public enum CommsEnum implements CommEnum {
 
     public void setMsg(String msg) {
         this.msg = msg;
+    }
+
+    @Override
+    public String getCode() {
+        return this.code;
+    }
+
+    @Override
+    public String getMsg() {
+        return this.msg;
     }
 }

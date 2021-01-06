@@ -3,7 +3,6 @@ package com.metoo.pojo.login.enums;
 import com.loongya.core.util.CommEnum;
 import lombok.Getter;
 
-@Getter
 public enum AuthEnum implements CommEnum {
 
     /** 成功 */
@@ -27,5 +26,15 @@ public enum AuthEnum implements CommEnum {
 
     public void setMsg(String msg) {
         this.msg = msg;
+    }
+
+    @Override
+    public String getCode() {
+        return this.code;
+    }
+
+    @Override
+    public String getMsg() {
+        return this.msg;
     }
 }

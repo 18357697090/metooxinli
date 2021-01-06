@@ -1,7 +1,10 @@
 package com.metoo.ps.ps.api;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.loongya.core.util.CopyUtils;
 import com.loongya.core.util.OU;
 import com.loongya.core.util.RE;
+import com.loongya.core.util.aliyun.OSSUtil;
 import com.metoo.api.ps.PsScaleGatherApi;
 import com.metoo.api.tj.TjUserInfoApi;
 import com.metoo.pojo.login.enums.AuthEnum;
@@ -15,7 +18,6 @@ import org.apache.dubbo.config.annotation.DubboService;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -47,31 +49,37 @@ public class PsScaleGatherApiImpl implements PsScaleGatherApi {
     private DozerBeanMapper mapper;
 
     @Override
-    public RE clgather(PsScaleVo vo) {
+    public RE getClgatherWithReCommend(PsScaleVo vo) {
         TjUserInfoModel userInfo = tjUserInfoApi.findByUid(vo.getUserId());
         if(OU.isBlack(userInfo)){
             return RE.fail(AuthEnum.LOGIN_TIMEOUT);
         }
         int level=OU.isBlack(userInfo.getLevel()) ? 1 : userInfo.getLevel();
-        List<PsScaleGather> scaleGathers =new ArrayList<>();
-        scaleGathers.add(psScaleGatherService.findByScaleGatherId(level));
-        scaleGathers.add(psScaleGatherService.findByScaleGatherId(101));
-        scaleGathers.add(psScaleGatherService.findByScaleGatherId(102));
-        if(OU.isBlack(scaleGathers)){
+        List<PsScaleGatherModel> scaleGathers =new ArrayList<>();
+        LambdaQueryWrapper<PsScaleGather> lqw = new LambdaQueryWrapper();
+        lqw.in(PsScaleGather::getScaleGatherId, level, 101, 102);
+        List<PsScaleGather> list = psScaleGatherService.list(lqw);
+        if(OU.isBlack(list)){
             return RE.noData();
         }
-        return RE.ok(scaleGathers);
+        return RE.ok(list.stream().flatMap(e->{
+            PsScaleGatherModel model = CopyUtils.copy(e, new PsScaleGatherModel());
+            model.setPicture(OSSUtil.fillPath(model.getPicture()));
+            return Stream.of(model);
+        }).collect(Collectors.toList()));
     }
 
-    @Override
-    public RE clgaherall() {
 
+    @Override
+    public RE getClgatherWithReCommendMore() {
         List<PsScaleGather> list = psScaleGatherService.findByScaleGatherIdAll();
         if(OU.isBlack(list)){
             return RE.noData();
         }
         return RE.ok(list.stream().flatMap(e->{
-            return Stream.of(mapper.map(e, PsScaleGatherModel.class));
+            PsScaleGatherModel model = CopyUtils.copy(e, new PsScaleGatherModel());
+            model.setPicture(OSSUtil.fillPath(model.getPicture()));
+            return Stream.of(model);
         }).collect(Collectors.toList()));
     }
 }

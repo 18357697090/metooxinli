@@ -1,6 +1,7 @@
 package com.metoo.ps.ps.service.impl;
 
 import com.loongya.core.util.OU;
+import com.loongya.core.util.aliyun.OSSUtil;
 import com.metoo.pojo.ps.model.PsArticleBannerModel;
 import com.metoo.ps.ps.dao.entity.PsArticleBanner;
 import com.metoo.ps.ps.dao.mapper.PsArticleBannerMapper;
@@ -35,7 +36,9 @@ public class PsArticleBannerServiceImpl extends ServiceImpl<PsArticleBannerMappe
             return null;
         }
         return list.stream().flatMap(e->{
-            return Stream.of(mapper.map(e, PsArticleBannerModel.class));
+            PsArticleBannerModel model = mapper.map(e, PsArticleBannerModel.class);
+            model.setPicture(OSSUtil.fillPath(model.getPicture()));
+            return Stream.of(model);
         }).collect(Collectors.toList());
     }
 }

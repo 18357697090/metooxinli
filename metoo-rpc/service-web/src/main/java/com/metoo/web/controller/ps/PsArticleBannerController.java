@@ -5,6 +5,7 @@ import com.loongya.core.util.RE;
 import com.metoo.api.ps.PsArticleBannerApi;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,10 +27,13 @@ public class PsArticleBannerController {
     @DubboReference
     private PsArticleBannerApi psArticleBannerApi;
 
-    @GetMapping("/index")
-    public RE index(){
-        return psArticleBannerApi.index();
-
+    /**
+     * bannerList接口
+     * @return
+     */
+    @PostMapping("/getBannerList")
+    public RE getBannerList(){
+        return psArticleBannerApi.getBannerList();
     }
 
 }

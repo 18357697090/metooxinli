@@ -42,7 +42,7 @@
           <archive>
             <manifest>
               <addClasspath>true</addClasspath>
-              <classpathPrefix>metooweb/</classpathPrefix>
+              <classpathPrefix>metooweblib/</classpathPrefix>
               <mainClass>com.metoo.web.MetooWebApplication</mainClass>
             </manifest>
             <manifestEntries>

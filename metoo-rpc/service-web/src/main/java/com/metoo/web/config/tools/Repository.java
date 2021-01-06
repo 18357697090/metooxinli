@@ -4,8 +4,8 @@ package com.metoo.web.config.tools;
 import com.loongya.core.util.RE;
 import com.metoo.api.im.*;
 import com.metoo.api.order.ImGiftRecordApi;
-import com.metoo.api.ps.PsOptionsApi;
-import com.metoo.api.ps.PsProblemApi;
+import com.metoo.api.ps.PsScaleOptionsApi;
+import com.metoo.api.ps.PsScaleProblemApi;
 import com.metoo.api.tj.TjUserAccountApi;
 import com.metoo.api.tj.TjUserAccountDetailApi;
 import com.metoo.api.tj.TjUserInfoApi;
@@ -13,8 +13,8 @@ import com.metoo.pojo.im.model.*;
 import com.metoo.pojo.old.model.TjUserInfoPojoModel;
 import com.metoo.pojo.old.vo.ReturnGivingGiftDTO;
 import com.metoo.pojo.order.model.ImGiftRecordModel;
-import com.metoo.pojo.ps.model.PsOptionsModel;
-import com.metoo.pojo.ps.model.PsProblemModel;
+import com.metoo.pojo.ps.model.PsScaleOptionsModel;
+import com.metoo.pojo.ps.model.PsScaleProblemModel;
 import com.metoo.pojo.tj.model.TjUserAccountDetailModel;
 import com.metoo.pojo.tj.model.TjUserAccountModel;
 import com.metoo.pojo.tj.model.TjUserInfoModel;
@@ -36,9 +36,9 @@ public class Repository {
     @DubboReference
     private TjUserInfoApi tjUserInfoApi;
     @DubboReference
-    private PsOptionsApi psOptionsApi;
+    private PsScaleOptionsApi psScaleOptionsApi;
     @DubboReference
-    private PsProblemApi psProblemApi;
+    private PsScaleProblemApi psProblemApi;
     @DubboReference
     private ImUserMessageApi imUserMessageApi;
     @DubboReference
@@ -122,15 +122,15 @@ public class Repository {
     /**                          测量                             */
 
 
-    public PsOptionsModel findOptions(int scaleId){
-        return repository.psOptionsApi.findByScaleId(scaleId);
+    public PsScaleOptionsModel findOptions(int scaleId){
+        return repository.psScaleOptionsApi.findByScaleId(scaleId);
     }
 
     public Repository() {
         super();
     }
 
-    public List<PsProblemModel> findProblem(int scaleId){
+    public List<PsScaleProblemModel> findProblem(int scaleId){
         return repository.psProblemApi.findByScaleId(scaleId);
     }
 

@@ -16,13 +16,13 @@ import java.util.List;
  */
 public interface PsArticleService extends IService<PsArticle> {
 
-    List<PsArticle> findArticleRand4();
+    List<PsArticle> findArticleRand(Integer count);
 
     List<PsArticle> findByState(Integer i, Pageable pageable);
 
     PsArticle findByArticleId(Integer articleId);
 
-    List<PsArticle> findArticleRand();
+    void addClickCount(Integer articleId);
 
     void updateNumber(Integer articleId);
 }

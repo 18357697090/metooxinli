@@ -13,7 +13,7 @@ import com.metoo.pojo.ps.vo.PsScaleVo;
  */
 public interface PsScaleGatherApi {
 
-    RE clgather(PsScaleVo vo);
+    RE getClgatherWithReCommend(PsScaleVo vo);
 
-    RE clgaherall();
+    RE getClgatherWithReCommendMore();
 }

@@ -44,7 +44,7 @@
           <archive>
             <manifest>
               <addClasspath>true</addClasspath>
-              <classpathPrefix>metooorder/</classpathPrefix>
+              <classpathPrefix>metooorderlib/</classpathPrefix>
               <mainClass>com.metoo.order.MetooOrderApplication</mainClass>
             </manifest>
             <manifestEntries>

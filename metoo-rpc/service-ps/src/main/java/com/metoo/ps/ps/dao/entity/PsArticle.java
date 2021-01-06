@@ -47,8 +47,11 @@ public class PsArticle extends Model<PsArticle> {
     @ApiModelProperty(value = "文章排序类型")
     private Integer sort;
 
-    @ApiModelProperty(value = "查看文章的人数")
+    @ApiModelProperty(value = "查看人数")
     private Integer number;
+
+    @ApiModelProperty(value = "点击次数")
+    private Integer clickCount;
 
 
     @Override

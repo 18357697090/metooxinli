@@ -1,8 +1,12 @@
 package com.metoo.ps.ps.service.impl;
 
+import com.loongya.core.util.ConstantUtil;
+import com.loongya.core.util.CopyUtils;
 import com.loongya.core.util.OU;
 import com.loongya.core.util.RE;
+import com.loongya.core.util.aliyun.OSSUtil;
 import com.metoo.pojo.ps.model.PsScaleModel;
+import com.metoo.pojo.ps.vo.PsScaleVo;
 import com.metoo.ps.ps.dao.entity.PsScale;
 import com.metoo.ps.ps.dao.mapper.PsScaleMapper;
 import com.metoo.ps.ps.dao.repository.PsScaleRepository;
@@ -37,13 +41,17 @@ public class PsScaleServiceImpl extends ServiceImpl<PsScaleMapper, PsScale> impl
     private DozerBeanMapper mapper;
 
     @Override
-    public RE cl(Integer page) {
-        Pageable pageable= PageRequest.of(page,7);
-        List<PsScale> allBySpare = psScaleRepository.findAllBySpare(1, pageable);
-        if(OU.isBlack(allBySpare)){
+    public RE getBoutiqueClgatherList(PsScaleVo vo) {
+        Pageable pageable= PageRequest.of(vo.getPagenum(),vo.getPagesize());
+        List<PsScale> psScaleList = psScaleRepository.findAllBySpare(ConstantUtil.YesOrNo.YES.getCode(), pageable);
+        if(OU.isBlack(psScaleList)){
             return RE.noData();
         }
-        return RE.ok(allBySpare);
+        return RE.ok(psScaleList.stream().flatMap(e->{
+            PsScaleModel model = CopyUtils.copy(e, new PsScaleModel());
+            model.setPicture(OSSUtil.fillPath(model.getPicture()));
+            return Stream.of(model);
+        }).collect(Collectors.toList()));
     }
 
     @Override
@@ -53,7 +61,9 @@ public class PsScaleServiceImpl extends ServiceImpl<PsScaleMapper, PsScale> impl
             return null;
         }
         return scaleRand.stream().flatMap(e->{
-            return Stream.of(mapper.map(e, PsScaleModel.class));
+            PsScaleModel model = CopyUtils.copy(e, new PsScaleModel());
+            model.setPicture(OSSUtil.fillPath(model.getPicture()));
+            return Stream.of(model);
         }).collect(Collectors.toList());
     }
 
@@ -63,7 +73,7 @@ public class PsScaleServiceImpl extends ServiceImpl<PsScaleMapper, PsScale> impl
     }
 
     @Override
-    public List<PsScale> findByScaleGatherId(Integer clgatherid) {
+    public List<PsScale> findPsScaleListbyclgatherid(Integer clgatherid) {
         return psScaleRepository.findByScaleGatherId(clgatherid);
     }
 

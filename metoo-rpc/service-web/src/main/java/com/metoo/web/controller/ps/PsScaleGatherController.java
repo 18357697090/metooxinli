@@ -1,10 +1,12 @@
 package com.metoo.web.controller.ps;
 
 
+import com.loongya.core.util.AssertUtils;
 import com.loongya.core.util.OU;
 import com.loongya.core.util.RE;
 import com.metoo.api.ps.PsScaleApi;
 import com.metoo.api.ps.PsScaleGatherApi;
+import com.metoo.pojo.ps.vo.PsScaleVo;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.apache.dubbo.config.annotation.DubboReference;
@@ -34,14 +36,18 @@ public class PsScaleGatherController {
     @DubboReference
     private PsScaleApi psScaleApi;
 
-
-
-
-
-    @GetMapping("/findbyclgatherid")
+    /**
+     * 推荐测量-测量列表
+     * @return
+     */
+    @GetMapping("/findPsScaleListbyclgatherid")
     @ApiOperation("推荐测量集合内容")
-    public RE findbyclgatherid(@ApiParam("测量集合的id")Integer clgatherid){
-        return psScaleApi.findbyclgatherid(clgatherid);
+    public RE findPsScaleListbyclgatherid(PsScaleVo vo){
+        RE re = AssertUtils.checkParam(vo.getClgatherId());
+        if(re.isFail()){
+            return re;
+        }
+        return psScaleApi.findPsScaleListbyclgatherid(vo);
     }
 
 }

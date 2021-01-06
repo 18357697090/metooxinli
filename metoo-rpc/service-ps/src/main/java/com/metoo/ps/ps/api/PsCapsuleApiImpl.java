@@ -2,13 +2,13 @@ package com.metoo.ps.ps.api;
 
 import com.loongya.core.util.OU;
 import com.loongya.core.util.RE;
-import com.metoo.api.order.PsUserBuyCapsuleApi;
+import com.metoo.api.order.PsCapsuleOrderApi;
 import com.metoo.api.ps.PsCapsuleApi;
 import com.metoo.api.tj.TjUserInfoApi;
 import com.metoo.pojo.old.model.FindCapsuleByIdPojo;
 import com.metoo.pojo.old.model.PourOutCapsulePojo;
 import com.metoo.pojo.old.model.SaveCapsulePojo;
-import com.metoo.pojo.order.model.PsUserBuyCapsuleModel;
+import com.metoo.pojo.order.model.PsCapsuleOrderModel;
 import com.metoo.pojo.ps.model.PsCapsuleModel;
 import com.metoo.pojo.tj.model.TjUserInfoModel;
 import com.metoo.ps.ps.dao.entity.PsCapsule;
@@ -45,7 +45,7 @@ public class PsCapsuleApiImpl implements PsCapsuleApi {
     @DubboReference
     private TjUserInfoApi tjUserInfoApi;
     @DubboReference
-    private PsUserBuyCapsuleApi psUserBuyCapsuleApi;
+    private PsCapsuleOrderApi psCapsuleOrderApi;
 
     @Autowired
     private DozerBeanMapper mapper;
@@ -166,7 +166,7 @@ public class PsCapsuleApiImpl implements PsCapsuleApi {
         findCapsuleByIdPojo.setName(userInfo.getNickName());
         findCapsuleByIdPojo.setPicture(userInfo.getHeadImg());
         capsule.setId(1);
-        PsUserBuyCapsuleModel userBuyCapsule = psUserBuyCapsuleApi.findByUidAndCapsuleId(uid,capsuleId);
+        PsCapsuleOrderModel userBuyCapsule = psCapsuleOrderApi.findByUidAndCapsuleId(uid,capsuleId);
         if(userBuyCapsule!=null){
             capsule.setUid(null);
             findCapsuleByIdPojo.setState("me");

@@ -15,7 +15,7 @@ public class RE<T> implements Serializable {
     private T data;
     private boolean fail = true;
 
-    private RE(CommEnum commEnum, T data){
+    protected RE(CommEnum commEnum, T data){
         this.code = commEnum.getCode();
         if(commEnum.getCode().equals("0")){
             this.fail = false;
@@ -23,7 +23,7 @@ public class RE<T> implements Serializable {
         this.msg = commEnum.getMsg();
         this.data = data;
     }
-    private RE(String code, String msg, T data){
+    protected RE(String code, String msg, T data){
         this.code = code;
         if(code.equals("0")){
             this.fail = false;
@@ -31,7 +31,7 @@ public class RE<T> implements Serializable {
         this.msg = msg;
         this.data = data;
     }
-    private RE(CommEnum commEnum){
+    protected RE(CommEnum commEnum){
         this.code = commEnum.getCode();
         if(commEnum.getCode().equals("0")){
             this.fail = false;

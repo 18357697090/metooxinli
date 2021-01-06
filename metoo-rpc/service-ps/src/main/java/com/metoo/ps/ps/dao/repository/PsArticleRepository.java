@@ -11,18 +11,19 @@ import java.util.List;
 
 
 public interface PsArticleRepository extends JpaRepository<PsArticle,Integer> {
+
     PsArticle findByArticleId(Integer articleId);
 
     List<PsArticle> findByState(Integer state, Pageable pageable);
 
-    @Query(nativeQuery = true,value = "SELECT * FROM ps_article ORDER BY RAND() LIMIT 6")
-    List<PsArticle> findArticleRand();
-
-    @Query(nativeQuery = true,value = "SELECT * FROM ps_article ORDER BY RAND() LIMIT 4")
-    List<PsArticle> findArticleRand4();
+    @Query(nativeQuery = true,value = "SELECT * FROM ps_article ORDER BY RAND() LIMIT ?1")
+    List<PsArticle> findArticleRand(Integer count);
 
     @Modifying
     @Query(value = "update ps_article set number = number+1 where article_id=?1",nativeQuery = true)
     int updateNumber(Integer articleId);
 
+    @Modifying
+    @Query(value = "update ps_article set click_count = click_count+1 where article_id=?1",nativeQuery = true)
+    void addClickCount(Integer articleId);
 }

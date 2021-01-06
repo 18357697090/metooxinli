@@ -33,30 +33,40 @@ public class PsScaleIndexController {
     @DubboReference
     private PsScaleGatherApi psScaleGatherApi;
 
-    @GetMapping("/clgather")
+    /**
+     * 推荐测量
+     * @param vo
+     * @return
+     */
+    @GetMapping("/getClgatherWithReCommend")
     @ApiOperation("推荐测量")
-    public RE clgather(PsScaleVo vo){
+    public RE getClgatherWithReCommend(PsScaleVo vo){
         Integer userId = ThreadLocal.getUserId();
         if(OU.isBlack(userId)){
             return RE.fail(AuthEnum.LOGIN_TIMEOUT);
         }
         vo.setUserId(userId);
-        return psScaleGatherApi.clgather(vo);
+        return psScaleGatherApi.getClgatherWithReCommend(vo);
     }
 
-    //所有测量集合
-    @GetMapping("/clgatherall")
+    /**
+     *  更多推荐测量
+     */
+    @GetMapping("/getClgatherWithReCommendMore")
     @ApiOperation("更多推荐测量")
-    public RE clgaherall(){
-        return psScaleGatherApi.clgaherall();
+    public RE getClgatherWithReCommendMore(){
+        return psScaleGatherApi.getClgatherWithReCommendMore();
     }
 
-
+    /**
+     * 精品测量-分页查询
+     * @param vo
+     * @return
+     */
     @ApiOperation("精品测量")
-    @GetMapping("/cl")
-    public RE cl(Integer page){
-        return psScaleApi.cl(page);
+    @GetMapping("/getBoutiqueClgatherList")
+    public RE getBoutiqueClgatherList(PsScaleVo vo){
+        return psScaleApi.getBoutiqueClgatherList(vo);
     }
-
 
 }

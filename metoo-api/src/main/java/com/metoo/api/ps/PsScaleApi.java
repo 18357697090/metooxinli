@@ -1,6 +1,7 @@
 package com.metoo.api.ps;
 
 import com.loongya.core.util.RE;
+import com.metoo.pojo.ps.vo.PsScaleVo;
 
 /**
  * <p>
@@ -12,9 +13,9 @@ import com.loongya.core.util.RE;
  */
 public interface PsScaleApi {
 
-    RE cl(Integer page);
+    RE getBoutiqueClgatherList(PsScaleVo vo);
 
     RE index();
 
-    RE findbyclgatherid(Integer clgatherid);
+    RE findPsScaleListbyclgatherid(PsScaleVo vo);
 }

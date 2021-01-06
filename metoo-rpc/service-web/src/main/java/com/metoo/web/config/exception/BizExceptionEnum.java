@@ -12,8 +12,6 @@ import lombok.NoArgsConstructor;
  * @author fengshuonan
  * @date 2016年11月12日 下午5:04:51
  */
-@Getter
-@NoArgsConstructor
 public enum BizExceptionEnum implements CommEnum {
 
     /**
@@ -48,4 +46,13 @@ public enum BizExceptionEnum implements CommEnum {
     private String msg;
 
 
+    @Override
+    public String getCode() {
+        return this.code;
+    }
+
+    @Override
+    public String getMsg() {
+        return this.msg;
+    }
 }

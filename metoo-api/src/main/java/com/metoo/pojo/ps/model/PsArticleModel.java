@@ -20,4 +20,17 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class PsArticleModel implements Serializable {
 
+    private Integer articleId;
+
+    private String content;
+
+    private String picture;
+
+    private Integer state;
+
+    private String title;
+
+    private Integer sort;
+
+    private Integer number;
 }

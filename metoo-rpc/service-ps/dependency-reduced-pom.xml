@@ -44,7 +44,7 @@
           <archive>
             <manifest>
               <addClasspath>true</addClasspath>
-              <classpathPrefix>metoops/</classpathPrefix>
+              <classpathPrefix>metoopslib/</classpathPrefix>
               <mainClass>com.metoo.ps.MetooPsApplication</mainClass>
             </manifest>
             <manifestEntries>

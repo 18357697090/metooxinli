@@ -1,9 +1,11 @@
 package com.metoo.ps.ps.api;
 
-import com.loongya.core.util.OU;
-import com.loongya.core.util.RE;
+import com.loongya.core.util.*;
+import com.loongya.core.util.aliyun.OSSUtil;
 import com.metoo.api.ps.PsArticleApi;
 import com.metoo.pojo.old.vo.ArticleDTO;
+import com.metoo.pojo.ps.model.PsArticleModel;
+import com.metoo.pojo.ps.vo.PsArticleVo;
 import com.metoo.ps.ps.dao.entity.PsArticle;
 import com.metoo.ps.ps.service.PsArticleService;
 import org.apache.dubbo.config.annotation.DubboService;
@@ -17,6 +19,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * <p>
@@ -34,26 +38,64 @@ public class PsArticleApiImpl implements PsArticleApi {
     @Autowired
     private PsArticleService psArticleService;
 
-    @Autowired
-    private DozerBeanMapper mapper;
+    @Override
+    public RE getArticleBoutiqueList(Integer count) {
+        List<PsArticle> boutiqueArticles = psArticleService.findArticleRand(count);
+        if(OU.isBlack(boutiqueArticles)){
+            return RE.fail(CommsEnum.NO_DATA);
+        }
+        return RE.ok(boutiqueArticles.stream().flatMap(e->{
+            PsArticleModel model = CopyUtils.copy(e, new PsArticleModel());
+            model.setPicture(OSSUtil.fillPath(model.getPicture()));
+            return Stream.of(model);
+        }).collect(Collectors.toList()));
+    }
 
     @Override
-    public RE more(Integer page) {
-        Pageable pageable = PageRequest.of(page,5, Sort.Direction.DESC,"sort");
-        List<PsArticle> articles = psArticleService.findByState(1,pageable);
-        List<ArticleDTO> articleDTOS = new ArrayList<>();
-        for (PsArticle article : articles){
-            ArticleDTO articleDTO = mapper.map(article,ArticleDTO.class);
-            articleDTOS.add(articleDTO);
-        }
-        if(OU.isBlack(articleDTOS)){
+    public RE getArticleBoutiqueMoreList(PsArticleVo vo) {
+        Pageable pageable = PageRequest.of(vo.getPagenum(),vo.getPagesize(), Sort.Direction.DESC,"sort");
+        List<PsArticle> articleList = psArticleService.findByState(ConstantUtil.YesOrNo.YES.getCode(),pageable);
+        if(OU.isBlack(articleList)){
             return RE.noData();
         }
-        return RE.ok(articleDTOS);
+        return REPage.ok(vo.getPagenum(), vo.getPagesize(), null, articleList.stream().flatMap(e->{
+            PsArticleModel model = CopyUtils.copy(e, new PsArticleModel());
+            model.setPicture(OSSUtil.fillPath(model.getPicture()));
+            return Stream.of(model);
+        }).collect(Collectors.toList()));
     }
 
     @Override
-    public RE content(Integer articleId) {
-        return RE.ok(psArticleService.findByArticleId(articleId).getContent());
+    public RE getArticleRecommendMoreList(PsArticleVo vo) {
+        Pageable pageable = PageRequest.of(vo.getPagenum(),vo.getPagesize(), Sort.Direction.DESC,"sort");
+        List<PsArticle> articleList = psArticleService.findByState(ConstantUtil.YesOrNo.YES.getCode(),pageable);
+        if(OU.isBlack(articleList)){
+            return RE.noData();
+        }
+        return REPage.ok(vo.getPagenum(), vo.getPagesize(), null, articleList.stream().flatMap(e->{
+            PsArticleModel model = CopyUtils.copy(e, new PsArticleModel());
+            model.setPicture(OSSUtil.fillPath(model.getPicture()));
+            return Stream.of(model);
+        }).collect(Collectors.toList()));
     }
+
+
+
+    @Override
+    public RE getArticleDetail(Integer articleId) {
+        PsArticle pojo = psArticleService.findByArticleId(articleId);
+        if(OU.isBlack(pojo)){
+            return RE.noData();
+        }
+        PsArticleModel model = CopyUtils.copy(pojo, new PsArticleModel());
+        model.setPicture(OSSUtil.fillPath(model.getPicture()));
+        addClickCount(articleId);
+        return RE.ok(model);
+    }
+
+    private void addClickCount(Integer articleId) {
+        // todo。此处应该使用redis的 分布式锁 机制
+        psArticleService.addClickCount(articleId);
+    }
+
 }

@@ -19,5 +19,13 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 public class PsScaleGatherModel implements Serializable {
+    private Integer id;
 
+    private Integer dw;
+
+    private String name;
+
+    private String picture;
+
+    private Integer scaleGatherId;
 }

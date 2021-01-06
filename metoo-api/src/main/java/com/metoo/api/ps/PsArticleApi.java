@@ -1,6 +1,7 @@
 package com.metoo.api.ps;
 
 import com.loongya.core.util.RE;
+import com.metoo.pojo.ps.vo.PsArticleVo;
 
 /**
  * <p>
@@ -12,7 +13,13 @@ import com.loongya.core.util.RE;
  */
 public interface PsArticleApi {
 
-    RE more(Integer page);
+    RE getArticleBoutiqueList(Integer count);
 
-    RE content(Integer articleId);
+    RE getArticleBoutiqueMoreList(PsArticleVo vo);
+
+    RE getArticleRecommendMoreList(PsArticleVo vo);
+
+    RE getArticleDetail(Integer articleId);
+
+
 }
