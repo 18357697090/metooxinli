@@ -1,31 +1,71 @@
-package com.metoo.web.action;
+package com.metoo.websocket.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.metoo.pojo.im.model.ImFriendModel;
-import com.metoo.pojo.im.model.ImUserMessageModel;
-import com.metoo.pojo.old.model.TjUserInfoPojoModel;
+import com.loongya.core.util.RE;
+import com.metoo.api.im.*;
+import com.metoo.api.order.ImGiftRecordApi;
+import com.metoo.api.ps.PsOptionsApi;
+import com.metoo.api.ps.PsProblemApi;
+import com.metoo.api.tj.TjUserAccountApi;
+import com.metoo.api.tj.TjUserAccountDetailApi;
+import com.metoo.api.tj.TjUserInfoApi;
+import com.metoo.pojo.im.model.*;
 import com.metoo.pojo.old.vo.AudioRoomGiftMessageDTO;
 import com.metoo.pojo.old.vo.ObjectTool;
 import com.metoo.pojo.old.vo.ReturnGivingGiftDTO;
+import com.metoo.pojo.order.model.ImGiftRecordModel;
+import com.metoo.pojo.tj.model.TjUserAccountDetailModel;
+import com.metoo.pojo.tj.model.TjUserAccountModel;
 import com.metoo.pojo.tj.model.TjUserInfoModel;
 import com.metoo.tools.AppMessage;
 import com.metoo.tools.AppMessageObject;
 import com.metoo.tools.AudioRoomMessage;
 import com.metoo.tools.SeatInfo;
-import com.metoo.web.config.tools.Repository;
 import net.sf.json.JSONObject;
+import org.apache.dubbo.config.annotation.DubboReference;
+import org.dozer.DozerBeanMapper;
+import org.dozer.Mapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.socket.handler.TextWebSocketHandler;
-
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Component
 @ServerEndpoint("/app/{uid}")
-public class WebSocketController extends TextWebSocketHandler {
+public class WebSocketController {
+
+    @DubboReference
+    private TjUserInfoApi tjUserInfoApi;
+    @DubboReference
+    private PsOptionsApi psOptionsApi;
+    @DubboReference
+    private PsProblemApi psProblemApi;
+    @DubboReference
+    private ImUserMessageApi imUserMessageApi;
+    @DubboReference
+    private ImSaveUserMessageApi imSaveUserMessageApi;
+    @DubboReference
+    private ImAudioRoomChatRecordApi imAudioRoomChatRecordApi;
+    @DubboReference
+    private TjUserAccountApi tjUserAccountApi;
+    @DubboReference
+    private ImGiftApi imGiftApi;
+    @DubboReference
+    private ImGiftRecordApi imGiftRecordApi;
+    @DubboReference
+    private TjUserAccountDetailApi tjUserAccountDetailApi;
+    @DubboReference
+    private ImFriendApi imFriendApi;
+    @Autowired
+    private Mapper dozerMapper;
+    @Autowired
+    private ObjectMapper objectMapper;
+
+
     //<用户uid，用户的session>
     private static final Map<Integer,Session> userSession = new ConcurrentHashMap<>();
 
@@ -44,9 +84,7 @@ public class WebSocketController extends TextWebSocketHandler {
     //处理离线消息<每条消息的id，AppMessage>
     private static final Map<String, AppMessage> deliveryMessage = new ConcurrentHashMap<>();
 
-    Repository repository=new Repository();
     AppMessage appMessage = new AppMessage();
-
 
     @OnOpen
     public void connect(@PathParam("uid") Integer uid, Session session) throws Exception{
@@ -60,14 +98,12 @@ public class WebSocketController extends TextWebSocketHandler {
         appMessage.setType("system");
         appMessage.setMessage("success");
         session.getBasicRemote().sendText(HandleAppMessage(appMessage));
-        System.out.println("11111");
-        List<ImUserMessageModel> userMessages = repository.takeOffLineMessage(uid);
-        System.out.println("22222");
+        List<ImUserMessageModel> userMessages = imUserMessageApi.uidx(uid);
         if (!userMessages.isEmpty()){
             System.out.println("---------发送用户"+uid+"离线消息-----------");
             for (ImUserMessageModel userMessage : userMessages){
                 session.getBasicRemote().sendText(userMessage.getMessage());
-                repository.deleteMessage(uid);
+                imUserMessageApi.deleteByUid(uid);
             }
 
         }
@@ -86,7 +122,7 @@ public class WebSocketController extends TextWebSocketHandler {
             String type =appMessage.getType();
             switch (type){
                 case "AudioRoom":
-                    TjUserInfoModel userInfo1 =repository.findUserInfo(uid);
+                    TjUserInfoModel userInfo1 =tjUserInfoApi.findByUid(uid);
                     if(appMessage.getTo()==null||appMessage.getType1()==null||userInfo1 ==null){
                         System.out.println("------发送消息不完全-----");
                         appMessage.setSpare("error");
@@ -145,7 +181,7 @@ public class WebSocketController extends TextWebSocketHandler {
                                 //map<麦序，uid>
                                 System.out.println("--------用户"+uid+userInfo.get(uid).getName()+"在房间"+AudioRoomId+"内，有麦上信息，为用户推送麦上人的信息--------");
                                 Map<Integer,Integer> seat = microphone.get(AudioRoomId);
-                                AudioRoomMessage audioRoomMessage = repository.handleAppMessage(appMessage);
+                                AudioRoomMessage audioRoomMessage = dozerMapper.map(appMessage,AudioRoomMessage.class);
                                 List<SeatInfo> seatInfos = new ArrayList<>();
                                 for (int i =1;i<9;i++){
                                     Integer uid1 = seat.get(i);
@@ -153,7 +189,7 @@ public class WebSocketController extends TextWebSocketHandler {
                                         System.out.println("--------用户"+uid1+userInfo.get(uid1).getName()+"在房间"+AudioRoomId+"内的"+i+"麦上，添加入seatInfos信息--------");
                                         SeatInfo seatInfo = new SeatInfo();
                                         seatInfo.setSeat(i);
-                                        seatInfo.setUserInfo(repository.userInfoModel(userInfo.get(uid1)));
+                                        seatInfo.setUserInfo(userInfo.get(uid1));
                                         seatInfos.add(seatInfo);
                                     }
                                 }
@@ -170,7 +206,7 @@ public class WebSocketController extends TextWebSocketHandler {
                                 System.out.println("创建microphone");
                                 Map<Integer,Integer> seat = new ConcurrentHashMap<>();
                                 microphone.put(AudioRoomId,seat);
-                                AudioRoomMessage audioRoomMessage = repository.handleAppMessage(appMessage);
+                                AudioRoomMessage audioRoomMessage = dozerMapper.map(appMessage,AudioRoomMessage.class);
                                 List<SeatInfo> seatInfos = new ArrayList<>();
                                 JSONObject json = JSONObject.fromObject(appMessage.getObject());
                                 ObjectMapper mapper1 = new ObjectMapper();
@@ -188,15 +224,18 @@ public class WebSocketController extends TextWebSocketHandler {
                             JSONObject json = JSONObject.fromObject(appMessage.getObject());
                             ObjectMapper mapper1 = new ObjectMapper();
                             ObjectTool objectTool = mapper1.convertValue(json,ObjectTool.class);
-                            AudioRoomMessage audioRoomMessage = repository.handleAppMessage(appMessage);
+                            AudioRoomMessage audioRoomMessage = dozerMapper.map(appMessage,AudioRoomMessage.class);
                             audioRoomMessage.setObject(objectTool);
                             List<SeatInfo> chatSeatInfos = new ArrayList<>();
                             SeatInfo chatSeatInfo = new SeatInfo();
-                            chatSeatInfo.setUserInfo(repository.userInfoModel(userInfo.get(uid)));
+                            chatSeatInfo.setUserInfo(userInfo.get(uid));
                             chatSeatInfos.add(chatSeatInfo);
                             audioRoomMessage.setSeatInfos(chatSeatInfos);
                             JSONObject json1 = JSONObject.fromObject(audioRoomMessage);
-                            repository.saveAudioRoomChatRecord(AudioRoomId,json1.toString());
+                            ImAudioRoomChatRecordModel imAudioRoomChatRecordModel = new ImAudioRoomChatRecordModel();
+                            imAudioRoomChatRecordModel.setAudioRoomId(AudioRoomId);
+                            imAudioRoomChatRecordModel.setContent(json1.toString());
+                            imAudioRoomChatRecordApi.save(imAudioRoomChatRecordModel);
                             broadcastAll(AudioRoomId, HandleAudioRoomMessage(audioRoomMessage));
                             break;
 //                        case "joinPourOut":
@@ -227,11 +266,11 @@ public class WebSocketController extends TextWebSocketHandler {
                                 JSONObject json11 = JSONObject.fromObject(appMessage.getObject());
                                 ObjectMapper mapper11 = new ObjectMapper();
                                 ObjectTool objectTool11 = mapper11.convertValue(json11,ObjectTool.class);
-                                AudioRoomMessage audioRoomMessage11 = repository.handleAppMessage(appMessage);
+                                AudioRoomMessage audioRoomMessage11 =  dozerMapper.map(appMessage,AudioRoomMessage.class);
                                 audioRoomMessage11.setObject(objectTool11);
                                 SeatInfo seatInfo = new SeatInfo();
                                 seatInfo.setSeat(seat);
-                                seatInfo.setUserInfo(repository.userInfoModel(userInfo.get(uid)));
+                                seatInfo.setUserInfo(userInfo.get(uid));
                                 List<SeatInfo> seatInfos = new ArrayList<>();
                                 seatInfos.add(seatInfo);
                                 audioRoomMessage11.setSeatInfos(seatInfos);
@@ -271,11 +310,11 @@ public class WebSocketController extends TextWebSocketHandler {
                             Integer acceptedId = Integer.parseInt(strArr[0]);
                             Integer giftId = Integer.parseInt(strArr[1]);
                             String number = strArr[2];
-                            ReturnGivingGiftDTO returnGivingGiftDTO = repository.givingGift(uid,acceptedId,giftId,number);
+                            ReturnGivingGiftDTO returnGivingGiftDTO = this.givingGift(uid,acceptedId,giftId,number);
                             if(returnGivingGiftDTO.getState().equals("success")){
-                                List<TjUserInfoPojoModel> userInfos = new ArrayList<>();
-                                userInfos.add(repository.userInfoModel(userInfo.get(uid)));
-                                userInfos.add(repository.userInfoModel(userInfo.get(acceptedId)));
+                                List<TjUserInfoModel> userInfos = new ArrayList<>();
+                                userInfos.add(userInfo.get(uid));
+                                userInfos.add(userInfo.get(acceptedId));
                                 AudioRoomGiftMessageDTO audioRoomGiftMessageDTO = new AudioRoomGiftMessageDTO();
                                 audioRoomGiftMessageDTO.setReturnGivingGiftDTO(returnGivingGiftDTO);
                                 audioRoomGiftMessageDTO.setUserInfos(userInfos);
@@ -305,9 +344,13 @@ public class WebSocketController extends TextWebSocketHandler {
                     Integer id=appMessage.getTo();
                     System.out.println("--------收到"+uid+userInfo.get(uid)+"发送给好友"+id+"的信息------------");
                     Session session1 = userSession.get(id);
-                    repository.saveUserMessage(uid,id,appMessage.getMessage());
+                    ImSaveUserMessageModel saveUserMessage = new ImSaveUserMessageModel();
+                    saveUserMessage.setUid(uid);
+                    saveUserMessage.setSendId(id);
+                    saveUserMessage.setMessage(message);
+                    imSaveUserMessageApi.save(saveUserMessage);
                     System.out.println("--------保存消息------");
-                    ImFriendModel friend = repository.checkFriendShip(id,uid);
+                    ImFriendModel friend = imFriendApi.findByUidAndFriendId(id,uid);
                     if(friend!=null){
                         if (friend.getState()==2){
                             JSONObject json = JSONObject.fromObject(appMessage.getObject());
@@ -335,7 +378,7 @@ public class WebSocketController extends TextWebSocketHandler {
                     if (session1==null){
                         System.out.println("------用户"+id+"不在线------");
                         JSONObject json = JSONObject.fromObject(appMessage);
-                        repository.saveUserMessageOffOline(id,uid,json.toString());
+                        this.saveUserMessageOffOline(id,uid,json.toString());
                         System.out.println("---------保存离线消息---------");
                     }else {
                         userSession.get(id).getBasicRemote().sendText(HandleAppMessage(appMessage));
@@ -348,7 +391,7 @@ public class WebSocketController extends TextWebSocketHandler {
                         if(appMessage2!=null){
                             System.out.println("----------用户"+id+"没有收到消息--------");
                             JSONObject json = JSONObject.fromObject(appMessage);
-                            repository.saveUserMessageOffOline(id,uid,json.toString());
+                            this.saveUserMessageOffOline(id,uid,json.toString());
                             System.out.println("----------存入离线消息"+appMessage+"----------");
                         }else {
                             System.out.println("-------用户"+id+"收到消息------");
@@ -499,6 +542,48 @@ public class WebSocketController extends TextWebSocketHandler {
 
     public static Set<Integer> OnlineUser(Integer audioRoomId){
         return rooms.get(audioRoomId);
+    }
+
+    public ReturnGivingGiftDTO givingGift(Integer uid, Integer acceptedId, Integer giftId, String number){
+        ReturnGivingGiftDTO returnGivingGiftDTO = new ReturnGivingGiftDTO();
+        TjUserAccountModel zh = tjUserAccountApi.findByUid(uid);
+
+        RE gift = imGiftApi.findByGiftId(giftId);
+        ImGiftModel imGiftModel = dozerMapper.map(gift.getData(),ImGiftModel.class);
+        returnGivingGiftDTO.setGift(imGiftModel);
+        BigDecimal number1= new BigDecimal(number);
+        BigDecimal balance = zh.getBalance().subtract(imGiftModel.getPrices().multiply(number1));
+        if (balance.compareTo(BigDecimal.ZERO)>=0){
+            tjUserAccountApi.updateBalance(balance,uid);
+            ImGiftRecordModel imGiftRecordModel = new ImGiftRecordModel();
+            imGiftRecordModel.setUid(uid);
+            imGiftRecordModel.setAccepted(acceptedId);
+            imGiftRecordModel.setGiftId(giftId);
+            imGiftRecordApi.save(imGiftRecordModel);
+            TjUserAccountDetailModel tjUserAccountDetailModel = new TjUserAccountDetailModel();
+            tjUserAccountDetailModel.setUid(uid);
+            tjUserAccountDetailModel.setPrices(imGiftModel.getPrices().intValue());
+            tjUserAccountDetailModel.setType("刷礼物");
+            tjUserAccountDetailModel.setContent(imGiftModel.getName());
+            tjUserAccountDetailApi.save(tjUserAccountDetailModel);
+            returnGivingGiftDTO.setBalance(balance);
+            returnGivingGiftDTO.setState("success");
+            returnGivingGiftDTO.setExplain("送礼物成功");
+        }else {
+            returnGivingGiftDTO.setBalance(zh.getBalance());
+            returnGivingGiftDTO.setState("error");
+            returnGivingGiftDTO.setExplain("账户余额不足");
+        }
+        return returnGivingGiftDTO;
+    }
+
+    public void saveUserMessageOffOline(Integer uid,Integer sendId,String message){
+        ImUserMessageModel userMessage = new ImUserMessageModel();
+        userMessage.setUid(uid);
+        userMessage.setSendId(sendId);
+        userMessage.setMessage(message);
+        userMessage.setState(1);
+        imUserMessageApi.save(userMessage);
     }
 
 }

@@ -2,6 +2,9 @@ package com.metoo.business.bu.service;
 
 import com.metoo.business.bu.dao.entity.BuUserList;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.metoo.pojo.bu.model.BuUserListModel;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface BuUserListService extends IService<BuUserList> {
 
+
+    List<BuUserList> findUserList(Integer page);
+
+    long userCount();
 }

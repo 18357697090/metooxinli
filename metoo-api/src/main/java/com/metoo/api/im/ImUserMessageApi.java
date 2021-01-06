@@ -13,6 +13,7 @@ import java.util.List;
  * @author loongya
  * @since 2020-12-28
  */
+
 public interface ImUserMessageApi {
 
     RE uid(Integer uid);

@@ -1,7 +1,10 @@
 package com.metoo.api.bu;
 
 import com.loongya.core.util.RE;
+import com.metoo.pojo.bu.model.BuUserListModel;
 import com.metoo.pojo.in.vo.InAreaVo;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,7 @@ import com.metoo.pojo.in.vo.InAreaVo;
  */
 public interface BuUserListApi {
 
+    List<BuUserListModel> findUserList(Integer page);
+
+    long userCount();
 }

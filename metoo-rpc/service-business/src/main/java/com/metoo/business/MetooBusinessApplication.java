@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @EnableDubbo
 @EnableTransactionManagement
-@SpringBootApplication(scanBasePackages = {"com.metoo.user", "com.metoo.comm.config"})
+@SpringBootApplication(scanBasePackages = {"com.metoo.business", "com.metoo.comm.config"})
 public class MetooBusinessApplication {
 
     public static void main(String[] args) {
