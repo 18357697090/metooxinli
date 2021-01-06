@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import javax.transaction.Transactional;
 import java.util.List;
 
-@Transactional
+
 public interface TaTaskRepository extends JpaRepository<TaTask,Integer> {
 
     @Query(value = "FROM TaTask WHERE state=1 and type=1")

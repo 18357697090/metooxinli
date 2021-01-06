@@ -5,7 +5,7 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.metoo.im.im.dao.entity.ImGift">
         <id column="id" property="id" />
-        <result column="creation_time" property="creationTime" />
+        <result column="create_time" property="createTime" />
         <result column="gift_id" property="giftId" />
         <result column="prices" property="prices" />
         <result column="name" property="name" />

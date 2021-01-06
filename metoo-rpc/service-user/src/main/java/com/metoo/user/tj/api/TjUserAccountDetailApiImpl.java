@@ -8,6 +8,8 @@ import org.apache.dubbo.config.annotation.DubboService;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <p>
@@ -19,6 +21,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @DubboService
+@Transactional
 public class TjUserAccountDetailApiImpl implements TjUserAccountDetailApi {
 
     @Autowired

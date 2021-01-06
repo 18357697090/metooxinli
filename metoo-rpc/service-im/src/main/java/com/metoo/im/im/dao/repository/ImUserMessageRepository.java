@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 import javax.transaction.Transactional;
 import java.util.List;
 
-@Transactional
+
 public interface ImUserMessageRepository extends JpaRepository<ImUserMessage,Integer> {
 //    @Modifying
 //    @Query(value = "",nativeQuery = true)

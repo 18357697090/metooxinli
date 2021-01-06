@@ -9,7 +9,7 @@
         <result column="be_watched" property="beWatched" />
         <result column="capsule_id" property="capsuleId" />
         <result column="content" property="content" />
-        <result column="creation_time" property="creationTime" />
+        <result column="create_time" property="createTime" />
         <result column="picture1" property="picture1" />
         <result column="picture2" property="picture2" />
         <result column="picture3" property="picture3" />

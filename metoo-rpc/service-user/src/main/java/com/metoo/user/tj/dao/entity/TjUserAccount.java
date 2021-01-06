@@ -34,19 +34,19 @@ public class TjUserAccount extends Model<TjUserAccount> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
     @ApiModelProperty(value = "用户uid")
     private Integer uid;
 
     @ApiModelProperty(value = "活动积分")
-    private Integer activeIntegral;
+    private BigDecimal activeIntegral;
 
     @ApiModelProperty(value = "余额")
     private BigDecimal balance;
 
     @ApiModelProperty(value = "心理积分")
-    private Integer psychologyIntegral;
+    private BigDecimal psychologyIntegral;
 
 
     @Override

@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import javax.transaction.Transactional;
 import java.util.List;
 
-@Transactional
+
 public interface ImAddFriendMessageRepository extends JpaRepository<ImAddFriendMessage,Integer> {
 
     @Query(value = "SELECT * FROM im_add_friend_message WHERE uid=?1 AND send_id=?2",nativeQuery = true)

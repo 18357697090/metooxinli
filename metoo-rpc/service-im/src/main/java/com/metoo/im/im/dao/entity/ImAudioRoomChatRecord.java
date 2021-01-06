@@ -37,17 +37,18 @@ public class ImAudioRoomChatRecord extends Model<ImAudioRoomChatRecord> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
     @ApiModelProperty(value = "聊天室id")
     private Integer audioRoomId;
 
     @ApiModelProperty(value = "消息内容")
+    @Column(name = "content", columnDefinition = "text")
     private String content;
 
     @CreatedDate
     @ApiModelProperty(value = "发送时间")
-    private Date creationTime;
+    private Date createTime;
 
 
     @Override

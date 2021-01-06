@@ -37,10 +37,10 @@ public class XyRace extends Model<XyRace> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
     @CreatedDate
-    private Date creationTime;
+    private Date createTime;
 
     private String introduction;
 

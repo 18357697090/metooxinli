@@ -37,7 +37,7 @@ public class NrGoods extends Model<NrGoods> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
     @ApiModelProperty(value = "商品内容介绍")
     private String content;
@@ -59,7 +59,7 @@ public class NrGoods extends Model<NrGoods> {
 
     @CreatedDate
     @ApiModelProperty(value = "创建时间")
-    private Date creationTime;
+    private Date createTime;
 
 
     @Override

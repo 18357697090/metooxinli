@@ -37,11 +37,11 @@ public class XyCountry extends Model<XyCountry> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
     @CreatedDate
     @ApiModelProperty(value = "创建时间")
-    private Date creationTime;
+    private Date createTime;
 
     @ApiModelProperty(value = "国id")
     private Integer countryId;

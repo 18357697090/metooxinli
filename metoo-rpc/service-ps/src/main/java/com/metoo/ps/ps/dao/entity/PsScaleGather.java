@@ -32,7 +32,7 @@ public class PsScaleGather extends Model<PsScaleGather> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
     @ApiModelProperty(value = "量表集合段位")
     private Integer dw;

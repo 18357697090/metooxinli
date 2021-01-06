@@ -1,6 +1,7 @@
 package com.metoo.pojo.login.model;
 
 import com.metoo.pojo.tj.model.TjUserInfoModel;
+import com.metoo.pojo.tj.model.TjUserModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -15,16 +16,11 @@ import java.util.List;
 @AllArgsConstructor
 public class LoginUserInfoModel implements Serializable {
 
-    private Integer state;
-
     private Integer userId;
 
-    private String username;
+    private String accessToken;
 
-    private String phone;
+    private String randomKey;
 
-    private TjUserInfoModel tjUserInfoModel;
-
-    private List<String> list;
-
+    private TjUserModel tjUserModel;
 }

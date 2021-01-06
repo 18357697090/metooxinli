@@ -14,8 +14,8 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class MeDTO implements Serializable {
     private BigDecimal balance;
-    private Integer activeIntegral;
-    private Integer psychologyIntegral;
+    private BigDecimal activeIntegral;
+    private BigDecimal psychologyIntegral;
     private String picture;
     private String name;
     private String motto;

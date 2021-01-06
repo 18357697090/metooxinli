@@ -37,7 +37,7 @@ public class ImAddFriendMessage extends Model<ImAddFriendMessage> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
     @ApiModelProperty(value = "好友请求发送者id")
     private Integer sendId;
@@ -56,7 +56,7 @@ public class ImAddFriendMessage extends Model<ImAddFriendMessage> {
 
     @CreatedDate
     @ApiModelProperty(value = "请求发起时间")
-    private Date creationTime;
+    private Date createTime;
 
 
     @Override

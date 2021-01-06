@@ -36,14 +36,14 @@ public class PsComment extends Model<PsComment> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
     @ApiModelProperty(value = "评论内容")
     private String comment;
 
     @CreatedDate
     @ApiModelProperty(value = "评论时间")
-    private Date creationTime;
+    private Date createTime;
 
     @ApiModelProperty(value = "量表id")
     private Integer scaleId;

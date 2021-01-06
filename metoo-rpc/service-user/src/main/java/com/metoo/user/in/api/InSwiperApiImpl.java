@@ -8,6 +8,8 @@ import com.metoo.user.in.dao.entity.InSwiper;
 import com.metoo.user.in.service.InSwiperService;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -22,6 +24,7 @@ import java.util.List;
  */
 @Component
 @DubboService
+@Transactional
 public class InSwiperApiImpl implements InSwiperApi {
 
     @Resource

@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import javax.transaction.Transactional;
 import java.util.List;
 
-@Transactional
+
 public interface TaUserTaskRepository extends JpaRepository<TaUserTask,Integer> {
 
     @Modifying

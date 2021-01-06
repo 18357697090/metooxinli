@@ -16,6 +16,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -32,6 +33,7 @@ import java.util.List;
  */
 @Component
 @DubboService
+@Transactional
 public class PsPourOutApiImpl implements PsPourOutApi {
 
     @Autowired
@@ -75,7 +77,7 @@ public class PsPourOutApiImpl implements PsPourOutApi {
                         pourOutCapsulePojo.setCapsuleId(Integer.parseInt(c));
                         break;
                     case 1:
-                        pourOutCapsulePojo.setCreationTime(c);
+                        pourOutCapsulePojo.setCreateTime(c);
                         break;
                     case 2:
                         pourOutCapsulePojo.setBeWatched(Integer.parseInt(c));
@@ -97,7 +99,7 @@ public class PsPourOutApiImpl implements PsPourOutApi {
             TjUserInfoModel userInfo = tjUserInfoApi.findByUid(pourOutCapsulePojo.getUid());
             pourOutCapsulePojo.setUid(null);
             pourOutCapsulePojo.setName(userInfo.getName());
-            pourOutCapsulePojo.setPicture(userInfo.getPicture());
+            pourOutCapsulePojo.setPicture(userInfo.getHeadImg());
             pourOutCapsulePojos.add(pourOutCapsulePojo);
         }
         return pourOutCapsulePojos;

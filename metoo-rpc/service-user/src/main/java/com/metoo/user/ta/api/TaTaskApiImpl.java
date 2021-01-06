@@ -23,6 +23,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -38,6 +40,7 @@ import java.util.List;
  */
 @Component
 @DubboService
+@Transactional
 public class TaTaskApiImpl implements TaTaskApi {
 
     @Autowired
@@ -68,7 +71,7 @@ public class TaTaskApiImpl implements TaTaskApi {
             int uid = task.getUid();
             TjUserInfoModel userInfo = tjUserInfoService.findByUid(uid);
             taskDTO.setName(userInfo.getName());
-            taskDTO.setPicture(userInfo.getPicture());
+            taskDTO.setPicture(userInfo.getHeadImg());
             TaskDTOs.add(taskDTO);
         }
         if(OU.isBlack(TaskDTOs)){
@@ -87,7 +90,7 @@ public class TaTaskApiImpl implements TaTaskApi {
             int uid = task.getUid();
             TjUserInfoModel userInfo = tjUserInfoService.findByUid(uid);
             taskDTO.setName(userInfo.getName());
-            taskDTO.setPicture(userInfo.getPicture());
+            taskDTO.setPicture(userInfo.getHeadImg());
             TaskDTOs.add(taskDTO);
         }
         if(OU.isBlack(TaskDTOs)){

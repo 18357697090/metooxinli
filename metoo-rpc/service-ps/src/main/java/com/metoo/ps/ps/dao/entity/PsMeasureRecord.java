@@ -36,7 +36,7 @@ public class PsMeasureRecord extends Model<PsMeasureRecord> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
     @ApiModelProperty(value = "测量结果内容")
     private String content;
@@ -55,7 +55,7 @@ public class PsMeasureRecord extends Model<PsMeasureRecord> {
 
     @CreatedDate
     @ApiModelProperty(value = "创建时间")
-    private Date creationTime;
+    private Date createTime;
 
 
     @Override

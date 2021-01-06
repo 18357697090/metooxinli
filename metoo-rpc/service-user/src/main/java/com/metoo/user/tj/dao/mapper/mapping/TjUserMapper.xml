@@ -7,16 +7,17 @@
         <id column="id" property="id" />
         <result column="password" property="password" />
         <result column="state" property="state" />
-        <result column="uid" property="uid" />
         <result column="username" property="username" />
-        <result column="phone_number" property="phoneNumber" />
-        <result column="spare" property="spare" />
-        <result column="creation_time" property="creationTime" />
+        <result column="phone" property="phone" />
+        <result column="extend_id" property="extendId" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
     </resultMap>
 
     <select id="login" resultType="com.metoo.pojo.login.model.LoginModel" parameterType="com.metoo.pojo.login.vo.LoginVo">
         SELECT
             tu.id AS userId,
+            tu.extend_id AS extendId,
             tu.username AS username,
             tu.password as pwd,
             tu.state AS state

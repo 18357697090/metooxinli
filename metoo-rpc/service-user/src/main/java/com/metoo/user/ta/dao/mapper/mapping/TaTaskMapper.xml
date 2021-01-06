@@ -15,7 +15,7 @@
         <result column="task_title" property="taskTitle" />
         <result column="uid" property="uid" />
         <result column="type" property="type" />
-        <result column="creation_time" property="creationTime" />
+        <result column="create_time" property="createTime" />
         <result column="picture" property="picture" />
     </resultMap>
 

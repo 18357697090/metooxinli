@@ -38,11 +38,6 @@ public class TjUserServiceImpl extends ServiceImpl<TjUserMapper, TjUser> impleme
     }
 
     @Override
-    public void updateUserPassword(String newPassword, String username) {
-        tjUserRepository.updateUserPassword(newPassword,username);
-    }
-
-    @Override
     public LoginModel login(LoginVo vo) {
         return tjUserMapper.login(vo);
     }

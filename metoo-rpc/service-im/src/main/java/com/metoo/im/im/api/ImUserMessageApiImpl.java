@@ -10,6 +10,7 @@ import org.apache.dubbo.config.annotation.DubboService;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,6 +26,7 @@ import java.util.stream.Stream;
  */
 @Component
 @DubboService
+@Transactional
 public class ImUserMessageApiImpl implements ImUserMessageApi {
 
     @Autowired

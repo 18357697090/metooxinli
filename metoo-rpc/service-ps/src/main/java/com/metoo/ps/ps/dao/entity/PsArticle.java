@@ -32,6 +32,7 @@ public class PsArticle extends Model<PsArticle> {
     private Integer articleId;
 
     @ApiModelProperty(value = "文章内容：富文本格式")
+    @Column(name = "content", columnDefinition = "text")
     private String content;
 
     @ApiModelProperty(value = "文章图片")

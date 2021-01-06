@@ -10,6 +10,7 @@ import com.tencentyun.TLSSigAPIv2;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
@@ -23,6 +24,7 @@ import java.util.Date;
  */
 @Component
 @DubboService
+@Transactional
 public class ImUserSigApiImpl implements ImUserSigApi {
 
     private final TLSSigAPIv2 api = new TLSSigAPIv2(
@@ -46,7 +48,7 @@ public class ImUserSigApiImpl implements ImUserSigApi {
             }
             return RE.ok(userSig);
         }else {
-            long a = userSig.getUpdatetime().getTime();
+            long a = userSig.getUpdateTime().getTime();
             Date date=new Date();
             long b=date.getTime()-a;
             long c= 2292000000L;

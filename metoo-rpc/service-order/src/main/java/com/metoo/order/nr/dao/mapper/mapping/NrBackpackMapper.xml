@@ -12,7 +12,7 @@
         <result column="content" property="content" />
         <result column="name" property="name" />
         <result column="spare" property="spare" />
-        <result column="creation_time" property="creationTime" />
+        <result column="create_time" property="createTime" />
     </resultMap>
 
 </mapper>

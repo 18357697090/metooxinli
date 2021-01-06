@@ -24,7 +24,7 @@ public class ImGiftModel implements Serializable {
 
     private Long id;
 
-    private Date creationTime;
+    private Date createTime;
 
     private Integer giftId;
 

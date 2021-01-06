@@ -25,6 +25,8 @@ import org.apache.dubbo.config.annotation.DubboService;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -40,6 +42,7 @@ import java.util.List;
  */
 @Component
 @DubboService
+@Transactional
 public class XyCountryApiImpl implements XyCountryApi {
 
     @Autowired
@@ -118,7 +121,7 @@ public class XyCountryApiImpl implements XyCountryApi {
                 return RE.ok("创建成功");
             }
         }
-        return RE.paramError("参数缺失");
+        return RE.fail("参数缺失");
     }
 
     @Override

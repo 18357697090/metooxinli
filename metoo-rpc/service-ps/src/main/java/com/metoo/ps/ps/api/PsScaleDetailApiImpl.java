@@ -23,6 +23,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -38,6 +40,7 @@ import java.util.List;
  */
 @Component
 @DubboService
+@Transactional
 public class PsScaleDetailApiImpl implements PsScaleDetailApi {
 
     @Autowired
@@ -92,9 +95,9 @@ public class PsScaleDetailApiImpl implements PsScaleDetailApi {
             TjUserInfoModel userInfo = tjUserInfoApi.findByUid(a.getUid());
             comments2.setComment(a.getComment());
             comments2.setUsername(userInfo.getName());
-            comments2.setUserPicture(userInfo.getPicture());
+            comments2.setUserPicture(userInfo.getHeadImg());
             comments2.setLevelPicture(tjLevelPictureApi.findByLevel(userInfo.getDw()).getLevelPicture());
-            comments2.setCreateTime(a.getCreationTime());
+            comments2.setCreateTime(a.getCreateTime());
             comments1.add(comments2);
         }
         scaleDetails.setComments(comments1);

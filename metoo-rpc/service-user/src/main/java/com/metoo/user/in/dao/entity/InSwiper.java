@@ -33,7 +33,7 @@ public class InSwiper extends Model<InSwiper> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
     @ApiModelProperty(value = "点击跳转地址")
     private String address;

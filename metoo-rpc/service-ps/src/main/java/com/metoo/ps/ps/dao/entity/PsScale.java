@@ -32,7 +32,7 @@ public class PsScale extends Model<PsScale> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
     @ApiModelProperty(value = "量表内容介绍")
     private String content;

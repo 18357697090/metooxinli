@@ -32,7 +32,7 @@ public class PsOptions extends Model<PsOptions> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
     @ApiModelProperty(value = "测量量表题目选项")
     private String options;

@@ -52,6 +52,6 @@ public class TjUserInfoServiceImpl extends ServiceImpl<TjUserInfoMapper, TjUserI
 
     @Override
     public List<TjUserInfo> findByNameLike(String name) {
-        return tjUserInfoRepository.findByNameLike("%" + name + "%");
+        return tjUserInfoRepository.findByNickNameLike("%" + name + "%");
     }
 }

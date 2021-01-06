@@ -3,6 +3,12 @@ package com.metoo.web.config;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
+import com.metoo.web.config.auth.security.DataSecurityAction;
+import com.metoo.web.config.auth.security.impl.Base64SecurityAction;
+import com.metoo.web.config.filter.AuthFilter;
+import com.metoo.web.config.properties.RestProperties;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -20,34 +26,17 @@ import java.util.List;
 @Configuration
 public class WebMVCConfig implements WebMvcConfigurer {
 
-    FastJsonHttpMessageConverter fastJsonHttpMessageConverter(){
-        FastJsonHttpMessageConverter fastJsonHttpMessageConverter=new FastJsonHttpMessageConverter();
-
-        FastJsonConfig fastJsonConfig=new FastJsonConfig();
-        fastJsonConfig.setSerializerFeatures(
-                SerializerFeature.QuoteFieldNames,
-                SerializerFeature.WriteMapNullValue,
-                SerializerFeature.DisableCircularReferenceDetect,
-                SerializerFeature.WriteDateUseDateFormat,
-                SerializerFeature.WriteNullNumberAsZero,
-                SerializerFeature.WriteNullListAsEmpty,
-                SerializerFeature.SortField,
-                SerializerFeature.WriteNullStringAsEmpty);
-
-        List<MediaType> mediaTypeList=new ArrayList<>();
-        mediaTypeList.add(MediaType.APPLICATION_JSON);
-        fastJsonHttpMessageConverter.setSupportedMediaTypes(mediaTypeList);
-        fastJsonHttpMessageConverter.setFastJsonConfig(fastJsonConfig);
-        return fastJsonHttpMessageConverter;
+    @Bean
+    @ConditionalOnProperty(prefix = RestProperties.REST_PREFIX, name = "auth-open", havingValue = "true", matchIfMissing = true)
+    public AuthFilter jwtAuthenticationTokenFilter() {
+        return new AuthFilter();
     }
 
-    @Override
-    public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
-        converters.clear();
-        StringHttpMessageConverter converter = new StringHttpMessageConverter(
-                Charset.forName("UTF-8"));
-        converters.add(converter);
-        converters.add(fastJsonHttpMessageConverter());
+    @Bean
+    public DataSecurityAction dataSecurityAction() {
+        return new Base64SecurityAction();
     }
+
+
 
 }

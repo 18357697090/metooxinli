@@ -37,14 +37,14 @@ public class ImGiftRecord extends Model<ImGiftRecord> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
     @ApiModelProperty(value = "送礼物的人id")
     private Integer uid;
 
     @CreatedDate
     @ApiModelProperty(value = "创建时间")
-    private Date creationTime;
+    private Date createTime;
 
     @ApiModelProperty(value = "接受礼物的用户id")
     private Integer accepted;

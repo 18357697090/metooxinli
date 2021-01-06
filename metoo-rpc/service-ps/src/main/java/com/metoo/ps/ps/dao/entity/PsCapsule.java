@@ -36,7 +36,7 @@ public class PsCapsule extends Model<PsCapsule> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
     @ApiModelProperty(value = "1表示公开，0表示私密")
     private Integer attribute;
@@ -52,7 +52,7 @@ public class PsCapsule extends Model<PsCapsule> {
 
     @CreatedDate
     @ApiModelProperty(value = "创建时间")
-    private Date creationTime;
+    private Date createTime;
 
     @ApiModelProperty(value = "图片1")
     private String picture1;

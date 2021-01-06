@@ -32,7 +32,7 @@ public class PsProblem extends Model<PsProblem> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
     @ApiModelProperty(value = "题目因子类型")
     private Integer factorType;

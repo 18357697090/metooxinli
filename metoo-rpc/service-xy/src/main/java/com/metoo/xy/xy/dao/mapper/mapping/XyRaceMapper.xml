@@ -5,7 +5,7 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.metoo.xy.xy.dao.entity.XyRace">
         <id column="id" property="id" />
-        <result column="creation_time" property="creationTime" />
+        <result column="create_time" property="createTime" />
         <result column="introduction" property="introduction" />
         <result column="name" property="name" />
         <result column="race_id" property="raceId" />

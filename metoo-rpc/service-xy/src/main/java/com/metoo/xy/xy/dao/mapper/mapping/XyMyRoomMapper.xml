@@ -5,7 +5,7 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.metoo.xy.xy.dao.entity.XyMyRoom">
         <id column="id" property="id" />
-        <result column="creation_time" property="creationTime" />
+        <result column="create_time" property="createTime" />
         <result column="is_host" property="isHost" />
         <result column="state" property="state" />
         <result column="type" property="type" />

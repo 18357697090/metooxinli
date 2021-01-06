@@ -36,7 +36,7 @@ public class TjUserAccountDetail extends Model<TjUserAccountDetail> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
     @ApiModelProperty(value = "消费内容")
     private String content;
@@ -57,7 +57,7 @@ public class TjUserAccountDetail extends Model<TjUserAccountDetail> {
     private Integer uid;
 
     @ApiModelProperty(value = "创建时间")
-    private Date creationTime;
+    private Date createTime;
 
 
     @Override

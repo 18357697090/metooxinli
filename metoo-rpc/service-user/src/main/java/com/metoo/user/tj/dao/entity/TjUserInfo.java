@@ -41,26 +41,41 @@ public class TjUserInfo extends Model<TjUserInfo> {
     @ApiModelProperty(value = "年龄")
     private Integer age;
 
-    @ApiModelProperty(value = "城市")
-    private String city;
-
-    @ApiModelProperty(value = "段位")
-    private Integer dw;
+    @ApiModelProperty(value = "等级")
+    private Integer level;
 
     @ApiModelProperty(value = "用户性别，1表示男，2表示女")
     private Integer gender;
 
     @ApiModelProperty(value = "昵称")
-    private String name;
+    private String nickName;
 
     @ApiModelProperty(value = "uid")
     private Integer uid;
 
     @ApiModelProperty(value = "头像")
-    private String picture;
+    private String headImg;
 
     @ApiModelProperty(value = "签名")
     private String motto;
+
+    @ApiModelProperty(value = "省名称")
+    private String prov;
+
+    @ApiModelProperty(value = "省编码")
+    private String provCode;
+
+    @ApiModelProperty(value = "市名称")
+    private String city;
+
+    @ApiModelProperty(value = "市编码")
+    private String cityCode;
+
+    @ApiModelProperty(value = "区名称")
+    private String area;
+
+    @ApiModelProperty(value = "区编码")
+    private String areaCode;
 
     @ApiModelProperty(value = "创建时间")
     private Date createTime;

@@ -8,7 +8,7 @@
         <result column="uid" property="uid" />
         <result column="updatetime" property="updatetime" />
         <result column="usersig" property="usersig" />
-        <result column="creation_time" property="creationTime" />
+        <result column="create_time" property="createTime" />
     </resultMap>
 
 </mapper>

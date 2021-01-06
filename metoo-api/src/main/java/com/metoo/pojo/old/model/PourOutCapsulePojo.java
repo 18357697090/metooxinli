@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 @Data
 public class PourOutCapsulePojo implements Serializable {
     private Integer capsuleId;
-    private String creationTime;
+    private String createTime;
     private String title;
     private Integer beWatched;
     private BigDecimal prices;

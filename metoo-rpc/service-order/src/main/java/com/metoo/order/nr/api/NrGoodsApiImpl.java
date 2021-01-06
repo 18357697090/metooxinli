@@ -7,6 +7,7 @@ import com.metoo.order.nr.dao.entity.NrGoods;
 import com.metoo.order.nr.service.NrGoodsService;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -21,6 +22,7 @@ import java.util.List;
  */
 @Component
 @DubboService
+@Transactional
 public class NrGoodsApiImpl implements NrGoodsApi {
 
     @Resource

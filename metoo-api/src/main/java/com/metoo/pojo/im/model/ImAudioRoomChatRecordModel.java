@@ -23,7 +23,7 @@ public class ImAudioRoomChatRecordModel implements Serializable {
     private long id;
 
 
-    private Date creationTime;
+    private Date createTime;
 
     private Integer AudioRoomId;
 

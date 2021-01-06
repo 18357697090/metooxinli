@@ -9,6 +9,7 @@ import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <p>
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @DubboService
+@Transactional
 public class ImGiftRecordApiImpl implements ImGiftRecordApi {
 
     @Autowired

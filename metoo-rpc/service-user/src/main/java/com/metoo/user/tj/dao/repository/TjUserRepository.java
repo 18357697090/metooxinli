@@ -7,13 +7,9 @@ import org.springframework.data.jpa.repository.Query;
 
 import javax.transaction.Transactional;
 
-@Transactional
+
 public interface TjUserRepository extends JpaRepository<TjUser,Integer>{
 
         TjUser findByUsername(String username);
-
-        @Modifying
-        @Query(value = "update tj_user set password=? where username=?",nativeQuery = true)
-        int updateUserPassword(String password,String username);
 
 }

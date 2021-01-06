@@ -13,6 +13,8 @@ import org.apache.dubbo.config.annotation.DubboService;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 
@@ -26,6 +28,7 @@ import java.math.BigDecimal;
  */
 @Component
 @DubboService
+@Transactional
 public class TjUserAccountApiImpl implements TjUserAccountApi {
 
     @Autowired
@@ -56,7 +59,7 @@ public class TjUserAccountApiImpl implements TjUserAccountApi {
         TjUserInfoModel userInfo = tjUserInfoService.findByUid(uid);
         MeDTO meDTO = new MeDTO();
         meDTO.setMotto(userInfo.getMotto());
-        meDTO.setPicture(userInfo.getPicture());
+        meDTO.setPicture(userInfo.getHeadImg());
         meDTO.setLevel(userInfo.getDw());
         meDTO.setName(userInfo.getName());
         meDTO.setActiveIntegral(zh.getActiveIntegral());
