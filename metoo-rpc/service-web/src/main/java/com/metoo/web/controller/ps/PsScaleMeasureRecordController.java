@@ -30,6 +30,11 @@ public class PsScaleMeasureRecordController {
     private PsScaleMeasureRecordApi psScaleMeasureRecordApi;
 
 
+    /**
+     * 未知 todo.
+     * @param time
+     * @return
+     */
     @PostMapping("/measureRecord")
     public RE measureRecord(String time){
         Integer userId = ThreadLocal.getUserId();
@@ -50,8 +55,6 @@ public class PsScaleMeasureRecordController {
         }
         psScaleMeasureRecordApi.updateMeasure(userId,result.getScaleId());
         PsScaleMeasureRecordModel model = psScaleMeasureRecordApi.findByUserIdAndScaleId(userId, result.getScaleId());
-
-
         String achievement= CalculateTheScore.calculate(result); //todo.
         model.setContent(achievement);
         psScaleMeasureRecordApi.updateRecord(model);

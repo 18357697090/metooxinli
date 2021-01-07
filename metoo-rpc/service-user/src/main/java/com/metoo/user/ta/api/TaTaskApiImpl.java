@@ -111,7 +111,7 @@ public class TaTaskApiImpl implements TaTaskApi {
             return RE.fail("你的余额不足");
         }else {
             BigDecimal balance = zh.getBalance().subtract(new BigDecimal(task.getTaskPrices()));
-            tjUserAccountService.updateBalance(balance,uid);
+            tjUserAccountService.updateBalance(new BigDecimal(task.getTaskPrices()),uid);
         }
         int taskId = CreateID.create();
         TaTask task1 = taTaskService.findByTaskId(taskId);
@@ -151,7 +151,7 @@ public class TaTaskApiImpl implements TaTaskApi {
             return RE.fail("余额不足");
         }else {
             BigDecimal ye = zh.getBalance().subtract(y);
-            tjUserAccountService.updateBalance(ye,uid);
+            tjUserAccountService.updateBalance(y,uid);
             taTaskService.updateTaskState(taskId);
             taUserTaskService.updateAcceptId(uid,taskId);
             TjUserAccountDetail zhRecord = new TjUserAccountDetail();

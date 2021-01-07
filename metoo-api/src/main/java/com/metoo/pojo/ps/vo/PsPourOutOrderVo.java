@@ -1,7 +1,6 @@
 package com.metoo.pojo.ps.vo;
 
 import com.loongya.core.util.vo.BaseVo;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -17,6 +16,5 @@ import lombok.NoArgsConstructor;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
-public class PsPsychologyConsultVo extends BaseVo {
-
+public class PsPourOutOrderVo extends BaseVo {
 }

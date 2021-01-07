@@ -1,9 +1,13 @@
 package com.metoo.web.controller.ps;
 
 
+import com.loongya.core.util.OU;
 import com.loongya.core.util.RE;
 import com.metoo.api.ps.PsCapsuleApi;
+import com.metoo.pojo.login.enums.AuthEnum;
 import com.metoo.pojo.old.model.SaveCapsulePojo;
+import com.metoo.pojo.ps.vo.PsCapsuleVo;
+import com.metoo.web.config.auth.ThreadLocal;
 import io.swagger.annotations.ApiOperation;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.*;
@@ -26,35 +30,89 @@ public class PsCapsuleController {
     @DubboReference
     private PsCapsuleApi psCapsuleApi;
 
-    @GetMapping("/mycapsule")
-    public RE myCapsule(@RequestHeader("UID") Integer uid, Integer page){
-        return psCapsuleApi.myCapsule(uid, page);
 
+
+
+    /**
+     * 胶囊banner图片
+     * @return
+     */
+    @GetMapping("/psCapsuleIndexBannerList")
+    public RE psCapsuleIndexBannerList(PsCapsuleVo vo){
+        return psCapsuleApi.psCapsuleIndexBannerList(vo);
     }
 
+
+    /**
+     * 胶囊首页-胶囊列表-随机获取三条数据
+     * @return
+     */
+    @GetMapping("/psCapsuleIndexList")
+    public RE psCapsuleIndexList(PsCapsuleVo vo){
+        vo.setUserId(ThreadLocal.getUserId());
+        return psCapsuleApi.psCapsuleIndexList(vo);
+    }
+
+
+
+    /**
+     * 更多热门胶囊列表
+     * @return
+     */
+    @GetMapping("/psCapsuleHostListMore")
+    public RE psCapsuleHostListMore(PsCapsuleVo vo){
+        vo.setUserId(ThreadLocal.getUserId());
+        return psCapsuleApi.psCapsuleHostListMore(vo);
+    }
+
+
+    /**
+     * ok
+     * 我的胶囊列表
+     * @param vo
+     * @return
+     */
+    @GetMapping("/mycapsule")
+    public RE myCapsule(PsCapsuleVo vo){
+        vo.setUserId(ThreadLocal.getUserId());
+        return psCapsuleApi.myCapsule(vo);
+    }
+
+    /**
+     * ok
+     * 修改胶囊状态（state ==2 删除）
+     * @param state
+     * @param capsuleId
+     * @return
+     */
     @GetMapping("/modifyacapsule")
     public RE modifyCapsule(Integer state,Integer capsuleId){
         return psCapsuleApi.modifyCapsule(state, capsuleId);
     }
 
-    @GetMapping("/capsuleDetail")
-    public RE capsuleDetail(Integer page){
-        return psCapsuleApi.capsuleDetail(page);
-    }
 
-
+    /**
+     * ok
+     * @param vo
+     * @return
+     */
     @ApiOperation("发布胶囊")
     @PostMapping("/saveCapsule")
-    public RE saveCapsule(@RequestBody SaveCapsulePojo saveCapsulePojo, @RequestHeader("UID")Integer uid) {
-        return psCapsuleApi.saveCapsule(saveCapsulePojo, uid);
-
+    public RE saveCapsule(PsCapsuleVo vo) {
+        vo.setUserId(ThreadLocal.getUserId());
+        return psCapsuleApi.saveCapsule(vo);
     }
 
 
-    @GetMapping("/findCapsuleById")
-    public RE capsule(int capsuleId,@RequestHeader("UID")Integer uid){
-        return psCapsuleApi.capsule(capsuleId, uid);
-
+    /**
+     * ok
+     * 根据胶囊id获取胶囊详情
+     * @param capsuleId
+     * @return
+     */
+    @GetMapping("/findCapsuleDetailById")
+    public RE findCapsuleDetailById(Integer capsuleId){
+        return psCapsuleApi.findCapsuleDetailById(capsuleId, ThreadLocal.getUserId());
     }
 
 

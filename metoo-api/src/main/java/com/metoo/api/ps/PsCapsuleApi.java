@@ -4,6 +4,7 @@ import com.loongya.core.util.RE;
 import com.metoo.pojo.old.model.PourOutCapsulePojo;
 import com.metoo.pojo.old.model.SaveCapsulePojo;
 import com.metoo.pojo.ps.model.PsCapsuleModel;
+import com.metoo.pojo.ps.vo.PsCapsuleVo;
 
 import java.util.List;
 
@@ -19,14 +20,17 @@ public interface PsCapsuleApi {
 
     PsCapsuleModel findByCapsuleId(Integer capsuleId);
 
-    RE myCapsule(Integer uid, Integer page);
+    RE myCapsule(PsCapsuleVo vo);
 
     RE modifyCapsule(Integer state, Integer capsuleId);
 
-    RE capsuleDetail(Integer page);
+    RE saveCapsule(PsCapsuleVo vo);
 
-    RE saveCapsule(SaveCapsulePojo saveCapsulePojo, Integer uid);
+    RE findCapsuleDetailById(Integer capsuleId, Integer uid);
 
-    RE capsule(Integer capsuleId, Integer uid);
+    RE psCapsuleIndexList(PsCapsuleVo vo);
 
+    RE psCapsuleHostListMore(PsCapsuleVo vo);
+
+    RE psCapsuleIndexBannerList(PsCapsuleVo vo);
 }

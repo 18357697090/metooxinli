@@ -3,6 +3,8 @@ package com.metoo.web.controller.order;
 
 import com.loongya.core.util.RE;
 import com.metoo.api.order.PsCapsuleOrderApi;
+import com.metoo.pojo.ps.vo.PsCapsuleVo;
+import com.metoo.web.config.auth.ThreadLocal;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -26,8 +28,9 @@ public  class PsCapsuleOrderController {
     private PsCapsuleOrderApi psCapsuleOrderApi;
 
     @GetMapping("/pay")
-    public RE pay(@RequestHeader("UID") Integer uid, Integer capsuleId){
-        return psCapsuleOrderApi.pay(uid, capsuleId);
+    public RE pay(PsCapsuleVo vo){
+        vo.setUserId(ThreadLocal.getUserId());
+        return psCapsuleOrderApi.pay(vo);
     }
 
 }

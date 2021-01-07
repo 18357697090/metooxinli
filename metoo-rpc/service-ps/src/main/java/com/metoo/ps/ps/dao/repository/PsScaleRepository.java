@@ -18,8 +18,8 @@ public interface PsScaleRepository extends JpaRepository<PsScale,Integer> {
     List<PsScale> findAllBySpare(int spare, Pageable pageable);
 
     @Modifying
-    @Query(value = "update ps_scale set number=? where scale_id=?",nativeQuery = true)
-    int updateNumber(int number,int scaleId);
+    @Query(value = "update ps_scale set `number`=`number` + 1 where scale_id=?",nativeQuery = true)
+    Integer updateNumber(Integer scaleId);
 
     @Query(nativeQuery = true,value = "SELECT * FROM ps_scale ORDER BY RAND() LIMIT 6")
     List<PsScale> findScaleRand();

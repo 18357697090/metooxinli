@@ -1,5 +1,6 @@
 package com.metoo.ps.ps.service;
 
+import com.metoo.pojo.ps.vo.PsCapsuleVo;
 import com.metoo.ps.ps.dao.entity.PsCapsule;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -17,13 +18,9 @@ public interface PsCapsuleService extends IService<PsCapsule> {
 
     PsCapsule findByCapsuleId(Integer capsuleId);
 
-    List<Object[]> findmyCapsules(Integer uid, Integer page);
+    List<PsCapsule> findCapsule();
 
-    Integer updataAttribute(Integer i, Integer capsuleId);
+    List<PsCapsule> findCapsuleRand(Integer limit);
 
-    Integer updataState(Integer capsuleId);
-
-    List<Object[]> findCapsules(Integer page);
-
-    List<Object[]> findCapsule();
+    void updateReadNum(Integer capsuleId);
 }

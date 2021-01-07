@@ -56,7 +56,7 @@ public class ImGiftApiImpl implements ImGiftApi {
         BigDecimal number1= new BigDecimal(number);
         BigDecimal balance = tjUserAccountModel.getBalance().subtract(gift.getPrices().multiply(number1));
         if (balance.compareTo(BigDecimal.ZERO)>=0){
-            tjUserAccountApi.updateBalance(balance,uid);
+            tjUserAccountApi.updateBalance(gift.getPrices().multiply(number1),uid);
 
             ImGiftRecordModel giftRecord = new ImGiftRecordModel();
             giftRecord.setUid(uid);

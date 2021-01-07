@@ -1,6 +1,6 @@
 package com.metoo.ps.ps.dao.mapper;
 
-import com.metoo.ps.ps.dao.entity.PsPsychologyConsult;
+import com.metoo.ps.ps.dao.entity.PsConsult;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author loongya
  * @since 2020-12-28
  */
-public interface PsPsychologyConsultMapper extends BaseMapper<PsPsychologyConsult> {
+public interface PsConsultMapper extends BaseMapper<PsConsult> {
 
 }

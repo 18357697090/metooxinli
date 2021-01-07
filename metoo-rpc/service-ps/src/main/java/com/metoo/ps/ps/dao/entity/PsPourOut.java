@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
+import java.math.BigDecimal;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -50,7 +52,7 @@ public class PsPourOut extends Model<PsPourOut> {
     private String content;
 
     @ApiModelProperty(value = "倾诉师的价格")
-    private Integer prices;
+    private BigDecimal prices;
 
     @ApiModelProperty(value = "倾诉师的头像")
     private String picture;

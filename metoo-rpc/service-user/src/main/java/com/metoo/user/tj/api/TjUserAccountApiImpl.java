@@ -1,5 +1,6 @@
 package com.metoo.user.tj.api;
 
+import com.loongya.core.exception.LoongyaException;
 import com.loongya.core.util.OU;
 import com.loongya.core.util.RE;
 import com.metoo.api.tj.TjUserAccountApi;
@@ -81,7 +82,7 @@ public class TjUserAccountApiImpl implements TjUserAccountApi {
     public RE findBalance(Integer uid) {
         TjUserAccount zh=tjUserAccountService.findByUid(uid);
         if(OU.isBlack(zh)){
-            return RE.fail("没有对象");
+            throw new LoongyaException("用户账号为空");
         }
         return RE.ok(zh.getBalance());
     }

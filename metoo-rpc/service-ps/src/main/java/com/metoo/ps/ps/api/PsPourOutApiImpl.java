@@ -1,13 +1,26 @@
 package com.metoo.ps.ps.api;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.loongya.core.util.CopyUtils;
+import com.loongya.core.util.DateUtil;
+import com.loongya.core.util.OU;
 import com.loongya.core.util.RE;
+import com.loongya.core.util.aliyun.OSSUtil;
 import com.metoo.api.ps.PsCapsuleApi;
 import com.metoo.api.ps.PsPourOutApi;
 import com.metoo.api.tj.TjUserInfoApi;
 import com.metoo.pojo.old.model.PourOutCapsulePojo;
 import com.metoo.pojo.old.model.PourOutPojo;
+import com.metoo.pojo.ps.model.PsCapsuleDetailModel;
+import com.metoo.pojo.ps.model.PsPourOutIndexModel;
+import com.metoo.pojo.ps.model.PsPourOutModel;
+import com.metoo.pojo.ps.vo.PsPourOutVo;
 import com.metoo.pojo.tj.model.TjUserInfoModel;
+import com.metoo.ps.ps.dao.entity.PsCapsule;
+import com.metoo.ps.ps.dao.entity.PsPourOut;
+import com.metoo.ps.ps.dao.entity.PsPourOutOrder;
 import com.metoo.ps.ps.service.PsCapsuleService;
+import com.metoo.ps.ps.service.PsPourOutOrderService;
 import com.metoo.ps.ps.service.PsPourOutService;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.DubboService;
@@ -17,10 +30,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -41,6 +56,8 @@ public class PsPourOutApiImpl implements PsPourOutApi {
 
     @Autowired
     private PsCapsuleService psCapsuleService;
+    @Autowired
+    private PsPourOutOrderService psPourOutOrderService;
 
     @DubboReference
     private TjUserInfoApi tjUserInfoApi;
@@ -49,59 +66,67 @@ public class PsPourOutApiImpl implements PsPourOutApi {
     private PsCapsuleApi psCapsuleApi;
 
     @Override
-    public RE capsule() {
-        PourOutPojo pourOutPojo = new PourOutPojo();
-        Pageable pageable = PageRequest.of(0,5, Sort.Direction.DESC,"prices");
-        pourOutPojo.setPourOuts(psPourOutService.findByOnLine(1,pageable));
-        List<Object[]> capsule= psCapsuleService.findCapsule();
-        pourOutPojo.setPourOutCapsulePojos(this.tool(capsule));
-        return RE.ok(pourOutPojo);
+    public RE getPourList(PsPourOutVo vo) {
+        PsPourOutIndexModel model = new PsPourOutIndexModel();
+        Pageable pageable = PageRequest.of(vo.getPagenum(),vo.getPagesize(), Sort.Direction.DESC,"prices");
+        List<PsPourOutModel> modelList = psPourOutService.findByOnLine(1, pageable);
+        modelList.stream().forEach(e->{
+            e.setPicture(OSSUtil.fillPath(e.getPicture()));
+            // 查询当前倾诉师状态 1: 是否在进行中 2：进行中是否是自己的订单
+            pushPourOutModel(e, vo.getUserId());
+        });
+        model.setPourOuts(modelList);
+        List<PsCapsule> capsule= psCapsuleService.findCapsule();
+        model.setPsCapsuleDetailModelList(this.pushModel(capsule));
+        return RE.ok(model);
+    }
+
+    @Override
+    public RE getPourDetail(PsPourOutVo vo) {
+        PsPourOut pojo = psPourOutService.getById(vo.getPourId());
+        Assert.isNull(pojo, "没有该倾诉师！");
+        PsPourOutModel model = CopyUtils.copy(pojo, new PsPourOutModel());
+        model.setPicture(OSSUtil.fillPath(model.getPicture()));
+        pushPourOutModel(model, vo.getUserId());
+        return RE.ok(model);
+    }
+
+    private void pushPourOutModel(PsPourOutModel model, Integer userId) {
+        // 查询当前倾诉师状态 1: 是否在进行中 2：进行中是否是自己的订单
+        LambdaQueryWrapper<PsPourOutOrder> lqw = new LambdaQueryWrapper<>();
+        lqw.eq(PsPourOutOrder::getPourId, model.getId());
+        lqw.eq(PsPourOutOrder::getStatus, 1);
+        List<PsPourOutOrder> list = psPourOutOrderService.list(lqw);
+        if(OU.isBlack(list)){
+            model.setStatus(1);
+        }else {
+            boolean flag = false;
+            for(PsPourOutOrder or: list){
+                if(or.getUserId() == userId){
+                    if(DateUtil.diffMin(new Date(), or.getCreateTime()) <= 60){
+                        flag = true;
+                    }
+                }
+            }
+            if(flag){ // 有自己的未完成的订单
+                model.setStatus(3);
+            }else {
+                model.setStatus(2);
+            }
+        }
     }
 
 
-    private List<PourOutCapsulePojo> tool(List<Object[]> capsules){
-        List<PourOutCapsulePojo> pourOutCapsulePojos = new ArrayList<>();
-        for (Object[] objects : capsules) {
-            PourOutCapsulePojo pourOutCapsulePojo = new PourOutCapsulePojo();
-            String x = Arrays.toString(objects);
-            String y = x.substring(1, x.length() - 1);
-            String[] str = y.split(",");
-            for (int j = 0; j < str.length; j++) {
-                String b = str[j];
-                String c = b;
-                if (j != 0) {
-                    c = b.substring(1);
-                }
-                switch (j) {
-                    case 0:
-                        pourOutCapsulePojo.setCapsuleId(Integer.parseInt(c));
-                        break;
-                    case 1:
-                        pourOutCapsulePojo.setCreateTime(c);
-                        break;
-                    case 2:
-                        pourOutCapsulePojo.setBeWatched(Integer.parseInt(c));
-                        break;
-                    case 3:
-                        pourOutCapsulePojo.setPrices(new BigDecimal(c));
-                        break;
-                    case 4:
-                        pourOutCapsulePojo.setTitle(c);
-                        break;
-                    case 5:
-                        pourOutCapsulePojo.setUid(Integer.parseInt(c));
-                        break;
-                    case 6:
-                        pourOutCapsulePojo.setAttribute(Integer.parseInt(c));
-                        break;
-                }
-            }
-            TjUserInfoModel userInfo = tjUserInfoApi.findByUid(pourOutCapsulePojo.getUid());
-            pourOutCapsulePojo.setUid(null);
-            pourOutCapsulePojo.setName(userInfo.getNickName());
-            pourOutCapsulePojo.setPicture(userInfo.getHeadImg());
-            pourOutCapsulePojos.add(pourOutCapsulePojo);
+    private List<PsCapsuleDetailModel> pushModel(List<PsCapsule> capsules){
+        List<PsCapsuleDetailModel> modelList = new ArrayList<>();
+        for (PsCapsule e : capsules) {
+            PsCapsuleDetailModel model = new PsCapsuleDetailModel();
+            CopyUtils.copy(e, model);
+            TjUserInfoModel userInfo = tjUserInfoApi.findByUid(e.getUid());
+            model.setNickName(userInfo.getNickName());
+            model.setHeadImg(OSSUtil.fillPath(userInfo.getHeadImg()));
+            modelList.add(model);
         }
-        return pourOutCapsulePojos;
+        return modelList;
     }
 }

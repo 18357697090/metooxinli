@@ -1,5 +1,6 @@
 package com.metoo.ps.ps.api;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.loongya.core.util.CommsEnum;
 import com.loongya.core.util.OU;
 import com.loongya.core.util.RE;
@@ -89,27 +90,31 @@ public class PsScaleDetailApiImpl implements PsScaleDetailApi {
         model.setContentPicture(OSSUtil.fillPath(scaleDetail.getContentPicture()));
         model.setPrice(scale.getPrices());
         model.setNumberOfProblem(scale.getNumberOfProblem());
+        // 获取评价总数
+        LambdaQueryWrapper<PsScaleComment> lqw = new LambdaQueryWrapper<>();
+        lqw.eq(PsScaleComment::getScaleId, scaleId);
+        Integer commentCount = psScaleCommentService.count(lqw);
+        model.setCommentCount(commentCount);
         Pageable pageable= PageRequest.of(0,3);
         List<PsScaleComment> comments=  psScaleCommentService.findByScaleId(scaleId,pageable);
-        if(OU.isBlack(scaleDetail)){
-            return RE.fail(CommsEnum.NO_DATA);
-        }
-        List<PsScaleCommentModel> comments1 = new ArrayList<>();
-        for (PsScaleComment a : comments ) {
-            PsScaleCommentModel comments2=new PsScaleCommentModel();
-            TjUserInfoModel userInfo = tjUserInfoApi.findByUid(a.getUid());
-            comments2.setComment(a.getComment());
-            comments2.setUsername(userInfo.getNickName());
-            comments2.setUserPicture(userInfo.getHeadImg());
-            TjLevelPictureModel byLevel = tjLevelPictureApi.findByLevel(userInfo.getLevel());
-            if(OU.isNotBlack(byLevel)){
-                comments2.setLevelPicture(OSSUtil.fillPath(byLevel.getLevelPicture()));
+        if(OU.isNotBlack(comments)){
+            List<PsScaleCommentModel> comments1 = new ArrayList<>();
+            for (PsScaleComment a : comments ) {
+                PsScaleCommentModel comments2=new PsScaleCommentModel();
+                TjUserInfoModel userInfo = tjUserInfoApi.findByUid(a.getUid());
+                comments2.setComment(a.getComment());
+                comments2.setUsername(userInfo.getNickName());
+                comments2.setUserPicture(OSSUtil.fillPath(userInfo.getHeadImg()));
+                TjLevelPictureModel byLevel = tjLevelPictureApi.findByLevel(userInfo.getLevel());
+                if(OU.isNotBlack(byLevel)){
+                    comments2.setLevelPicture(OSSUtil.fillPath(byLevel.getLevelPicture()));
+                }
+                comments2.setCreateTime(a.getCreateTime());
+                comments1.add(comments2);
             }
-            comments2.setCreateTime(a.getCreateTime());
-            comments1.add(comments2);
+            model.setComments(comments1);
         }
-        model.setComments(comments1);
-        PsScaleMeasureRecord userAndMeasure= psScaleMeasureRecordService.findByUidAndScaleId(uid,scaleId);
+        PsScaleMeasureRecord userAndMeasure= psScaleMeasureRecordService.findFirstByUidAndScaleIdOrderByCreateTimeDesc(uid,scaleId);
         TjUserAccountModel zh=tjUserAccountApi.findByUid(uid);
         if(OU.isNotBlack(zh)){
             model.setAccountBalance(zh.getBalance());

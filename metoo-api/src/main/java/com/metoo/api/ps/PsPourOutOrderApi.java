@@ -1,6 +1,8 @@
 package com.metoo.api.ps;
 
 import com.loongya.core.util.RE;
+import com.metoo.pojo.ps.vo.PsConsultOrderVo;
+import com.metoo.pojo.ps.vo.PsPourOutVo;
 
 /**
  * <p>
@@ -10,7 +12,7 @@ import com.loongya.core.util.RE;
  * @author loongya
  * @since 2020-12-28
  */
-public interface PsPsychologyConsultApi {
+public interface PsPourOutOrderApi {
 
-    RE psychologyConsults();
+    RE buyPour(PsPourOutVo vo);
 }

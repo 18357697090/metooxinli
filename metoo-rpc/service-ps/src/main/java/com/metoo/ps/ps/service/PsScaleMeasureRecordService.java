@@ -17,12 +17,12 @@ public interface PsScaleMeasureRecordService extends IService<PsScaleMeasureReco
 
     List<PsScaleMeasureRecord> findBytime(String time, Integer uid);
 
-    void updateMeasure(Integer uid, int scaleId);
+    void updateMeasure(Integer uid, Integer scaleId);
 
     PsScaleMeasureRecord findByUidAndScaleId(Integer uid, Integer scaleId);
 
     PsScaleMeasureRecord findFirstByUidAndScaleIdOrderByCreateTimeDesc(Integer uid, Integer scaleId);
 
-    void updateCount(Integer i, Integer uid, Integer scaleId);
+    void updateCount(Integer id);
 
 }

@@ -1,5 +1,6 @@
 package com.metoo.user.tj.service.impl;
 
+import com.loongya.core.exception.LoongyaException;
 import com.loongya.core.util.OU;
 import com.loongya.core.util.aliyun.OSSUtil;
 import com.metoo.pojo.tj.model.TjUserInfoModel;
@@ -35,7 +36,7 @@ public class TjUserInfoServiceImpl extends ServiceImpl<TjUserInfoMapper, TjUserI
     public TjUserInfoModel findByUid(Integer uid) {
         TjUserInfo pojo = tjUserInfoRepository.findByUid(uid);
         if(OU.isBlack(pojo)){
-            return null;
+            throw new LoongyaException("没有该用户信息");
         }
         TjUserInfoModel model = mapper.map(pojo, TjUserInfoModel.class);
         model.setHeadImg(OSSUtil.fillPath(model.getHeadImg()));

@@ -88,7 +88,7 @@ public class Repository {
         BigDecimal number1= new BigDecimal(number);
         BigDecimal balance = zh.getBalance().subtract(imGiftModel.getPrices().multiply(number1));
         if (balance.compareTo(BigDecimal.ZERO)>=0){
-            repository.tjUserAccountApi.updateBalance(balance,uid);
+            repository.tjUserAccountApi.updateBalance(imGiftModel.getPrices().multiply(number1),uid);
             ImGiftRecordModel imGiftRecordModel = new ImGiftRecordModel();
             imGiftRecordModel.setUid(uid);
             imGiftRecordModel.setAccepted(acceptedId);

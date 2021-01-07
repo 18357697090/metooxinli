@@ -16,12 +16,12 @@ public interface PsScaleMeasureRecordRepository extends JpaRepository<PsScaleMea
     List<PsScaleMeasureRecord> findBytime(String time, Integer uid);
 
     @Modifying
-    @Query(value = "update ps_scale_measure_record set state=2 where uid=? and scale_id=?",nativeQuery = true)
-    int updateMeasure(int uid,int scaleId);
+    @Query(value = "update ps_scale_measure_record set state=2 where uid= :uid and scale_id= :scaleId",nativeQuery = true)
+    Integer updateMeasure(Integer uid,Integer scaleId);
 
     @Modifying
-    @Query(value = "update ps_scale_measure_record set count=? where uid=? and scale_id=?",nativeQuery = true)
-    int updateCount(int count,int uid,int scaleId);
+    @Query(value = "update ps_scale_measure_record set `count`=`count`+1 where id= :id ",nativeQuery = true)
+    Integer updateCount(Integer id);
 
     PsScaleMeasureRecord findByUidAndScaleId(Integer uid, Integer scaleId);
     PsScaleMeasureRecord findFirstByUidAndScaleIdOrderByCreateTimeDesc(Integer uid, Integer scaleId);

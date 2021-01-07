@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
+import java.math.BigDecimal;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -24,8 +26,8 @@ import javax.persistence.*;
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value="PsPsychologyConsult对象", description="心理咨询师表")
-public class PsPsychologyConsult extends Model<PsPsychologyConsult> {
+@ApiModel(value="PsConsult对象", description="心理咨询师表")
+public class PsConsult extends Model<PsConsult> {
 
     private static final long serialVersionUID = 1L;
 
@@ -50,10 +52,10 @@ public class PsPsychologyConsult extends Model<PsPsychologyConsult> {
     private Integer onLine;
 
     @ApiModelProperty(value = "咨询师头像")
-    private String picture;
+    private String headImg;
 
     @ApiModelProperty(value = "价格")
-    private Integer prices;
+    private BigDecimal price;
 
     @ApiModelProperty(value = "排序")
     private Integer sort;

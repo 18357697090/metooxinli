@@ -1,6 +1,8 @@
 package com.loongya.core.util;
 
 
+import com.loongya.core.exception.LoongyaException;
+
 public class AssertUtils {
 
     public static boolean success(RE t){
@@ -21,7 +23,7 @@ public class AssertUtils {
 
     public static<M> RE checkParam(M ...ms) {
         if(OU.hasAnyBlack(ms)){
-            return RE.fail(CommsEnum.PARAM_ERR);
+            throw new LoongyaException(CommsEnum.PARAM_ERR);
         }
         return RE.ok();
     }

@@ -1,6 +1,8 @@
 package com.metoo.web.config.auth;
 
+import com.loongya.core.exception.LoongyaException;
 import com.loongya.core.util.OU;
+import com.metoo.pojo.login.enums.AuthEnum;
 
 public class ThreadLocal {
 
@@ -14,7 +16,7 @@ public class ThreadLocal {
     public static Integer getUserId(){
         String userIds = threadLocal.get();
         if(OU.isBlack(userIds)){
-            return null;
+            throw new LoongyaException(AuthEnum.LOGIN_TIMEOUT);
         }
         return Integer.parseInt(userIds);
     }

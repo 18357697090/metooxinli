@@ -1,6 +1,7 @@
 package com.metoo.api.ps;
 
 import com.loongya.core.util.RE;
+import com.metoo.pojo.ps.vo.PsPourOutVo;
 
 /**
  * <p>
@@ -12,5 +13,7 @@ import com.loongya.core.util.RE;
  */
 public interface PsPourOutApi {
 
-    RE capsule();
+    RE getPourList(PsPourOutVo vo);
+
+    RE getPourDetail(PsPourOutVo vo);
 }

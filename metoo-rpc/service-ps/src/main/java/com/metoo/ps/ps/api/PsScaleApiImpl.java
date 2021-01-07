@@ -13,7 +13,7 @@ import com.metoo.ps.ps.dao.entity.PsArticle;
 import com.metoo.ps.ps.dao.entity.PsScale;
 import com.metoo.ps.ps.service.PsArticleService;
 import com.metoo.ps.ps.service.PsPourOutService;
-import com.metoo.ps.ps.service.PsPsychologyConsultService;
+import com.metoo.ps.ps.service.PsConsultService;
 import com.metoo.ps.ps.service.PsScaleService;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.dozer.DozerBeanMapper;
@@ -42,7 +42,7 @@ public class PsScaleApiImpl implements PsScaleApi {
     private PsPourOutService psPourOutService;
 
     @Autowired
-    private PsPsychologyConsultService psPsychologyConsultService;
+    private PsConsultService psConsultService;
 
     @Autowired
     private DozerBeanMapper mapper;
@@ -78,7 +78,7 @@ public class PsScaleApiImpl implements PsScaleApi {
         }
         indexDTO.setArticleDTOS(articleDTOS);
         indexDTO.setPourOuts(psPourOutService.findPourOutRand());
-        indexDTO.setPsychologyConsults(psPsychologyConsultService.findPsychologyConsultRand());
+        indexDTO.setPsychologyConsults(psConsultService.findPsychologyConsultRand());
 
         return RE.ok(indexDTO);
     }

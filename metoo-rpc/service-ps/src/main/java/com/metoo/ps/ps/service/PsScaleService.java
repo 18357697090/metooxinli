@@ -26,5 +26,5 @@ public interface PsScaleService extends IService<PsScale> {
 
     List<PsScale> findPsScaleListbyclgatherid(Integer clgatherid);
 
-    void updateNumber(Integer number, Integer scaleId);
+    void updateNumber(Integer scaleId);
 }

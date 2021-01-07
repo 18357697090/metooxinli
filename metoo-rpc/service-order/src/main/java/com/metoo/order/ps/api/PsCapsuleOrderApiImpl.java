@@ -8,6 +8,7 @@ import com.metoo.order.ps.dao.entity.PsCapsuleOrder;
 import com.metoo.order.ps.service.PsCapsuleOrderService;
 import com.metoo.pojo.order.model.PsCapsuleOrderModel;
 import com.metoo.pojo.ps.model.PsCapsuleModel;
+import com.metoo.pojo.ps.vo.PsCapsuleVo;
 import com.metoo.pojo.tj.model.TjUserAccountModel;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.DubboService;
@@ -40,21 +41,18 @@ public class PsCapsuleOrderApiImpl implements PsCapsuleOrderApi {
     private PsCapsuleOrderService psCapsuleOrderService;
 
     @Override
-    public RE pay(Integer uid, Integer capsuleId) {
-
-        TjUserAccountModel zh = tjUserAccountApi.findByUid(uid);
-        PsCapsuleModel capsule = psCapsuleApi.findByCapsuleId(capsuleId);
-        BigDecimal prices = new BigDecimal(capsule.getPrices());
-        int x = zh.getBalance().compareTo(prices);
-        if(x >= 0){
-            tjUserAccountApi.updateBalance(zh.getBalance().subtract(prices),uid);
+    public RE pay(PsCapsuleVo vo) {
+        TjUserAccountModel accountModel = tjUserAccountApi.findByUid(vo.getUserId());
+        PsCapsuleModel capsule = psCapsuleApi.findByCapsuleId(vo.getCapsuleId());
+        if(accountModel.getBalance().compareTo(capsule.getPrice()) >= 0){
+            tjUserAccountApi.updateBalance(capsule.getPrice(),vo.getUserId());
             PsCapsuleOrder userBuyCapsule = new PsCapsuleOrder();
-            userBuyCapsule.setCapsuleId(capsuleId);
-            userBuyCapsule.setUid(uid);
+            userBuyCapsule.setCapsuleId(vo.getCapsuleId());
+            userBuyCapsule.setUid(vo.getUserId());
             psCapsuleOrderService.save(userBuyCapsule);
             return RE.ok();
         }else {
-            return RE.fail("error");
+            return RE.fail("余额不足");
         }
     }
 

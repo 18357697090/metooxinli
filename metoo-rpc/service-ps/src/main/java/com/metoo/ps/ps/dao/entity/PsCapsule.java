@@ -3,7 +3,9 @@ package com.metoo.ps.ps.dao.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
+
+import java.math.BigDecimal;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -38,57 +40,37 @@ public class PsCapsule extends Model<PsCapsule> {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @ApiModelProperty(value = "1表示公开，0表示私密")
-    private Integer attribute;
+    @ApiModelProperty(value = "权限：1表示公开，0表示私密")
+    private Integer authType;
 
     @ApiModelProperty(value = "观看量")
-    private Integer beWatched;
-
-    @ApiModelProperty(value = "胶囊id")
-    private Integer capsuleId;
-
-    @ApiModelProperty(value = "胶囊内容")
-    private String content;
-
-    @CreatedDate
-    @ApiModelProperty(value = "创建时间")
-    private Date createTime;
-
-    @ApiModelProperty(value = "图片1")
-    private String picture1;
-
-    @ApiModelProperty(value = "图片2")
-    private String picture2;
-
-    private String picture3;
-
-    private String picture4;
-
-    private String picture5;
-
-    private String picture6;
-
-    private String picture7;
-
-    private String picture8;
-
-    private String picture9;
-
-    @ApiModelProperty(value = "胶囊价格，0表示免费")
-    private Integer prices;
+    private Integer readNum;
 
     @ApiModelProperty(value = "胶囊标题")
     private String title;
 
-    @ApiModelProperty(value = "胶囊类型")
+    @ApiModelProperty(value = "胶囊内容")
+    private String content;
+
+    @ApiModelProperty(value = "胶囊价格，0表示免费")
+    private BigDecimal price;
+
+    @ApiModelProperty(value = "胶囊类型(1:爱情 2：友情 3：癖好 4：心事)")
     private Integer type;
 
     @ApiModelProperty(value = "用户uid")
     private Integer uid;
 
-    @ApiModelProperty(value = "1表示正常 0表示不可见，删除")
+    @ApiModelProperty(value = "状态：0：正常 1：屏蔽 2： 删除")
     private Integer state;
 
+
+    @CreatedDate
+    @ApiModelProperty(value = "创建时间")
+    private Date createTime;
+
+    @ApiModelProperty(value = "修改时间")
+    private Date updateTime;
 
     @Override
     protected Serializable pkVal() {

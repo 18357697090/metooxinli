@@ -42,7 +42,16 @@ public class PsScaleCommentController {
         }
         vo.setUserId(userId);
         return psScaleCommentApi.addComment(vo);
-
+    }
+    /**
+     * 用户评价列表-分页
+     * @param vo
+     * @return
+     */
+    @ApiOperation("用户评价列表-分页")
+    @PostMapping("/getCommentList")
+    public RE getCommentList(PsScaleCommentVo vo){
+        return psScaleCommentApi.getCommentList(vo);
     }
 
 }

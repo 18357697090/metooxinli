@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * <p>
@@ -17,8 +18,11 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
-public class PsPsychologyConsultModel implements Serializable {
-    private Long id;
+public class PsConsultModel implements Serializable {
+
+    private Integer status; // 1: 正常  2：服务中 3：有待继续的咨询
+
+    private Integer id;
 
     private String content;
 
@@ -30,9 +34,9 @@ public class PsPsychologyConsultModel implements Serializable {
 
     private Integer onLine;
 
-    private String picture;
+    private String headImg;
 
-    private Integer prices;
+    private BigDecimal price;
 
     private Integer sort;
 

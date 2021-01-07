@@ -127,6 +127,26 @@ public class ConstantUtil {
             this.msg = msg;
         }
     }
+    /**
+     * 状态：0：正常 1：屏蔽 2： 删除
+     *
+     * @author loongya
+     */
+    @Getter
+    public enum CommStatusEnum{
+        NORMAL(0, "正常"),
+        NO_NORMAL(1, "异常"),
+        DELETE(2, "删除")
+        ;
+
+        private Integer code;
+        private String msg;
+
+        CommStatusEnum(Integer code, String msg) {
+            this.code = code;
+            this.msg = msg;
+        }
+    }
 
     /**
      * 1: 收入 2： 支出
@@ -228,6 +248,39 @@ public class ConstantUtil {
         private String msg;
 
         OrOrderPayType(Integer code, String msg) {
+            this.code = code;
+            this.msg = msg;
+        }
+        public static String getMsgByCode(Integer code) {
+            if (OU.isNotBlack(map)) {
+                return OU.isBlack(map.get(code)) ? "" : map.get(code).getMsg();
+            }
+            return "";
+        }
+    }
+    /**
+
+     * 0 表示没购买    1 表示购买未完成测试  2 表示已经测试过
+     * @author loongya
+     */
+    @Getter
+    public enum PsScaleMeasureRecordStateEnum{
+        NOT_BUY(0, "表示没购买"),
+        BUY_NOT_USE(1, "表示购买未完成测试"),
+        USED(2, "表示已经测试过")
+        ;
+        static final Map<Integer, PsScaleMeasureRecordStateEnum> map = new HashMap<>();
+
+        static {
+            EnumSet.allOf(PsScaleMeasureRecordStateEnum.class).forEach(e -> {
+                map.put(e.getCode(), e);
+            });
+        }
+
+        private Integer code;
+        private String msg;
+
+        PsScaleMeasureRecordStateEnum(Integer code, String msg) {
             this.code = code;
             this.msg = msg;
         }

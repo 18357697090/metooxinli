@@ -93,7 +93,7 @@ public class XyCountryApiImpl implements XyCountryApi {
                 if (country2 != null) {
                     return RE.fail("国度名字已存在");
                 }
-                tjUserAccountApi.updateBalance(balance, uid);
+                tjUserAccountApi.updateBalance(bigDecimal, uid);
                 XyCountry country = mapper.map(buildCountryDTO, XyCountry.class);
                 int countryId = CreateID.create();
                 XyCountry country1 = xyCountryService.findByCountryId(countryId);

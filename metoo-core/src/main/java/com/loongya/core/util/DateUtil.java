@@ -231,6 +231,9 @@ public class DateUtil {
         return dateStr;
     }
 
+    public static long diffMin(Date start, Date end){
+        return (start.getTime()-end.getTime())/(1000*60);
+    }
     /**
      * 得到n天之后是周几
      */
@@ -279,23 +282,7 @@ public class DateUtil {
      */
     public static  int getAge(String dateOfBirth) {
         Date birthday = DateUtil.parse(dateOfBirth, "yyyy-MM-dd");
-        int age = 0;
-        Calendar born = Calendar.getInstance();
-        Calendar now = Calendar.getInstance();
-        if (dateOfBirth != null) {
-            now.setTime(new Date());
-            born.setTime(birthday);
-            if (born.after(now)) {
-                throw new IllegalArgumentException("年龄不能超过当前日期");
-            }
-            age = now.get(Calendar.YEAR) - born.get(Calendar.YEAR);
-            int nowDayOfYear = now.get(Calendar.DAY_OF_YEAR);
-            int bornDayOfYear = born.get(Calendar.DAY_OF_YEAR);
-            if (nowDayOfYear < bornDayOfYear) {
-                age -= 1;
-            }
-        }
-        return age;
+        return getAge(birthday);
     }
 
 }

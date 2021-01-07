@@ -18,5 +18,6 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 public class PsPourOutVo extends BaseVo {
-
+    private Integer pourId;
+    private Integer userId;
 }

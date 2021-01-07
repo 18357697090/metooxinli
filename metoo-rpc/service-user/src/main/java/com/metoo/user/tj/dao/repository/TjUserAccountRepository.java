@@ -14,7 +14,7 @@ public interface TjUserAccountRepository extends JpaRepository<TjUserAccount,Int
     TjUserAccount findByUid(Integer uid);
 
     @Modifying
-    @Query(value = "update tj_user_account set balance=? where uid=?",nativeQuery = true)
+    @Query(value = "update tj_user_account set balance=balance-? where uid=?",nativeQuery = true)
     int updateBalance(BigDecimal balance, Integer uid);
 
     @Modifying

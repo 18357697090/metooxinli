@@ -26,8 +26,8 @@ public class TjUserAccountServiceImpl extends ServiceImpl<TjUserAccountMapper, T
     private TjUserAccountRepository tjUserAccountRepository;
 
     @Override
-    public void updateBalance(BigDecimal subtract, Integer uid) {
-        tjUserAccountRepository.updateBalance(subtract, uid);
+    public void updateBalance(BigDecimal price, Integer uid) {
+        tjUserAccountRepository.updateBalance(price, uid);
     }
 
     @Override

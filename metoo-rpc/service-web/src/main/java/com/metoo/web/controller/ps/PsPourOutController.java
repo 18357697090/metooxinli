@@ -1,8 +1,11 @@
 package com.metoo.web.controller.ps;
 
 
+import com.loongya.core.util.AssertUtils;
 import com.loongya.core.util.RE;
 import com.metoo.api.ps.PsPourOutApi;
+import com.metoo.pojo.ps.vo.PsPourOutVo;
+import com.metoo.web.config.auth.ThreadLocal;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,10 +31,24 @@ public class PsPourOutController {
     @DubboReference
     private PsPourOutApi psPourOutApi;
 
-    @GetMapping("/capsule")
-    public RE capsule(){
-        return psPourOutApi.capsule();
-
+    /**
+     * 倾诉师列表
+     * @return
+     */
+    @GetMapping("/getPourList")
+    public RE getPourList(PsPourOutVo vo){
+        vo.setUserId(ThreadLocal.getUserId());
+        return psPourOutApi.getPourList(vo);
+    }
+    /**
+     * 倾诉师详情
+     * @return
+     */
+    @GetMapping("/getPourDetail")
+    public RE getPourDetail(PsPourOutVo vo){
+        AssertUtils.checkParam(vo.getPourId());
+        vo.setUserId(ThreadLocal.getUserId());
+        return psPourOutApi.getPourDetail(vo);
     }
 
 

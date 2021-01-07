@@ -1,5 +1,6 @@
 package com.metoo.ps.ps.api;
 
+import com.loongya.core.util.ConstantUtil;
 import com.loongya.core.util.CopyUtils;
 import com.loongya.core.util.OU;
 import com.loongya.core.util.RE;
@@ -85,29 +86,25 @@ public class PsScaleMeasureRecordApiImpl implements PsScaleMeasureRecordApi {
 
     @Override
     public RE pay(Integer uid, Integer scaleId) {
-
         PsScale scale = psScaleService.findByScaleId(scaleId);
-        TjUserAccountModel zh=tjUserAccountApi.findByUid(uid);
-        int x =zh.getBalance().compareTo(scale.getPrices());
-        if(x >= 0) {
-            BigDecimal balance = zh.getBalance().subtract(scale.getPrices());
-            tjUserAccountApi.updateBalance(balance, uid);
-            PsScaleMeasureRecord userAndMeasure=psScaleMeasureRecordService.findByUidAndScaleId(uid,scaleId);
+        TjUserAccountModel accountModel =tjUserAccountApi.findByUid(uid);
+        if(accountModel.getBalance().compareTo(scale.getPrices()) >= 0) {
+            tjUserAccountApi.updateBalance(scale.getPrices(), uid);
+            PsScaleMeasureRecord userAndMeasure=psScaleMeasureRecordService.findFirstByUidAndScaleIdOrderByCreateTimeDesc(uid,scaleId);
             if(userAndMeasure==null){
                 PsScaleMeasureRecord userAndMeasure1 = new PsScaleMeasureRecord();
                 userAndMeasure1.setScaleId(scaleId);
                 userAndMeasure1.setUid(uid);
-                userAndMeasure1.setState(1);
+                userAndMeasure1.setState(ConstantUtil.PsScaleMeasureRecordStateEnum.BUY_NOT_USE.getCode());
                 userAndMeasure1.setCount(1);
                 psScaleMeasureRecordService.save(userAndMeasure1);
             }else {
-                psScaleMeasureRecordService.updateCount(userAndMeasure.getCount()+1,uid,scaleId);
+                psScaleMeasureRecordService.updateCount(userAndMeasure.getScaleId());
             }
-            int number=scale.getNumber()+1;
-            psScaleService.updateNumber(number,scaleId);
-            return RE.ok("success");
+            psScaleService.updateNumber(scaleId);
+            return RE.ok();
         }else {
-            return RE.fail("error");//error表示余额不足
+            return RE.fail("余额不足");//error表示余额不足
         }
     }
 

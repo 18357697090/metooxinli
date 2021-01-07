@@ -78,7 +78,7 @@ public class PsScaleServiceImpl extends ServiceImpl<PsScaleMapper, PsScale> impl
     }
 
     @Override
-    public void updateNumber(Integer number, Integer scaleId) {
-        psScaleRepository.updateNumber(number, scaleId);
+    public void updateNumber(Integer scaleId) {
+        psScaleRepository.updateNumber(scaleId);
     }
 }

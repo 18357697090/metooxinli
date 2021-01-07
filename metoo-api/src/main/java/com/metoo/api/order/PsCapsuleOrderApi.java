@@ -2,6 +2,7 @@ package com.metoo.api.order;
 
 import com.loongya.core.util.RE;
 import com.metoo.pojo.order.model.PsCapsuleOrderModel;
+import com.metoo.pojo.ps.vo.PsCapsuleVo;
 
 /**
  * <p>
@@ -13,7 +14,7 @@ import com.metoo.pojo.order.model.PsCapsuleOrderModel;
  */
 public interface PsCapsuleOrderApi {
 
-    RE pay(Integer uid, Integer capsuleId);
-
     PsCapsuleOrderModel findByUidAndCapsuleId(Integer uid, Integer capsuleId);
+
+    RE pay(PsCapsuleVo vo);
 }

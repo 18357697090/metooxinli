@@ -28,6 +28,7 @@ public class PsScaleDetailModel implements Serializable{
     private String content;
     private Integer numberOfPeople;
     private Integer numberOfProblem;
+    private Integer commentCount; // 评价总数
     private String contentPicture;
     private List<PsScaleCommentModel> comments;
     private String scaleNeedToKnow;

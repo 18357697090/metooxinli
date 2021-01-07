@@ -15,29 +15,14 @@ public interface PsCapsuleRepository extends JpaRepository<PsCapsule,Integer> {
 
     Integer countByType(Integer type);
 
-//    @Query(nativeQuery = true,value = "SELECT * FROM Capsule WHERE attribute=1 ORDER BY id DESC LIMIT ?,7")
-//    List<Capsule> findCapsules(Integer page);
+    @Query(nativeQuery = true,value = "SELECT * FROM ps_capsule WHERE auth_type=1 and `state` = 0 ORDER BY RAND() LIMIT 4")
+    List<PsCapsule> findCapsule();
 
-
-    @Modifying
-    @Query(value = "update ps_capsule set state=0 where capsule_id=?",nativeQuery = true)
-    int updataState(Integer capsuleId);
+    @Query(nativeQuery = true,value = "SELECT * FROM ps_capsule WHERE auth_type=1 and  `state` = 0 ORDER BY RAND() LIMIT ?1")
+    List<PsCapsule> findAllByRand(Integer limit);
 
     @Modifying
-    @Query(value = "update ps_capsule set attribute=? where capsule_id=?",nativeQuery = true)
-    int updataAttribute(Integer attribute,Integer capsuleId);
-
-
-    @Query(nativeQuery = true,value = "SELECT capsule_id,create_time,be_watched,prices,title,uid,attribute FROM ps_capsule WHERE uid = ? and state = 1 ORDER BY id DESC LIMIT ?,7")
-    List<Object[]> findmyCapsules(Integer uid,Integer page);
-
-    @Query(nativeQuery = true,value = "SELECT capsule_id,create_time,be_watched,prices,title,uid FROM ps_capsule WHERE attribute=1 and state = 1 ORDER BY id DESC LIMIT ?,7")
-    List<Object[]> findCapsules(Integer page);
-//    @Query(nativeQuery = true,value = "SELECT * FROM ps_capsule WHERE attribute=1 ORDER BY RAND() LIMIT 4")
-//    List<PsCapsule> findCapsule();
-
-    @Query(nativeQuery = true,value = "SELECT capsule_id,create_time,be_watched,prices,title,uid FROM ps_capsule WHERE attribute=1 and state = 1 ORDER BY RAND() LIMIT 4")
-    List<Object[]> findCapsule();
-
+    @Query(value = "update ps_capsule set read_num=read_num+1 where id= :capsuleId ",nativeQuery = true)
+    void updateReadNum(Integer capsuleId);
 
 }

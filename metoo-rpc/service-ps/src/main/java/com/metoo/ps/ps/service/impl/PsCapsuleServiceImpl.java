@@ -1,5 +1,6 @@
 package com.metoo.ps.ps.service.impl;
 
+import com.metoo.pojo.ps.vo.PsCapsuleVo;
 import com.metoo.ps.ps.dao.entity.PsCapsule;
 import com.metoo.ps.ps.dao.mapper.PsCapsuleMapper;
 import com.metoo.ps.ps.dao.repository.PsCapsuleRepository;
@@ -31,27 +32,17 @@ public class PsCapsuleServiceImpl extends ServiceImpl<PsCapsuleMapper, PsCapsule
     }
 
     @Override
-    public List<Object[]> findmyCapsules(Integer uid, Integer page) {
-        return psCapsuleRepository.findmyCapsules(uid, page);
-    }
-
-    @Override
-    public Integer updataAttribute(Integer i, Integer capsuleId) {
-        return psCapsuleRepository.updataAttribute(i, capsuleId);
-    }
-
-    @Override
-    public Integer updataState(Integer capsuleId) {
-        return psCapsuleRepository.updataState(capsuleId);
-    }
-
-    @Override
-    public List<Object[]> findCapsules(Integer page) {
-        return psCapsuleRepository.findCapsules(page);
-    }
-
-    @Override
-    public List<Object[]> findCapsule() {
+    public List<PsCapsule> findCapsule() {
         return psCapsuleRepository.findCapsule();
+    }
+
+    @Override
+    public List<PsCapsule> findCapsuleRand(Integer limit) {
+        return psCapsuleRepository.findAllByRand(limit);
+    }
+
+    @Override
+    public void updateReadNum(Integer capsuleId) {
+        psCapsuleRepository.updateReadNum(capsuleId);
     }
 }

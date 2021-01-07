@@ -30,7 +30,7 @@ public class PsScaleMeasureRecordServiceImpl extends ServiceImpl<PsScaleMeasureR
     }
 
     @Override
-    public void updateMeasure(Integer uid, int scaleId) {
+    public void updateMeasure(Integer uid, Integer scaleId) {
         psScaleMeasureRecordRepository.updateMeasure(uid, scaleId);
     }
 
@@ -44,8 +44,8 @@ public class PsScaleMeasureRecordServiceImpl extends ServiceImpl<PsScaleMeasureR
     }
 
     @Override
-    public void updateCount(Integer i, Integer uid, Integer scaleId) {
-        psScaleMeasureRecordRepository.updateCount(i, uid, scaleId);
+    public void updateCount(Integer id) {
+        psScaleMeasureRecordRepository.updateCount(id);
     }
 
 }

@@ -16,4 +16,5 @@ public interface PsScaleCommentApi {
 
     RE addComment(PsScaleCommentVo vo);
 
+    RE getCommentList(PsScaleCommentVo vo);
 }

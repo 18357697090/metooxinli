@@ -19,6 +19,8 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 public class PsPourOutModel implements Serializable {
+    private Integer status; // 服务状态： 1：正常状态  2：进行服务中 3：有未完成的倾诉，可以继续倾诉
+
     private Long id;
 
     private String label;
