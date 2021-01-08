@@ -10,6 +10,9 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import javax.persistence.*;
 
 /**
  * <p>
@@ -19,6 +22,9 @@ import lombok.EqualsAndHashCode;
  * @author loongya
  * @since 2021-01-08
  */
+@Entity
+@Table(name = "tj_user_account_point_detail")
+@EntityListeners(AuditingEntityListener.class)
 @Data
 @EqualsAndHashCode(callSuper = false)
 @ApiModel(value="TjUserAccountPointDetail对象", description="积分使用详情类")
@@ -26,6 +32,8 @@ public class TjUserAccountPointDetail extends Model<TjUserAccountPointDetail> {
 
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
