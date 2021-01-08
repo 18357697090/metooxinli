@@ -20,6 +20,8 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 public class NrGoodsVo extends BaseVo {
-
+    private Integer userId;
+    private Integer goodsId;
+    private Integer extendId;
 
 }

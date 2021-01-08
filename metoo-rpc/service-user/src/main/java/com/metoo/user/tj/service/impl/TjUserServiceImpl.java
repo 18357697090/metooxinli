@@ -41,4 +41,9 @@ public class TjUserServiceImpl extends ServiceImpl<TjUserMapper, TjUser> impleme
     public LoginModel login(LoginVo vo) {
         return tjUserMapper.login(vo);
     }
+
+    @Override
+    public Integer findByExtendId(Integer extendId) {
+        return tjUserMapper.findByExtendId(extendId);
+    }
 }

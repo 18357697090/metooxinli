@@ -10,13 +10,13 @@ import java.io.Serializable;
 @Setter
 @NoArgsConstructor
 public class REPage<T> extends RE{
-    private Integer total;
+    private Long total;
     private Integer pagesize;
     private Integer pagenum;
-    private Integer totalPage;
+    private Long totalPage;
 
 
-    private REPage(Integer pagenum, Integer pagesize, Integer total, T data){
+    private REPage(Integer pagenum, Integer pagesize, Long total, T data){
         super(CommsEnum.SUCCESS,data);
         this.pagenum = pagenum;
         this.pagesize = pagesize;
@@ -26,7 +26,7 @@ public class REPage<T> extends RE{
         }
     }
 
-    public static<T> REPage ok(Integer pagenum, Integer pagesize, Integer total, T data){
+    public static<T> REPage ok(Integer pagenum, Integer pagesize, Long total, T data){
         return new REPage(pagenum, pagesize, total, data);
     }
 }

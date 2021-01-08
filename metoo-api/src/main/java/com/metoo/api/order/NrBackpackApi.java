@@ -1,6 +1,8 @@
 package com.metoo.api.order;
 
 import com.loongya.core.util.RE;
+import com.metoo.pojo.nr.vo.NrGoodsVo;
+import com.metoo.pojo.order.vo.NrBackpackVo;
 
 /**
  * <p>
@@ -12,9 +14,11 @@ import com.loongya.core.util.RE;
  */
 public interface NrBackpackApi {
 
-    RE backpack(Integer uid);
+    RE myBackpackList(NrBackpackVo vo);
 
-    RE buy(Integer uid, Integer type);
+    RE buyGoods(NrGoodsVo vo);
 
-    RE give(Integer uid, Integer type, Integer donee);
+    RE giveGoods(NrGoodsVo vo);
+
+    RE buyAndGiveGoods(NrGoodsVo vo);
 }

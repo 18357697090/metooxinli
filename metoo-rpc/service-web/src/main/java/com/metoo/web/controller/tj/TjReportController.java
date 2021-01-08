@@ -4,7 +4,6 @@ package com.metoo.web.controller.tj;
 import com.loongya.core.util.RE;
 import com.metoo.api.tj.TjReportApi;
 import com.metoo.pojo.tj.vo.TjReportVo;
-import com.metoo.web.controller.order.NrBackpackController;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.*;
 

@@ -63,8 +63,8 @@ public class TjUserAccountApiImpl implements TjUserAccountApi {
         meDTO.setPicture(userInfo.getHeadImg());
         meDTO.setLevel(userInfo.getLevel());
         meDTO.setName(userInfo.getNickName());
-        meDTO.setActiveIntegral(zh.getActiveIntegral());
-        meDTO.setPsychologyIntegral(zh.getPsychologyIntegral());
+        meDTO.setActiveIntegral(zh.getAcPoints());
+        meDTO.setPsychologyIntegral(zh.getPsPoints());
         meDTO.setBalance(zh.getBalance());
         return RE.ok(meDTO);
     }

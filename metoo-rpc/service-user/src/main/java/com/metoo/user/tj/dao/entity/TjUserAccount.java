@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
+import java.util.Date;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -40,13 +42,33 @@ public class TjUserAccount extends Model<TjUserAccount> {
     private Integer uid;
 
     @ApiModelProperty(value = "活动积分")
-    private BigDecimal activeIntegral;
+    private BigDecimal acPoints;
 
     @ApiModelProperty(value = "余额")
     private BigDecimal balance;
 
     @ApiModelProperty(value = "心理积分")
-    private BigDecimal psychologyIntegral;
+    private BigDecimal psPoints;
+
+    @ApiModelProperty(value = "心理币")
+    private BigDecimal psCoin;
+
+    @ApiModelProperty(value = "冻结兔币")
+    private BigDecimal balanceFrozen;
+
+    @ApiModelProperty(value = "已使用活动积分")
+    private BigDecimal acPointsUsed;
+
+    @ApiModelProperty(value = "已使用心理积分")
+    private BigDecimal psPointsUsed;
+
+
+    @ApiModelProperty(value = "创建时间")
+    private Date createTime;
+
+
+    @ApiModelProperty(value = "修改时间")
+    private Date updateTime;
 
 
     @Override

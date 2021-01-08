@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -19,6 +20,20 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 public class NrGoodsModel implements Serializable {
+    private Integer id;
 
+    private String content;
+
+    private String name;
+
+    private String img;
+
+    private Integer price;
+
+    private String remark;
+
+    private Date createTime;
+
+    private Date updateTime;
 
 }

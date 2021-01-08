@@ -30,7 +30,18 @@ public class NrBackpackServiceImpl extends ServiceImpl<NrBackpackMapper, NrBackp
     }
 
     @Override
-    public void updateGoodsNumber(Integer i, Integer uid, Integer type) {
-        nrBackpackRepository.updateGoodsNumber(i, uid, type);
+    public void updateGoodsNumber(Integer userId, Integer goodsId) {
+        nrBackpackRepository.updateGoodsNumber(userId, goodsId);
     }
+
+    @Override
+    public void updateGoodsNumDownById(Integer id) {
+        nrBackpackRepository.updateGoodsNumDownById(id);
+    }
+
+    @Override
+    public NrBackpack findFirstByUidAndGoodsId(Integer userId, Integer goodsId) {
+        return nrBackpackRepository.findFirstByUidAndGoodsIdOrderByCreateTimeDesc(userId, goodsId);
+    }
+
 }

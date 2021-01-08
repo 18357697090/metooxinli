@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 import io.swagger.annotations.ApiModel;
@@ -40,13 +41,13 @@ public class NrBackpack extends Model<NrBackpack> {
     private Integer id;
 
     @ApiModelProperty(value = "用户拥有商品数量")
-    private Integer number;
+    private Integer num;
 
     @ApiModelProperty(value = "商品图片")
-    private String picture;
+    private String img;
 
     @ApiModelProperty(value = "商品类型id")
-    private Integer type;
+    private Integer goodsId;
 
     @ApiModelProperty(value = "用户uid")
     private Integer uid;
@@ -57,12 +58,18 @@ public class NrBackpack extends Model<NrBackpack> {
     @ApiModelProperty(value = "商品名称")
     private String name;
 
+    @ApiModelProperty(value = "商品价格")
+    private BigDecimal price;
+
     @ApiModelProperty(value = "备用字段")
-    private String spare;
+    private String remark;
 
     @CreatedDate
     @ApiModelProperty(value = "创建时间")
     private Date createTime;
+
+    @ApiModelProperty(value = "修改时间")
+    private Date updateTime;
 
 
     @Override

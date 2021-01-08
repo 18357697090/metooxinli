@@ -13,7 +13,12 @@ public interface NrBackpackRepository extends JpaRepository<NrBackpack,Integer> 
     List<NrBackpack> findByUid(Integer uid);
 
     @Modifying
-    @Query(value = "update nr_backpack set number = ? where uid=? and type=?",nativeQuery = true)
-    int updateGoodsNumber(int number, int uid,int type);
+    @Query(value = "update nr_backpack set num = num + 1 where uid= :userId and goods_id= :goodsId",nativeQuery = true)
+    int updateGoodsNumber(Integer userId, Integer goodsId);
 
+    NrBackpack findFirstByUidAndGoodsIdOrderByCreateTimeDesc(Integer uid, Integer goodsId);
+
+    @Modifying
+    @Query(value = "update nr_backpack set num = num - 1 where id = :id",nativeQuery = true)
+    void updateGoodsNumDownById(Integer id);
 }

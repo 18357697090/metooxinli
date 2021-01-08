@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -19,20 +20,27 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 public class TjUserAccountDetailModel implements Serializable {
-    private Long id;
 
-    private String content;
-
-    private String orderNumber;
-
-    private Integer prices;
-
-    private String spare;
-
-    private String type;
+    private Integer id;
 
     private Integer uid;
 
+    private BigDecimal acPoints;
+
+    private BigDecimal balance;
+
+    private BigDecimal psPoints;
+
+    private BigDecimal psCoin;
+
+    private BigDecimal balanceFrozen;
+
+    private BigDecimal acPointsUsed;
+
+    private BigDecimal psPointsUsed;
+
     private Date createTime;
+
+    private Date updateTime;
 
 }

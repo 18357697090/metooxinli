@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * <p>
@@ -20,13 +21,25 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class TjUserAccountModel implements Serializable {
 
-    private Long id;
+    private Integer id;
 
     private Integer uid;
 
-    private Integer activeIntegral;
+    private BigDecimal acPoints;
 
     private BigDecimal balance;
 
-    private Integer psychologyIntegral;
+    private BigDecimal psPoints;
+
+    private BigDecimal psCoin;
+
+    private BigDecimal balanceFrozen;
+
+    private BigDecimal acPointsUsed;
+
+    private BigDecimal psPointsUsed;
+
+    private Date createTime;
+
+    private Date updateTime;
 }

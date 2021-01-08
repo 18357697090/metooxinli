@@ -31,6 +31,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -84,6 +85,13 @@ public class TjUserApiImpl implements TjUserApi {
     }
 
     @Override
+    public RE findUserIdByExtendId(Integer extendId) {
+        Integer userId = tjUserService.findByExtendId(extendId);
+        Assert.isNull(userId, "没有该用户");
+        return RE.ok(userId);
+    }
+
+    @Override
     public RE register(LoginVo vo) {
         if(!vo.getPassword().equals(vo.getRepeatPassword())){
             return RE.fail("密码不相同,请重新输入密码！");
@@ -106,8 +114,8 @@ public class TjUserApiImpl implements TjUserApi {
         TjUserAccount tjUserAccount = new TjUserAccount();
         tjUserAccount.setUid(pojo.getId());
         tjUserAccount.setBalance(new BigDecimal(0));
-        tjUserAccount.setPsychologyIntegral(new BigDecimal(0));
-        tjUserAccount.setActiveIntegral(new BigDecimal(0));
+        tjUserAccount.setPsPoints(new BigDecimal(0));
+        tjUserAccount.setAcPoints(new BigDecimal(0));
         tjUserAccountService.save(tjUserAccount);
         // 创建用户详细表
         TjUserInfo tjUserInfo = new TjUserInfo();

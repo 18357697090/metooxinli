@@ -6,6 +6,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * <p>
@@ -20,5 +22,25 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class NrBackpackModel implements Serializable {
 
+    private Integer id;
 
+    private Integer num;
+
+    private String img;
+
+    private Integer goodsId;
+
+    private Integer uid;
+
+    private String content;
+
+    private String name;
+
+    private BigDecimal price;
+
+    private String remark;
+
+    private Date createTime;
+
+    private Date updateTime;
 }

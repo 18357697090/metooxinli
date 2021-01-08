@@ -22,8 +22,4 @@ public class NrGoodsServiceImpl extends ServiceImpl<NrGoodsMapper, NrGoods> impl
     @Autowired
     private NrGoodsRepository nrGoodsRepository;
 
-    @Override
-    public NrGoods findByType(Integer type) {
-        return nrGoodsRepository.findByType(type);
-    }
 }

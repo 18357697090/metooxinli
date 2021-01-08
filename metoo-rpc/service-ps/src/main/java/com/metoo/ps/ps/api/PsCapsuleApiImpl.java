@@ -118,7 +118,7 @@ public class PsCapsuleApiImpl implements PsCapsuleApi {
     private RE getCapsuleList(PsCapsuleVo vo,Page<PsCapsule> page, LambdaQueryWrapper<PsCapsule> lqw) {
         page = psCapsuleService.page(page, lqw);
         List<PsCapsule> capsuleList = page.getRecords();
-        return REPage.ok(vo.getPagenum(), vo.getPagesize(), (int)page.getTotal(), capsuleList.stream().flatMap(e->{
+        return REPage.ok(vo.getPagenum(), vo.getPagesize(), page.getTotal(), capsuleList.stream().flatMap(e->{
             PsCapsuleDetailModel model = getDetailModel(e, vo.getUserId());
             return Stream.of(model);
         }).collect(Collectors.toList()));

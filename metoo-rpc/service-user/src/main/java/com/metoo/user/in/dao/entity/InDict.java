@@ -1,37 +1,32 @@
-package com.metoo.order.nr.dao.entity;
+package com.metoo.user.in.dao.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
-
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Date;
-
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 
 /**
  * <p>
- * 商品表
+ * 字典表
  * </p>
  *
  * @author loongya
- * @since 2020-12-28
+ * @since 2021-01-08
  */
 @Entity
-@Table(name = "nr_goods")
+@Table(name = "in_dict")
 @EntityListeners(AuditingEntityListener.class)
 @Data
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value="NrGoods对象", description="商品表")
-public class NrGoods extends Model<NrGoods> {
+@ApiModel(value="InDict对象", description="字典表")
+public class InDict extends Model<InDict> {
 
     private static final long serialVersionUID = 1L;
 
@@ -40,27 +35,20 @@ public class NrGoods extends Model<NrGoods> {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @ApiModelProperty(value = "商品内容介绍")
-    private String content;
-
-    @ApiModelProperty(value = "商品名称")
+    @ApiModelProperty(value = "字典名称")
     private String name;
 
-    @ApiModelProperty(value = "商品图片")
-    private String img;
+    @ApiModelProperty(value = "归属key")
+    private String pkey;
 
-    @ApiModelProperty(value = "商品价格")
-    private BigDecimal price;
+    @ApiModelProperty(value = "字典key")
+    private String key;
 
-    @ApiModelProperty(value = "备用字段")
+    @ApiModelProperty(value = "字典key")
+    private String value;
+
+    @ApiModelProperty(value = "备注")
     private String remark;
-
-    @CreatedDate
-    @ApiModelProperty(value = "创建时间")
-    private Date createTime;
-
-    @ApiModelProperty(value = "修改时间")
-    private Date updateTime;
 
 
     @Override

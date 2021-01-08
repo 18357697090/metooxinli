@@ -21,5 +21,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class NrBackpackVo extends BaseVo {
 
+    private Integer userId;
 
 }

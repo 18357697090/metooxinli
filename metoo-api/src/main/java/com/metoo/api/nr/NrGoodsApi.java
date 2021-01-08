@@ -1,6 +1,7 @@
 package com.metoo.api.nr;
 
 import com.loongya.core.util.RE;
+import com.metoo.pojo.nr.vo.NrGoodsVo;
 
 /**
  * <p>
@@ -12,5 +13,5 @@ import com.loongya.core.util.RE;
  */
 public interface NrGoodsApi{
 
-    RE findAll();
+    RE getGoodsList(NrGoodsVo vo);
 }

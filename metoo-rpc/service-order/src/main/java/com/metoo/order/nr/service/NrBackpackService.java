@@ -17,5 +17,9 @@ public interface NrBackpackService extends IService<NrBackpack> {
 
     List<NrBackpack> findByUid(Integer uid);
 
-    void updateGoodsNumber(Integer i, Integer uid, Integer type);
+    NrBackpack findFirstByUidAndGoodsId(Integer userId, Integer goodsId);
+
+    void updateGoodsNumber(Integer userId, Integer goodsId);
+
+    void updateGoodsNumDownById(Integer id);
 }

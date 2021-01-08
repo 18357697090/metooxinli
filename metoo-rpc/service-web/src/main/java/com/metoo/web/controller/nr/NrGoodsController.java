@@ -5,6 +5,8 @@ import com.loongya.core.util.RE;
 import com.metoo.api.im.ImUserMessageApi;
 import com.metoo.api.nr.NrGoodsApi;
 import com.metoo.pojo.im.model.ImUserMessageModel;
+import com.metoo.pojo.nr.vo.NrGoodsVo;
+import com.metoo.web.config.auth.ThreadLocal;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,12 +28,15 @@ public class NrGoodsController {
 
     @DubboReference
     private NrGoodsApi nrGoodsApi;
-    @DubboReference
-    private ImUserMessageApi imUserMessageApi;
 
-    @GetMapping("/goods")
-    public RE shop(){
-        return nrGoodsApi.findAll();
+    /**
+     * 获取商城道具列表
+     * @return
+     */
+    @GetMapping("/getGoodsList")
+    public RE getGoodsList(NrGoodsVo vo){
+        vo.setUserId(ThreadLocal.getUserId());
+        return nrGoodsApi.getGoodsList(vo);
     }
 
 

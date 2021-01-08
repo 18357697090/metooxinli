@@ -17,4 +17,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 public interface TjUserMapper extends BaseMapper<TjUser> {
 
     LoginModel login(LoginVo vo);
+
+    Integer findByExtendId(Integer extendId);
 }

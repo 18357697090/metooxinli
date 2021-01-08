@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.metoo.user.in.dao.mapper.InDictMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.metoo.user.in.dao.entity.InDict">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="pkey" property="pkey" />
+        <result column="key" property="key" />
+        <result column="value" property="value" />
+        <result column="remark" property="remark" />
+    </resultMap>
+
+</mapper>

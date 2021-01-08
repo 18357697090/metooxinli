@@ -28,4 +28,6 @@ public interface TjUserApi {
 
 
     RE fendFriend(Integer uid, String name);
+
+    RE findUserIdByExtendId(Integer extendId);
 }
