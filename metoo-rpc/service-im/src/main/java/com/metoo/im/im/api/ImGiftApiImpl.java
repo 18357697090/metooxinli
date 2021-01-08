@@ -65,8 +65,8 @@ public class ImGiftApiImpl implements ImGiftApi {
             imGiftRecordApi.save(giftRecord);
             TjUserAccountDetailModel zhRecord = new TjUserAccountDetailModel();
             zhRecord.setUid(uid);
-            zhRecord.setPrices(gift.getPrices().intValue());
-            zhRecord.setType("刷礼物");
+            zhRecord.setPrice(gift.getPrices());
+            zhRecord.setRemark("刷礼物");
             zhRecord.setContent(gift.getName());
             tjUserAccountDetailApi.save(zhRecord);
             returnGivingGiftDTO.setBalance(balance);

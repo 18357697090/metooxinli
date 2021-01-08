@@ -5,7 +5,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * <p>
@@ -18,7 +17,6 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
-public class TaUserTaskModel implements Serializable {
-
+public class TaTaskToLevelModel implements Serializable {
 
 }

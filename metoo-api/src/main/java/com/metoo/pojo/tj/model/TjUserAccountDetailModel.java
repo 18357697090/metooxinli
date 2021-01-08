@@ -25,22 +25,22 @@ public class TjUserAccountDetailModel implements Serializable {
 
     private Integer uid;
 
-    private BigDecimal acPoints;
+    private Integer accountId;
 
-    private BigDecimal balance;
+    private String content;
 
-    private BigDecimal psPoints;
+    private BigDecimal prePrice;
 
-    private BigDecimal psCoin;
+    private BigDecimal price;
 
-    private BigDecimal balanceFrozen;
+    private BigDecimal afterPrice;
 
-    private BigDecimal acPointsUsed;
+    private Integer type;
 
-    private BigDecimal psPointsUsed;
+    private Integer typeName;
+
+    private String remark;
 
     private Date createTime;
-
-    private Date updateTime;
 
 }

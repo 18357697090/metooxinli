@@ -1,6 +1,6 @@
 package com.metoo.user.ta.service;
 
-import com.metoo.user.ta.dao.entity.TaUserTask;
+import com.metoo.user.ta.dao.entity.TaTaskUser;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -11,7 +11,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author loongya
  * @since 2020-12-29
  */
-public interface TaUserTaskService extends IService<TaUserTask> {
+public interface TaTaskUserService extends IService<TaTaskUser> {
 
     void updateAcceptId(Integer uid, Integer taskId);
 

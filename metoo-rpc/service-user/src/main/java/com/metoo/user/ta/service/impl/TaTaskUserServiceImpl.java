@@ -1,9 +1,9 @@
 package com.metoo.user.ta.service.impl;
 
-import com.metoo.user.ta.dao.entity.TaUserTask;
-import com.metoo.user.ta.dao.mapper.TaUserTaskMapper;
-import com.metoo.user.ta.dao.repository.TaUserTaskRepository;
-import com.metoo.user.ta.service.TaUserTaskService;
+import com.metoo.user.ta.dao.entity.TaTaskUser;
+import com.metoo.user.ta.dao.mapper.TaTaskUserMapper;
+import com.metoo.user.ta.dao.repository.TaTaskUserRepository;
+import com.metoo.user.ta.service.TaTaskUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,18 +17,18 @@ import org.springframework.stereotype.Service;
  * @since 2020-12-29
  */
 @Service
-public class TaUserTaskServiceImpl extends ServiceImpl<TaUserTaskMapper, TaUserTask> implements TaUserTaskService {
+public class TaTaskUserServiceImpl extends ServiceImpl<TaTaskUserMapper, TaTaskUser> implements TaTaskUserService {
 
     @Autowired
-    private TaUserTaskRepository taUserTaskRepository;
+    private TaTaskUserRepository taTaskUserRepository;
 
     @Override
     public void updateAcceptId(Integer uid, Integer taskId) {
-        taUserTaskRepository.updateAcceptId(uid, taskId);
+        taTaskUserRepository.updateAcceptId(uid, taskId);
     }
 
     @Override
     public int updateAcceptState(Integer taskId, Integer uid) {
-        return taUserTaskRepository.updateAcceptState(taskId, uid);
+        return taTaskUserRepository.updateAcceptState(taskId, uid);
     }
 }

@@ -1,6 +1,6 @@
 package com.metoo.user.ta.dao.repository;
 
-import com.metoo.user.ta.dao.entity.TaUserTask;
+import com.metoo.user.ta.dao.entity.TaTaskUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -9,7 +9,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 
-public interface TaUserTaskRepository extends JpaRepository<TaUserTask,Integer> {
+public interface TaTaskUserRepository extends JpaRepository<TaTaskUser,Integer> {
 
     @Modifying
     @Query(value = "update ta_user_task set accept_id=?1 where task_id=?2",nativeQuery = true)
@@ -24,7 +24,7 @@ public interface TaUserTaskRepository extends JpaRepository<TaUserTask,Integer> 
     int updateAcceptState(Integer taskId,Integer uid);
 
     @Query(value = "select * from  ta_user_task where publish_id=?1 or accept_id=?1",nativeQuery = true)
-    List<TaUserTask> findByPublishIdOrAcceptId(Integer uid);
+    List<TaTaskUser> findByPublishIdOrAcceptId(Integer uid);
 
-    TaUserTask findByTaskId(Integer taskId);
+    TaTaskUser findByTaskId(Integer taskId);
 }

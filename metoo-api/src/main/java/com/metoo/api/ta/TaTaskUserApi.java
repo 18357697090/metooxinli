@@ -11,7 +11,7 @@ import com.metoo.pojo.old.vo.PublishTaskDTO;
  * @author loongya
  * @since 2020-12-28
  */
-public interface TaUserTaskApi {
+public interface TaTaskUserApi {
 
 
 }

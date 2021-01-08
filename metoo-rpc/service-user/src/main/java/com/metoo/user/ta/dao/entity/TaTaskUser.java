@@ -1,10 +1,10 @@
-package com.metoo.ps.ps.dao.entity;
+package com.metoo.user.ta.dao.entity;
 
-import java.math.BigDecimal;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 import io.swagger.annotations.ApiModel;
@@ -17,19 +17,19 @@ import javax.persistence.*;
 
 /**
  * <p>
- * 倾诉师订单
+ * 用户我的任务表
  * </p>
  *
  * @author loongya
- * @since 2021-01-07
+ * @since 2020-12-29
  */
 @Entity
-@Table(name = "ps_consult_order")
+@Table(name = "ta_task_user")
 @EntityListeners(AuditingEntityListener.class)
 @Data
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value="PsPourOutOrder对象", description="倾诉师订单")
-public class PsPourOutOrder extends Model<PsPourOutOrder> {
+@ApiModel(value="TaTaskUser对象", description="用户我的任务表")
+public class TaTaskUser extends Model<TaTaskUser> {
 
     private static final long serialVersionUID = 1L;
 
@@ -38,22 +38,23 @@ public class PsPourOutOrder extends Model<PsPourOutOrder> {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @ApiModelProperty(value = "倾诉师表id")
-    private Integer pourId;
+    @ApiModelProperty(value = "任务id")
+    private Integer taskId;
 
-    @ApiModelProperty(value = "咨询用户id")
-    private Integer userId;
+    @ApiModelProperty(value = "领去任务的用户的id")
+    private Integer uid;
 
-    @ApiModelProperty(value = "状态：1：进行中， 2：已结束")
+    @ApiModelProperty(value = "任务状态 1: 待完成 2: 待审核 3: 审核成功(金额到账) 4: 审核失败(7日后金额原路返回) 5:已关闭")
     private Integer status;
 
-    @ApiModelProperty(value = "倾诉价格")
+    @ApiModelProperty(value = "任务价格")
     private BigDecimal price;
 
+    @ApiModelProperty(value = "任务领取时间")
     private Date createTime;
 
+    @ApiModelProperty(value = "更新时间")
     private Date updateTime;
-
 
     @Override
     protected Serializable pkVal() {

@@ -8,9 +8,9 @@ import com.metoo.pojo.old.vo.TaskDTO;
 import com.metoo.pojo.tj.model.TjUserInfoModel;
 import com.metoo.tools.CreateID;
 import com.metoo.user.ta.dao.entity.TaTask;
-import com.metoo.user.ta.dao.entity.TaUserTask;
+import com.metoo.user.ta.dao.entity.TaTaskUser;
 import com.metoo.user.ta.service.TaTaskService;
-import com.metoo.user.ta.service.TaUserTaskService;
+import com.metoo.user.ta.service.TaTaskUserService;
 import com.metoo.user.tj.dao.entity.TjUserAccount;
 import com.metoo.user.tj.dao.entity.TjUserAccountDetail;
 import com.metoo.user.tj.service.TjUserAccountDetailService;
@@ -56,7 +56,7 @@ public class TaTaskApiImpl implements TaTaskApi {
     private TjUserAccountDetailService tjUserAccountDetailService;
 
     @Autowired
-    private TaUserTaskService taUserTaskService;
+    private TaTaskUserService taTaskUserService;
 
     @Autowired
     private DozerBeanMapper mapper;
@@ -103,37 +103,29 @@ public class TaTaskApiImpl implements TaTaskApi {
     public RE publishTask(PublishTaskDTO publishTaskDTO, Integer uid) {
 
         TaTask task = mapper.map(publishTaskDTO,TaTask.class);
-        task.setTaskPrices(publishTaskDTO.getPrices().intValue());
+        task.setPrice(publishTaskDTO.getPrices());
         task.setUid(uid);
         TjUserAccount zh = tjUserAccountService.findByUid(uid);
-        int x = zh.getBalance().compareTo(new BigDecimal(task.getTaskPrices()));
+        int x = zh.getBalance().compareTo(task.getPrice());
         if(x<0){
             return RE.fail("你的余额不足");
         }else {
-            BigDecimal balance = zh.getBalance().subtract(new BigDecimal(task.getTaskPrices()));
-            tjUserAccountService.updateBalance(new BigDecimal(task.getTaskPrices()),uid);
+            BigDecimal balance = zh.getBalance().subtract(task.getPrice());
+            tjUserAccountService.updateBalance(task.getPrice(),uid);
         }
-        int taskId = CreateID.create();
-        TaTask task1 = taTaskService.findByTaskId(taskId);
-        while (task1!=null){
-            taskId=CreateID.create();
-            task1 = taTaskService.findByTaskId(taskId);
-        }
-        task.setTaskId(taskId);
         taTaskService.save(task);
         //消费记录
         TjUserAccountDetail zhRecord = new TjUserAccountDetail();
         zhRecord.setUid(uid);
-        zhRecord.setPrices(task.getTaskPrices());
-        zhRecord.setType("发布任务");
+        zhRecord.setPrice(task.getPrice());
+        zhRecord.setRemark("发布任务");
         tjUserAccountDetailService.save(zhRecord);
         //我的任务
-        TaUserTask userTask = new TaUserTask();
-        userTask.setPublishId(uid);
-        userTask.setTaskId(taskId);
-        userTask.setType(1);
-        userTask.setState(1);
-        taUserTaskService.save(userTask);
+        TaTaskUser userTask = new TaTaskUser();
+        userTask.setUid(uid);
+        userTask.setTaskId(task.getId());
+        userTask.setStatus(1);
+        taTaskUserService.save(userTask);
         return RE.ok();
     }
 
@@ -145,7 +137,7 @@ public class TaTaskApiImpl implements TaTaskApi {
         }
         TjUserAccount zh = tjUserAccountService.findByUid(uid);
         BigDecimal bigDecimal = new BigDecimal("10");
-        BigDecimal y = new BigDecimal(task.getTaskPrices()).divide(bigDecimal,2);
+        BigDecimal y = task.getPrice().divide(bigDecimal,2);
         int x = zh.getBalance().compareTo(y);
         if(x<0){
             return RE.fail("余额不足");
@@ -153,11 +145,11 @@ public class TaTaskApiImpl implements TaTaskApi {
             BigDecimal ye = zh.getBalance().subtract(y);
             tjUserAccountService.updateBalance(y,uid);
             taTaskService.updateTaskState(taskId);
-            taUserTaskService.updateAcceptId(uid,taskId);
+            taTaskUserService.updateAcceptId(uid,taskId);
             TjUserAccountDetail zhRecord = new TjUserAccountDetail();
-            zhRecord.setPrices(y.intValue());
+            zhRecord.setPrice(y);
             zhRecord.setUid(uid);
-            zhRecord.setType("接受任务");
+            zhRecord.setRemark("接受任务");
             tjUserAccountDetailService.save(zhRecord);
             return RE.ok("发布成功");
         }
@@ -166,7 +158,7 @@ public class TaTaskApiImpl implements TaTaskApi {
     @Override
     public RE acceptSubmitTask(Integer uid, Integer taskId) {
 
-        if(taUserTaskService.updateAcceptState(taskId,uid)==1){
+        if(taTaskUserService.updateAcceptState(taskId,uid)==1){
             return RE.ok();
         }else {
             return RE.fail("error");

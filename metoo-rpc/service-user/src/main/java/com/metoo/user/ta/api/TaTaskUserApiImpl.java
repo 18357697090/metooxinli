@@ -3,7 +3,7 @@ package com.metoo.user.ta.api;
 import com.loongya.core.util.OU;
 import com.loongya.core.util.RE;
 import com.metoo.api.ta.TaTaskApi;
-import com.metoo.api.ta.TaUserTaskApi;
+import com.metoo.api.ta.TaTaskUserApi;
 import com.metoo.pojo.old.vo.PublishTaskDTO;
 import com.metoo.pojo.old.vo.TaskDTO;
 import com.metoo.pojo.tj.model.TjUserInfoModel;
@@ -40,6 +40,6 @@ import java.util.List;
 @Component
 @DubboService
 @Transactional
-public class TaUserTaskApiImpl implements TaUserTaskApi {
+public class TaTaskUserApiImpl implements TaTaskUserApi {
 
 }

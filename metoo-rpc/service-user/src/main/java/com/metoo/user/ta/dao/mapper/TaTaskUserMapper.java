@@ -1,6 +1,6 @@
 package com.metoo.user.ta.dao.mapper;
 
-import com.metoo.user.ta.dao.entity.TaUserTask;
+import com.metoo.user.ta.dao.entity.TaTaskUser;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author loongya
  * @since 2020-12-29
  */
-public interface TaUserTaskMapper extends BaseMapper<TaUserTask> {
+public interface TaTaskUserMapper extends BaseMapper<TaTaskUser> {
 
 }

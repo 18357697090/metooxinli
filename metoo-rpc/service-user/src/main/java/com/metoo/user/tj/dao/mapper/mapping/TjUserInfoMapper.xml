@@ -2,18 +2,5 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.metoo.user.tj.dao.mapper.TjUserInfoMapper">
 
-    <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.metoo.user.tj.dao.entity.TjUserInfo">
-        <id column="id" property="id" />
-        <result column="age" property="age" />
-        <result column="city" property="city" />
-        <result column="dw" property="dw" />
-        <result column="gender" property="gender" />
-        <result column="name" property="name" />
-        <result column="uid" property="uid" />
-        <result column="picture" property="picture" />
-        <result column="motto" property="motto" />
-        <result column="create_time" property="createTime" />
-    </resultMap>
 
 </mapper>

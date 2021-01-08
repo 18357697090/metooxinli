@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
-public class TaUserTaskVo extends BaseVo {
+public class TaTaskUserVo extends BaseVo {
 
 
 }

@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 import io.swagger.annotations.ApiModel;
@@ -38,27 +39,35 @@ public class TjUserAccountDetail extends Model<TjUserAccountDetail> {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @ApiModelProperty(value = "消费内容")
-    private String content;
-
-    @ApiModelProperty(value = "订单号")
-    private String orderNumber;
-
-    @ApiModelProperty(value = "金额")
-    private Integer prices;
-
-    @ApiModelProperty(value = "备用字段")
-    private String spare;
-
-    @ApiModelProperty(value = "消费类型")
-    private String type;
-
     @ApiModelProperty(value = "用户uid")
     private Integer uid;
 
+    @ApiModelProperty(value = "账号id")
+    private Integer accountId;
+
+    @ApiModelProperty(value = "消费内容")
+    private String content;
+
+    @ApiModelProperty(value = "变动前余额")
+    private BigDecimal prePrice;
+
+    @ApiModelProperty(value = "变动金额")
+    private BigDecimal price;
+
+    @ApiModelProperty(value = "变动后余额")
+    private BigDecimal afterPrice;
+
+    @ApiModelProperty(value = "兔币类型: 0-10000:收入 >10000:消费")
+    private Integer type;
+
+    @ApiModelProperty(value = "兔币类型文字描述")
+    private Integer typeName;
+
+    @ApiModelProperty(value = "备注")
+    private String remark;
+
     @ApiModelProperty(value = "创建时间")
     private Date createTime;
-
 
     @Override
     protected Serializable pkVal() {
