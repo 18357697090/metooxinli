@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * <p>
@@ -20,6 +21,7 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 public class TjUserAccountDetailVo extends BaseVo {
+
 
 
 }

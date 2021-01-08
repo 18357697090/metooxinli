@@ -1,5 +1,7 @@
 package com.metoo.user.ta.service;
 
+import com.metoo.pojo.ta.model.TaTaskModel;
+import com.metoo.pojo.ta.vo.TaTaskVo;
 import com.metoo.user.ta.dao.entity.TaTask;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.data.domain.Pageable;
@@ -23,4 +25,6 @@ public interface TaTaskService extends IService<TaTask> {
     TaTask findByTaskId(Integer taskId);
 
     void updateTaskState(Integer taskId);
+
+    List<TaTaskModel> taskList(TaTaskVo vo);
 }

@@ -3,13 +3,11 @@ package com.metoo.order.nr.api;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.loongya.core.exception.LoongyaException;
-import com.loongya.core.util.CopyUtils;
-import com.loongya.core.util.OU;
-import com.loongya.core.util.RE;
-import com.loongya.core.util.REPage;
+import com.loongya.core.util.*;
 import com.loongya.core.util.aliyun.OSSUtil;
 import com.metoo.api.order.NrBackpackApi;
 import com.metoo.api.tj.TjUserAccountApi;
+import com.metoo.api.tj.TjUserAccountDetailApi;
 import com.metoo.api.tj.TjUserApi;
 import com.metoo.order.nr.dao.entity.NrBackpack;
 import com.metoo.order.nr.dao.entity.NrGoods;
@@ -19,7 +17,10 @@ import com.metoo.pojo.nr.vo.NrGoodsVo;
 import com.metoo.pojo.old.vo.BackpackDTO;
 import com.metoo.pojo.order.model.NrBackpackModel;
 import com.metoo.pojo.order.vo.NrBackpackVo;
+import com.metoo.pojo.tj.model.TjUserAccountDetailAddDetailModel;
+import com.metoo.pojo.tj.model.TjUserAccountDetailModel;
 import com.metoo.pojo.tj.model.TjUserAccountModel;
+import com.metoo.pojo.tj.vo.TjUserAccountDetailVo;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.dozer.DozerBeanMapper;
@@ -50,6 +51,8 @@ public class NrBackpackApiImpl implements NrBackpackApi {
     @DubboReference
     private TjUserAccountApi tjUserAccountApi;
     @DubboReference
+    private TjUserAccountDetailApi tjUserAccountDetailApi;
+    @DubboReference
     private TjUserApi tjUserApi;
 
     @Override
@@ -79,6 +82,18 @@ public class NrBackpackApiImpl implements NrBackpackApi {
             throw new LoongyaException("余额不足!");
         // 修改用户余额
         tjUserAccountApi.updateBalance(goods.getPrice(),vo.getUserId());
+        // todo. need asyn
+        TjUserAccountDetailAddDetailModel acModel = new TjUserAccountDetailAddDetailModel();
+        acModel.setUid(vo.getUserId());
+        acModel.setRemark("购买道具支出兔币");
+        acModel.setContent("购买道具,支出" + goods.getPrice() + "兔币");
+        acModel.setPrice(goods.getPrice());
+        acModel.setAccountId(accountModel.getId());
+        acModel.setType(ConstantUtil.TjUserAccountDetailTypeEnum.BUY_GOODS.getCode());
+        acModel.setTypeName(ConstantUtil.TjUserAccountDetailTypeEnum.BUY_GOODS.getMsg());
+        acModel.setAfterPrice(accountModel.getBalance().subtract(goods.getPrice()));
+        acModel.setPrePrice(accountModel.getBalance());
+        tjUserAccountDetailApi.insertDetails(acModel);
         pushBackpack(vo.getUserId(), goods);
         return RE.ok();
     }
@@ -145,6 +160,18 @@ public class NrBackpackApiImpl implements NrBackpackApi {
             throw new LoongyaException("余额不足,请充值");
         }
         tjUserAccountApi.updateBalance(goods.getPrice(), targetUserId);
+        // todo. need asyn
+        TjUserAccountDetailAddDetailModel acModel = new TjUserAccountDetailAddDetailModel();
+        acModel.setUid(vo.getUserId());
+        acModel.setRemark("赠送道具支出兔币");
+        acModel.setContent("赠送道具,支出" + goods.getPrice() + "兔币" + ", 赠送商品id:{" + goods.getId() + "}" + "赠送商品名称: {" + goods.getName() + "}");
+        acModel.setPrice(goods.getPrice());
+        acModel.setAccountId(accountModel.getId());
+        acModel.setType(ConstantUtil.TjUserAccountDetailTypeEnum.GIVE_GOODS.getCode());
+        acModel.setTypeName(ConstantUtil.TjUserAccountDetailTypeEnum.GIVE_GOODS.getMsg());
+        acModel.setAfterPrice(accountModel.getBalance().subtract(goods.getPrice()));
+        acModel.setPrePrice(accountModel.getBalance());
+        tjUserAccountDetailApi.insertDetails(acModel);
         pushBackpack(targetUserId, goods);
         return RE.ok();
     }

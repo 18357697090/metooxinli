@@ -33,5 +33,5 @@ public class PsScaleDetailModel implements Serializable{
     private List<PsScaleCommentModel> comments;
     private String scaleNeedToKnow;
     private String state;
-    private BigDecimal accountBalance;
+    private BigDecimal psCoin;
 }

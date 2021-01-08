@@ -27,6 +27,11 @@ public  class PsCapsuleOrderController {
     @DubboReference
     private PsCapsuleOrderApi psCapsuleOrderApi;
 
+    /**
+     * 胶囊购买
+     * @param vo
+     * @return
+     */
     @GetMapping("/pay")
     public RE pay(PsCapsuleVo vo){
         vo.setUserId(ThreadLocal.getUserId());

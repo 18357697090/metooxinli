@@ -1,5 +1,7 @@
 package com.metoo.user.ta.service.impl;
 
+import com.metoo.pojo.ta.model.TaTaskModel;
+import com.metoo.pojo.ta.vo.TaTaskVo;
 import com.metoo.user.ta.dao.entity.TaTask;
 import com.metoo.user.ta.dao.mapper.TaTaskMapper;
 import com.metoo.user.ta.dao.repository.TaTaskRepository;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -24,6 +27,9 @@ public class TaTaskServiceImpl extends ServiceImpl<TaTaskMapper, TaTask> impleme
 
     @Autowired
     private TaTaskRepository taTaskRepository;
+
+    @Resource
+    private TaTaskMapper taTaskMapper;
 
     @Override
     public List<TaTask> findOrdinaryTask(Pageable pageable) {
@@ -43,5 +49,10 @@ public class TaTaskServiceImpl extends ServiceImpl<TaTaskMapper, TaTask> impleme
     @Override
     public void updateTaskState(Integer taskId) {
         taTaskRepository.updateTaskState(taskId);
+    }
+
+    @Override
+    public List<TaTaskModel> taskList(TaTaskVo vo) {
+        return taTaskMapper.taskList(vo);
     }
 }

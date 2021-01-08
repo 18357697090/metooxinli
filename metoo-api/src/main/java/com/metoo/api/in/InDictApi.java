@@ -1,6 +1,7 @@
 package com.metoo.api.in;
 
 import com.loongya.core.util.RE;
+import com.metoo.pojo.in.vo.InDictVo;
 
 /**
  * <p>
@@ -12,4 +13,5 @@ import com.loongya.core.util.RE;
  */
 public interface InDictApi {
 
+    RE levelList(InDictVo vo);
 }

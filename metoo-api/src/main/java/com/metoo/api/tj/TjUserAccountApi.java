@@ -17,11 +17,13 @@ public interface TjUserAccountApi {
 
     TjUserAccountModel findByUid(Integer uid);
 
-    void updateBalance(BigDecimal subtract, Integer uid);
+    RE updateBalance(BigDecimal subtract, Integer uid);
 
     RE me(Integer uid);
 
     RE findzh(Integer uid);
 
     RE findBalance(Integer uid);
+
+    RE updatePsCoin(BigDecimal prices, Integer uid);
 }

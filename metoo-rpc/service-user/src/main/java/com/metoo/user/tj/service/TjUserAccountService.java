@@ -18,4 +18,6 @@ public interface TjUserAccountService extends IService<TjUserAccount> {
     void updateBalance(BigDecimal subtract, Integer uid);
 
     TjUserAccount findByUid(Integer uid);
+
+    void updatePsCoin(BigDecimal price, Integer uid);
 }

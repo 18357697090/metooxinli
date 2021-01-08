@@ -32,17 +32,6 @@ public class NrBackpackController {
     private NrBackpackApi nrBackpackApi;
 
     /**
-     * 我的道具列表
-     * @param vo
-     * @return
-     */
-    @GetMapping("/myBackpackList")
-    public RE myBackpackList(NrBackpackVo vo){
-         vo.setUserId(ThreadLocal.getUserId());
-        return nrBackpackApi.myBackpackList(vo);
-    }
-
-    /**
      * 购买道具接口
      * @return
      */

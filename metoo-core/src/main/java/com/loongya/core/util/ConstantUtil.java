@@ -12,6 +12,7 @@ public class ConstantUtil {
     public static final double DISTANCELIMIT = 10000; // 10公里以内
     public static final String DISTANCE_LIMIT = "DISTANCE_LIMIT"; // 距离限制key
     public static final String HEAD_IMG_DEFAULT = ""; // 默认头像
+    public static final String LEVEL_DICT = "LEVEL_DICT"; // 用户等级归属key
 
     /**
      * 0表示正常，1表示被封
@@ -292,20 +293,21 @@ public class ConstantUtil {
         }
     }
     /**
-
-     * 等级（1： 初级。2： 高级。3：精英）
+     * 兔币明细类型: 兔币类型: 0-10000:收入 >10000:支出
      * @author loongya
      */
     @Getter
-    public enum OrTrustOrderLevel{
-        FIRST_TEACH(1, "初级老师"),
-        MIDD_TEACH(2, "高级老师"),
-        HEIGH_TEACH(3, "精英老师")
+    public enum TjUserAccountDetailTypeEnum{
+        ALIPAY_INVEST(1, "支付宝充值"),
+        WECHAT_INVEST(2, "微信充值"),
+        BUY_GOODS(10001, "购买道具"),
+        GIVE_GOODS(10002, "赠送道具"),
+        GIVE_CAPSULE(10003, "购买胶囊"),
         ;
-        static final Map<Integer, OrTrustOrderLevel> map = new HashMap<>();
+        static final Map<Integer, TjUserAccountDetailTypeEnum> map = new HashMap<>();
 
         static {
-            EnumSet.allOf(OrTrustOrderLevel.class).forEach(e -> {
+            EnumSet.allOf(TjUserAccountDetailTypeEnum.class).forEach(e -> {
                 map.put(e.getCode(), e);
             });
         }
@@ -313,7 +315,40 @@ public class ConstantUtil {
         private Integer code;
         private String msg;
 
-        OrTrustOrderLevel(Integer code, String msg) {
+        TjUserAccountDetailTypeEnum(Integer code, String msg) {
+            this.code = code;
+            this.msg = msg;
+        }
+        public static String getMsgByCode(Integer code) {
+            if (OU.isNotBlack(map)) {
+                return OU.isBlack(map.get(code)) ? "" : map.get(code).getMsg();
+            }
+            return "";
+        }
+    }
+    /**
+     * 心理币明细类型: 心理币类型: 0-10000:收入 >10000:支出
+     * @author loongya
+     */
+    @Getter
+    public enum TjUserAccountCoinDetailTypeEnum{
+        USE_GOODS(1, "道具使用增加心理币"),
+        BUY_PS(10001, "购买心理测试"),
+        BUY_CONSULT(10002, "心理咨询"),
+        BUY_POUROUT(10002, "心理倾诉"),
+        ;
+        static final Map<Integer, TjUserAccountCoinDetailTypeEnum> map = new HashMap<>();
+
+        static {
+            EnumSet.allOf(TjUserAccountCoinDetailTypeEnum.class).forEach(e -> {
+                map.put(e.getCode(), e);
+            });
+        }
+
+        private Integer code;
+        private String msg;
+
+        TjUserAccountCoinDetailTypeEnum(Integer code, String msg) {
             this.code = code;
             this.msg = msg;
         }

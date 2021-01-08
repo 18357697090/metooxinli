@@ -23,5 +23,4 @@ public class NrGoodsVo extends BaseVo {
     private Integer userId;
     private Integer goodsId;
     private Integer extendId;
-
 }

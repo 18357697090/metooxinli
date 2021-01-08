@@ -1,6 +1,7 @@
 package com.metoo.user.tj.api;
 
 import com.metoo.api.tj.TjUserAccountDetailApi;
+import com.metoo.pojo.tj.model.TjUserAccountDetailAddDetailModel;
 import com.metoo.pojo.tj.model.TjUserAccountDetailModel;
 import com.metoo.user.tj.dao.entity.TjUserAccountDetail;
 import com.metoo.user.tj.service.TjUserAccountDetailService;
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Date;
 
 /**
  * <p>
@@ -33,6 +36,22 @@ public class TjUserAccountDetailApiImpl implements TjUserAccountDetailApi {
     @Override
     public void save(TjUserAccountDetailModel zhRecord) {
         TjUserAccountDetail pojo = mapper.map(zhRecord, TjUserAccountDetail.class);
+        tjUserAccountDetailService.save(pojo);
+    }
+
+    @Override
+    public void insertDetails(TjUserAccountDetailAddDetailModel acModel) {
+        TjUserAccountDetail pojo = new TjUserAccountDetail();
+        pojo.setUid(acModel.getUid());
+        pojo.setTypeName(acModel.getTypeName());
+        pojo.setRemark(acModel.getRemark());
+        pojo.setType(acModel.getType());
+        pojo.setPrice(acModel.getPrice());
+        pojo.setPrePrice(acModel.getPrePrice());
+        pojo.setAfterPrice(acModel.getAfterPrice());
+        pojo.setCreateTime(new Date());
+        pojo.setContent(acModel.getContent());
+        pojo.setAccountId(acModel.getAccountId());
         tjUserAccountDetailService.save(pojo);
     }
 }

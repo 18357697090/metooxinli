@@ -6,7 +6,7 @@ import com.metoo.pojo.ps.vo.PsPourOutVo;
 
 /**
  * <p>
- * 心理咨询师表 服务类
+ * 倾诉师表 服务类
  * </p>
  *
  * @author loongya

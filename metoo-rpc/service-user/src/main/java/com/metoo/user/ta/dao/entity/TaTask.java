@@ -57,6 +57,15 @@ public class TaTask extends Model<TaTask> {
     @ApiModelProperty(value = "1表示普通任务，2表示教程任务类型")
     private Integer type;
 
+    @ApiModelProperty(value = "限制领取任务人数(1:只能一人 ,2:多人)")
+    private Integer personNum;
+
+    @ApiModelProperty(value = "是否设置指定用户 0:是 1:否")
+    private Integer isUser;
+
+    @ApiModelProperty(value = "是否设置指定等级 0:是 1:否")
+    private Integer isLevel;
+
     @ApiModelProperty(value = "备用字段")
     private String remark;
 

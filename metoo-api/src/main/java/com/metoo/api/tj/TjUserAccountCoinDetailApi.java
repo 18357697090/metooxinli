@@ -1,5 +1,6 @@
 package com.metoo.api.tj;
 
+import com.metoo.pojo.tj.model.TjUserAccountCoinDetailModel;
 import com.metoo.pojo.tj.model.TjUserAccountDetailModel;
 
 /**
@@ -12,4 +13,5 @@ import com.metoo.pojo.tj.model.TjUserAccountDetailModel;
  */
 public interface TjUserAccountCoinDetailApi {
 
+    void insertDetails(TjUserAccountCoinDetailModel acModel);
 }

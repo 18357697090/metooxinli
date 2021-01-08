@@ -44,9 +44,4 @@ public class PsScaleOrderController {
         return psScaleMeasureRecordApi.pay(userId, vo.getScaleId());
     }
 
-
-
-
-
-
 }

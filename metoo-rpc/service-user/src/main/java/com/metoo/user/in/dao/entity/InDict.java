@@ -44,7 +44,7 @@ public class InDict extends Model<InDict> {
     @ApiModelProperty(value = "字典key")
     private String key;
 
-    @ApiModelProperty(value = "字典key")
+    @ApiModelProperty(value = "字典value")
     private String value;
 
     @ApiModelProperty(value = "备注")

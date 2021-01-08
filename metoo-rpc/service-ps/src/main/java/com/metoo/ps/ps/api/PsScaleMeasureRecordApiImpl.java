@@ -6,10 +6,13 @@ import com.loongya.core.util.OU;
 import com.loongya.core.util.RE;
 import com.metoo.api.ps.PsScaleMeasureRecordApi;
 import com.metoo.api.tj.TjUserAccountApi;
+import com.metoo.api.tj.TjUserAccountCoinDetailApi;
 import com.metoo.pojo.old.model.Result;
 import com.metoo.pojo.old.vo.MeasureRecordDTO;
 import com.metoo.pojo.ps.model.PsScaleMeasureRecordModel;
 import com.metoo.pojo.ps.vo.PsScaleMeasureRecordVo;
+import com.metoo.pojo.tj.model.TjUserAccountCoinDetailModel;
+import com.metoo.pojo.tj.model.TjUserAccountDetailAddDetailModel;
 import com.metoo.pojo.tj.model.TjUserAccountModel;
 import com.metoo.ps.ps.dao.entity.PsScale;
 import com.metoo.ps.ps.dao.entity.PsScaleMeasureRecord;
@@ -51,6 +54,9 @@ public class PsScaleMeasureRecordApiImpl implements PsScaleMeasureRecordApi {
     @DubboReference
     private TjUserAccountApi tjUserAccountApi;
 
+    @DubboReference
+    private TjUserAccountCoinDetailApi tjUserAccountCoinDetailApi;
+
     @Autowired
     private DozerBeanMapper mapper;
 
@@ -88,8 +94,21 @@ public class PsScaleMeasureRecordApiImpl implements PsScaleMeasureRecordApi {
     public RE pay(Integer uid, Integer scaleId) {
         PsScale scale = psScaleService.findByScaleId(scaleId);
         TjUserAccountModel accountModel =tjUserAccountApi.findByUid(uid);
-        if(accountModel.getBalance().compareTo(scale.getPrices()) >= 0) {
-            tjUserAccountApi.updateBalance(scale.getPrices(), uid);
+        if(accountModel.getPsCoin().compareTo(scale.getPrices()) >= 0) {
+            tjUserAccountApi.updatePsCoin(scale.getPrices(), uid);
+            // 此处应该使用心理币购买
+            // 用户账户详情添加 todo. need asyn
+            TjUserAccountCoinDetailModel acModel = new TjUserAccountCoinDetailModel();
+            acModel.setUid(uid);
+            acModel.setRemark("购买心理测试支出心理币");
+            acModel.setContent("购买心理测试,支出" + scale.getPrices() + "心理币" + ", 购买测量表id:{" + scale.getId() + "}" + "购买测量表名称: {" + scale.getName() + "}");
+            acModel.setPrice(scale.getPrices());
+            acModel.setAccountId(accountModel.getId());
+            acModel.setType(ConstantUtil.TjUserAccountCoinDetailTypeEnum.BUY_PS.getCode());
+            acModel.setTypeName(ConstantUtil.TjUserAccountCoinDetailTypeEnum.BUY_PS.getMsg());
+            acModel.setAfterPrice(accountModel.getPsCoin().subtract(scale.getPrices()));
+            acModel.setPrePrice(accountModel.getPsCoin());
+            tjUserAccountCoinDetailApi.insertDetails(acModel);
             PsScaleMeasureRecord userAndMeasure=psScaleMeasureRecordService.findFirstByUidAndScaleIdOrderByCreateTimeDesc(uid,scaleId);
             if(userAndMeasure==null){
                 PsScaleMeasureRecord userAndMeasure1 = new PsScaleMeasureRecord();

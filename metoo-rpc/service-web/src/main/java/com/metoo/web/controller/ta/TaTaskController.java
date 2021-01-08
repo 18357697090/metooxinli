@@ -1,9 +1,12 @@
 package com.metoo.web.controller.ta;
 
 
+import com.loongya.core.util.AssertUtils;
 import com.loongya.core.util.RE;
 import com.metoo.api.ta.TaTaskApi;
 import com.metoo.pojo.old.vo.PublishTaskDTO;
+import com.metoo.pojo.ta.vo.TaTaskVo;
+import com.metoo.web.config.auth.ThreadLocal;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -28,10 +31,27 @@ public class TaTaskController {
     @DubboReference
     private TaTaskApi taTaskApi;
 
-    //任务大厅
+
+    /**
+     * ok
+     *发布任务
+     */
+    @PostMapping("/publishTask")
+    public RE publishTask(TaTaskVo vo){
+        AssertUtils.checkParam(vo.getTitle(), vo.getContent(), vo.getPrice(), vo.getType());
+        vo.setUid(ThreadLocal.getUserId());
+        return taTaskApi.publishTask(vo);
+    }
+
+
+    /**
+     * 任务大厅任务列表
+     * @return
+     */
     @GetMapping("/taskList")
-    public RE taskList(Integer page) {
-        return taTaskApi.taskList(page);
+    public RE taskList(TaTaskVo vo) {
+        vo.setUid(ThreadLocal.getUserId());
+        return taTaskApi.taskList(vo);
 
     }
 
@@ -41,12 +61,6 @@ public class TaTaskController {
         return taTaskApi.tutorialTaskList(page);
     }
 
-    //发布任务
-    @PostMapping("/publishTask")
-    public RE publishTask(@RequestBody PublishTaskDTO publishTaskDTO, @RequestHeader("UID")Integer uid){
-        return taTaskApi.publishTask(publishTaskDTO, uid);
-
-    }
 
     //接受任务
     @GetMapping("/acceptTask")

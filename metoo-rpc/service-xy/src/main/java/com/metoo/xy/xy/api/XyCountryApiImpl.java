@@ -114,8 +114,8 @@ public class XyCountryApiImpl implements XyCountryApi {
                 xyMyRoomService.save(myRoom);
                 TjUserAccountDetailModel zhRecord = new TjUserAccountDetailModel();
                 zhRecord.setUid(uid);
-                zhRecord.setPrices(bigDecimal.intValue());
-                zhRecord.setType("创建国度");
+                zhRecord.setPrice(bigDecimal);
+                zhRecord.setRemark("创建国度");
                 zhRecord.setContent(buildCountryDTO.getName());
                 tjUserAccountDetailApi.save(zhRecord);
                 return RE.ok("创建成功");

@@ -1,14 +1,17 @@
 package com.metoo.order.ps.api;
 
+import com.loongya.core.util.ConstantUtil;
 import com.loongya.core.util.RE;
 import com.metoo.api.order.PsCapsuleOrderApi;
 import com.metoo.api.ps.PsCapsuleApi;
 import com.metoo.api.tj.TjUserAccountApi;
+import com.metoo.api.tj.TjUserAccountDetailApi;
 import com.metoo.order.ps.dao.entity.PsCapsuleOrder;
 import com.metoo.order.ps.service.PsCapsuleOrderService;
 import com.metoo.pojo.order.model.PsCapsuleOrderModel;
 import com.metoo.pojo.ps.model.PsCapsuleModel;
 import com.metoo.pojo.ps.vo.PsCapsuleVo;
+import com.metoo.pojo.tj.model.TjUserAccountDetailAddDetailModel;
 import com.metoo.pojo.tj.model.TjUserAccountModel;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.DubboService;
@@ -35,6 +38,9 @@ public class PsCapsuleOrderApiImpl implements PsCapsuleOrderApi {
     private TjUserAccountApi tjUserAccountApi;
 
     @DubboReference
+    private TjUserAccountDetailApi tjUserAccountDetailApi;
+
+    @DubboReference
     private PsCapsuleApi psCapsuleApi;
 
     @Autowired
@@ -46,6 +52,18 @@ public class PsCapsuleOrderApiImpl implements PsCapsuleOrderApi {
         PsCapsuleModel capsule = psCapsuleApi.findByCapsuleId(vo.getCapsuleId());
         if(accountModel.getBalance().compareTo(capsule.getPrice()) >= 0){
             tjUserAccountApi.updateBalance(capsule.getPrice(),vo.getUserId());
+            // 明细添加  todo. need asyn
+            TjUserAccountDetailAddDetailModel acModel = new TjUserAccountDetailAddDetailModel();
+            acModel.setUid(vo.getUserId());
+            acModel.setRemark("购买胶囊支出兔币");
+            acModel.setContent("购买胶囊,支出" + capsule.getPrice() + "兔币" + ", 购买胶囊id:{" + capsule.getId() + "}" + "购买胶囊标题: {" + capsule.getTitle() + "}");
+            acModel.setPrice(capsule.getPrice());
+            acModel.setAccountId(accountModel.getId());
+            acModel.setType(ConstantUtil.TjUserAccountDetailTypeEnum.GIVE_CAPSULE.getCode());
+            acModel.setTypeName(ConstantUtil.TjUserAccountDetailTypeEnum.GIVE_CAPSULE.getMsg());
+            acModel.setAfterPrice(accountModel.getBalance().subtract(capsule.getPrice()));
+            acModel.setPrePrice(accountModel.getBalance());
+            tjUserAccountDetailApi.insertDetails(acModel);
             PsCapsuleOrder userBuyCapsule = new PsCapsuleOrder();
             userBuyCapsule.setCapsuleId(vo.getCapsuleId());
             userBuyCapsule.setUid(vo.getUserId());

@@ -14,15 +14,18 @@ public interface TjUserAccountRepository extends JpaRepository<TjUserAccount,Int
     TjUserAccount findByUid(Integer uid);
 
     @Modifying
-    @Query(value = "update tj_user_account set balance=balance-? where uid=?",nativeQuery = true)
+    @Query(value = "update tj_user_account set balance=balance-?1 where uid=?2",nativeQuery = true)
     int updateBalance(BigDecimal balance, Integer uid);
 
     @Modifying
-    @Query(value = "update tj_user_account set activeIntegral=? where uid=?",nativeQuery = true)
+    @Query(value = "update tj_user_account set activeIntegral=?1 where uid=?2",nativeQuery = true)
     int updateActiveIntegral(Integer ActiveIntegral,Integer uid);
 
     @Modifying
-    @Query(value = "update tj_user_account set psychologyIntegral=? where uid=?",nativeQuery = true)
+    @Query(value = "update tj_user_account set psychologyIntegral=?1 where uid=?2",nativeQuery = true)
     int updatePsychologyIntegral(Integer PsychologyIntegral,Integer uid);
 
+    @Modifying
+    @Query(value = "update tj_user_account set ps_coin=ps_coin-?1 where uid=?2",nativeQuery = true)
+    void updatePsCoin(BigDecimal price, Integer uid);
 }

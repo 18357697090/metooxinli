@@ -117,7 +117,7 @@ public class PsScaleDetailApiImpl implements PsScaleDetailApi {
         PsScaleMeasureRecord userAndMeasure= psScaleMeasureRecordService.findFirstByUidAndScaleIdOrderByCreateTimeDesc(uid,scaleId);
         TjUserAccountModel zh=tjUserAccountApi.findByUid(uid);
         if(OU.isNotBlack(zh)){
-            model.setAccountBalance(zh.getBalance());
+            model.setPsCoin(zh.getPsCoin());
         }
         if(userAndMeasure==null){
             model.setState("success");

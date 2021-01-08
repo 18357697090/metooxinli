@@ -96,8 +96,8 @@ public class Repository {
             repository.imGiftRecordApi.save(imGiftRecordModel);
             TjUserAccountDetailModel tjUserAccountDetailModel = new TjUserAccountDetailModel();
             tjUserAccountDetailModel.setUid(uid);
-            tjUserAccountDetailModel.setPrices(imGiftModel.getPrices().intValue());
-            tjUserAccountDetailModel.setType("刷礼物");
+            tjUserAccountDetailModel.setPrice(imGiftModel.getPrices());
+            tjUserAccountDetailModel.setRemark("刷礼物");
             tjUserAccountDetailModel.setContent(imGiftModel.getName());
             repository.tjUserAccountDetailApi.save(tjUserAccountDetailModel);
             returnGivingGiftDTO.setBalance(balance);

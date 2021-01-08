@@ -3,6 +3,8 @@ package com.metoo.user.in.service;
 import com.metoo.user.in.dao.entity.InDict;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  * 字典表 服务类
@@ -13,4 +15,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface InDictService extends IService<InDict> {
 
+    List<InDict> findAllByPkey(String levelDict);
 }

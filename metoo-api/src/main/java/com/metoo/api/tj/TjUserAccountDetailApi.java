@@ -1,5 +1,6 @@
 package com.metoo.api.tj;
 
+import com.metoo.pojo.tj.model.TjUserAccountDetailAddDetailModel;
 import com.metoo.pojo.tj.model.TjUserAccountDetailModel;
 
 /**
@@ -13,4 +14,6 @@ import com.metoo.pojo.tj.model.TjUserAccountDetailModel;
 public interface TjUserAccountDetailApi {
 
     void save(TjUserAccountDetailModel zhRecord);
+
+    void insertDetails(TjUserAccountDetailAddDetailModel acModel);
 }

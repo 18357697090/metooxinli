@@ -34,4 +34,9 @@ public class TjUserAccountServiceImpl extends ServiceImpl<TjUserAccountMapper, T
     public TjUserAccount findByUid(Integer uid) {
         return tjUserAccountRepository.findByUid(uid);
     }
+
+    @Override
+    public void updatePsCoin(BigDecimal price, Integer uid) {
+        tjUserAccountRepository.updatePsCoin(price, uid);
+    }
 }

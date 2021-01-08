@@ -20,5 +20,16 @@ import java.util.Date;
 @NoArgsConstructor
 public class InDictModel implements Serializable {
 
+    private Integer id;
+
+    private String name;
+
+    private String pkey;
+
+    private String key;
+
+    private String value;
+
+    private String remark;
 
 }

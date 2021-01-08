@@ -2,6 +2,7 @@ package com.metoo.api.ta;
 
 import com.loongya.core.util.RE;
 import com.metoo.pojo.old.vo.PublishTaskDTO;
+import com.metoo.pojo.ta.vo.TaTaskVo;
 
 /**
  * <p>
@@ -13,13 +14,13 @@ import com.metoo.pojo.old.vo.PublishTaskDTO;
  */
 public interface TaTaskApi {
 
-    RE taskList(Integer page);
+    RE taskList(TaTaskVo vo);
 
     RE tutorialTaskList(Integer page);
-
-    RE publishTask(PublishTaskDTO publishTaskDTO, Integer uid);
 
     RE acceptTask(Integer uid, Integer taskId);
 
     RE acceptSubmitTask(Integer uid, Integer taskId);
+
+    RE publishTask(TaTaskVo vo);
 }

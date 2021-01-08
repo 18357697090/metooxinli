@@ -3,4 +3,16 @@
 <mapper namespace="com.metoo.user.ta.dao.mapper.TaTaskMapper">
 
 
+    <select id="taskList" resultType="com.metoo.pojo.ta.model.TaTaskModel" parameterType="com.metoo.pojo.ta.vo.TaTaskVo">
+        SELECT
+        *
+        FROM
+        ta_task tt
+        WHERE
+        tt.state = 1
+        AND tt.type = 1
+        AND tt.start_time <![CDATA[ < ]]> now() AND tt.end_time <![CDATA[ > ]]> NOW()
+        AND (tt.is_user = 1 OR (tt.is_user = 0 and (select count(1) from ta_task_to_user ttou where ttou.user_id = #{uid} AND ttou.task_id = tt.id)>0))
+        AND (tt.is_level = 1 OR (tt.is_level = 0 and (select count(1) from ta_task_to_level ttol where ttol.`level` = #{levels} AND ttol.task_id = tt.id)>0))
+    </select>
 </mapper>

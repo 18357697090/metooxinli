@@ -56,10 +56,10 @@ public class TjUserAccountCoinDetail extends Model<TjUserAccountCoinDetail> {
     @ApiModelProperty(value = "变动后余额")
     private BigDecimal afterPrice;
 
-    @ApiModelProperty(value = "兔币类型: 0-10000:收入 >10000:消费")
+    @ApiModelProperty(value = "心理币类型: 0-10000:收入 >10000:消费")
     private Integer type;
 
-    @ApiModelProperty(value = "兔币类型文字描述")
+    @ApiModelProperty(value = "心理币类型文字描述")
     private String typeName;
 
     @ApiModelProperty(value = "备注")

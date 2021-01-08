@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import java.math.BigDecimal;
 
@@ -44,13 +45,15 @@ public class TjUserAccountApiImpl implements TjUserAccountApi {
     @Override
     public TjUserAccountModel findByUid(Integer uid) {
         TjUserAccount pojo = tjUserAccountService.findByUid(uid);
+        Assert.isNull(pojo, "账户异常");
         TjUserAccountModel model = dozerBeanMapper.map(pojo, TjUserAccountModel.class);
         return model;
     }
 
     @Override
-    public void updateBalance(BigDecimal subtract, Integer uid) {
+    public RE updateBalance(BigDecimal subtract, Integer uid) {
         tjUserAccountService.updateBalance(subtract, uid);
+        return RE.ok();
     }
 
     @Override
@@ -85,5 +88,11 @@ public class TjUserAccountApiImpl implements TjUserAccountApi {
             throw new LoongyaException("用户账号为空");
         }
         return RE.ok(zh.getBalance());
+    }
+
+    @Override
+    public RE updatePsCoin(BigDecimal price, Integer uid) {
+        tjUserAccountService.updatePsCoin(price, uid);
+        return RE.ok();
     }
 }

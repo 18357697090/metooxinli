@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface InDictRepository extends JpaRepository<InDict,Integer> {
 
+    List<InDict> findAllByPkey(String levelDict);
+
 }

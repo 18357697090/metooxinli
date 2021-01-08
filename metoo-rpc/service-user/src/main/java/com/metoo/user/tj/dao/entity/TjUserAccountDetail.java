@@ -61,7 +61,7 @@ public class TjUserAccountDetail extends Model<TjUserAccountDetail> {
     private Integer type;
 
     @ApiModelProperty(value = "兔币类型文字描述")
-    private Integer typeName;
+    private String typeName;
 
     @ApiModelProperty(value = "备注")
     private String remark;

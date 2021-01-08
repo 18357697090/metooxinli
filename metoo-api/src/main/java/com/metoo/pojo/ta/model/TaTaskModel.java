@@ -23,6 +23,13 @@ import java.util.Date;
 @NoArgsConstructor
 public class TaTaskModel implements Serializable {
 
+    // 发布人头像
+    private String headImg;
+    // 人不如昵称
+    private String nickName;
+    // 是否可以领取 1: 已经领取 0:可以领取
+    private Integer getStatus;
+
     private Integer id;
 
     private Integer uid;

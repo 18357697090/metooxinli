@@ -16,4 +16,6 @@ public interface TaTaskUserService extends IService<TaTaskUser> {
     void updateAcceptId(Integer uid, Integer taskId);
 
     int updateAcceptState(Integer taskId, Integer uid);
+
+    Long countByUidAndTaskId(Integer uid, Integer taskId);
 }
