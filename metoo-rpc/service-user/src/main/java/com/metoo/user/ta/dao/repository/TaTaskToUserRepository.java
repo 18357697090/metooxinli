@@ -6,5 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TaTaskToUserRepository extends JpaRepository<TaTaskToUser,Integer> {
 
-   
+
+    int countAllByTaskIdAndUserId(Integer taskId, Integer uid);
 }

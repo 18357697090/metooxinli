@@ -136,7 +136,7 @@ public class ConstantUtil {
     @Getter
     public enum CommStatusEnum{
         NORMAL(0, "正常"),
-        NO_NORMAL(1, "异常"),
+        NO_NORMAL(1, "异常(关闭)"),
         DELETE(2, "删除")
         ;
 
@@ -300,6 +300,10 @@ public class ConstantUtil {
     public enum TjUserAccountDetailTypeEnum{
         ALIPAY_INVEST(1, "支付宝充值"),
         WECHAT_INVEST(2, "微信充值"),
+        DOING_TASK_ADD_COIN(3, "做任务增加兔币"),
+
+
+
         BUY_GOODS(10001, "购买道具"),
         GIVE_GOODS(10002, "赠送道具"),
         GIVE_CAPSULE(10003, "购买胶囊"),

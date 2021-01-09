@@ -44,4 +44,14 @@ public class TjUserAccountServiceImpl extends ServiceImpl<TjUserAccountMapper, T
     public void frozeenBalance(Integer uid, BigDecimal price) {
         tjUserAccountRepository.frozeenBalance(uid, price);
     }
+
+    @Override
+    public void updateBalanceUp(BigDecimal price, Integer uid) {
+        tjUserAccountRepository.updateBalanceUp(price, uid);
+    }
+
+    @Override
+    public void unFrozeenBalance(Integer uid, BigDecimal price) {
+        tjUserAccountRepository.unFrozeenBalance(uid, price);
+    }
 }

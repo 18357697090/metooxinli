@@ -2,6 +2,7 @@ package com.metoo.web.controller.ta;
 
 
 import com.loongya.core.util.AssertUtils;
+import com.loongya.core.util.OU;
 import com.loongya.core.util.RE;
 import com.metoo.api.ta.TaTaskApi;
 import com.metoo.pojo.old.vo.PublishTaskDTO;
@@ -94,7 +95,6 @@ public class TaTaskController {
         AssertUtils.checkParam(vo.getTaskId());
         vo.setUid(ThreadLocal.getUserId());
         return taTaskApi.acceptTask(vo);
-
     }
 
 
@@ -119,7 +119,7 @@ public class TaTaskController {
     /**
      * 我发布的任务任务详情
      */
-    @GetMapping("myPublishTaskDetail")
+    @GetMapping("/myPublishTaskDetail")
     public RE myPublishTaskDetail(MyTaTaskVo vo){
         AssertUtils.checkParam(vo.getTaskId());
         vo.setUid(ThreadLocal.getUserId());
@@ -128,7 +128,7 @@ public class TaTaskController {
     /**
      * 我领取的任务任务详情
      */
-    @GetMapping("myAcceptTaskDetail")
+    @GetMapping("/myAcceptTaskDetail")
     public RE myAcceptTaskDetail(MyTaTaskVo vo){
         AssertUtils.checkParam(vo.getTaskId());
         vo.setUid(ThreadLocal.getUserId());
@@ -136,11 +136,13 @@ public class TaTaskController {
     }
 
     /**
+     * ok
      * 领取任务后,提交任务接口
+     * taskUserId: 不是用户id,是ta_task_user表的id
      */
     @GetMapping("commitTask")
     public RE commitTask(CommitTaTaskVo vo){
-        AssertUtils.checkParam(vo.getTaskId());
+        AssertUtils.checkParam(vo.getTaskUserId());
         vo.setUid(ThreadLocal.getUserId());
         return taTaskApi.commitTask(vo);
     }
@@ -148,10 +150,15 @@ public class TaTaskController {
      * 提交任务后,发布者确认是通过还是拒绝
      * 如果通过,冻结的余额解冻,进入接收者的余额里面
      * 如果拒绝,冻结的余额七日后返回到发布者的余额
+     * status ==3同意  或者 == 4 拒绝
+     * refuseRemark : 拒绝理由
+     *
      */
     @GetMapping("confirmTask")
     public RE confirmTask(MyTaTaskVo vo){
-        AssertUtils.checkParam(vo.getTaskId());
+        AssertUtils.checkParam(vo.getTataskUserId(), vo.getStatus());
+        assert vo.getStatus() == 3 || vo.getStatus() == 4;
+        assert vo.getStatus() == 4 && OU.isNotBlack(vo.getRefuseRemark());
         vo.setUid(ThreadLocal.getUserId());
         return taTaskApi.confirmTask(vo);
     }
@@ -161,7 +168,7 @@ public class TaTaskController {
      */
     @GetMapping("appealTask")
     public RE appealTask(AppealTaskVo vo){
-        AssertUtils.checkParam(vo.getTaskId());
+        AssertUtils.checkParam(vo.getTaTaskUserId());
         vo.setUid(ThreadLocal.getUserId());
         return taTaskApi.appealTask(vo);
     }
@@ -181,15 +188,13 @@ public class TaTaskController {
     }
 
     /**
-     * 关闭任务  有如下情形不能关闭:
-     *  1: 任务有人未完成
+     * 关闭任务
      *
      * @return
      */
     @GetMapping("/closeTask")
     public RE closeTask(MyTaTaskVo vo){
         AssertUtils.checkParam(vo.getTaskId());
-        vo.setUid(ThreadLocal.getUserId());
         return taTaskApi.closeTask(vo);
     }
 

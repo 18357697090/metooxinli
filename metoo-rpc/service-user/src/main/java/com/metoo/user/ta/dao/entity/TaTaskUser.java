@@ -59,6 +59,15 @@ public class TaTaskUser extends Model<TaTaskUser> {
     @ApiModelProperty(value = "任务拒绝原因")
     private String refuseRemark;
 
+    @ApiModelProperty(value = "申诉内容 ")
+    private String appealRemark;
+
+    @ApiModelProperty(value = "申诉状态:1:待审核 2:已处理")
+    private Integer appealStatus;
+
+    @ApiModelProperty(value = "申诉结果")
+    private String appealAnswer;
+
     @ApiModelProperty(value = "任务领取时间")
     private Date createTime;
 

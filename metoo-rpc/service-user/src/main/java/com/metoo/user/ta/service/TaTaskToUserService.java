@@ -13,4 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface TaTaskToUserService extends IService<TaTaskToUser> {
 
+    int countAllByTaskIdAndUserId(Integer taskId, Integer uid);
 }
