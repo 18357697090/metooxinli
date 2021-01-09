@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
+import java.util.Date;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -58,6 +60,8 @@ public class InArea extends Model<InArea> {
 
     @ApiModelProperty(value = "所有上级名称")
     private String pcodenames;
+
+    private Date createTime;
 
 
     @Override
