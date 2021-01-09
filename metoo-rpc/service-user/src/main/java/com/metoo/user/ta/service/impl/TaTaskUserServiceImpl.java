@@ -8,6 +8,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  * 用户我的任务表 服务实现类
@@ -35,5 +37,15 @@ public class TaTaskUserServiceImpl extends ServiceImpl<TaTaskUserMapper, TaTaskU
     @Override
     public Long countByUidAndTaskId(Integer uid, Integer id) {
         return taTaskUserRepository.countAllByUidAndTaskId(uid, id);
+    }
+
+    @Override
+    public TaTaskUser findFirstByUidAndTaskId(Integer uid, Integer id) {
+        return taTaskUserRepository.findFirstByUidAndTaskId(uid, id);
+    }
+
+    @Override
+    public List<TaTaskUser> findAllByTaskId(Integer taskId) {
+        return taTaskUserRepository.findAllByTaskId(taskId);
     }
 }

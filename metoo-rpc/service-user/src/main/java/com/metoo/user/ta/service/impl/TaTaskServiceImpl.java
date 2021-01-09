@@ -1,6 +1,7 @@
 package com.metoo.user.ta.service.impl;
 
 import com.metoo.pojo.ta.model.TaTaskModel;
+import com.metoo.pojo.ta.vo.MyTaTaskVo;
 import com.metoo.pojo.ta.vo.TaTaskVo;
 import com.metoo.user.ta.dao.entity.TaTask;
 import com.metoo.user.ta.dao.mapper.TaTaskMapper;
@@ -42,11 +43,6 @@ public class TaTaskServiceImpl extends ServiceImpl<TaTaskMapper, TaTask> impleme
     }
 
     @Override
-    public TaTask findByTaskId(Integer taskId) {
-        return taTaskRepository.findByTaskId(taskId);
-    }
-
-    @Override
     public void updateTaskState(Integer taskId) {
         taTaskRepository.updateTaskState(taskId);
     }
@@ -54,5 +50,15 @@ public class TaTaskServiceImpl extends ServiceImpl<TaTaskMapper, TaTask> impleme
     @Override
     public List<TaTaskModel> taskList(TaTaskVo vo) {
         return taTaskMapper.taskList(vo);
+    }
+
+    @Override
+    public List<TaTaskModel> myAcceptTaskList(MyTaTaskVo vo) {
+        return taTaskMapper.myAcceptTaskList(vo);
+    }
+
+    @Override
+    public List<TaTaskModel> myPublishTaskList(MyTaTaskVo vo) {
+        return taTaskMapper.myPublishTaskList(vo);
     }
 }

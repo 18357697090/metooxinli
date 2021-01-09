@@ -10,9 +10,63 @@
         ta_task tt
         WHERE
         tt.state = 1
-        AND tt.type = 1
+        AND tt.type = #{type}
         AND tt.start_time <![CDATA[ < ]]> now() AND tt.end_time <![CDATA[ > ]]> NOW()
         AND (tt.is_user = 1 OR (tt.is_user = 0 and (select count(1) from ta_task_to_user ttou where ttou.user_id = #{uid} AND ttou.task_id = tt.id)>0))
         AND (tt.is_level = 1 OR (tt.is_level = 0 and (select count(1) from ta_task_to_level ttol where ttol.`level` = #{levels} AND ttol.task_id = tt.id)>0))
+        ORDER BY DATE_FORMAT(tt.start_time,'%Y-%m-%d') DESC, tt.price DESC
+        LIMIT #{pagenum}, #{pagesize}
+    </select>
+    <select id="myAcceptTaskList" resultType="com.metoo.pojo.ta.model.TaTaskModel" parameterType="com.metoo.pojo.ta.vo.MyTaTaskVo">
+        SELECT
+            ttu.`status` AS taskUserStatus,
+            tui.nick_name AS nickName,
+            tui.head_img AS headImg,
+            tt.*
+        FROM
+            ta_task_user ttu
+            INNER JOIN ta_task tt ON ttu.task_id = tt.id
+            INNER JOIN tj_user_info tui ON tui.uid = tt.uid
+        WHERE
+            ttu.uid = #{uid}
+            <if test="status != null">
+                AND ttu.`status` = #{status}
+            </if>
+            <if test="type != null">
+                AND tt.type = #{type}
+            </if>
+            <if test="startTime != null and startTime != ''">
+                AND ttu.create_time <![CDATA[>]]> #{startTime}
+            </if>
+            <if test="endTime != null and endTime != ''">
+                AND ttu.create_time <![CDATA[<]]> #{endTime}
+            </if>
+            ORDER BY ttu.create_time DESC
+            LIMIT #{pagenum}, #{pagesize}
+    </select>
+    <select id="myPublishTaskList" resultType="com.metoo.pojo.ta.model.TaTaskModel" parameterType="com.metoo.pojo.ta.vo.MyTaTaskVo">
+        SELECT
+            tui.nick_name AS nickName,
+            tui.head_img AS headImg,
+            tt.*
+        FROM
+            ta_task tt
+            INNER JOIN tj_user_info tui ON tui.uid = tt.uid
+        WHERE
+            tt.uid = 1
+            <if test="status != null">
+                AND tt.`state` = #{status}
+            </if>
+            <if test="type != null">
+                AND tt.type = #{type}
+            </if>
+            <if test="startTime != null and startTime != ''">
+                AND tt.start_time <![CDATA[>]]> #{startTime}
+            </if>
+            <if test="endTime != null and endTime != ''">
+                AND tt.start_time <![CDATA[<]]> #{endTime}
+            </if>
+            ORDER BY tt.create_time DESC
+            LIMIT #{pagenum}, #{pagesize}
     </select>
 </mapper>

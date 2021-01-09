@@ -303,6 +303,8 @@ public class ConstantUtil {
         BUY_GOODS(10001, "购买道具"),
         GIVE_GOODS(10002, "赠送道具"),
         GIVE_CAPSULE(10003, "购买胶囊"),
+        TASK_ONE_ACCECT(10004, "任务发布支出"),
+        ACCEPT_TASK_PAY_COMMISSION(10005, "接受任务支付佣金"),
         ;
         static final Map<Integer, TjUserAccountDetailTypeEnum> map = new HashMap<>();
 
@@ -349,6 +351,40 @@ public class ConstantUtil {
         private String msg;
 
         TjUserAccountCoinDetailTypeEnum(Integer code, String msg) {
+            this.code = code;
+            this.msg = msg;
+        }
+        public static String getMsgByCode(Integer code) {
+            if (OU.isNotBlack(map)) {
+                return OU.isBlack(map.get(code)) ? "" : map.get(code).getMsg();
+            }
+            return "";
+        }
+    }
+    /**
+     * 任务状态 1: 待完成 2: 待审核 3: 审核成功(金额到账) 4: 审核失败(7日后金额原路返回) 5:已关闭
+     * @author loongya
+     */
+    @Getter
+    public enum TataskUserStatusEnum{
+        TOTO(1, "待完成"),
+        PENDING(2, "待审核"),
+        PENDED(3, "审核成功(金额到账)"),
+        PENDFAIL(4, "审核失败(7日后金额原路返回)"),
+        CLOSE(5, "已关闭")
+        ;
+        static final Map<Integer, TataskUserStatusEnum> map = new HashMap<>();
+
+        static {
+            EnumSet.allOf(TataskUserStatusEnum.class).forEach(e -> {
+                map.put(e.getCode(), e);
+            });
+        }
+
+        private Integer code;
+        private String msg;
+
+        TataskUserStatusEnum(Integer code, String msg) {
             this.code = code;
             this.msg = msg;
         }

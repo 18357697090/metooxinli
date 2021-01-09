@@ -1,5 +1,6 @@
 package com.metoo.user.tj.service;
 
+import com.metoo.pojo.tj.model.TjUserAccountDetailAddDetailModel;
 import com.metoo.user.tj.dao.entity.TjUserAccountDetail;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -13,4 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface TjUserAccountDetailService extends IService<TjUserAccountDetail> {
 
+    void insertDetails(TjUserAccountDetailAddDetailModel acModel);
 }

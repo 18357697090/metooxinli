@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -20,5 +21,20 @@ import java.util.Date;
 @NoArgsConstructor
 public class TaTaskUserModel implements Serializable {
 
+    private String headImg;
+    private String nickName;
 
+    private Integer id;
+
+    private Integer taskId;
+
+    private Integer uid;
+
+    private Integer status;
+
+    private BigDecimal price;
+
+    private Date createTime;
+
+    private Date updateTime;
 }

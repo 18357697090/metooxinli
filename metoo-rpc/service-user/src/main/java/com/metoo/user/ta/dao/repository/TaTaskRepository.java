@@ -22,5 +22,4 @@ public interface TaTaskRepository extends JpaRepository<TaTask,Integer> {
     @Query(value = "update ta_task set state=2 where task_id=?1",nativeQuery = true)
     int updateTaskState(Integer taskId);
 
-    TaTask findByTaskId(Integer taskId);
 }

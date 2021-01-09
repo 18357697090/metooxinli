@@ -39,4 +39,9 @@ public class TjUserAccountServiceImpl extends ServiceImpl<TjUserAccountMapper, T
     public void updatePsCoin(BigDecimal price, Integer uid) {
         tjUserAccountRepository.updatePsCoin(price, uid);
     }
+
+    @Override
+    public void frozeenBalance(Integer uid, BigDecimal price) {
+        tjUserAccountRepository.frozeenBalance(uid, price);
+    }
 }

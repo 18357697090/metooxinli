@@ -116,6 +116,7 @@ public class TjUserApiImpl implements TjUserApi {
         tjUserAccount.setBalance(new BigDecimal(0));
         tjUserAccount.setPsPoints(new BigDecimal(0));
         tjUserAccount.setAcPoints(new BigDecimal(0));
+        tjUserAccount.setBalanceFrozen(new BigDecimal(0));
         tjUserAccountService.save(tjUserAccount);
         // 创建用户详细表
         TjUserInfo tjUserInfo = new TjUserInfo();

@@ -41,17 +41,6 @@ public class TjUserAccountDetailApiImpl implements TjUserAccountDetailApi {
 
     @Override
     public void insertDetails(TjUserAccountDetailAddDetailModel acModel) {
-        TjUserAccountDetail pojo = new TjUserAccountDetail();
-        pojo.setUid(acModel.getUid());
-        pojo.setTypeName(acModel.getTypeName());
-        pojo.setRemark(acModel.getRemark());
-        pojo.setType(acModel.getType());
-        pojo.setPrice(acModel.getPrice());
-        pojo.setPrePrice(acModel.getPrePrice());
-        pojo.setAfterPrice(acModel.getAfterPrice());
-        pojo.setCreateTime(new Date());
-        pojo.setContent(acModel.getContent());
-        pojo.setAccountId(acModel.getAccountId());
-        tjUserAccountDetailService.save(pojo);
+        tjUserAccountDetailService.insertDetails(acModel);
     }
 }

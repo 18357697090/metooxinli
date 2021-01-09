@@ -22,6 +22,8 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 public class TaTaskVo extends BaseVo {
+    //任务id
+    private Integer taskId;
     //任务标题
     private String title;
     //任务内容

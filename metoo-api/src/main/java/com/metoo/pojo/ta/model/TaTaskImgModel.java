@@ -20,5 +20,9 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 public class TaTaskImgModel implements Serializable {
+    private Integer id;
 
+    private Integer taskId;
+
+    private String img;
 }

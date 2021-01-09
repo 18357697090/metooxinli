@@ -1,6 +1,7 @@
 package com.metoo.user.ta.dao.mapper;
 
 import com.metoo.pojo.ta.model.TaTaskModel;
+import com.metoo.pojo.ta.vo.MyTaTaskVo;
 import com.metoo.pojo.ta.vo.TaTaskVo;
 import com.metoo.user.ta.dao.entity.TaTask;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
@@ -18,4 +19,8 @@ import java.util.List;
 public interface TaTaskMapper extends BaseMapper<TaTask> {
 
     List<TaTaskModel> taskList(TaTaskVo vo);
+
+    List<TaTaskModel> myAcceptTaskList(MyTaTaskVo vo);
+
+    List<TaTaskModel> myPublishTaskList(MyTaTaskVo vo);
 }
