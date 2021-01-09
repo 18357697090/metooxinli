@@ -97,30 +97,6 @@ public class TaTaskController {
 
     }
 
-    //发布人提交完成任务
-//    @GetMapping("/publishSubmitTask")
-//    public ReturnMessage publishSubmitTask(@RequestHeader("UID")Integer uid,Integer taskId){
-//        ReturnMessage returnMessage = new ReturnMessage();
-//        returnMessage.setState("error");
-//        UserTask userTask = userTaskDao.findByTaskId(taskId);
-//        if(userTask.getAcceptState()!=1){
-//
-//        }
-//
-//         if(userTaskDao.updatePublishState(taskId,uid)==1){
-//
-//             return "success";
-//         }else {
-//             return "error";
-//         }
-//    }
-
-    //接收人提交完成任务
-    @GetMapping("/acceptSubmitTask")
-    public RE acceptSubmitTask(@RequestHeader("UID")Integer uid,Integer taskId) {
-        return taTaskApi.acceptSubmitTask(uid, taskId);
-    }
-
 
     /**
      * 我接受的任务列表
@@ -130,6 +106,7 @@ public class TaTaskController {
         vo.setUid(ThreadLocal.getUserId());
         return taTaskApi.myAcceptTaskList(vo);
     }
+
     /**
      * 我发布的任务列表
      */
@@ -148,7 +125,15 @@ public class TaTaskController {
         vo.setUid(ThreadLocal.getUserId());
         return taTaskApi.myPublishTaskDetail(vo);
     }
-
+    /**
+     * 我领取的任务任务详情
+     */
+    @GetMapping("myAcceptTaskDetail")
+    public RE myAcceptTaskDetail(MyTaTaskVo vo){
+        AssertUtils.checkParam(vo.getTaskId());
+        vo.setUid(ThreadLocal.getUserId());
+        return taTaskApi.myAcceptTaskDetail(vo);
+    }
 
     /**
      * 领取任务后,提交任务接口
@@ -193,6 +178,19 @@ public class TaTaskController {
         AssertUtils.checkParam(vo.getTaskId());
         vo.setUid(ThreadLocal.getUserId());
         return taTaskApi.deleteTask(vo);
+    }
+
+    /**
+     * 关闭任务  有如下情形不能关闭:
+     *  1: 任务有人未完成
+     *
+     * @return
+     */
+    @GetMapping("/closeTask")
+    public RE closeTask(MyTaTaskVo vo){
+        AssertUtils.checkParam(vo.getTaskId());
+        vo.setUid(ThreadLocal.getUserId());
+        return taTaskApi.closeTask(vo);
     }
 
 

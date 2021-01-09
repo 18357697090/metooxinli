@@ -50,6 +50,15 @@ public class TaTaskUser extends Model<TaTaskUser> {
     @ApiModelProperty(value = "任务价格")
     private BigDecimal price;
 
+    @ApiModelProperty(value = "任务提交备注")
+    private String remark;
+
+    @ApiModelProperty(value = "任务提交证明图片(,)隔开")
+    private String imgs;
+
+    @ApiModelProperty(value = "任务拒绝原因")
+    private String refuseRemark;
+
     @ApiModelProperty(value = "任务领取时间")
     private Date createTime;
 

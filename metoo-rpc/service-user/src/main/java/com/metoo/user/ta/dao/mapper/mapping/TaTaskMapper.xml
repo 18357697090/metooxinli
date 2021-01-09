@@ -22,6 +22,7 @@
             ttu.`status` AS taskUserStatus,
             tui.nick_name AS nickName,
             tui.head_img AS headImg,
+            tui.id AS taskUserId,
             tt.*
         FROM
             ta_task_user ttu

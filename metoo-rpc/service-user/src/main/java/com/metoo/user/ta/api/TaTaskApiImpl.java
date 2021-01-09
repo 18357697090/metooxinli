@@ -226,6 +226,8 @@ public class TaTaskApiImpl implements TaTaskApi {
 
     @Override
     public RE commitTask(CommitTaTaskVo vo) {
+        // 提交任务
+
         return null;
     }
 
@@ -241,6 +243,16 @@ public class TaTaskApiImpl implements TaTaskApi {
 
     @Override
     public RE deleteTask(MyTaTaskVo vo) {
+        return null;
+    }
+
+    @Override
+    public RE closeTask(MyTaTaskVo vo) {
+        return null;
+    }
+
+    @Override
+    public RE myAcceptTaskDetail(MyTaTaskVo vo) {
         return null;
     }
 
@@ -419,13 +431,4 @@ public class TaTaskApiImpl implements TaTaskApi {
         return RE.ok("发布成功");
     }
 
-    @Override
-    public RE acceptSubmitTask(Integer uid, Integer taskId) {
-
-        if(taTaskUserService.updateAcceptState(taskId,uid)==1){
-            return RE.ok();
-        }else {
-            return RE.fail("error");
-        }
-    }
 }

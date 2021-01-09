@@ -26,8 +26,6 @@ public interface TaTaskApi {
 
     RE acceptTask(TaTaskVo vo);
 
-    RE acceptSubmitTask(Integer uid, Integer taskId);
-
     RE publishTask(TaTaskVo vo);
 
     RE taskDetail(TaTaskVo vo);
@@ -45,4 +43,8 @@ public interface TaTaskApi {
     RE appealTask(AppealTaskVo vo);
 
     RE deleteTask(MyTaTaskVo vo);
+
+    RE closeTask(MyTaTaskVo vo);
+
+    RE myAcceptTaskDetail(MyTaTaskVo vo);
 }

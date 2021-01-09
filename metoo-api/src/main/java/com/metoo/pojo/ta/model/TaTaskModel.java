@@ -49,6 +49,8 @@ public class TaTaskModel implements Serializable {
     List<TaTaskUserModel> waitConfirmList = new ArrayList<>();
     // 已结束列表
     List<TaTaskUserModel> finishList = new ArrayList<>();
+    // 我领取任务的记录表id
+    private Integer taskUserId;
 
     private Integer id;
 

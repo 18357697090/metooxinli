@@ -25,16 +25,6 @@ public class TaTaskUserServiceImpl extends ServiceImpl<TaTaskUserMapper, TaTaskU
     private TaTaskUserRepository taTaskUserRepository;
 
     @Override
-    public void updateAcceptId(Integer uid, Integer taskId) {
-        taTaskUserRepository.updateAcceptId(uid, taskId);
-    }
-
-    @Override
-    public int updateAcceptState(Integer taskId, Integer uid) {
-        return taTaskUserRepository.updateAcceptState(taskId, uid);
-    }
-
-    @Override
     public Long countByUidAndTaskId(Integer uid, Integer id) {
         return taTaskUserRepository.countAllByUidAndTaskId(uid, id);
     }

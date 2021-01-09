@@ -34,6 +34,12 @@ public class TaTaskUserModel implements Serializable {
 
     private BigDecimal price;
 
+    private String remark;
+
+    private String imgs;
+
+    private String refuseRemark;
+
     private Date createTime;
 
     private Date updateTime;
