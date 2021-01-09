@@ -24,7 +24,7 @@ import javax.persistence.*;
  * @since 2021-01-07
  */
 @Entity
-@Table(name = "in_area")
+@Table(name = "in_banner")
 @EntityListeners(AuditingEntityListener.class)
 @Data
 @EqualsAndHashCode(callSuper = false)
