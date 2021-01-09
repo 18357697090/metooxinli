@@ -5,13 +5,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 
 public interface PsCapsuleRepository extends JpaRepository<PsCapsule,Integer> {
-
-    PsCapsule findByCapsuleId(Integer capsuleId);
 
     Integer countByType(Integer type);
 

@@ -28,7 +28,7 @@ public class PsCapsuleServiceImpl extends ServiceImpl<PsCapsuleMapper, PsCapsule
 
     @Override
     public PsCapsule findByCapsuleId(Integer capsuleId) {
-        return psCapsuleRepository.findByCapsuleId(capsuleId);
+        return psCapsuleRepository.getOne(capsuleId);
     }
 
     @Override

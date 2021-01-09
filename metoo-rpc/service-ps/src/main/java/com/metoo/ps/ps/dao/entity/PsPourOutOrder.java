@@ -24,7 +24,7 @@ import javax.persistence.*;
  * @since 2021-01-07
  */
 @Entity
-@Table(name = "ps_consult_order")
+@Table(name = "ps_pour_out_order")
 @EntityListeners(AuditingEntityListener.class)
 @Data
 @EqualsAndHashCode(callSuper = false)
