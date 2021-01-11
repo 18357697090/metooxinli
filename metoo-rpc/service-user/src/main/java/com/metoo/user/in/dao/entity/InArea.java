@@ -24,7 +24,6 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "in_area")
-@EntityListeners(AuditingEntityListener.class)
 @Data
 @EqualsAndHashCode(callSuper = false)
 @ApiModel(value="InArea对象", description="区域表")
