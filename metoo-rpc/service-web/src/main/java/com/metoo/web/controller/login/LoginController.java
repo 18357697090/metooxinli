@@ -76,7 +76,7 @@ public class LoginController {
         // randomKey和token已经生成完毕
         final String randomKey = jwtTokenUtil.getRandomKey();
         final String token = jwtTokenUtil.generateToken(loginModel.getUserId()+"", randomKey);
-        return RE.ok(new AuthResponse(token, randomKey));
+        return RE.ok(new AuthResponse(token, loginModel.getExtendId(), randomKey));
     }
 
 

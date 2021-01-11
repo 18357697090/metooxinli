@@ -24,10 +24,13 @@ public class AuthResponse implements Serializable {
      * 用于客户端混淆md5加密
      */
     private final String randomKey;
+    // 用户拓展id
+    private final String extendId;
 
-    public AuthResponse(String token, String randomKey) {
+    public AuthResponse(String token, String extendId,  String randomKey) {
         this.token = token;
         this.randomKey = randomKey;
+        this.extendId = extendId;
     }
 
 }
