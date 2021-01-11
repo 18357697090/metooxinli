@@ -723,6 +723,12 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
+      <groupId>net.coobird</groupId>
+      <artifactId>thumbnailator</artifactId>
+      <version>0.4.11</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
       <groupId>com.aliyun.oss</groupId>
       <artifactId>aliyun-sdk-oss</artifactId>
       <version>3.8.0</version>
@@ -916,12 +922,6 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>net.coobird</groupId>
-      <artifactId>thumbnailator</artifactId>
-      <version>0.4.11</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
       <groupId>com.baomidou</groupId>
       <artifactId>mybatis-plus-boot-starter</artifactId>
       <version>3.4.1</version>
@@ -1038,6 +1038,12 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-jcl</artifactId>
+      <version>5.2.10.RELEASE</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
       <version>5.2.10.RELEASE</version>
       <scope>compile</scope>
     </dependency>

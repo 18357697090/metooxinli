@@ -18,7 +18,7 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
-public class XyJoinCityMessageVo extends BaseVo {
+public class XyCreateCityVo extends BaseVo {
     private Long id;
 
     private Date createTime;

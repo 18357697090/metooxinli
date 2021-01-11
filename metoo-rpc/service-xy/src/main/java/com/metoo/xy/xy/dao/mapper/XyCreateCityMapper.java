@@ -1,6 +1,6 @@
 package com.metoo.xy.xy.dao.mapper;
 
-import com.metoo.xy.xy.dao.entity.XyJoinCityMessage;
+import com.metoo.xy.xy.dao.entity.XyCreateCity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author loongya
  * @since 2020-12-28
  */
-public interface XyJoinCityMessageMapper extends BaseMapper<XyJoinCityMessage> {
+public interface XyCreateCityMapper extends BaseMapper<XyCreateCity> {
 
 }

@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 import io.swagger.annotations.ApiModel;
@@ -39,43 +40,33 @@ public class XyCountry extends Model<XyCountry> {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
+    @ApiModelProperty(value = "名称")
+    private String name;
+
+    @ApiModelProperty(value = "介绍")
+    private String detail;
+
+    @ApiModelProperty(value = "图片")
+    private String img;
+
+    @ApiModelProperty(value = "消耗积分")
+    private BigDecimal price;
+
+    @ApiModelProperty(value = "1正常, 2:异常 3:删除")
+    private Integer status;
+
+    @ApiModelProperty(value = "用户id")
+    private Integer uid;
+
+    @ApiModelProperty(value = "类型:1:国度 2:族  默认为 1")
+    private Integer type;
+
     @CreatedDate
     @ApiModelProperty(value = "创建时间")
     private Date createTime;
 
-    @ApiModelProperty(value = "国id")
-    private Integer countryId;
-
-    @ApiModelProperty(value = "介绍")
-    private String introduction;
-
-    @ApiModelProperty(value = "名称")
-    private String name;
-
-    @ApiModelProperty(value = "图片")
-    private String picture;
-
-    @ApiModelProperty(value = "族id")
-    private Integer raceId;
-
-    @ApiModelProperty(value = "备用字段")
-    private String spare;
-
-    @ApiModelProperty(value = "1正常。0被删除")
-    private Integer state;
-
-    @ApiModelProperty(value = "是否为聊天室")
-    private Integer isAudioRoom;
-
-    @ApiModelProperty(value = "是否为城")
-    private Integer isCity;
-
-    @ApiModelProperty(value = "是否为国")
-    private Integer isCountry;
-
-    @ApiModelProperty(value = "是否为族")
-    private Integer isRace;
-
+    @ApiModelProperty(value = "修改时间")
+    private Date updateTime;
 
     @Override
     protected Serializable pkVal() {

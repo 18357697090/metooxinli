@@ -18,19 +18,19 @@ import javax.persistence.*;
 
 /**
  * <p>
- * 国度，族表
+ * 申请加入城消息记录表
  * </p>
  *
  * @author loongya
  * @since 2020-12-28
  */
 @Entity
-@Table(name = "xy_race")
+@Table(name = "xy_create_city")
 @EntityListeners(AuditingEntityListener.class)
 @Data
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value="XyRace对象", description="国度，族表")
-public class XyRace extends Model<XyRace> {
+@ApiModel(value="XyCreateCity对象", description="申请加入城消息记录表")
+public class XyCreateCity extends Model<XyCreateCity> {
 
     private static final long serialVersionUID = 1L;
 
@@ -40,15 +40,23 @@ public class XyRace extends Model<XyRace> {
     private Integer id;
 
     @CreatedDate
+    @ApiModelProperty(value = "创建时间")
     private Date createTime;
 
-    private String introduction;
+    @ApiModelProperty(value = "群主id")
+    private Integer cityHostId;
 
-    private String name;
+    @ApiModelProperty(value = "申请内容")
+    private String message;
 
-    private Integer raceId;
+    @ApiModelProperty(value = "1表示未处理，0表示处理了")
+    private Integer state;
 
-    private String picture;
+    @ApiModelProperty(value = "申请用户uid")
+    private Integer uid;
+
+    @ApiModelProperty(value = "城名称")
+    private String cityName;
 
 
     @Override

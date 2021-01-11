@@ -11,15 +11,12 @@ import com.metoo.pojo.tj.model.TjUserInfoModel;
 import com.metoo.xy.xy.dao.entity.XyCity;
 import com.metoo.xy.xy.dao.entity.XyCountry;
 import com.metoo.xy.xy.dao.entity.XyMyRoom;
-import com.metoo.xy.xy.dao.entity.XyRace;
 import com.metoo.xy.xy.service.XyCityService;
 import com.metoo.xy.xy.service.XyCountryService;
 import com.metoo.xy.xy.service.XyMyRoomService;
-import com.metoo.xy.xy.service.XyRaceService;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -42,9 +39,6 @@ public class XyMyRoomApiImpl implements XyMyRoomApi {
     private XyMyRoomService xyMyRoomService;
 
     @Autowired
-    private XyRaceService xyRaceService;
-
-    @Autowired
     private XyCountryService xyCountryService;
 
     @Autowired
@@ -62,22 +56,22 @@ public class XyMyRoomApiImpl implements XyMyRoomApi {
             myRoomDTO.setRoomId(myRoom.getMyRoomId());
             switch (myRoom.getType()){
                 case 1 :
-                    XyRace race = xyRaceService.findByRaceId(myRoom.getMyRoomId());
-                    myRoomDTO.setName(race.getName());
-                    myRoomDTO.setPicture(race.getPicture());
-                    myRoomDTO.setIntroduction(race.getIntroduction());
+//                    XyRace race = xyRaceService.findByRaceId(myRoom.getMyRoomId());
+//                    myRoomDTO.setName(race.getName());
+//                    myRoomDTO.setPicture(race.getPicture());
+//                    myRoomDTO.setIntroduction(race.getIntroduction());
                     break;
                 case 2 :
                     XyCountry country = xyCountryService.findByCountryId(myRoom.getMyRoomId());
                     myRoomDTO.setName(country.getName());
-                    myRoomDTO.setPicture(country.getPicture());
-                    myRoomDTO.setIntroduction(country.getIntroduction());
+//                    myRoomDTO.setPicture(country.getPicture());
+//                    myRoomDTO.setIntroduction(country.getIntroduction());
                     break;
                 case 3 :
                     XyCity city =  xyCityService.findByCityId(myRoom.getMyRoomId());
                     myRoomDTO.setName(city.getName());
-                    myRoomDTO.setPicture(city.getPicture());
-                    myRoomDTO.setIntroduction(city.getIntroduction());
+//                    myRoomDTO.setPicture(city.getPicture());
+//                    myRoomDTO.setIntroduction(city.getIntroduction());
                     break;
             }
             myRoomDTOS.add(myRoomDTO);

@@ -15,17 +15,14 @@ import com.metoo.tools.CreateID;
 import com.metoo.xy.xy.dao.entity.XyCity;
 import com.metoo.xy.xy.dao.entity.XyCountry;
 import com.metoo.xy.xy.dao.entity.XyMyRoom;
-import com.metoo.xy.xy.dao.entity.XyRace;
 import com.metoo.xy.xy.service.XyCityService;
 import com.metoo.xy.xy.service.XyCountryService;
 import com.metoo.xy.xy.service.XyMyRoomService;
-import com.metoo.xy.xy.service.XyRaceService;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
@@ -53,8 +50,8 @@ public class XyCountryApiImpl implements XyCountryApi {
 
     @Autowired
     private XyMyRoomService xyMyRoomService;
-    @Autowired
-    private XyRaceService xyRaceService;
+//    @Autowired
+//    private XyRaceService xyRaceService;
 
     @DubboReference
     private TjUserInfoApi tjUserInfoApi;
@@ -103,8 +100,8 @@ public class XyCountryApiImpl implements XyCountryApi {
                     city = xyCityService.findByCityId(countryId);
                     country1 = xyCountryService.findByCountryId(countryId);
                 }
-                country.setCountryId(countryId);
-                country.setState(1);
+//                country.setCountryId(countryId);
+//                country.setState(1);
                 xyCountryService.save(country);
                 XyMyRoom myRoom = new XyMyRoom();
                 myRoom.setIsHost(1);
@@ -127,17 +124,17 @@ public class XyCountryApiImpl implements XyCountryApi {
     @Override
     public RE getCountry(Integer uid, Integer raceId) {
 
-        XyRace race =  xyRaceService.findByRaceId(raceId);
-        ReturnCountryDTO returnCountryDTO = mapper.map(race,ReturnCountryDTO.class);
-        returnCountryDTO.setCountryId(raceId);
-        returnCountryDTO.setStatusBar(2);
-        returnCountryDTO.setUserName(tjUserInfoApi.findByUid(xyMyRoomService.findByMyRoomIdAndIsHost(raceId).getUid()).getNickName());
+//        XyRace race =  xyRaceService.findByRaceId(raceId);
+//        ReturnCountryDTO returnCountryDTO = mapper.map(race,ReturnCountryDTO.class);
+//        returnCountryDTO.setCountryId(raceId);
+//        returnCountryDTO.setStatusBar(2);
+//        returnCountryDTO.setUserName(tjUserInfoApi.findByUid(xyMyRoomService.findByMyRoomIdAndIsHost(raceId).getUid()).getNickName());
         List<ReturnCountryDTO> returnCountryDTOS = new ArrayList<>();
-        returnCountryDTOS.add(returnCountryDTO);
+//        returnCountryDTOS.add(returnCountryDTO);
         List<XyCountry> countries = xyCountryService.findByRaceId(raceId);
         for (XyCountry country : countries) {
             ReturnCountryDTO returnCountryDTO1 = mapper.map(country,ReturnCountryDTO.class);
-            returnCountryDTO1.setUserName(tjUserInfoApi.findByUid(xyMyRoomService.findByMyRoomIdAndIsHost(country.getCountryId()).getUid()).getNickName());
+//            returnCountryDTO1.setUserName(tjUserInfoApi.findByUid(xyMyRoomService.findByMyRoomIdAndIsHost(country.getCountryId()).getUid()).getNickName());
             returnCountryDTOS.add(returnCountryDTO1);
         }
         if(OU.isBlack(returnCountryDTOS)){

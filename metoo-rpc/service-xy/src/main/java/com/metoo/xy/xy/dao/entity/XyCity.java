@@ -39,34 +39,42 @@ public class XyCity extends Model<XyCity> {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @CreatedDate
-    @ApiModelProperty(value = "创建时间")
-    private Date createTime;
-
-    @ApiModelProperty(value = "城id")
-    private Integer cityId;
-
     @ApiModelProperty(value = "国家id")
     private Integer countryId;
 
-    @ApiModelProperty(value = "介绍")
-    private String introduction;
+    @ApiModelProperty(value = "国主id")
+    private Integer countryUid;
 
     @ApiModelProperty(value = "名称")
     private String name;
 
+    @ApiModelProperty(value = "城市创建者")
+    private Integer uid;
+
+    @ApiModelProperty(value = "用户拓展id")
+    private String extendId;
+
+    @ApiModelProperty(value = "介绍")
+    private String detail;
+
     @ApiModelProperty(value = "头像")
-    private String picture;
+    private String img;
 
-    @ApiModelProperty(value = "族id")
-    private Integer raceId;
+    @ApiModelProperty(value = "1正常 2:异常  3: 删除")
+    private Integer status;
 
-    @ApiModelProperty(value = "1正常。0被删除")
-    private Integer state;
-
-    @ApiModelProperty(value = "1 为正常的城，2，商家馆  3，倾诉馆 4，请安馆 5，匹配")
+    @ApiModelProperty(value = "城市标签: 1 为正常的城，2，商家馆  3，倾诉馆 4，请安馆 5，匹配 , 100:小部落")
     private Integer type;
 
+    @ApiModelProperty(value = "是否主城 0:是 1:否")
+    private Integer isMain;
+
+    @CreatedDate
+    @ApiModelProperty(value = "创建时间")
+    private Date createTime;
+
+    @ApiModelProperty(value = "修改时间")
+    private Date updateTime;
 
     @Override
     protected Serializable pkVal() {

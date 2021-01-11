@@ -1,14 +1,15 @@
-package com.metoo.pojo.xy.vo;
+package com.metoo.pojo.xy.model;
 
-import com.loongya.core.util.vo.BaseVo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 /**
  * <p>
- * 国度，族表
+ * 申请加入城消息记录表
  * </p>
  *
  * @author loongya
@@ -17,7 +18,7 @@ import lombok.NoArgsConstructor;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
-public class XyRaceVo extends BaseVo {
+public class XyCreateCityModel implements Serializable{
 
 
 }

@@ -1,6 +1,6 @@
 package com.metoo.xy.xy.service;
 
-import com.metoo.xy.xy.dao.entity.XyJoinCityMessage;
+import com.metoo.xy.xy.dao.entity.XyCreateCity;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author loongya
  * @since 2020-12-28
  */
-public interface XyJoinCityMessageService extends IService<XyJoinCityMessage> {
+public interface XyCreateCityService extends IService<XyCreateCity> {
 
 }

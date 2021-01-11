@@ -1,7 +1,7 @@
 package com.metoo.api.xy;
 
 import com.loongya.core.util.RE;
-import com.metoo.pojo.xy.vo.XyJoinCityMessageVo;
+import com.metoo.pojo.xy.vo.XyCreateCityVo;
 
 /**
  * <p>
@@ -11,7 +11,7 @@ import com.metoo.pojo.xy.vo.XyJoinCityMessageVo;
  * @author loongya
  * @since 2020-12-28
  */
-public interface XyJoinCityMessageApi{
+public interface XyCreateCityApi{
 
-    RE joinCity(Integer uid, XyJoinCityMessageVo vo);
+    RE joinCity(Integer uid, XyCreateCityVo vo);
 }
