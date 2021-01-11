@@ -2,7 +2,6 @@ package com.loongya.core.util;
 
 
 import net.coobird.thumbnailator.Thumbnails;
-import org.apache.commons.io.FileUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -14,7 +13,7 @@ public class imageUtil {
 
     private static final List<String> ALLOW_TYPES= Arrays.asList("image/jpeg","image/png","image/bmp","image/jpg");
 
-    public RE saveImage(MultipartFile file){
+    public static RE saveImage(MultipartFile file){
         if(file.isEmpty()){
             return RE.noData();
         }
@@ -39,7 +38,7 @@ public class imageUtil {
             }
             File dest = new File(path + originalFilename);
             Thumbnails.of(file.getInputStream()).scale(1f).outputQuality(0.25f).toFile(dest);
-            return RE.ok();
+            return RE.ok("http://www.metooxinli:8088/image/"+year+'/'+hourse+'/'+day+'/'+originalFilename);
         } catch (Exception e) {
             return RE.fail("Failed to save image");
         }
