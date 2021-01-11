@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 import io.swagger.annotations.ApiModel;
@@ -39,25 +40,37 @@ public class XyCreateCity extends Model<XyCreateCity> {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
+    @ApiModelProperty(value = "国id")
+    private Integer countryId;
+
+    @ApiModelProperty(value = "群主id(国主id)")
+    private Integer countryUid;
+
+    @ApiModelProperty(value = "申请建成用户uid")
+    private Integer uid;
+
+    @ApiModelProperty(value = "消耗积分")
+    private BigDecimal price;
+
+    @ApiModelProperty(value = "申请内容")
+    private String msg;
+
+    @ApiModelProperty(value = "1: 待审核 2: 审核成功 3: 审核失败")
+    private Integer status;
+
+    @ApiModelProperty(value = "城名称")
+    private String cityNname;
+
+    @ApiModelProperty(value = "城市简介")
+    private String cityDetail;
+
     @CreatedDate
     @ApiModelProperty(value = "创建时间")
     private Date createTime;
 
-    @ApiModelProperty(value = "群主id")
-    private Integer cityHostId;
-
-    @ApiModelProperty(value = "申请内容")
-    private String message;
-
-    @ApiModelProperty(value = "1表示未处理，0表示处理了")
-    private Integer state;
-
-    @ApiModelProperty(value = "申请用户uid")
-    private Integer uid;
-
-    @ApiModelProperty(value = "城名称")
-    private String cityName;
-
+    @CreatedDate
+    @ApiModelProperty(value = "修改时间")
+    private Date updateTime;
 
     @Override
     protected Serializable pkVal() {

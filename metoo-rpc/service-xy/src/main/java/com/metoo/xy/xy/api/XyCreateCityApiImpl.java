@@ -47,8 +47,6 @@ public class XyCreateCityApiImpl implements XyCreateCityApi {
 
         XyCreateCity cityMessage = mapper.map(vo, XyCreateCity.class);
         cityMessage.setUid(uid);
-        cityMessage.setCityName(xyCityService.findByCityId(cityMessage.getCityHostId()).getName());
-        cityMessage.setCityHostId(xyMyRoomService.findByMyRoomIdAndIsHost(cityMessage.getCityHostId()).getUid());
         xyCreateCityService.save(cityMessage);
         return RE.ok("申请加入成功");
     }

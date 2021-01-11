@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
-public class XyMyCountryVo extends BaseVo {
+public class XyAuthVo extends BaseVo {
 
 
 }

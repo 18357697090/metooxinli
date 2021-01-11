@@ -39,27 +39,40 @@ public class XyMyRoom extends Model<XyMyRoom> {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
+    @ApiModelProperty(value = "国家id")
+    private Integer countryId;
+
+    @ApiModelProperty(value = "国主id")
+    private Integer countryUid;
+
+    @ApiModelProperty(value = "城市id")
+    private Integer cityId;
+
+    @ApiModelProperty(value = "城主id")
+    private Integer cityUid;
+
+    @ApiModelProperty(value = "成员id")
+    private Integer uid;
+
+    @ApiModelProperty(value = "用户拓展id")
+    private Integer extendId;
+
+    @ApiModelProperty(value = "1: 表示正常 2: 退出 3: 强制退出")
+    private Integer status;
+
+    @ApiModelProperty(value = "房间公告")
+    private String notice;
+
+    @ApiModelProperty(value = "1:普通城市 2: 主城 3: 小部落")
+    private Integer type;
+
     @CreatedDate
     @ApiModelProperty(value = "创建时间")
     private Date createTime;
 
-    @ApiModelProperty(value = "是否为主任")
-    private Integer isHost;
-
-    @ApiModelProperty(value = "0表示退出或者被T  1表示正常")
-    private Integer state;
-
-    @ApiModelProperty(value = "类型")
-    private Integer type;
-
-    @ApiModelProperty(value = "uid")
-    private Integer uid;
-
-    @ApiModelProperty(value = "房间id")
-    private Integer myRoomId;
-
-    @ApiModelProperty(value = "房间公告")
-    private String notice;
+    @CreatedDate
+    @ApiModelProperty(value = "修改时间")
+    private Date updateTime;
 
 
     @Override

@@ -2,6 +2,7 @@ package com.metoo.api.xy;
 
 import com.loongya.core.util.RE;
 import com.metoo.pojo.old.vo.BuildCountryDTO;
+import com.metoo.pojo.xy.vo.XyCountryVo;
 
 /**
  * <p>
@@ -13,7 +14,7 @@ import com.metoo.pojo.old.vo.BuildCountryDTO;
  */
 public interface XyCountryApi {
 
-    RE buildCountry(BuildCountryDTO buildCountryDTO, Integer uid);
+    RE buildCountry(XyCountryVo vo);
 
     RE getCountry(Integer uid, Integer raceId);
 }

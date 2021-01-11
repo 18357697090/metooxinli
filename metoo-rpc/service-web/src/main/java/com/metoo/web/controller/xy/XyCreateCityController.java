@@ -22,20 +22,23 @@ public class XyCreateCityController {
     @DubboReference
     private XyCreateCityApi xyCreateCityApi;
 
-    //加入国度
+    /**
+     * 建城申请表
+     * 1: 判断是否积分足够
+     * 2: 判断国家是否是自己的,如果是,直接建城,如果不是,加入申请表.
+     * 3: 冻结积分, 新增积分明细
+     * @param uid
+     * @param vo
+     * @return
+     */
     @GetMapping("/joinCity")
     public RE joinCity(@RequestHeader("UID")Integer uid, @RequestBody XyCreateCityVo vo){
         return xyCreateCityApi.joinCity(uid, vo);
 
     }
 
-
-    //查看请求
-//    @GetMapping()
-//    public ReturnMessage (){
-//    ReturnMessage returnMessage = new ReturnMessage();
-//
-//    return returnMessage;
-//}
-
+    /**
+     * 国主审核建城申请列表
+     * 如果同意,直接建城,如果拒绝,返还积分
+     */
 }
