@@ -19,10 +19,6 @@ jwt:
 spring:
   application:
     name: metoo-web
-  mvc:
-    static-path-pattern: /image/**
-  resources:
-    static-locations: file:/usr/local/image/
 
 dubbo:
   scan:

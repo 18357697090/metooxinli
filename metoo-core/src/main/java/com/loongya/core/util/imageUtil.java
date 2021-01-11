@@ -1,15 +1,16 @@
 package com.loongya.core.util;
 
 
+import com.loongya.core.util.aliyun.OSSUtil;
 import net.coobird.thumbnailator.Thumbnails;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class imageUtil {
+
+    private static final String SAVE_PATH = "/usr/local/image/";
 
     private static final List<String> ALLOW_TYPES= Arrays.asList("image/jpeg","image/png","image/bmp","image/jpg");
 
@@ -31,14 +32,18 @@ public class imageUtil {
         String year=DateUtils.getYear();
         try {
             //存放的目录
-            String path="/usr/local/image/"+year+'/'+hourse+'/'+day+'/';
+            String path=SAVE_PATH +year+'/'+hourse+'/'+day+'/';
             File files =new File(path);
             if(!files.exists()){
                 files.mkdirs();
             }
             File dest = new File(path + originalFilename);
             Thumbnails.of(file.getInputStream()).scale(1f).outputQuality(0.25f).toFile(dest);
-            return RE.ok("http://www.metooxinli:8088/image/"+year+'/'+hourse+'/'+day+'/'+originalFilename);
+            String subPath = "/image/"+year+"/"+hourse+"/"+day+"/"+originalFilename;
+            Map<String, String> map = new HashMap<>();
+            map.put("path", subPath);
+            map.put("fullPath", OSSUtil.fillPath(subPath));
+            return RE.ok(map);
         } catch (Exception e) {
             return RE.fail("Failed to save image");
         }

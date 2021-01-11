@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 
 public class OSSUtil {
 
-    public static final String PATH_PRE = "http://img.yuanyuejituan.com/";
+    public static final String PATH_PRE = "http://www.metooxinli.com/";
     public static final String PATH_VIDEO_PRE = "http://video.yuanyuejituan.com/";
     public static  final String PRE_IMG = "img/";
     public static final String PRE_VIDEO = "video/";
