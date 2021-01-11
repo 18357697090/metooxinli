@@ -16,4 +16,6 @@ public interface TaTaskUserRepository extends JpaRepository<TaTaskUser,Integer> 
     TaTaskUser findFirstByUidAndTaskId(Integer uid, Integer id);
 
     List<TaTaskUser> findAllByTaskId(Integer taskId);
+
+    Integer countByTaskId(Integer taskId);
 }

@@ -19,8 +19,6 @@ import lombok.NoArgsConstructor;
 public class CommitTaTaskVo extends BaseVo {
     // 用户id
     private Integer uid;
-    // 任务id
-    private Integer taskId;
     // 用户领取任务表id
     private Integer taskUserId;
 

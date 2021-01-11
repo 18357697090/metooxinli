@@ -21,4 +21,6 @@ public interface TaTaskUserService extends IService<TaTaskUser> {
     TaTaskUser findFirstByUidAndTaskId(Integer uid, Integer id);
 
     List<TaTaskUser> findAllByTaskId(Integer id);
+
+    Integer countByTaskId(Integer id);
 }

@@ -43,6 +43,13 @@ public class TaTaskModel implements Serializable {
     private Integer taskUserStatus;
     // 我对该任务的状态 任务状态 1: 待完成 2: 待审核 3: 审核成功(金额到账) 4: 审核失败(7日后金额原路返回) 5:已关闭
     private String taskUserStatusName;
+
+
+    private String appealRemark;
+
+    private Integer appealStatus;
+
+    private String appealAnswer;
     // 待完成列表
     List<TaTaskUserModel> goOnList = new ArrayList<>();
     // 待确认列表

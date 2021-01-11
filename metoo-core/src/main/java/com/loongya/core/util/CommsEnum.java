@@ -9,6 +9,7 @@ public enum CommsEnum implements CommEnum {
     SUCCESS("0", "操作成功!"),
     NO_DATA("605", "没有数据"),
     SAVE_FAIL("1", "保存失败!"),
+    BUSINESS_FAIL("1", "业务出错!"),
     PARAM_ERR("1", "缺少参数"),
    ;
 

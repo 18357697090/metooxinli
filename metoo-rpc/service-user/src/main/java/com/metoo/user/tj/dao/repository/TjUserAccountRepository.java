@@ -33,4 +33,12 @@ public interface TjUserAccountRepository extends JpaRepository<TjUserAccount,Int
     @Modifying
     @Query(value = "update tj_user_account set balance_frozen=balance_frozen + :price where uid= :uid",nativeQuery = true)
     void frozeenBalance(Integer uid, BigDecimal price);
+
+    @Modifying
+    @Query(value = "update tj_user_account set balance_frozen=balance_frozen - :price where uid= :uid",nativeQuery = true)
+    void unFrozeenBalance(Integer uid, BigDecimal price);
+
+    @Modifying
+    @Query(value = "update tj_user_account set balance=balance + :price where uid= :uid",nativeQuery = true)
+    void updateBalanceUp(BigDecimal price, Integer uid);
 }

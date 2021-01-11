@@ -51,7 +51,7 @@ public class TaTask extends Model<TaTask> {
     @ApiModelProperty(value = "任务价格")
     private BigDecimal price;
 
-    @ApiModelProperty(value = "任务状态 1正常 2: 异常 3:删除")
+    @ApiModelProperty(value = "任务状态  1正常 2: 关闭 4:删除")
     private Integer state;
 
     @ApiModelProperty(value = "1表示普通任务，2表示教程任务类型")

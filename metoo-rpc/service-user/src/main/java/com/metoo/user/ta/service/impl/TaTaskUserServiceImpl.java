@@ -38,4 +38,9 @@ public class TaTaskUserServiceImpl extends ServiceImpl<TaTaskUserMapper, TaTaskU
     public List<TaTaskUser> findAllByTaskId(Integer taskId) {
         return taTaskUserRepository.findAllByTaskId(taskId);
     }
+
+    @Override
+    public Integer countByTaskId(Integer taskId) {
+        return taTaskUserRepository.countByTaskId(taskId);
+    }
 }

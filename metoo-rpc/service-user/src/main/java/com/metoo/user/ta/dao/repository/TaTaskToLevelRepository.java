@@ -6,5 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TaTaskToLevelRepository extends JpaRepository<TaTaskToLevel,Integer> {
 
-   
+
+
+    int countAllByTaskIdAndLevelGreaterThanEqual(Integer taskId, Integer level);
+
 }

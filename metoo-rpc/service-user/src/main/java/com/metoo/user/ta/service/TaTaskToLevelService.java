@@ -13,4 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface TaTaskToLevelService extends IService<TaTaskToLevel> {
 
+    int countAllByTaskIdAndLevel(Integer id, Integer level);
 }
