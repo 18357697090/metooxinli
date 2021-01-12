@@ -6,6 +6,7 @@ import com.loongya.core.exception.LoongyaException;
 import com.loongya.core.util.*;
 import com.loongya.core.util.aliyun.OSSUtil;
 import com.metoo.api.tj.TjUserApi;
+import com.metoo.pojo.login.enums.AuthEnum;
 import com.metoo.pojo.login.model.LoginModel;
 import com.metoo.pojo.login.model.LoginUserInfoModel;
 import com.metoo.pojo.login.vo.LoginUploadPasswordVo;

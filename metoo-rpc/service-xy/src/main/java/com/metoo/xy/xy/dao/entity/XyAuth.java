@@ -25,12 +25,12 @@ import javax.persistence.*;
  * @since 2020-12-28
  */
 @Entity
-@Table(name = "xy_my_country")
+@Table(name = "xy_auth")
 @EntityListeners(AuditingEntityListener.class)
 @Data
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value="XyMyCountry对象", description="我的国度表")
-public class XyMyCountry extends Model<XyMyCountry> {
+@ApiModel(value="XyAuth对象", description="我的国度表")
+public class XyAuth extends Model<XyAuth> {
 
     private static final long serialVersionUID = 1L;
 

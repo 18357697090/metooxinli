@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  * <p>
- * 我的加入的聊天室表 前端控制器
+ * 用户聊天室表 前端控制器
  * </p>
  *
  * @author loongya
@@ -29,24 +29,17 @@ public class XyMyRoomController {
     @DubboReference
     private XyMyRoomApi xyMyRoomApi;
 
+    /**
+     * 我的聊天室列表
+     * 显示国度,城市,聊天室信息
+     * @param uid
+     * @return
+     */
     @ApiOperation("我加入的国家或城的聊天室房间")
     //我的聊天室
     @GetMapping("/myRoom")
     public RE myRoom(@RequestHeader("UID")Integer uid){
         return xyMyRoomApi.myRoom(uid);
-    }
-
-    //创建国度所需要的国家
-    @GetMapping("/getMyCountryList")
-    public RE getMyCountryList(@RequestHeader("UID")Integer uid){
-        return xyMyRoomApi.getMyCountryList(uid);
-    }
-
-    //加入聊天室返回的数据
-    @GetMapping("/joinAudioRoom")
-    public RE joinAudioRoom(@RequestHeader("UID")Integer uid,Integer audioRoomId){
-        return xyMyRoomApi.joinAudioRoom(uid, audioRoomId);
-
     }
 
 

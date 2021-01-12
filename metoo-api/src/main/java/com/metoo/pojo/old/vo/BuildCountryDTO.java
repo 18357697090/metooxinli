@@ -6,8 +6,7 @@ import java.io.Serializable;
 
 @Data
 public class BuildCountryDTO implements Serializable {
-    private Integer raceId;
     private String name;
-    private String picture;
-    private String introduction;
+    private String img;
+    private String detail;
 }

@@ -53,7 +53,7 @@ public class XyMyRoomApiImpl implements XyMyRoomApi {
         List<MyRoomDTO> myRoomDTOS = new ArrayList<>();
         for (XyMyRoom myRoom : myRooms){
             MyRoomDTO myRoomDTO = new MyRoomDTO();
-            myRoomDTO.setRoomId(myRoom.getMyRoomId());
+            myRoomDTO.setRoomId(myRoom.getId());
             switch (myRoom.getType()){
                 case 1 :
 //                    XyRace race = xyRaceService.findByRaceId(myRoom.getMyRoomId());
@@ -62,13 +62,13 @@ public class XyMyRoomApiImpl implements XyMyRoomApi {
 //                    myRoomDTO.setIntroduction(race.getIntroduction());
                     break;
                 case 2 :
-                    XyCountry country = xyCountryService.findByCountryId(myRoom.getMyRoomId());
+                    XyCountry country = xyCountryService.findByCountryId(myRoom.getId());
                     myRoomDTO.setName(country.getName());
 //                    myRoomDTO.setPicture(country.getPicture());
 //                    myRoomDTO.setIntroduction(country.getIntroduction());
                     break;
                 case 3 :
-                    XyCity city =  xyCityService.findByCityId(myRoom.getMyRoomId());
+                    XyCity city =  xyCityService.findByCityId(myRoom.getId());
                     myRoomDTO.setName(city.getName());
 //                    myRoomDTO.setPicture(city.getPicture());
 //                    myRoomDTO.setIntroduction(city.getIntroduction());
@@ -89,8 +89,8 @@ public class XyMyRoomApiImpl implements XyMyRoomApi {
         List<ReturnMyCityList> returnMyCityLists =  new ArrayList<>();
         for (XyMyRoom myRoom : myCities){
             ReturnMyCityList returnMyCityList = new ReturnMyCityList();
-            returnMyCityList.setMyCityId(myRoom.getMyRoomId());
-            returnMyCityList.setName(xyCountryService.findByCountryId(myRoom.getMyRoomId()).getName());
+            returnMyCityList.setMyCityId(myRoom.getId());
+            returnMyCityList.setName(xyCountryService.findByCountryId(myRoom.getId()).getName());
             returnMyCityLists.add(returnMyCityList);
         }
         if(OU.isBlack(returnMyCityLists)){

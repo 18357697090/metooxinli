@@ -20,5 +20,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class XyCountryVo extends BaseVo {
 
-
+    private Integer uid;
+    private String name;
+    private String img;
+    private String detail;
 }

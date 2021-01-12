@@ -28,6 +28,23 @@ public class XyCityController {
     @DubboReference
     private XyCityApi xyCityApi;
 
+    /**
+     * 点击城市按钮,查看是否有权限加入
+     * 判断是否有权限加入的条件:
+     * 1: 用户等级为3级,可以加入任何一个城市,除了主城
+     * 2: 用户等级4级,不判断,任意加入
+     * 3: 用户等级为2级, 是否有城市通行证,或者有城市增加资格
+     *
+     */
+
+
+    /**
+     *
+     * 创建城市
+     * @param uid
+     * @param countryId
+     * @return
+     */
     //@ApiOperation("创建城")
     //创建城或者馆
 //    @PostMapping("/buildCity")
@@ -112,6 +129,12 @@ public class XyCityController {
 //        }
 //    }
 
+    /**
+     * 根据国家或部落获取城市列表
+     * @param uid
+     * @param countryId
+     * @return
+     */
     @ApiOperation("获取城列表")
     //获取城
     @GetMapping("/getCity")

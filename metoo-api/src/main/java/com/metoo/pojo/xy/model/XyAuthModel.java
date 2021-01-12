@@ -18,7 +18,7 @@ import java.io.Serializable;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
-public class XyMyCountryModel implements Serializable {
+public class XyAuthModel implements Serializable {
 
 
 }

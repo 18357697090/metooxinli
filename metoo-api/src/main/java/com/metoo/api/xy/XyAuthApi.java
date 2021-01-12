@@ -8,6 +8,6 @@ package com.metoo.api.xy;
  * @author loongya
  * @since 2020-12-28
  */
-public interface XyMyCountryApi {
+public interface XyAuthApi {
 
 }

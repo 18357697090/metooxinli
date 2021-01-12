@@ -1,6 +1,6 @@
 package com.metoo.xy.xy.service;
 
-import com.metoo.xy.xy.dao.entity.XyMyCountry;
+import com.metoo.xy.xy.dao.entity.XyAuth;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author loongya
  * @since 2020-12-28
  */
-public interface XyMyCountryService extends IService<XyMyCountry> {
+public interface XyAuthService extends IService<XyAuth> {
 
 }

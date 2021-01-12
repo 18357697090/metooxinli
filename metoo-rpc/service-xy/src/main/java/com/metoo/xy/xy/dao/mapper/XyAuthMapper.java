@@ -1,6 +1,6 @@
 package com.metoo.xy.xy.dao.mapper;
 
-import com.metoo.xy.xy.dao.entity.XyMyCountry;
+import com.metoo.xy.xy.dao.entity.XyAuth;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author loongya
  * @since 2020-12-28
  */
-public interface XyMyCountryMapper extends BaseMapper<XyMyCountry> {
+public interface XyAuthMapper extends BaseMapper<XyAuth> {
 
 }
