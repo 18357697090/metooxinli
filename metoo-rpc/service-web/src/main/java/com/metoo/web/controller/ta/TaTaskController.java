@@ -54,7 +54,7 @@ public class TaTaskController {
      * 任务大厅任务列表
      * @return
      */
-    @GetMapping("/taskList")
+    @PostMapping("/taskList")
     public RE taskList(TaTaskVo vo) {
         vo.setUid(ThreadLocal.getUserId());
         return taTaskApi.taskList(vo);
@@ -66,7 +66,7 @@ public class TaTaskController {
      * @param vo
      * @return
      */
-    @GetMapping("/tutorialTaskList")
+    @PostMapping("/tutorialTaskList")
     public RE tutorialTaskList(TaTaskVo vo) {
         vo.setUid(ThreadLocal.getUserId());
         return taTaskApi.tutorialTaskList(vo);
@@ -78,7 +78,7 @@ public class TaTaskController {
      * @param vo
      * @return
      */
-    @GetMapping("/taskDetail")
+    @PostMapping("/taskDetail")
     public RE taskDetail(TaTaskVo vo) {
         AssertUtils.checkParam(vo.getTaskId());
         vo.setUid(ThreadLocal.getUserId());
@@ -90,7 +90,7 @@ public class TaTaskController {
      * 接受任务
      * @return
      */
-    @GetMapping("/acceptTask")
+    @PostMapping("/acceptTask")
     public RE acceptTask(TaTaskVo vo){
         AssertUtils.checkParam(vo.getTaskId());
         vo.setUid(ThreadLocal.getUserId());
@@ -101,7 +101,7 @@ public class TaTaskController {
     /**
      * 我接受的任务列表
      */
-    @GetMapping("myAcceptTaskList")
+    @PostMapping("myAcceptTaskList")
     public RE myAcceptTaskList(MyTaTaskVo vo){
         vo.setUid(ThreadLocal.getUserId());
         return taTaskApi.myAcceptTaskList(vo);
@@ -110,7 +110,7 @@ public class TaTaskController {
     /**
      * 我发布的任务列表
      */
-    @GetMapping("myPublishTaskList")
+    @PostMapping("myPublishTaskList")
     public RE myPublishTaskList(MyTaTaskVo vo){
         vo.setUid(ThreadLocal.getUserId());
         return taTaskApi.myPublishTaskList(vo);
@@ -119,7 +119,7 @@ public class TaTaskController {
     /**
      * 我发布的任务任务详情
      */
-    @GetMapping("/myPublishTaskDetail")
+    @PostMapping("/myPublishTaskDetail")
     public RE myPublishTaskDetail(MyTaTaskVo vo){
         AssertUtils.checkParam(vo.getTaskId());
         vo.setUid(ThreadLocal.getUserId());
@@ -128,7 +128,7 @@ public class TaTaskController {
     /**
      * 我领取的任务任务详情
      */
-    @GetMapping("/myAcceptTaskDetail")
+    @PostMapping("/myAcceptTaskDetail")
     public RE myAcceptTaskDetail(MyTaTaskVo vo){
         AssertUtils.checkParam(vo.getTaskId());
         vo.setUid(ThreadLocal.getUserId());
@@ -140,7 +140,7 @@ public class TaTaskController {
      * 领取任务后,提交任务接口
      * taskUserId: 不是用户id,是ta_task_user表的id
      */
-    @GetMapping("commitTask")
+    @PostMapping("commitTask")
     public RE commitTask(CommitTaTaskVo vo){
         AssertUtils.checkParam(vo.getTaskUserId());
         vo.setUid(ThreadLocal.getUserId());
@@ -154,7 +154,7 @@ public class TaTaskController {
      * refuseRemark : 拒绝理由
      *
      */
-    @GetMapping("confirmTask")
+    @PostMapping("confirmTask")
     public RE confirmTask(MyTaTaskVo vo){
         AssertUtils.checkParam(vo.getTataskUserId(), vo.getStatus());
         assert vo.getStatus() == 3 || vo.getStatus() == 4;
@@ -166,7 +166,7 @@ public class TaTaskController {
     /**
      * 申诉接口 ,用户完成任务后,被发布者拒绝,可在这个接口申诉,由平台解决,申诉时间为7天内.
      */
-    @GetMapping("appealTask")
+    @PostMapping("appealTask")
     public RE appealTask(AppealTaskVo vo){
         AssertUtils.checkParam(vo.getTaTaskUserId());
         vo.setUid(ThreadLocal.getUserId());
@@ -180,7 +180,7 @@ public class TaTaskController {
      *
      * @return
      */
-    @GetMapping("/deleteTask")
+    @PostMapping("/deleteTask")
     public RE deleteTask(MyTaTaskVo vo){
         AssertUtils.checkParam(vo.getTaskId());
         vo.setUid(ThreadLocal.getUserId());
@@ -192,7 +192,7 @@ public class TaTaskController {
      *
      * @return
      */
-    @GetMapping("/closeTask")
+    @PostMapping("/closeTask")
     public RE closeTask(MyTaTaskVo vo){
         AssertUtils.checkParam(vo.getTaskId());
         return taTaskApi.closeTask(vo);

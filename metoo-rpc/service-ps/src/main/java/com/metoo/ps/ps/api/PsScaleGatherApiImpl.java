@@ -65,6 +65,7 @@ public class PsScaleGatherApiImpl implements PsScaleGatherApi {
         return RE.ok(list.stream().flatMap(e->{
             PsScaleGatherModel model = CopyUtils.copy(e, new PsScaleGatherModel());
             model.setPicture(OSSUtil.fillPath(model.getPicture()));
+
             return Stream.of(model);
         }).collect(Collectors.toList()));
     }

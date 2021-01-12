@@ -7,7 +7,7 @@ import com.metoo.api.ps.PsPourOutApi;
 import com.metoo.pojo.ps.vo.PsPourOutVo;
 import com.metoo.web.config.auth.ThreadLocal;
 import org.apache.dubbo.config.annotation.DubboReference;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,7 +35,7 @@ public class PsPourOutController {
      * 倾诉师列表
      * @return
      */
-    @GetMapping("/getPourList")
+    @PostMapping("/getPourList")
     public RE getPourList(PsPourOutVo vo){
         vo.setUserId(ThreadLocal.getUserId());
         return psPourOutApi.getPourList(vo);
@@ -44,7 +44,7 @@ public class PsPourOutController {
      * 倾诉师详情
      * @return
      */
-    @GetMapping("/getPourDetail")
+    @PostMapping("/getPourDetail")
     public RE getPourDetail(PsPourOutVo vo){
         AssertUtils.checkParam(vo.getPourId());
         vo.setUserId(ThreadLocal.getUserId());

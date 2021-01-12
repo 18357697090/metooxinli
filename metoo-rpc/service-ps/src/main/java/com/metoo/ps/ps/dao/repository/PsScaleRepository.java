@@ -15,7 +15,7 @@ public interface PsScaleRepository extends JpaRepository<PsScale,Integer> {
 
     List<PsScale> findByScaleGatherId(int scaleGatherId);
 
-    List<PsScale> findAllBySpare(int spare, Pageable pageable);
+    List<PsScale> findAllByState(int state, Pageable pageable);
 
     @Modifying
     @Query(value = "update ps_scale set `number`=`number` + 1 where scale_id=?",nativeQuery = true)

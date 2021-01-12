@@ -88,7 +88,8 @@ public class TjUserApiImpl implements TjUserApi {
     @Override
     public RE findUserIdByExtendId(Integer extendId) {
         Integer userId = tjUserService.findByExtendId(extendId);
-        Assert.isNull(userId, "没有该用户");
+        if(OU.isBlack(userId))
+            return RE.fail("没有该用户");
         return RE.ok(userId);
     }
 

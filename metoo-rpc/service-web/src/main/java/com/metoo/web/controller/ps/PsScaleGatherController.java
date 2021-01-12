@@ -11,7 +11,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -40,7 +40,7 @@ public class PsScaleGatherController {
      * 推荐测量-测量列表
      * @return
      */
-    @GetMapping("/findPsScaleListbyclgatherid")
+    @PostMapping("/findPsScaleListbyclgatherid")
     @ApiOperation("推荐测量集合内容")
     public RE findPsScaleListbyclgatherid(PsScaleVo vo){
         RE re = AssertUtils.checkParam(vo.getClgatherId());

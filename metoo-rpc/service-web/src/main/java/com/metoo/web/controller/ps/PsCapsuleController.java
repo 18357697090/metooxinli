@@ -37,7 +37,7 @@ public class PsCapsuleController {
      * 胶囊banner图片
      * @return
      */
-    @GetMapping("/psCapsuleIndexBannerList")
+    @PostMapping("/psCapsuleIndexBannerList")
     public RE psCapsuleIndexBannerList(PsCapsuleVo vo){
         return psCapsuleApi.psCapsuleIndexBannerList(vo);
     }
@@ -47,7 +47,7 @@ public class PsCapsuleController {
      * 胶囊首页-胶囊列表-随机获取三条数据
      * @return
      */
-    @GetMapping("/psCapsuleIndexList")
+    @PostMapping("/psCapsuleIndexList")
     public RE psCapsuleIndexList(PsCapsuleVo vo){
         vo.setUserId(ThreadLocal.getUserId());
         return psCapsuleApi.psCapsuleIndexList(vo);
@@ -59,7 +59,7 @@ public class PsCapsuleController {
      * 更多热门胶囊列表
      * @return
      */
-    @GetMapping("/psCapsuleHostListMore")
+    @PostMapping("/psCapsuleHostListMore")
     public RE psCapsuleHostListMore(PsCapsuleVo vo){
         vo.setUserId(ThreadLocal.getUserId());
         return psCapsuleApi.psCapsuleHostListMore(vo);
@@ -72,7 +72,7 @@ public class PsCapsuleController {
      * @param vo
      * @return
      */
-    @GetMapping("/mycapsule")
+    @PostMapping("/mycapsule")
     public RE myCapsule(PsCapsuleVo vo){
         vo.setUserId(ThreadLocal.getUserId());
         return psCapsuleApi.myCapsule(vo);
@@ -85,7 +85,7 @@ public class PsCapsuleController {
      * @param capsuleId
      * @return
      */
-    @GetMapping("/modifyacapsule")
+    @PostMapping("/modifyacapsule")
     public RE modifyCapsule(Integer state,Integer capsuleId){
         return psCapsuleApi.modifyCapsule(state, capsuleId);
     }
@@ -110,7 +110,7 @@ public class PsCapsuleController {
      * @param capsuleId
      * @return
      */
-    @GetMapping("/findCapsuleDetailById")
+    @PostMapping("/findCapsuleDetailById")
     public RE findCapsuleDetailById(Integer capsuleId){
         return psCapsuleApi.findCapsuleDetailById(capsuleId, ThreadLocal.getUserId());
     }

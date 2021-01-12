@@ -25,7 +25,7 @@ public class PsCapsuleVo extends BaseVo {
     private Integer userId;
     private String imgs; // 图片 “，”隔开
     private String title;
-    private String content;
+        private String content;
     private Integer authType; // 权限：1表示公开，0表示私密
     private BigDecimal price; // 胶囊价格，0表示免费
 

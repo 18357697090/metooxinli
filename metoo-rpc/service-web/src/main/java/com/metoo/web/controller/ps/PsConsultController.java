@@ -7,7 +7,7 @@ import com.metoo.api.ps.PsConsultApi;
 import com.metoo.pojo.ps.vo.PsConsultVo;
 import com.metoo.web.config.auth.ThreadLocal;
 import org.apache.dubbo.config.annotation.DubboReference;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,7 +33,7 @@ public class PsConsultController {
      * @param vo
      * @return
      */
-    @GetMapping("/psConsultBannerList")
+    @PostMapping("/psConsultBannerList")
     public RE psConsultBannerList(PsConsultVo vo){
         return psConsultApi.psConsultBannerList(vo);
     }
@@ -42,7 +42,7 @@ public class PsConsultController {
      * @param vo
      * @return
      */
-    @GetMapping("/psConsultList")
+    @PostMapping("/psConsultList")
     public RE psConsultList(PsConsultVo vo){
         vo.setUserId(ThreadLocal.getUserId());
         return psConsultApi.psConsultList(vo);
@@ -52,7 +52,7 @@ public class PsConsultController {
      * @param vo
      * @return
      */
-    @GetMapping("/psConsultDetail")
+    @PostMapping("/psConsultDetail")
     public RE psConsultDetail(PsConsultVo vo){
         AssertUtils.checkParam(vo.getConId());
         vo.setUserId(ThreadLocal.getUserId());

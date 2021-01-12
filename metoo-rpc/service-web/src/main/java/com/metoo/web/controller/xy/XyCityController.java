@@ -5,7 +5,7 @@ import com.loongya.core.util.RE;
 import com.metoo.api.xy.XyCityApi;
 import io.swagger.annotations.ApiOperation;
 import org.apache.dubbo.config.annotation.DubboReference;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -137,7 +137,7 @@ public class XyCityController {
      */
     @ApiOperation("获取城列表")
     //获取城
-    @GetMapping("/getCity")
+    @PostMapping("/getCity")
     public RE getCity(@RequestHeader("UID")Integer uid, Integer countryId){
         return xyCityApi.getCity(uid, countryId);
 

@@ -1,5 +1,6 @@
 package com.metoo.ps.ps.api;
 
+import com.loongya.core.exception.LoongyaException;
 import com.loongya.core.util.ConstantUtil;
 import com.loongya.core.util.CopyUtils;
 import com.loongya.core.util.OU;
@@ -135,6 +136,9 @@ public class PsScaleMeasureRecordApiImpl implements PsScaleMeasureRecordApi {
     @Override
     public PsScaleMeasureRecordModel findByUserIdAndScaleId(Integer userId, Integer scaleId) {
         PsScaleMeasureRecord pojo = psScaleMeasureRecordService.findFirstByUidAndScaleIdOrderByCreateTimeDesc(userId, scaleId);
+        if(OU.isBlack(pojo)){
+            throw new LoongyaException("数据异常");
+        }
         PsScaleMeasureRecordModel model = CopyUtils.copy(pojo, new PsScaleMeasureRecordModel());
         return model;
     }

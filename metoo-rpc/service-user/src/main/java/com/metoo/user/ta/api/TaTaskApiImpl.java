@@ -196,7 +196,8 @@ public class TaTaskApiImpl implements TaTaskApi {
         }).collect(Collectors.toList()));
         // 判断该任务与该用户的关系
         TaTaskUser taTaskUser = taTaskUserService.findFirstByUidAndTaskId(vo.getUid(), model.getId());
-        Assert.isNull(taTaskUser, "业务出错");
+        if(OU.isBlack(taTaskUser))
+            return RE.fail("业务出错");
         model.setTaskUserStatus(taTaskUser.getStatus());
         model.setTaskUserId(taTaskUser.getId());
         model.setTaskUserStatusName(ConstantUtil.TataskUserStatusEnum.getMsgByCode(taTaskUser.getStatus()));
@@ -266,9 +267,10 @@ public class TaTaskApiImpl implements TaTaskApi {
     public RE commitTask(CommitTaTaskVo vo) {
         // 提交任务 修改数据
         TaTaskUser pojo = taTaskUserService.getById(vo.getTaskUserId());
-        Assert.isNull(pojo, CommsEnum.BUSINESS_FAIL.getMsg());
+        if(OU.isBlack(pojo))
+            return RE.fail(CommsEnum.BUSINESS_FAIL);
         if(pojo.getStatus() != ConstantUtil.TataskUserStatusEnum.TOTO.getCode()){
-            throw new LoongyaException("该任务状态不正确!");
+            return RE.fail("该任务状态不正确!");
         }
         TaTaskUser taTaskUser = new TaTaskUser();
         taTaskUser.setId(pojo.getId());
@@ -292,7 +294,7 @@ public class TaTaskApiImpl implements TaTaskApi {
         TaTaskUser pojo = taTaskUserService.getById(vo.getTataskUserId());
         assert pojo != null;
         if(pojo.getStatus() != ConstantUtil.TataskUserStatusEnum.PENDING.getCode()){
-            throw new LoongyaException("业务异常!");
+            return RE.fail("业务异常!");
         }
         // 修改状态
         TaTaskUser taTaskUser = new TaTaskUser();
@@ -380,7 +382,8 @@ public class TaTaskApiImpl implements TaTaskApi {
     @Override
     public RE taskList(TaTaskVo vo) {
         TjUserInfo uinfo = tjUserInfoService.findUserInfoByUserId(vo.getUid());
-        Assert.isNull(uinfo, "数据异常");
+        if(OU.isBlack(uinfo))
+            return RE.fail("数据异常");
         vo.setLevels(uinfo.getLevel() + "");
         vo.setType(1);
         Integer pagenum = vo.getPagenum();
@@ -464,7 +467,8 @@ public class TaTaskApiImpl implements TaTaskApi {
     @Override
     public RE tutorialTaskList(TaTaskVo vo) {
         TjUserInfo uinfo = tjUserInfoService.findUserInfoByUserId(vo.getUid());
-        Assert.isNull(uinfo, "数据异常");
+        if(OU.isBlack(uinfo))
+            return RE.fail("数据异常");
         vo.setLevels(uinfo.getLevel() + "");
         vo.setType(2);
         Integer pagenum = vo.getPagenum();
@@ -490,7 +494,8 @@ public class TaTaskApiImpl implements TaTaskApi {
         // 判断用户是否有权限领取任务
         // 判断任务指定等级
         TjUserInfo userInfo = tjUserInfoService.findUserInfoByUserId(vo.getUid());
-        Assert.isNull(userInfo, CommsEnum.BUSINESS_FAIL.getMsg());
+        if(OU.isBlack(userInfo))
+            throw new LoongyaException(CommsEnum.BUSINESS_FAIL);
         if(task.getIsLevel() == ConstantUtil.YesOrNo.YES.getCode()){
             if(taTaskToLevelService.countAllByTaskIdAndLevel(task.getId(), userInfo.getLevel()) == 0){
                 levelFlag = false;

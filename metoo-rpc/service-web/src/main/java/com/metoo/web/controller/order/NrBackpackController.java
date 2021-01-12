@@ -8,7 +8,7 @@ import com.metoo.pojo.nr.vo.NrGoodsVo;
 import com.metoo.pojo.order.vo.NrBackpackVo;
 import com.metoo.web.config.auth.ThreadLocal;
 import org.apache.dubbo.config.annotation.DubboReference;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,7 +35,7 @@ public class NrBackpackController {
      * 购买道具接口
      * @return
      */
-    @GetMapping("/buyGoods")
+    @PostMapping("/buyGoods")
     public RE buyGoods(NrGoodsVo vo){
         AssertUtils.checkParam(vo.getGoodsId());
         vo.setUserId(ThreadLocal.getUserId());
@@ -46,7 +46,7 @@ public class NrBackpackController {
      * 购买+赠送道具接口
      * @return
      */
-    @GetMapping("/buyAndGiveGoods")
+    @PostMapping("/buyAndGiveGoods")
     public RE buyAndGiveGoods(NrGoodsVo vo){
         AssertUtils.checkParam(vo.getExtendId(), vo.getGoodsId());
         vo.setUserId(ThreadLocal.getUserId());
@@ -57,7 +57,7 @@ public class NrBackpackController {
      * 赠送道具接口
      * @return
      */
-    @GetMapping("/giveGoods")
+    @PostMapping("/giveGoods")
     public RE giveGoods(NrGoodsVo vo){
         AssertUtils.checkParam(vo.getExtendId(), vo.getGoodsId());
         vo.setUserId(ThreadLocal.getUserId());

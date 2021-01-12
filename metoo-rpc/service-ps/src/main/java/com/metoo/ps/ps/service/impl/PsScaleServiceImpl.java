@@ -42,8 +42,8 @@ public class PsScaleServiceImpl extends ServiceImpl<PsScaleMapper, PsScale> impl
 
     @Override
     public RE getBoutiqueClgatherList(PsScaleVo vo) {
-        Pageable pageable= PageRequest.of(vo.getPagenum(),vo.getPagesize());
-        List<PsScale> psScaleList = psScaleRepository.findAllBySpare(ConstantUtil.YesOrNo.YES.getCode(), pageable);
+        Pageable pageable= PageRequest.of(vo.getPagenum()-1,vo.getPagesize());
+        List<PsScale> psScaleList = psScaleRepository.findAllByState(ConstantUtil.YesOrNo.YES.getCode(), pageable);
         if(OU.isBlack(psScaleList)){
             return RE.noData();
         }

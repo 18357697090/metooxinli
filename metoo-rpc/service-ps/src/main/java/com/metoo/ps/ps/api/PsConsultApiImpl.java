@@ -62,7 +62,7 @@ public class PsConsultApiImpl implements PsConsultApi {
 
     @Override
     public RE psConsultList(PsConsultVo vo) {
-        Pageable pageable = PageRequest.of(vo.getPagenum(),vo.getPagesize(), Sort.Direction.DESC,"price");
+        Pageable pageable = PageRequest.of(vo.getPagenum()-1,vo.getPagesize(), Sort.Direction.DESC,"price");
         List<PsConsult> list =  psConsultService.findByOnLine(1,pageable);
         if(OU.isBlack(list)){
             return RE.noData();
@@ -104,7 +104,8 @@ public class PsConsultApiImpl implements PsConsultApi {
     @Override
     public RE psConsultDetail(PsConsultVo vo) {
         PsConsult pojo = psConsultService.getById(vo.getConId());
-        Assert.isNull(pojo, "没有该咨询师！");
+        if(OU.isBlack(pojo))
+            return RE.fail("没有该咨询师！");
         PsConsultModel model = CopyUtils.copy(pojo, new PsConsultModel());
         model.setHeadImg(OSSUtil.fillPath(model.getHeadImg()));
         pushConsultModel(model, vo.getUserId());

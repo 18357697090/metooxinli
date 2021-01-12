@@ -20,6 +20,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * <p>
@@ -67,6 +68,7 @@ public class PsCapsuleOrderApiImpl implements PsCapsuleOrderApi {
             PsCapsuleOrder userBuyCapsule = new PsCapsuleOrder();
             userBuyCapsule.setCapsuleId(vo.getCapsuleId());
             userBuyCapsule.setUid(vo.getUserId());
+            userBuyCapsule.setCreateTime(new Date());
             psCapsuleOrderService.save(userBuyCapsule);
             return RE.ok();
         }else {

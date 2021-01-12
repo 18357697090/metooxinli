@@ -25,5 +25,5 @@ public class PsScaleMeasureRecordModel implements Serializable {
     private Integer score;
     private String content;
     private String scaleName;
-    private Date createtime;
+    private Date createTime;
 }

@@ -4,10 +4,7 @@ package com.metoo.web.controller.tj;
 import com.loongya.core.util.RE;
 import com.metoo.api.tj.TjUserAccountApi;
 import org.apache.dubbo.config.annotation.DubboReference;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -27,20 +24,20 @@ public class TjUserAccountController {
     @DubboReference
     private TjUserAccountApi tjUserAccountApi;
 
-    @GetMapping("/me")
+    @PostMapping("/me")
     public RE me(@RequestHeader("UID")Integer uid){
         return tjUserAccountApi.me(uid);
     }
 
     //获取个人账户信息
-    @GetMapping("/findzh")
+    @PostMapping("/findzh")
     public RE findzh(Integer uid){
         return tjUserAccountApi.findzh(uid);
     }
 
 
     //查找账户余额
-    @GetMapping("/findBalance")
+    @PostMapping("/findBalance")
     public RE findBalance(@RequestHeader("UID") Integer uid){
         return tjUserAccountApi.findBalance(uid);
     }

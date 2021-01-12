@@ -4,7 +4,7 @@ package com.metoo.web.controller.im;
 import com.loongya.core.util.RE;
 import com.metoo.api.im.ImUserMessageApi;
 import org.apache.dubbo.config.annotation.DubboReference;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,7 +26,7 @@ public class ImUserMessageController {
     private ImUserMessageApi imUserMessageApi;
 
     //取离线消息
-    @GetMapping("/offlineMessage")
+    @PostMapping("/offlineMessage")
     public RE offlineMessage(@RequestHeader("UID")Integer uid){
         return imUserMessageApi.uid(uid);
     }

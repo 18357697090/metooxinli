@@ -89,6 +89,7 @@
     <logger name="java.sql.PreparedStatement" level="DEBUG" />
 
     <logger name="org.springframework" level="INFO" />
+    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE"/>
     <logger name="com.metoo" level="DEBUG" additivity="false">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="FILE-INFO-ROLLING"/>

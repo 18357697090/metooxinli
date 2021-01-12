@@ -9,7 +9,7 @@ import com.metoo.pojo.ps.vo.PsConsultOrderVo;
 import com.metoo.pojo.ps.vo.PsConsultVo;
 import com.metoo.web.config.auth.ThreadLocal;
 import org.apache.dubbo.config.annotation.DubboReference;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,7 +34,7 @@ public  class PsConsultOrderController {
      * @param vo
      * @return
      */
-    @GetMapping("/buyConsult")
+    @PostMapping("/buyConsult")
     public RE buyConsult(PsConsultOrderVo vo){
         vo.setUserId(ThreadLocal.getUserId());
         return psConsultOrderApi.buyConsult(vo);

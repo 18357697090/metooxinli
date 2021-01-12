@@ -41,7 +41,7 @@ public class TjUserInfoController {
     }
 
 
-    @GetMapping("/userInfo")
+    @PostMapping("/userInfo")
     public RE userInfo(@RequestHeader("UID")Integer uid1, Integer uid){
         return tjUserInfoApi.userInfo(uid1,uid);
     }
@@ -54,13 +54,13 @@ public class TjUserInfoController {
 
 
     //查找个人信息
-    @GetMapping("/findUserInfo")
+    @PostMapping("/findUserInfo")
     public TjUserInfoModel findUserInfo(int uid){
         return tjUserInfoApi.findByUid(uid);
     }
 
     //获取个人段位
-    @GetMapping("/finddw")
+    @PostMapping("/finddw")
     public Integer finddw(Integer uid){
         TjUserInfoModel a = tjUserInfoApi.findByUid(uid);
         if(a==null){

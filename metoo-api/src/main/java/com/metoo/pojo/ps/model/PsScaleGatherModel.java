@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * <p>
@@ -22,6 +23,8 @@ public class PsScaleGatherModel implements Serializable {
     private Integer id;
 
     private Integer dw;
+
+    private BigDecimal price;
 
     private String name;
 

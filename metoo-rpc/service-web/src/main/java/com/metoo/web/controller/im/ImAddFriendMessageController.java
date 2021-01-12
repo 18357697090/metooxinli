@@ -32,14 +32,14 @@ public class ImAddFriendMessageController {
     }
 
     //查看好友申请
-    @GetMapping("/FriendRequest")
+    @PostMapping("/FriendRequest")
     public RE FriendRequest(@RequestHeader("UID")Integer uid){
         return imAddFriendMessageApi.FriendRequest(uid);
     }
 
 
     //处理好友请求
-    @GetMapping("/HandleFriendRequest")//handle 1表示同意，0表示拒绝
+    @PostMapping("/HandleFriendRequest")//handle 1表示同意，0表示拒绝
     public RE HandlerFriendRequest(@RequestHeader("UID")Integer uid,Integer sendId,Integer Handle){
         return imAddFriendMessageApi.HandlerFriendRequest(uid,sendId,Handle);
     }

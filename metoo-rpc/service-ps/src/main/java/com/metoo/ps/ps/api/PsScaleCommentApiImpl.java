@@ -22,6 +22,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -50,6 +51,7 @@ public class PsScaleCommentApiImpl implements PsScaleCommentApi {
         PsScaleComment comment=new PsScaleComment();
         comment.setComment(vo.getComment());
         comment.setScaleId(vo.getScaleId());
+        comment.setCreateTime(new Date());
         comment.setUid(vo.getUserId());
         psScaleCommentService.save(comment);
         return RE.ok();
@@ -57,7 +59,7 @@ public class PsScaleCommentApiImpl implements PsScaleCommentApi {
 
     @Override
     public RE getCommentList(PsScaleCommentVo vo) {
-        Pageable pageable= PageRequest.of(vo.getPagenum(),vo.getPagesize());
+        Pageable pageable= PageRequest.of(vo.getPagenum()-1,vo.getPagesize());
         List<PsScaleComment> commentList=  psScaleCommentService.findByScaleId(vo.getScaleId(),pageable);
         if(OU.isBlack(commentList)) {
             return RE.noData();

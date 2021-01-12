@@ -14,6 +14,7 @@ import com.metoo.pojo.old.model.PourOutCapsulePojo;
 import com.metoo.pojo.old.model.SaveCapsulePojo;
 import com.metoo.pojo.order.model.PsCapsuleOrderModel;
 import com.metoo.pojo.ps.model.PsCapsuleDetailModel;
+import com.metoo.pojo.ps.model.PsCapsuleImgModel;
 import com.metoo.pojo.ps.model.PsCapsuleModel;
 import com.metoo.pojo.ps.vo.PsCapsuleVo;
 import com.metoo.pojo.tj.model.TjUserInfoModel;
@@ -118,6 +119,9 @@ public class PsCapsuleApiImpl implements PsCapsuleApi {
     private RE getCapsuleList(PsCapsuleVo vo,Page<PsCapsule> page, LambdaQueryWrapper<PsCapsule> lqw) {
         page = psCapsuleService.page(page, lqw);
         List<PsCapsule> capsuleList = page.getRecords();
+        if(OU.isBlack(capsuleList)){
+            return RE.noData();
+        }
         return REPage.ok(vo.getPagenum(), vo.getPagesize(), page.getTotal(), capsuleList.stream().flatMap(e->{
             PsCapsuleDetailModel model = getDetailModel(e, vo.getUserId());
             return Stream.of(model);
@@ -175,7 +179,8 @@ public class PsCapsuleApiImpl implements PsCapsuleApi {
     @Override
     public RE findCapsuleDetailById(Integer capsuleId, Integer uid) {
         PsCapsule capsule = psCapsuleService.findByCapsuleId(capsuleId);
-        Assert.isNull(capsule, "没有该胶囊");
+        if(OU.isBlack(capsule))
+            RE.fail("没有该胶囊");
         // 胶囊观看量加一
         psCapsuleService.updateReadNum(capsuleId);
         return RE.ok(getDetailModel(capsule, uid));
@@ -184,6 +189,13 @@ public class PsCapsuleApiImpl implements PsCapsuleApi {
 
     private PsCapsuleDetailModel getDetailModel(PsCapsule capsule, Integer uid) {
         PsCapsuleDetailModel model = new PsCapsuleDetailModel();
+        List<PsCapsuleImg> imgList = psCapsuleImgService.findImgListByCapId(capsule.getId());
+        if (OU.isNotBlack(imgList)) {
+            model.setImgList(imgList.stream().flatMap(e->{
+                return Stream.of(OSSUtil.fillPath(e.getImg()));
+            }).collect(Collectors.toList()));
+        }
+
         model.setPrice(capsule.getPrice());
         // 查询胶囊用户信息
         TjUserInfoModel byUid = tjUserInfoApi.findByUid(capsule.getUid());

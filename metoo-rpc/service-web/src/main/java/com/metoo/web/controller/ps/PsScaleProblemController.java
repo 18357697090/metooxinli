@@ -6,7 +6,7 @@ import com.metoo.api.ps.PsScaleProblemApi;
 import io.swagger.annotations.ApiOperation;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,7 +27,7 @@ public class PsScaleProblemController {
 
     //测量的题目
     @ApiOperation("量表题目")
-    @GetMapping("/problem")
+    @PostMapping("/problem")
     public RE problem(Integer scaleId){
         return psProblemApi.problem(scaleId);
     }

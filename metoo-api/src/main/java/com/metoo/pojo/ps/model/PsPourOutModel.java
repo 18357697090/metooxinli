@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * <p>
@@ -21,7 +22,7 @@ import java.io.Serializable;
 public class PsPourOutModel implements Serializable {
     private Integer status; // 服务状态： 1：正常状态  2：进行服务中 3：有未完成的倾诉，可以继续倾诉
 
-    private Long id;
+    private Integer id;
 
     private String label;
 
@@ -33,7 +34,7 @@ public class PsPourOutModel implements Serializable {
 
     private String content;
 
-    private Integer prices;
+    private BigDecimal prices;
 
     private String picture;
 

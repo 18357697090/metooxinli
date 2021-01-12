@@ -5,7 +5,7 @@ import com.loongya.core.util.RE;
 import com.metoo.api.im.ImGiftApi;
 import io.swagger.annotations.ApiOperation;
 import org.apache.dubbo.config.annotation.DubboReference;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,13 +29,13 @@ public class ImGiftController {
     private ImGiftApi imGiftApi;
 
     @ApiOperation("送礼物")
-    @GetMapping("/givingGift")
+    @PostMapping("/givingGift")
     public RE givingGift(@RequestHeader("UID")Integer uid, Integer acceptedId, Integer giftId, String number){
         return imGiftApi.givingGift(uid,acceptedId,giftId,number);
     }
 
     @ApiOperation("获取礼物列表")
-    @GetMapping("/getGiftList")
+    @PostMapping("/getGiftList")
     public RE getGiftList(){
         return imGiftApi.getGiftList();
     }
