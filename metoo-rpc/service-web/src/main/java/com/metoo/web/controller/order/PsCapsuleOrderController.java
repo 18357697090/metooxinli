@@ -6,7 +6,7 @@ import com.metoo.api.order.PsCapsuleOrderApi;
 import com.metoo.pojo.ps.vo.PsCapsuleVo;
 import com.metoo.web.config.auth.ThreadLocal;
 import org.apache.dubbo.config.annotation.DubboReference;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,7 +32,7 @@ public  class PsCapsuleOrderController {
      * @param vo
      * @return
      */
-    @GetMapping("/pay")
+    @PostMapping("/pay")
     public RE pay(PsCapsuleVo vo){
         vo.setUserId(ThreadLocal.getUserId());
         return psCapsuleOrderApi.pay(vo);

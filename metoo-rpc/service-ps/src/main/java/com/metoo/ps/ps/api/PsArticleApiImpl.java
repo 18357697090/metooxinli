@@ -53,7 +53,7 @@ public class PsArticleApiImpl implements PsArticleApi {
 
     @Override
     public RE getArticleBoutiqueMoreList(PsArticleVo vo) {
-        Pageable pageable = PageRequest.of(vo.getPagenum(),vo.getPagesize(), Sort.Direction.DESC,"sort");
+        Pageable pageable = PageRequest.of(vo.getPagenum()-1,vo.getPagesize(), Sort.Direction.DESC,"sort");
         List<PsArticle> articleList = psArticleService.findByState(ConstantUtil.YesOrNo.YES.getCode(),pageable);
         if(OU.isBlack(articleList)){
             return RE.noData();
@@ -67,7 +67,7 @@ public class PsArticleApiImpl implements PsArticleApi {
 
     @Override
     public RE getArticleRecommendMoreList(PsArticleVo vo) {
-        Pageable pageable = PageRequest.of(vo.getPagenum(),vo.getPagesize(), Sort.Direction.DESC,"sort");
+        Pageable pageable = PageRequest.of(vo.getPagenum()-1,vo.getPagesize(), Sort.Direction.DESC,"sort");
         List<PsArticle> articleList = psArticleService.findByState(ConstantUtil.YesOrNo.YES.getCode(),pageable);
         if(OU.isBlack(articleList)){
             return RE.noData();

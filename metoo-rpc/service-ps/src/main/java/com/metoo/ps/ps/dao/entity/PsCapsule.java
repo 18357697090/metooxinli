@@ -55,9 +55,6 @@ public class PsCapsule extends Model<PsCapsule> {
     @ApiModelProperty(value = "胶囊价格，0表示免费")
     private BigDecimal price;
 
-    @ApiModelProperty(value = "胶囊类型(1:爱情 2：友情 3：癖好 4：心事)")
-    private Integer type;
-
     @ApiModelProperty(value = "用户uid")
     private Integer uid;
 

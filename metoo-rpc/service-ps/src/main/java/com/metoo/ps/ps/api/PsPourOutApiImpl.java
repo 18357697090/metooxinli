@@ -1,14 +1,14 @@
 package com.metoo.ps.ps.api;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.loongya.core.util.CopyUtils;
-import com.loongya.core.util.DateUtil;
-import com.loongya.core.util.OU;
-import com.loongya.core.util.RE;
+import com.loongya.core.exception.LoongyaException;
+import com.loongya.core.exception.LoongyaExceptionEnum;
+import com.loongya.core.util.*;
 import com.loongya.core.util.aliyun.OSSUtil;
 import com.metoo.api.ps.PsCapsuleApi;
 import com.metoo.api.ps.PsPourOutApi;
 import com.metoo.api.tj.TjUserInfoApi;
+import com.metoo.pojo.login.enums.AuthEnum;
 import com.metoo.pojo.old.model.PourOutCapsulePojo;
 import com.metoo.pojo.old.model.PourOutPojo;
 import com.metoo.pojo.ps.model.PsCapsuleDetailModel;
@@ -68,7 +68,7 @@ public class PsPourOutApiImpl implements PsPourOutApi {
     @Override
     public RE getPourList(PsPourOutVo vo) {
         PsPourOutIndexModel model = new PsPourOutIndexModel();
-        Pageable pageable = PageRequest.of(vo.getPagenum(),vo.getPagesize(), Sort.Direction.DESC,"prices");
+        Pageable pageable = PageRequest.of(vo.getPagenum()-1,vo.getPagesize(), Sort.Direction.DESC,"prices");
         List<PsPourOutModel> modelList = psPourOutService.findByOnLine(1, pageable);
         modelList.stream().forEach(e->{
             e.setPicture(OSSUtil.fillPath(e.getPicture()));
@@ -84,7 +84,9 @@ public class PsPourOutApiImpl implements PsPourOutApi {
     @Override
     public RE getPourDetail(PsPourOutVo vo) {
         PsPourOut pojo = psPourOutService.getById(vo.getPourId());
-        Assert.isNull(pojo, "没有该倾诉师！");
+        if(OU.isBlack(pojo)){
+           return RE.fail("没有该倾诉师！");
+        }
         PsPourOutModel model = CopyUtils.copy(pojo, new PsPourOutModel());
         model.setPicture(OSSUtil.fillPath(model.getPicture()));
         pushPourOutModel(model, vo.getUserId());

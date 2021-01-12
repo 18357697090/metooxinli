@@ -11,7 +11,7 @@ import com.metoo.pojo.ps.vo.PsScaleVo;
 import com.metoo.web.config.auth.ThreadLocal;
 import io.swagger.annotations.ApiOperation;
 import org.apache.dubbo.config.annotation.DubboReference;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -38,7 +38,7 @@ public class PsScaleIndexController {
      * @param vo
      * @return
      */
-    @GetMapping("/getClgatherWithReCommend")
+    @PostMapping("/getClgatherWithReCommend")
     @ApiOperation("推荐测量")
     public RE getClgatherWithReCommend(PsScaleVo vo){
         Integer userId = ThreadLocal.getUserId();
@@ -52,7 +52,7 @@ public class PsScaleIndexController {
     /**
      *  更多推荐测量
      */
-    @GetMapping("/getClgatherWithReCommendMore")
+    @PostMapping("/getClgatherWithReCommendMore")
     @ApiOperation("更多推荐测量")
     public RE getClgatherWithReCommendMore(){
         return psScaleGatherApi.getClgatherWithReCommendMore();
@@ -64,7 +64,7 @@ public class PsScaleIndexController {
      * @return
      */
     @ApiOperation("精品测量")
-    @GetMapping("/getBoutiqueClgatherList")
+    @PostMapping("/getBoutiqueClgatherList")
     public RE getBoutiqueClgatherList(PsScaleVo vo){
         return psScaleApi.getBoutiqueClgatherList(vo);
     }

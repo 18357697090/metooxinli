@@ -13,7 +13,7 @@ public class CalculateTheScore {
     public static String calculate(Result result){
         int scaleId=result.getScaleId();
         Repository repository=new Repository();
-        Map<Integer,Integer> results=result.getResults();
+        List<OptionsResult> results=result.getResults();
         PsScaleOptionsModel options = repository.findOptions(scaleId);
         List<PsScaleProblemModel> problem = repository.findProblem(scaleId);
         String stroptions= options.getOptions();
@@ -32,21 +32,21 @@ public class CalculateTheScore {
         }
         int score=0;
         for(int i=0 ; i<length-1;i++){
-            int option = results.get(i);
-            score += x[i+1][option+1];
+            OptionsResult option = results.get(i);
+            score += x[i+1][option.getAnswerIndex()+1];
         }
         int a=0;
         int b=0;
         int c=0;
         for (int i=1;i<length;i++){
-            int option = results.get(i-1);
+            OptionsResult option = results.get(i);
             int factor = problem.get(i-1).getFactorType();
             if(factor==1){
-                a += x[i][option];
+                a += x[i][option.getAnswerIndex()];
             }else if (factor==2){
-                b += x[i][option];
+                b += x[i][option.getAnswerIndex()];
             }else if(factor==3){
-                c += x[i][option];
+                c += x[i][option.getAnswerIndex()];
             }
         }
         int d=(a+b);

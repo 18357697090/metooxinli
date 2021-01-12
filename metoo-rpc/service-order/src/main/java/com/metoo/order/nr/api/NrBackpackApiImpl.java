@@ -76,8 +76,11 @@ public class NrBackpackApiImpl implements NrBackpackApi {
     public RE buyGoods(NrGoodsVo vo) {
         TjUserAccountModel accountModel = tjUserAccountApi.findByUid(vo.getUserId());
         NrGoods goods = nrGoodsService.getById(vo.getGoodsId());
-        Assert.isNull(accountModel, "没有该用户账号");
-        Assert.isNull(goods, "没有该商品");
+        if(OU.isBlack(accountModel))
+            return RE.fail("没有该用户账号");
+        if(OU.isBlack(goods))
+            return RE.fail("没有该商品");
+
         if (accountModel.getBalance().compareTo(goods.getPrice())<0)
             throw new LoongyaException("余额不足!");
         // 修改用户余额
@@ -124,13 +127,16 @@ public class NrBackpackApiImpl implements NrBackpackApi {
         // 根据拓展id获取用户id
         RE re = tjUserApi.findUserIdByExtendId(vo.getExtendId());
         Integer targetUserId = (Integer) re.getData();
-        Assert.isNull(targetUserId, "没有目标用户");
+        if(OU.isBlack(targetUserId))
+            return RE.fail("没有目标用户");
         NrGoods goods = nrGoodsService.getById(vo.getGoodsId());
-        Assert.isNull(goods, "没有该商品");
+        if(OU.isBlack(goods))
+            return RE.fail("没有该商品");
         NrBackpack userBackpack = nrBackpackService.findFirstByUidAndGoodsId(vo.getUserId(), vo.getGoodsId());
-        Assert.isNull(userBackpack, "您没购买该道具,请购买");
+        if (OU.isBlack(userBackpack))
+            RE.fail("您没购买该道具,请购买");
         if(userBackpack.getNum()<1){
-            throw new LoongyaException("您的道具数据不足,请购买!");
+            RE.fail("您的道具数据不足,请购买!");
         }
         // 修改目标用户道具数量
         pushBackpack(targetUserId, goods);
@@ -151,13 +157,16 @@ public class NrBackpackApiImpl implements NrBackpackApi {
         // 根据拓展id获取用户id
         RE re = tjUserApi.findUserIdByExtendId(vo.getExtendId());
         Integer targetUserId = (Integer) re.getData();
-        Assert.isNull(targetUserId, "没有目标用户");
+        if(OU.isBlack(targetUserId))
+            return RE.fail("没有目标用户");
         NrGoods goods = nrGoodsService.getById(vo.getGoodsId());
-        Assert.isNull(accountModel, "没有该用户账号");
-        Assert.isNull(goods, "没有该商品");
+        if(OU.isBlack(accountModel))
+            return RE.fail("没有该用户账号");
+        if(OU.isBlack(goods))
+            return RE.fail("没有该商品");
 
         if (accountModel.getBalance().compareTo(goods.getPrice()) < 0) {
-            throw new LoongyaException("余额不足,请充值");
+            return RE.fail("余额不足,请充值");
         }
         tjUserAccountApi.updateBalance(goods.getPrice(), targetUserId);
         // todo. need asyn

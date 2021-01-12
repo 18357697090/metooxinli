@@ -1,6 +1,8 @@
 package com.metoo.web.controller.ps;
 
 
+import com.alibaba.fastjson.JSONArray;
+import com.loongya.core.util.AssertUtils;
 import com.loongya.core.util.OU;
 import com.loongya.core.util.RE;
 import com.metoo.api.ps.PsScaleMeasureRecordApi;
@@ -9,10 +11,13 @@ import com.metoo.pojo.ps.model.PsScaleMeasureRecordModel;
 import com.metoo.pojo.ps.vo.PsScaleMeasureRecordVo;
 import com.metoo.web.config.auth.ThreadLocal;
 import com.metoo.web.config.tools.CalculateTheScore;
+import com.metoo.web.config.tools.OptionsResult;
 import com.metoo.web.config.tools.Result;
 import io.swagger.annotations.ApiOperation;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * <p>
@@ -53,6 +58,9 @@ public class PsScaleMeasureRecordController {
         if(OU.isBlack(userId)){
             return RE.fail(AuthEnum.LOGIN_TIMEOUT);
         }
+        AssertUtils.checkParam(result.getResultStr(), result.getScaleId());
+        List<OptionsResult> results = JSONArray.parseArray(result.getResultStr(), OptionsResult.class);
+        result.setResults(results);
         psScaleMeasureRecordApi.updateMeasure(userId,result.getScaleId());
         PsScaleMeasureRecordModel model = psScaleMeasureRecordApi.findByUserIdAndScaleId(userId, result.getScaleId());
         String achievement= CalculateTheScore.calculate(result); //todo.

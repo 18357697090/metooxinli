@@ -54,7 +54,7 @@ public class XyCountryController {
      *
      */
     @ApiOperation("获取国家列表")
-    @GetMapping("/getCountry")
+    @PostMapping("/getCountry")
     public RE getCountry(@RequestHeader("UID")Integer uid, Integer raceId){
         return xyCountryApi.getCountry(uid, raceId);
     }

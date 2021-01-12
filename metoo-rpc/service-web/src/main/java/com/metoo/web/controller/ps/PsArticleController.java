@@ -8,7 +8,7 @@ import com.metoo.api.ps.PsArticleApi;
 import com.metoo.api.ps.PsArticleBannerApi;
 import com.metoo.pojo.ps.vo.PsArticleVo;
 import org.apache.dubbo.config.annotation.DubboReference;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -79,7 +79,7 @@ public class PsArticleController {
      * 文章详情查询
      * @return
      */
-    @GetMapping("/getArticleDetail")
+    @PostMapping("/getArticleDetail")
     public RE getArticleDetail(Integer articleId){
         return psArticleApi.getArticleDetail(articleId);
     }

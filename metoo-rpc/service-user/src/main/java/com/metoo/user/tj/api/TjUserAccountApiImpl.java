@@ -45,7 +45,8 @@ public class TjUserAccountApiImpl implements TjUserAccountApi {
     @Override
     public TjUserAccountModel findByUid(Integer uid) {
         TjUserAccount pojo = tjUserAccountService.findByUid(uid);
-        Assert.isNull(pojo, "账户异常");
+        if(OU.isBlack(pojo))
+            throw new LoongyaException("账户异常");
         TjUserAccountModel model = dozerBeanMapper.map(pojo, TjUserAccountModel.class);
         return model;
     }

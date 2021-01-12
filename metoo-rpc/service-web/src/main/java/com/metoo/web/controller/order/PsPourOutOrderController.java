@@ -8,7 +8,7 @@ import com.metoo.pojo.ps.vo.PsCapsuleVo;
 import com.metoo.pojo.ps.vo.PsPourOutVo;
 import com.metoo.web.config.auth.ThreadLocal;
 import org.apache.dubbo.config.annotation.DubboReference;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,7 +32,7 @@ public class PsPourOutOrderController {
      * @param vo
      * @return
      */
-    @GetMapping("/buyPour")
+    @PostMapping("/buyPour")
     public RE buyPour(PsPourOutVo vo){
         AssertUtils.checkParam(vo.getPourId());
         vo.setUserId(ThreadLocal.getUserId());

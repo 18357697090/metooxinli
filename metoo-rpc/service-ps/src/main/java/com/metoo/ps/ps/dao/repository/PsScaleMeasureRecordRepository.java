@@ -5,6 +5,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -17,11 +18,11 @@ public interface PsScaleMeasureRecordRepository extends JpaRepository<PsScaleMea
 
     @Modifying
     @Query(value = "update ps_scale_measure_record set state=2 where uid= :uid and scale_id= :scaleId",nativeQuery = true)
-    Integer updateMeasure(Integer uid,Integer scaleId);
+    Integer updateMeasure(@Param("uid") Integer uid,@Param("scaleId")  Integer scaleId);
 
     @Modifying
     @Query(value = "update ps_scale_measure_record set `count`=`count`+1 where id= :id ",nativeQuery = true)
-    Integer updateCount(Integer id);
+    Integer updateCount(@Param("id") Integer id);
 
     PsScaleMeasureRecord findByUidAndScaleId(Integer uid, Integer scaleId);
     PsScaleMeasureRecord findFirstByUidAndScaleIdOrderByCreateTimeDesc(Integer uid, Integer scaleId);

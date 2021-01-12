@@ -64,12 +64,12 @@ public class PsConsultOrderApiImpl implements PsConsultOrderApi {
         // 判断咨询师是否在线
         PsConsult psConsult = psConsultService.getById(vo.getConsultId());
         if(OU.isBlack(psConsult)||psConsult.getOnLine() == 0 ){
-            throw new LoongyaException("咨询师不在线");
+            return RE.fail("咨询师不在线");
         }
         // 判断用户余额是否充足
         TjUserAccountModel accountModel =tjUserAccountApi.findByUid(vo.getUserId());
         if(accountModel.getPsCoin().compareTo(psConsult.getPrice())<0){
-            throw new LoongyaException("心理币不足");
+            return RE.fail("心理币不足");
         }
         // 减余额
         tjUserAccountApi.updatePsCoin(psConsult.getPrice(), vo.getUserId());

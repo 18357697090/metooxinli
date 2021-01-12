@@ -39,7 +39,7 @@ public class ImAudioRoomChatRecordApiImpl implements ImAudioRoomChatRecordApi {
 
     @Override
     public RE audioRoomChatRecord(Integer audioRoomId, Integer page) {
-        Pageable pageable = PageRequest.of(page,20, Sort.Direction.DESC,"id");
+        Pageable pageable = PageRequest.of(page-1,20, Sort.Direction.DESC,"id");
         List<ImAudioRoomChatRecord> audioRoomChatRecords=  imAudioRoomChatRecordService.findByAudioRoomId(audioRoomId,pageable);
         List<String> strings = new ArrayList<>();
         for (ImAudioRoomChatRecord audioRoomChatRecord : audioRoomChatRecords){

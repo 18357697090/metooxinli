@@ -26,6 +26,7 @@ public class GlobalExceptionHandler {
         return RE.fail(e.getCode(),e.getMsg());
     }
 
+
     /**
      * 处理空指针的异常
      * @param req
@@ -36,7 +37,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public RE exceptionHandler(HttpServletRequest req, NullPointerException e){
         log.error("发生空指针异常！原因是:",e);
-        return RE.fail(LoongyaExceptionEnum.SERVER_ERROR);
+        return RE.fail(LoongyaExceptionEnum.SERVER_ERROR.getCode(), e.getMessage());
     }
 
 
@@ -50,6 +51,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public RE exceptionHandler(HttpServletRequest req, Exception e){
         log.error("未知异常！原因是:",e);
-        return RE.fail(LoongyaExceptionEnum.SERVER_ERROR);
+        log.error(e.getMessage());
+        return RE.fail(LoongyaExceptionEnum.SERVER_ERROR.getCode(), e.getMessage());
     }
 }

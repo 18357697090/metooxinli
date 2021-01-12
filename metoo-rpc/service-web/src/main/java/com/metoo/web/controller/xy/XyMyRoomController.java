@@ -6,7 +6,7 @@ import com.metoo.api.xy.XyMyRoomApi;
 import com.metoo.pojo.old.vo.ReturnMyCityList;
 import io.swagger.annotations.ApiOperation;
 import org.apache.dubbo.config.annotation.DubboReference;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,14 +37,14 @@ public class XyMyRoomController {
      */
     @ApiOperation("我加入的国家或城的聊天室房间")
     //我的聊天室
-    @GetMapping("/myRoom")
+    @PostMapping("/myRoom")
     public RE myRoom(@RequestHeader("UID")Integer uid){
         return xyMyRoomApi.myRoom(uid);
     }
 
 
     //进入聊天室检验
-//    @GetMapping("/enterAudioRoom")
+//    @PostMapping("/enterAudioRoom")
 //    public ReturnMessage enterAudioRoom(@RequestHeader("UID")Integer uid,Integer audioRoomId){
 //        ReturnMessage returnMessage = new ReturnMessage();
 //        returnMessage.setState("error");
@@ -124,7 +124,7 @@ public class XyMyRoomController {
 
 
     //聊天室详情
-//    @GetMapping("/detailAudioRoom")
+//    @PostMapping("/detailAudioRoom")
 //    public DetailAudioRoomDTO detailAudioRoom(@RequestHeader("UID")Integer uid,Integer roomId){
 //        DetailAudioRoomDTO detailAudioRoomDTO = new DetailAudioRoomDTO();
 //        List<MyRoom> myRooms =  myRoomDao.findByMyRoomId(roomId);

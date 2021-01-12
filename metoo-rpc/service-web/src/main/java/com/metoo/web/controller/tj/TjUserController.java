@@ -36,7 +36,7 @@ public class TjUserController {
 
 
     //搜索人，添加好友
-    @GetMapping("/findFriend")
+    @PostMapping("/findFriend")
     public RE fendFriend(@RequestHeader("UID")Integer uid, String name){
         return tjUserApi.fendFriend(uid, name);
     }

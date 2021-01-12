@@ -1,6 +1,7 @@
 package com.metoo.web.controller.ps;
 
 
+import com.loongya.core.util.AssertUtils;
 import com.loongya.core.util.OU;
 import com.loongya.core.util.RE;
 import com.metoo.api.ps.PsScaleCommentApi;
@@ -51,6 +52,7 @@ public class PsScaleCommentController {
     @ApiOperation("用户评价列表-分页")
     @PostMapping("/getCommentList")
     public RE getCommentList(PsScaleCommentVo vo){
+        AssertUtils.checkParam(vo.getScaleId());
         return psScaleCommentApi.getCommentList(vo);
     }
 

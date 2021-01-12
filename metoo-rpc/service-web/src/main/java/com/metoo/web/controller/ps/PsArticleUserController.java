@@ -7,7 +7,7 @@ import com.metoo.api.ps.PsArticleUserApi;
 import com.metoo.pojo.login.enums.AuthEnum;
 import com.metoo.web.config.auth.ThreadLocal;
 import org.apache.dubbo.config.annotation.DubboReference;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,7 +32,7 @@ public class PsArticleUserController {
      * @param articleId
      * @return
      */
-    @GetMapping("/watchArticle")
+    @PostMapping("/watchArticle")
     public RE watchArticle(Integer articleId){
         Integer userId = ThreadLocal.getUserId();
         if(OU.isBlack(userId)){

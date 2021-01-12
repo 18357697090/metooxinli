@@ -31,7 +31,7 @@ public class XyCreateCityController {
      * @param vo
      * @return
      */
-    @GetMapping("/joinCity")
+    @PostMapping("/joinCity")
     public RE joinCity(@RequestHeader("UID")Integer uid, @RequestBody XyCreateCityVo vo){
         return xyCreateCityApi.joinCity(uid, vo);
 

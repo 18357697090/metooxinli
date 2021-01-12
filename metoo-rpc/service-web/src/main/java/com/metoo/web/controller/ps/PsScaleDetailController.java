@@ -8,7 +8,7 @@ import com.metoo.pojo.login.enums.AuthEnum;
 import com.metoo.web.config.auth.ThreadLocal;
 import io.swagger.annotations.ApiOperation;
 import org.apache.dubbo.config.annotation.DubboReference;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,7 +36,7 @@ public class PsScaleDetailController {
      * 测量详情
      */
     @ApiOperation("测量详情")
-    @GetMapping("/gaugedetails")
+    @PostMapping("/gaugedetails")
     public RE gaugedetails(Integer scaleId){
         Integer userId = ThreadLocal.getUserId();
         if(OU.isBlack(userId)){
