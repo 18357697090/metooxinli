@@ -16,5 +16,17 @@ public interface PsCapsuleOrderApi {
 
     PsCapsuleOrderModel findByUidAndCapsuleId(Integer uid, Integer capsuleId);
 
+    /**
+     * 使用兔币
+     * @param vo
+     * @return
+     */
     RE pay(PsCapsuleVo vo);
+
+    /**
+     * 使用心理币
+     * @param vo
+     * @return
+     */
+    RE payByCoin(PsCapsuleVo vo);
 }

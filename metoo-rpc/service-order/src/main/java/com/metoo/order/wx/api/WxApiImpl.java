@@ -6,6 +6,7 @@ import com.github.wxpay.sdk.WXPayUtil;
 import com.loongya.core.util.ConstantUtil;
 import com.loongya.core.util.OU;
 import com.loongya.core.util.RE;
+import com.metoo.api.order.NrOrderInvestApi;
 import com.metoo.api.pay.wxpay.WxApi;
 import com.metoo.order.nr.dao.entity.NrOrderInvest;
 import com.metoo.order.nr.service.NrOrderInvestService;
@@ -28,6 +29,8 @@ public class WxApiImpl implements WxApi {
 
     @Autowired
     private NrOrderInvestService nrOrderInvestService;
+    @Autowired
+    private NrOrderInvestApi nrOrderInvestApi;
 
 
 
@@ -111,7 +114,7 @@ public class WxApiImpl implements WxApi {
                         // 注意特殊情况：微信服务端同样的通知可能会多次发送给商户系统，所以数据持久化之前需要检查是否已经处理过了，处理了直接返回成功标志
                         //业务数据持久化
                         log.info("微信手机支付回调成功订单号:{}", out_trade_no);
-                        nrOrderInvestService.investOrderSuccessBack(out_trade_no);
+                        nrOrderInvestApi.investOrderSuccessBack(out_trade_no);
                         xmlBack = "<xml>" + "<return_code><![CDATA[SUCCESS]]></return_code>" + "<return_msg><![CDATA[OK]]></return_msg>" + "</xml> ";
                         return RE.ok(xmlBack);
                     } else {

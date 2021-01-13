@@ -26,4 +26,6 @@ public interface TjUserAccountApi {
     RE findBalance(Integer uid);
 
     RE updatePsCoin(BigDecimal prices, Integer uid);
+
+    void updateBalanceUp(BigDecimal total, Integer uid);
 }

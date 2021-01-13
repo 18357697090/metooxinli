@@ -14,6 +14,7 @@ import com.github.wxpay.sdk.WXPayUtil;
 import com.loongya.core.util.ConstantUtil;
 import com.loongya.core.util.OU;
 import com.loongya.core.util.RE;
+import com.metoo.api.order.NrOrderInvestApi;
 import com.metoo.api.pay.alipay.AlipayApi;
 import com.metoo.api.pay.wxpay.WxApi;
 import com.metoo.order.alipay.config.AlipayConfig;
@@ -42,6 +43,9 @@ public class AlipayApiImpl implements AlipayApi {
 
     @Autowired
     private NrOrderInvestService nrOrderInvestService;
+
+    @Autowired
+    private NrOrderInvestApi nrOrderInvestApi;
 
     @Override
     public RE getOrderInfo(String orderNo) {
@@ -108,7 +112,7 @@ public class AlipayApiImpl implements AlipayApi {
                                 || trade_status.equals("TRADE_FINISHED")){
                             // 处理支付成功逻辑
                             try {
-                              nrOrderInvestService.investOrderSuccessBack(outTradeNo);
+                              nrOrderInvestApi.investOrderSuccessBack(outTradeNo);
                             } catch (Exception e) {
                                 log.error("支付宝回调业务处理报错,params:" + paramsJson, e);
                             }

@@ -81,4 +81,5 @@ public class PsScaleServiceImpl extends ServiceImpl<PsScaleMapper, PsScale> impl
     public void updateNumber(Integer scaleId) {
         psScaleRepository.updateNumber(scaleId);
     }
+
 }

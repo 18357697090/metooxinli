@@ -339,6 +339,7 @@ public class ConstantUtil {
     @Getter
     public enum TjUserAccountCoinDetailTypeEnum{
         USE_GOODS(1, "道具使用增加心理币"),
+        INVEST_GOODS(2, "充值增加心理币"),
         BUY_PS(10001, "购买心理测试"),
         BUY_CONSULT(10002, "心理咨询"),
         BUY_POUROUT(10003, "心理倾诉"),

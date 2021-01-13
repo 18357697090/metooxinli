@@ -1,5 +1,6 @@
 package com.metoo.ps.ps.dao.repository;
 
+import com.loongya.core.util.RE;
 import com.metoo.ps.ps.dao.entity.PsScale;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -23,4 +24,5 @@ public interface PsScaleRepository extends JpaRepository<PsScale,Integer> {
 
     @Query(nativeQuery = true,value = "SELECT * FROM ps_scale ORDER BY RAND() LIMIT 6")
     List<PsScale> findScaleRand();
+
 }

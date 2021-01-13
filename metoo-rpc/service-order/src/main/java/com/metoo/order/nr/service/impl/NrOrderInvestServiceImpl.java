@@ -11,6 +11,7 @@ import com.metoo.order.nr.dao.repository.NrOrderInvestRepository;
 import com.metoo.order.nr.service.NrOrderInvestService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.metoo.pojo.nr.model.NrOrderInvestModel;
+import com.metoo.pojo.tj.model.TjUserAccountCoinDetailModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,23 +33,13 @@ public class NrOrderInvestServiceImpl extends ServiceImpl<NrOrderInvestMapper, N
     @Autowired
     private NrOrderInvestRepository nrOrderInvestRepository;
 
+
+
     @Override
     public NrOrderInvest findFirstByOrderNo(String orderNo) {
         return nrOrderInvestRepository.findFirstByOrderNo(orderNo);
     }
 
-    @Override
-    public void investOrderSuccessBack(String out_trade_no) {
-        NrOrderInvest pojo = nrOrderInvestRepository.findFirstByOrderNo(out_trade_no);
-        if(OU.isBlack(pojo)){
-            throw new LoongyaException("没有该订单号");
-        }
-        NrOrderInvest model = new NrOrderInvest();
-        model.setId(pojo.getId());
-        model.setPayTime(new Date());
-        model.setUpdateTime(new Date());
-        model.setStatus(ConstantUtil.NrOrderInvestStatusEnum.PAY_SUCCESS.getCode());
-        this.updateById(model);
-    }
+
 
 }

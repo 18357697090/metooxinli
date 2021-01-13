@@ -26,15 +26,8 @@ public class InSwiperController {
     @DubboReference
     private InSwiperApi inSwiperApi;
 
-    //轮播图
-    @RequestMapping("/swiper")
-    public RE swiper(){
-        return inSwiperApi.swiper();
-    }
-
-
     //发布轮播图
-    @RequestMapping("/jhxksave")
+    @RequestMapping("/addIndexBanner")
     public RE save(@RequestBody InSwiperVo vo){
         return inSwiperApi.save(vo);
     }

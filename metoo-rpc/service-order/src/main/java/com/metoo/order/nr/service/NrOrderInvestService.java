@@ -15,5 +15,4 @@ public interface NrOrderInvestService extends IService<NrOrderInvest> {
 
     NrOrderInvest findFirstByOrderNo(String orderNo);
 
-    void investOrderSuccessBack(String out_trade_no);
 }

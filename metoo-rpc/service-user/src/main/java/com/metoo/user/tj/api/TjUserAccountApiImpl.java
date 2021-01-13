@@ -96,4 +96,9 @@ public class TjUserAccountApiImpl implements TjUserAccountApi {
         tjUserAccountService.updatePsCoin(price, uid);
         return RE.ok();
     }
+
+    @Override
+    public void updateBalanceUp(BigDecimal total, Integer uid) {
+        tjUserAccountService.updateBalanceUp(total, uid);
+    }
 }

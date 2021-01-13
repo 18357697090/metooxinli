@@ -16,4 +16,5 @@ import com.metoo.pojo.order.vo.NrBackpackVo;
 public interface NrOrderInvestApi {
 
     RE createInvestOrder(NrOrderInvestVo vo);
+    RE investOrderSuccessBack(String out_trade_no);
 }

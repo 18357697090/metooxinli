@@ -13,7 +13,7 @@ import com.metoo.pojo.in.vo.InSwiperVo;
  */
 public interface InSwiperApi {
 
-    RE swiper();
-
     RE save(InSwiperVo vo);
+
+    RE indexBannerList();
 }
