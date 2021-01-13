@@ -125,12 +125,12 @@ public class XyCountryApiImpl implements XyCountryApi {
 //        returnCountryDTO.setUserName(tjUserInfoApi.findByUid(xyMyRoomService.findByMyRoomIdAndIsHost(raceId).getUid()).getNickName());
         List<ReturnCountryDTO> returnCountryDTOS = new ArrayList<>();
 //        returnCountryDTOS.add(returnCountryDTO);
-        List<XyCountry> countries = xyCountryService.findByRaceId(raceId);
-        for (XyCountry country : countries) {
-            ReturnCountryDTO returnCountryDTO1 = mapper.map(country,ReturnCountryDTO.class);
-//            returnCountryDTO1.setUserName(tjUserInfoApi.findByUid(xyMyRoomService.findByMyRoomIdAndIsHost(country.getCountryId()).getUid()).getNickName());
-            returnCountryDTOS.add(returnCountryDTO1);
-        }
+//        List<XyCountry> countries = xyCountryService.findByRaceId(raceId);
+//        for (XyCountry country : countries) {
+//            ReturnCountryDTO returnCountryDTO1 = mapper.map(country,ReturnCountryDTO.class);
+////            returnCountryDTO1.setUserName(tjUserInfoApi.findByUid(xyMyRoomService.findByMyRoomIdAndIsHost(country.getCountryId()).getUid()).getNickName());
+//            returnCountryDTOS.add(returnCountryDTO1);
+//        }
         if(OU.isBlack(returnCountryDTOS)){
             return RE.noData();
         }

@@ -59,7 +59,7 @@ public class XyCreateCity extends Model<XyCreateCity> {
     private Integer status;
 
     @ApiModelProperty(value = "城名称")
-    private String cityNname;
+    private String cityName;
 
     @ApiModelProperty(value = "城市简介")
     private String cityDetail;
