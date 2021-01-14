@@ -18,4 +18,6 @@ public interface PsScaleApi {
     RE index();
 
     RE findPsScaleListbyclgatherid(PsScaleVo vo);
+
+    RE indexScaleList();
 }

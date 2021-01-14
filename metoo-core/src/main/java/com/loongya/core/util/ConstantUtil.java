@@ -339,6 +339,7 @@ public class ConstantUtil {
     @Getter
     public enum TjUserAccountCoinDetailTypeEnum{
         USE_GOODS(1, "道具使用增加心理币"),
+        INVEST_GOODS(2, "充值增加心理币"),
         BUY_PS(10001, "购买心理测试"),
         BUY_CONSULT(10002, "心理咨询"),
         BUY_POUROUT(10003, "心理倾诉"),
@@ -389,6 +390,39 @@ public class ConstantUtil {
         private String msg;
 
         TataskUserStatusEnum(Integer code, String msg) {
+            this.code = code;
+            this.msg = msg;
+        }
+        public static String getMsgByCode(Integer code) {
+            if (OU.isNotBlack(map)) {
+                return OU.isBlack(map.get(code)) ? "" : map.get(code).getMsg();
+            }
+            return "";
+        }
+    }
+    /**
+     *状态:1: 待支付 2: 支付成功 3:支付失败 4:已关闭
+     * @author loongya
+     */
+    @Getter
+    public enum NrOrderInvestStatusEnum{
+        WAIT_PAYING(1, "待支付"),
+        PAY_SUCCESS(2, "支付成功"),
+        PAY_FAIL(3, "支付失败"),
+        CLOSE(4, "已关闭")
+        ;
+        static final Map<Integer, NrOrderInvestStatusEnum> map = new HashMap<>();
+
+        static {
+            EnumSet.allOf(NrOrderInvestStatusEnum.class).forEach(e -> {
+                map.put(e.getCode(), e);
+            });
+        }
+
+        private Integer code;
+        private String msg;
+
+        NrOrderInvestStatusEnum(Integer code, String msg) {
             this.code = code;
             this.msg = msg;
         }

@@ -55,7 +55,7 @@ public class XyMyRoom extends Model<XyMyRoom> {
     private Integer uid;
 
     @ApiModelProperty(value = "用户拓展id")
-    private Integer extendId;
+    private String extendId;
 
     @ApiModelProperty(value = "1: 表示正常 2: 退出 3: 强制退出")
     private Integer status;

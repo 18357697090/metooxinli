@@ -67,6 +67,12 @@ public class PsScaleApiImpl implements PsScaleApi {
     }
 
     @Override
+    public RE indexScaleList() {
+        List<PsScaleModel> list = psScaleService.findScaleRand();
+        return RE.ok(list);
+    }
+
+    @Override
     public RE index() {
         IndexDTO indexDTO = new IndexDTO();
         indexDTO.setScales(psScaleService.findScaleRand());

@@ -39,24 +39,27 @@ public class XyAuth extends Model<XyAuth> {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
+    @ApiModelProperty(value = "用户uid")
+    private Integer uid;
+
+    @ApiModelProperty(value = "国度切换次数")
+    private Integer countryJump;
+
+    @ApiModelProperty(value = "国度新增次数")
+    private Integer countryAdd;
+
+    @ApiModelProperty(value = "城市切换次数")
+    private Integer cityJump;
+
+    @ApiModelProperty(value = "城市切换次数")
+    private Integer cityAdd;
+
     @CreatedDate
     @ApiModelProperty(value = "创建时间")
     private Date createTime;
 
-    @ApiModelProperty(value = "公告")
-    private String notice;
-
-    @ApiModelProperty(value = "国家id")
-    private Integer countryId;
-
-    @ApiModelProperty(value = "是否为房主")
-    private Integer isHost;
-
-    @ApiModelProperty(value = "0表示退出或者被T  1表示正常")
-    private Integer state;
-
-    @ApiModelProperty(value = "用户uid")
-    private Integer uid;
+    @ApiModelProperty(value = "修改时间")
+    private Date updateTime;
 
 
     @Override

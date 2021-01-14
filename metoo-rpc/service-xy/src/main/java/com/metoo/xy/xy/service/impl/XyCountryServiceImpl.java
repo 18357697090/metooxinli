@@ -26,7 +26,7 @@ public class XyCountryServiceImpl extends ServiceImpl<XyCountryMapper, XyCountry
 
     @Override
     public XyCountry findByCountryId(Integer countryId) {
-        return xyCountryRepository.findByCountryId(countryId);
+        return this.getById(countryId);
     }
 
     @Override
@@ -34,8 +34,4 @@ public class XyCountryServiceImpl extends ServiceImpl<XyCountryMapper, XyCountry
         return xyCountryRepository.findByName(name);
     }
 
-    @Override
-    public List<XyCountry> findByRaceId(Integer raceId) {
-        return xyCountryRepository.findByRaceId(raceId);
-    }
 }

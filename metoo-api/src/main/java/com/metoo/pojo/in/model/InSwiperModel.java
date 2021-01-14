@@ -19,6 +19,10 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 public class InSwiperModel implements Serializable {
+    private Integer id;
 
+    private String address;
+
+    private String swiper;
 
 }

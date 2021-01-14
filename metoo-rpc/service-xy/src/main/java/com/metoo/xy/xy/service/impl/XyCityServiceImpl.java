@@ -31,6 +31,6 @@ public class XyCityServiceImpl extends ServiceImpl<XyCityMapper, XyCity> impleme
 
     @Override
     public XyCity findByCityId(int countryId) {
-        return xyCityRepository.findByCityId(countryId);
+        return this.getById(countryId);
     }
 }

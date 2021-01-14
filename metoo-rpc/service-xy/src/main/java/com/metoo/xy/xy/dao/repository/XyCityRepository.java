@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface XyCityRepository extends JpaRepository<XyCity,Integer> {
-    XyCity findByCityId(Integer cityId);
 
     @Query(nativeQuery = true,value = "select * from xy_city where country_id=?1 and state=1")
     List<XyCity> findByCountryId(Integer countryId);

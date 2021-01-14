@@ -35,7 +35,7 @@ public  class PsCapsuleOrderController {
     @PostMapping("/pay")
     public RE pay(PsCapsuleVo vo){
         vo.setUserId(ThreadLocal.getUserId());
-        return psCapsuleOrderApi.pay(vo);
+        return psCapsuleOrderApi.payByCoin(vo);
     }
 
 }

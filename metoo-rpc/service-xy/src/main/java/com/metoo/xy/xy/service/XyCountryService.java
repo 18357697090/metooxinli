@@ -19,5 +19,4 @@ public interface XyCountryService extends IService<XyCountry> {
 
     XyCountry findByName(String name);
 
-    List<XyCountry> findByRaceId(Integer raceId);
 }
