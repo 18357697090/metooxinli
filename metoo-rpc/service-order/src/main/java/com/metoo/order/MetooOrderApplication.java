@@ -5,7 +5,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-@EnableTransactionManagement
 @EnableDubbo
 @SpringBootApplication(scanBasePackages = {"com.metoo.order", "com.metoo.comm.config"})
 public class MetooOrderApplication {

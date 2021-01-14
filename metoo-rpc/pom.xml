@@ -20,6 +20,7 @@
         <module>service-ps</module>
         <module>service-comm</module>
         <module>service-web</module>
+        <module>service-wechat-web</module>
     </modules>
 
     <properties>

@@ -20,14 +20,5 @@ public class CrosConfig implements WebMvcConfigurer {
                         "access-control-allow-origin",
                         "access-control-max-age",
                         "X-Frame-Options");
-
-
-        registry.addMapping("/**")
-                .allowedOrigins("*")
-                .allowedMethods("GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS")
-                .allowCredentials(true)
-
-                .maxAge(3600)
-                .allowedHeaders("*");
     }
 }

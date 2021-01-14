@@ -19,6 +19,16 @@ jwt:
 spring:
   application:
     name: metoo-web
+  activemq:
+    user: admin
+    password: admin
+    broker-url: tcp://localhost:61616
+    pool:
+      enabled: true
+      max-connections: 10
+
+queue-name: publish.queue
+topic-name: publish.topic
 
 dubbo:
   scan:

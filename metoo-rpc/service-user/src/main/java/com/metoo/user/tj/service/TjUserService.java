@@ -24,4 +24,5 @@ public interface TjUserService extends IService<TjUser> {
     LoginModel login(LoginVo vo);
 
     Integer findByExtendId(Integer extendId);
+    TjUser findByOpenId(String openId);
 }
