@@ -71,7 +71,7 @@ public class PsPourOutApiImpl implements PsPourOutApi {
         Pageable pageable = PageRequest.of(vo.getPagenum()-1,vo.getPagesize(), Sort.Direction.DESC,"prices");
         List<PsPourOutModel> modelList = psPourOutService.findByOnLine(1, pageable);
         modelList.stream().forEach(e->{
-            e.setPicture(OSSUtil.fillPath(e.getPicture()));
+            e.setHeadImg(OSSUtil.fillPath(e.getHeadImg()));
             // 查询当前倾诉师状态 1: 是否在进行中 2：进行中是否是自己的订单
             pushPourOutModel(e, vo.getUserId());
         });
@@ -88,7 +88,7 @@ public class PsPourOutApiImpl implements PsPourOutApi {
            return RE.fail("没有该倾诉师！");
         }
         PsPourOutModel model = CopyUtils.copy(pojo, new PsPourOutModel());
-        model.setPicture(OSSUtil.fillPath(model.getPicture()));
+        model.setHeadImg(OSSUtil.fillPath(model.getHeadImg()));
         pushPourOutModel(model, vo.getUserId());
         return RE.ok(model);
     }
