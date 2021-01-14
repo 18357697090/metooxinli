@@ -23,7 +23,7 @@ public class AlipayOrderController {
     private AlipayApi alipayApi;
 
     @PostMapping("/getOrderInfo")
-    public RE getOrderInfo(String orderNo) throws Exception {
+    public RE getOrderInfo(String orderNo)  {
         return alipayApi.getOrderInfo(orderNo);
     }
 
