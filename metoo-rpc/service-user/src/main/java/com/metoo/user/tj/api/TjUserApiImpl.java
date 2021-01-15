@@ -16,6 +16,7 @@ import com.metoo.pojo.old.model.SecretGuardPojo;
 import com.metoo.pojo.old.vo.FriendListDto;
 import com.metoo.pojo.tj.model.TjUserInfoModel;
 import com.metoo.pojo.tj.model.TjUserModel;
+import com.metoo.pojo.wechat.tj.login.model.WechatLoginModel;
 import com.metoo.tools.CreateID;
 import com.metoo.tools.zc;
 import com.metoo.user.tj.dao.entity.TjSecretGuard;
@@ -91,6 +92,23 @@ public class TjUserApiImpl implements TjUserApi {
         if(OU.isBlack(userId))
             return RE.fail("没有该用户");
         return RE.ok(userId);
+    }
+    @Override
+    public RE findByOpenId(String openId) {
+        TjUser pojo = tjUserService.findByOpenId(openId);
+        if(OU.isBlack(pojo))
+            return RE.fail("没有该用户");
+        return RE.ok(CopyUtils.copy(pojo, new TjUserModel()));
+    }
+
+    @Override
+    public RE saveToken(WechatLoginModel model) {
+        TjUser pojo = new TjUser();
+        pojo.setId(model.getUid());
+        pojo.setOpenId(model.getOpenId());
+        pojo.setAssectToken(model.getAssectToken());
+        tjUserService.updateById(pojo);
+        return RE.ok();
     }
 
     @Override

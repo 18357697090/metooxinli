@@ -12,4 +12,5 @@ public interface TjUserRepository extends JpaRepository<TjUser,Integer>{
 
         TjUser findByUsername(String username);
 
+        TjUser findFirstByOpenId(String openId);
 }

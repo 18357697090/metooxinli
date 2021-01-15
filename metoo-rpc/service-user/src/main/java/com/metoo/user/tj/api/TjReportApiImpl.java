@@ -4,6 +4,7 @@ import com.loongya.core.util.RE;
 import com.metoo.api.tj.TjReportApi;
 import com.metoo.pojo.tj.vo.TjReportVo;
 import com.metoo.user.tj.dao.entity.TjReport;
+import com.metoo.user.tj.dao.repository.TjReportRepository;
 import com.metoo.user.tj.service.TjReportService;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.dozer.DozerBeanMapper;

@@ -48,4 +48,8 @@ public class TjUserServiceImpl extends ServiceImpl<TjUserMapper, TjUser> impleme
     public Integer findByExtendId(Integer extendId) {
         return tjUserMapper.findByExtendId(extendId);
     }
+    @Override
+    public TjUser findByOpenId(String openId) {
+        return tjUserRepository.findFirstByOpenId(openId);
+    }
 }

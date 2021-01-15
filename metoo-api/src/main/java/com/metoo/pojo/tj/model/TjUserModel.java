@@ -30,6 +30,10 @@ public class TjUserModel implements Serializable {
 
     private String extendId;
 
+    private String openId;
+
+    private String assectToken;
+
     private Date createTime;
 
     private Date updateTime;

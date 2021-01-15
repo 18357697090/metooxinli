@@ -5,6 +5,7 @@ import com.metoo.pojo.login.vo.LoginUploadPasswordVo;
 import com.metoo.pojo.login.vo.LoginVo;
 import com.metoo.pojo.old.model.LoginPojo;
 import com.metoo.pojo.old.model.SecretGuardPojo;
+import com.metoo.pojo.wechat.tj.login.model.WechatLoginModel;
 
 /**
  * <p>
@@ -30,4 +31,8 @@ public interface TjUserApi {
     RE fendFriend(Integer uid, String name);
 
     RE findUserIdByExtendId(Integer extendId);
+
+    RE findByOpenId(String openId);
+
+    RE saveToken(WechatLoginModel model);
 }

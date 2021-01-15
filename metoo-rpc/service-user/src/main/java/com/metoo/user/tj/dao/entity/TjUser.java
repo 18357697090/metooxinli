@@ -53,6 +53,12 @@ public class TjUser extends Model<TjUser> {
     @ApiModelProperty(value = "拓展id")
     private String extendId;
 
+    @ApiModelProperty(value = "微信assectToken")
+    private String assectToken;
+
+    @ApiModelProperty(value = "微信openId")
+    private String openId;
+
     @ApiModelProperty(value = "创建时间")
     private Date createTime;
 

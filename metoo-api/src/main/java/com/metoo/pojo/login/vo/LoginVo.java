@@ -18,4 +18,6 @@ public class LoginVo implements Serializable {
     private String repeatPassword;
     private String secret;
     private String answer;
+
+    private String jsCode;
 }

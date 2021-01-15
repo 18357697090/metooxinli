@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 
 @EnableDubbo
-@EnableTransactionManagement
 @SpringBootApplication(scanBasePackages = {"com.metoo.im", "com.metoo.comm.config"})
 public class MetooImApplication {
 

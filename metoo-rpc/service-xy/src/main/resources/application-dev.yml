@@ -9,18 +9,25 @@ spring:
       password: '@Jy940327'
       driver-class-name: com.mysql.cj.jdbc.Driver
       url: jdbc:mysql://47.111.98.218:3306/metoo?allowPublicKeyRetrieval=true&useSSL=false&useUnicode=true&characterEncoding=UTF8&serverTimezone=GMT
-      initialSize: 10 #初始化连接池大小
-      minIdle: 10 #连接池中保留最小连接数
-      maxActive: 60 # 连接池中保留最大连接数
-      max-wait: 60 # 配置获取连接等待超时的时间
+      initialSize: 5 #初始化连接池大小
+      minIdle: 5 #连接池中保留最小连接数
+      maxActive: 20 # 连接池中保留最大连接数
+      max-wait: 60000 # 配置获取连接等待超时的时间
       min-evictable-idle-time-millis: 300000 # 配置一个连接在池中最小生存的时间，单位是毫秒
       time-between-eviction-runs-millis: 60000 # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
       test-while-idle: true # 空闲的时候检测，如果空闲时间大于 timeBetweenEvictionRunsMillis， 执行validationQuery检测连接是否有效
-      validation-query: select 'x' # 检测sql
+      validation-query: SELECT 1 FROM DUAL  # select 'x' # 检测sql
+      filters: stat,wall #   配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+      max-pool-prepared-statement-per-connection-size: 20
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
       test-on-borrow: false # 申请连接时执行validationQuery检测连接是否有效，开启这个配置会降低性能 线上不开启
       test-on-return: false # 归还连接时执行validationQuery检测连接是否有效，开启这个配置会降低性能 线上不开启
-      pool-prepared-statements: true # 开启PSCache 会消耗一定的内存 但能提高性能
+      pool-prepared-statements: false # 开启PSCache 会消耗一定的内存 但能提高性能
       max-open-prepared-statements: 20 # 每个connection PSCache 缓存语句的数量
+      remove-abandoned: true # 超过时间限制是否回收
+      remove-abandoned-timeout: 180 # 超时时间；单位为秒。180秒=3分钟
+      log-abandoned: true # 关闭abanded连接时输出错误日志
+      use-global-data-source-stat: true
   jpa:
     show-sql: true
     properties:
@@ -31,7 +38,16 @@ spring:
       ddl-auto: validate
     database: mysql
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+  activemq:
+    user: admin
+    password: admin
+    broker-url: tcp://localhost:61616
+    pool:
+      enabled: true
+      max-connections: 10
 
+queue-name: publish.queue
+topic-name: publish.topic
 
 mybatis-plus:
   mapper-locations: classpath:com/metoo/xy/**/dao/mapper/mapping/*.xml
