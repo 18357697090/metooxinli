@@ -18,6 +18,17 @@ public class LoginVo implements Serializable {
     private String repeatPassword;
     private String secret;
     private String answer;
+    // 微信用户信息
+    private String nickName;
+    private String headImg;
+    private Integer gender;
+    private String province;
+    private String city;
+    private String country;
+    private String openId;
+
 
     private String jsCode;
+    // 1: 绑定迷途心理账号  2: 新注册
+    private Integer type;
 }
