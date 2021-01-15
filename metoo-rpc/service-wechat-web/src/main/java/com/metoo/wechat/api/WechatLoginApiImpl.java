@@ -60,16 +60,8 @@ public class WechatLoginApiImpl implements WechatLoginApi {
             TjUserModel userModel = (TjUserModel) userResult.getData();
             userId = userModel.getId();
             extendId = userModel.getExtendId();
+            return getToken(userId, extendId);
         }
-        // 登录
-        model.setUid(userId);
-        tjUserApi.saveToken(model);
-        updateUserInfo(userId, vo);
-        // 返回token信息
-        return getToken(userId, extendId);
-
-
-
     }
 
     private RE getToken(Integer userId, String extendId) {
@@ -86,7 +78,6 @@ public class WechatLoginApiImpl implements WechatLoginApi {
         userInfoModel.setGender(vo.getGender());
         userInfoModel.setProv(vo.getProvince());
         userInfoModel.setCity(vo.getCity());
-        userInfoModel.setArea(vo.getCountry());
         tjUserInfoApi.upLoadUserInfo(userInfoModel);
     }
 
@@ -94,6 +85,8 @@ public class WechatLoginApiImpl implements WechatLoginApi {
     public RE register(LoginVo vo) {
         Integer userId = null;
         String extendId = null;
+        WechatLoginModel model = wechatLogin(vo);
+        vo.setOpenId(model.getOpenId());
         if(vo.getType() == 1){
             // 绑定用户名和密码
             LoginVo loginVo = new LoginVo();
@@ -106,6 +99,9 @@ public class WechatLoginApiImpl implements WechatLoginApi {
             LoginModel loginModel = (LoginModel) re.getData();
             userId = loginModel.getUserId();
             extendId = loginModel.getExtendId();
+            // 更新openId
+            model.setUid(userId);
+            tjUserApi.saveToken(model);
         }else if (vo.getType() == 2){
             // 新注册用户
             vo.setUsername(vo.getOpenId());
