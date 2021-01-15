@@ -126,6 +126,7 @@ public class TjUserApiImpl implements TjUserApi {
         pojo.setPassword(vo.getPassword());
         pojo.setUpdateTime(new Date());
         pojo.setExtendId(IdGenerator.getId());
+        pojo.setOpenId(vo.getOpenId());
         pojo.setCreateTime(new Date());
         pojo.setUsername(vo.getUsername());
         pojo.setState(ConstantUtil.TjUserState.COMM.getCode());

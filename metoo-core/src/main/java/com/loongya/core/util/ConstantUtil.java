@@ -13,6 +13,7 @@ public class ConstantUtil {
     public static final String DISTANCE_LIMIT = "DISTANCE_LIMIT"; // 距离限制key
     public static final String HEAD_IMG_DEFAULT = ""; // 默认头像
     public static final String LEVEL_DICT = "LEVEL_DICT"; // 用户等级归属key
+    public static final String REDIS_ASSECTTOKEN_KEY = "WECHAT:ASSECTTOKEN"; // 微信token
 
     /**
      * 0表示正常，1表示被封

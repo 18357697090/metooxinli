@@ -7,6 +7,7 @@ public enum AuthEnum implements CommEnum {
 
     /** 成功 */
     LOGIN_TIMEOUT("-1", "登录超时，请重新登录!"),
+    LOGIN_NO_USERNAME("-1", "请重新登录!"),
    ;
 
     private String code;

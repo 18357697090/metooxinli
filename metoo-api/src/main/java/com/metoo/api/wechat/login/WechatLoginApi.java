@@ -6,4 +6,6 @@ import com.metoo.pojo.login.vo.LoginVo;
 public interface WechatLoginApi {
 
     RE login(LoginVo vo);
+
+    RE register(LoginVo vo);
 }

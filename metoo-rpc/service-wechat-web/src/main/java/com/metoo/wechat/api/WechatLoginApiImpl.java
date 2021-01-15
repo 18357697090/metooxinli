@@ -3,15 +3,19 @@ package com.metoo.wechat.api;
 
 import com.alibaba.fastjson.JSONObject;
 import com.loongya.core.exception.LoongyaException;
+import com.loongya.core.util.ConstantUtil;
 import com.loongya.core.util.OU;
 import com.loongya.core.util.RE;
 import com.loongya.core.util.http.HttpClientUtil;
 import com.metoo.api.tj.TjUserApi;
+import com.metoo.api.tj.TjUserInfoApi;
 import com.metoo.api.wechat.login.WechatLoginApi;
 import com.metoo.pojo.login.enums.AuthEnum;
 import com.metoo.pojo.login.model.LoginModel;
 import com.metoo.pojo.login.vo.LoginVo;
+import com.metoo.pojo.tj.model.TjUserInfoModel;
 import com.metoo.pojo.tj.model.TjUserModel;
+import com.metoo.pojo.tj.vo.TjUserInfoVo;
 import com.metoo.pojo.wechat.tj.login.model.WechatLoginModel;
 import com.metoo.wechat.config.properties.WechatProperties;
 import com.metoo.wechat.config.tools.JwtTokenUtil;
@@ -32,6 +36,8 @@ public class WechatLoginApiImpl implements WechatLoginApi {
 
     @DubboReference
     private TjUserApi tjUserApi;
+    @DubboReference
+    private TjUserInfoApi tjUserInfoApi;
 
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
@@ -41,6 +47,96 @@ public class WechatLoginApiImpl implements WechatLoginApi {
 
     @Override
     public RE login(LoginVo vo) {
+        Integer userId = null;
+        String extendId = null;
+        // 微信登录获取openId
+        WechatLoginModel model = wechatLogin(vo);
+        // 根据openId获取用户信息
+        RE userResult = tjUserApi.findByOpenId(model.getOpenId());
+        if(userResult.isFail()){
+            // 如果没有数据,返回,绑定迷途心理账号,或者直接注册新账号
+            return RE.fail("999", model.getOpenId());
+        }else {
+            TjUserModel userModel = (TjUserModel) userResult.getData();
+            userId = userModel.getId();
+            extendId = userModel.getExtendId();
+        }
+        // 登录
+        model.setUid(userId);
+        tjUserApi.saveToken(model);
+        updateUserInfo(userId, vo);
+        // 返回token信息
+        return getToken(userId, extendId);
+
+
+
+    }
+
+    private RE getToken(Integer userId, String extendId) {
+        String randomKey = jwtTokenUtil.getRandomKey();
+        String token = jwtTokenUtil.generateToken(userId+"", randomKey);
+        return RE.ok(new AuthResponse(token, extendId, randomKey));
+    }
+
+    private void updateUserInfo(Integer userId, LoginVo vo) {
+        TjUserInfoVo userInfoModel = new TjUserInfoVo();
+        userInfoModel.setUserId(userId);
+        userInfoModel.setHeadImg(vo.getHeadImg());
+        userInfoModel.setNickName(vo.getNickName());
+        userInfoModel.setGender(vo.getGender());
+        userInfoModel.setProv(vo.getProvince());
+        userInfoModel.setCity(vo.getCity());
+        userInfoModel.setArea(vo.getCountry());
+        tjUserInfoApi.upLoadUserInfo(userInfoModel);
+    }
+
+    @Override
+    public RE register(LoginVo vo) {
+        Integer userId = null;
+        String extendId = null;
+        if(vo.getType() == 1){
+            // 绑定用户名和密码
+            LoginVo loginVo = new LoginVo();
+            loginVo.setUsername(vo.getUsername());
+            loginVo.setPassword(vo.getPassword());
+            RE re = tjUserApi.logIn(loginVo);
+            if(re.isFail()){
+                return re;
+            }
+            LoginModel loginModel = (LoginModel) re.getData();
+            userId = loginModel.getUserId();
+            extendId = loginModel.getExtendId();
+        }else if (vo.getType() == 2){
+            // 新注册用户
+            vo.setUsername(vo.getOpenId());
+            vo.setPassword(vo.getPassword());
+            vo.setRepeatPassword(vo.getPassword());
+            RE registerRe  = tjUserApi.register(vo);
+            if(!registerRe.isFail()){
+                LoginModel loginModel = (LoginModel) registerRe.getData();
+                userId = loginModel.getUserId();
+                extendId = loginModel.getExtendId();
+            }
+        }
+        updateUserInfo(userId, vo);
+        // 获取assectToken逻辑
+        // 获取token
+        String tokenUrl = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid="+wechatProperties.getAppid() + "&secret=" +wechatProperties.getSecret();
+        log.info("微信获取token:{}", tokenUrl);
+        String tokenResult = HttpClientUtil.getHttp(tokenUrl);
+        log.info("微信获取token结果: {}", tokenResult);
+        JSONObject tokenjson = JSONObject.parseObject(tokenResult);
+        String assectToken = tokenjson.getString("access_token");
+        long expiresIn = tokenjson.getLong("expires_in");
+        ValueOperations valueOperations = redisTemplate.opsForValue();
+        valueOperations.set(ConstantUtil.REDIS_ASSECTTOKEN_KEY, assectToken, expiresIn);
+        // 定时任务,定时刷新token,保存到数据库 todo.
+
+
+        return getToken(userId, extendId);
+    }
+
+    private WechatLoginModel wechatLogin(LoginVo vo) {
         StringBuilder sb = new StringBuilder();
         sb.append(wechatProperties.getLoginUrl())
                 .append("?")
@@ -55,58 +151,17 @@ public class WechatLoginApiImpl implements WechatLoginApi {
         log.info("微信登录url:{}", sb.toString());
         String http = HttpClientUtil.getHttp(sb.toString());
         log.info("微信登录结果: {}", http);
-        WechatLoginModel model = null;
         try {
             //"{"session_key":"3zH27RCqCkzQxXBBKAt3ng==","openid":"oVteb5RoFy_xMt5Ub6Qpgk_0H4h8"}"
-            model = JSONObject.parseObject(http, WechatLoginModel.class);
+            WechatLoginModel model = JSONObject.parseObject(http, WechatLoginModel.class);
             if(OU.isBlack(model)){
                 throw new Exception("登录失败");
             }
+            return model;
         }catch (Exception e){
             e.printStackTrace();
             throw new LoongyaException("登录失败!");
         }
-        RE userResult = tjUserApi.findByOpenId(model.getOpenId());
-        Integer userId = null;
-        String extendId = null;
-        if(userResult.isFail()){
-            if(OU.isBlack(vo.getUsername())){
-                // 没有登录过,返回,唤起账号密码登录
-                return RE.fail(AuthEnum.LOGIN_TIMEOUT);
-            }
-            LoginVo loginVo = new LoginVo();
-            loginVo.setUsername(vo.getUsername());
-            loginVo.setPassword(vo.getPassword());
-            RE re = tjUserApi.logIn(loginVo);
-            if(re.isFail()){
-                return re;
-            }
-            LoginModel loginModel = (LoginModel) re.getData();
-            userId = loginModel.getUserId();
-            extendId = loginModel.getExtendId();
-        }else {
-            TjUserModel userModel = (TjUserModel) userResult.getData();
-            userId = userModel.getId();
-            extendId = userModel.getExtendId();
-        }
-        // 登录
-        model.setUid(userId);
-        // 获取token
-        String tokenUrl = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid="+wechatProperties.getAppid() + "&secret=" +wechatProperties.getSecret();
-        log.info("微信获取token:{}", tokenUrl);
-        String tokenResult = HttpClientUtil.getHttp(tokenUrl);
-        log.info("微信获取token结果: {}", tokenResult);
-        JSONObject tokenjson = JSONObject.parseObject(tokenResult);
-        String assectToken = tokenjson.getString("access_token");
-        long expiresIn = tokenjson.getLong("expires_in");
-        model.setAssectToken(assectToken);
-        tjUserApi.saveToken(model);
-        final String randomKey = jwtTokenUtil.getRandomKey();
-        final String token = jwtTokenUtil.generateToken(userId+"", randomKey);
-        ValueOperations valueOperations = redisTemplate.opsForValue();
-        valueOperations.set("wechat:assecttoken:uid:" + userId, assectToken, expiresIn);
-        // 定时任务,定时刷新token,保存到数据库 todo.
 
-        return RE.ok(new AuthResponse(token, extendId, randomKey));
     }
 }
