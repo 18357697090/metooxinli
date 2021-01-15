@@ -106,7 +106,6 @@ public class TjUserApiImpl implements TjUserApi {
         TjUser pojo = new TjUser();
         pojo.setId(model.getUid());
         pojo.setOpenId(model.getOpenId());
-        pojo.setAssectToken(model.getAssectToken());
         tjUserService.updateById(pojo);
         return RE.ok();
     }

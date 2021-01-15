@@ -24,7 +24,6 @@ public class LoginVo implements Serializable {
     private Integer gender;
     private String province;
     private String city;
-    private String country;
     private String openId;
 
 
