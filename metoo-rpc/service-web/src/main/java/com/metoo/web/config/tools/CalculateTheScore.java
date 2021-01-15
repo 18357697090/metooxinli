@@ -39,7 +39,7 @@ public class CalculateTheScore {
         int b=0;
         int c=0;
         for (int i=1;i<length;i++){
-            OptionsResult option = results.get(i);
+            OptionsResult option = results.get(i-1);
             int factor = problem.get(i-1).getFactorType();
             if(factor==1){
                 a += x[i][option.getAnswerIndex()];

@@ -83,12 +83,12 @@ public class TjUserAccountApiImpl implements TjUserAccountApi {
     }
 
     @Override
-    public RE findBalance(Integer uid) {
-        TjUserAccount zh=tjUserAccountService.findByUid(uid);
+    public RE findBalance(Integer id) {
+        TjUserAccount zh=tjUserAccountService.findBalance(id);
         if(OU.isBlack(zh)){
             throw new LoongyaException("用户账号为空");
         }
-        return RE.ok(zh.getBalance());
+        return RE.ok(zh);
     }
 
     @Override

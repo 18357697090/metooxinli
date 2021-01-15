@@ -23,7 +23,7 @@ public interface TjUserAccountApi {
 
     RE findzh(Integer uid);
 
-    RE findBalance(Integer uid);
+    RE findBalance(Integer id);
 
     RE updatePsCoin(BigDecimal prices, Integer uid);
 

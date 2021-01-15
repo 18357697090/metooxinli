@@ -3,6 +3,7 @@ package com.metoo.web.controller.tj;
 
 import com.loongya.core.util.RE;
 import com.metoo.api.tj.TjUserAccountApi;
+import com.metoo.web.config.auth.ThreadLocal;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,8 +39,8 @@ public class TjUserAccountController {
 
     //查找账户余额
     @PostMapping("/findBalance")
-    public RE findBalance(@RequestHeader("UID") Integer uid){
-        return tjUserAccountApi.findBalance(uid);
+    public RE findBalance(){
+        return tjUserAccountApi.findBalance(ThreadLocal.getUserId());
     }
 
 
