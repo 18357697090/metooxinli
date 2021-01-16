@@ -38,4 +38,15 @@ public class PsPourOutOrderController {
         vo.setUserId(ThreadLocal.getUserId());
         return psPourOutOrderApi.buyPour(vo);
     }
+
+
+    /**
+     * 倾诉师订单列表
+     * @return
+     */
+    @PostMapping("/getPourOrderList")
+    public RE getPourOrderList(PsPourOutVo vo){
+        vo.setUserId(ThreadLocal.getUserId());
+        return psPourOutOrderApi.getPourOrderList(vo);
+    }
 }

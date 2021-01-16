@@ -1,36 +1,34 @@
 package com.metoo.ps.ps.api;
 
-import com.loongya.core.exception.LoongyaException;
-import com.loongya.core.util.ConstantUtil;
-import com.loongya.core.util.OU;
-import com.loongya.core.util.RE;
-import com.metoo.api.ps.PsConsultApi;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.loongya.core.util.*;
+import com.loongya.core.util.aliyun.OSSUtil;
 import com.metoo.api.ps.PsConsultOrderApi;
 import com.metoo.api.tj.TjUserAccountApi;
 import com.metoo.api.tj.TjUserAccountCoinDetailApi;
+import com.metoo.api.tj.TjUserApi;
+import com.metoo.api.tj.TjUserInfoApi;
 import com.metoo.pojo.ps.model.PsConsultModel;
-import com.metoo.pojo.ps.vo.PsCapsuleVo;
+import com.metoo.pojo.ps.model.PsConsultOrderModel;
 import com.metoo.pojo.ps.vo.PsConsultOrderVo;
+import com.metoo.pojo.ps.vo.PsConsultVo;
 import com.metoo.pojo.tj.model.TjUserAccountCoinDetailModel;
-import com.metoo.pojo.tj.model.TjUserAccountDetailAddDetailModel;
 import com.metoo.pojo.tj.model.TjUserAccountModel;
+import com.metoo.pojo.tj.model.TjUserInfoModel;
 import com.metoo.ps.ps.dao.entity.PsConsult;
 import com.metoo.ps.ps.dao.entity.PsConsultOrder;
 import com.metoo.ps.ps.service.PsConsultOrderService;
 import com.metoo.ps.ps.service.PsConsultService;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.DubboService;
-import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -55,6 +53,9 @@ public class PsConsultOrderApiImpl implements PsConsultOrderApi {
 
     @DubboReference
     private TjUserAccountApi tjUserAccountApi;
+
+    @DubboReference
+    private TjUserInfoApi tjUserInfoApi;
 
     @DubboReference
     private TjUserAccountCoinDetailApi tjUserAccountCoinDetailApi;
@@ -96,5 +97,28 @@ public class PsConsultOrderApiImpl implements PsConsultOrderApi {
         order.setConId(psConsult.getId());
         psConsultOrderService.save(order);
         return RE.ok();
+    }
+
+    @Override
+    public RE psConsulOrdertList(PsConsultVo vo) {
+        Page<PsConsultOrder> page = new Page(vo.getPagenum(), vo.getPagesize());
+        LambdaQueryWrapper<PsConsultOrder> lqw = new LambdaQueryWrapper<>();
+        lqw.eq(PsConsultOrder::getUserId, vo.getUserId());
+        page = psConsultOrderService.page(page, lqw);
+        List<PsConsultOrder> list = page.getRecords();
+        if(OU.isBlack(list)){
+            return RE.noData();
+        }
+        return REPage.ok(vo.getPagenum(), vo.getPagesize(), page.getTotal(), list.stream().flatMap(e->{
+            PsConsultOrderModel model = CopyUtils.copy(e, new PsConsultOrderModel());
+            model.setTjUserInfoModel(tjUserInfoApi.findByUid(model.getUserId()));
+            PsConsult psConsult = psConsultService.getById(model.getConId());
+            if(OU.isNotBlack(psConsult)){
+                PsConsultModel psConsultModel = CopyUtils.copy(psConsult, new PsConsultModel());
+                psConsultModel.setHeadImg(OSSUtil.fillPath(psConsultModel.getHeadImg()));
+                model.setPsConsultModel(psConsultModel);
+            }
+            return Stream.of(model);
+        }).collect(Collectors.toList()));
     }
 }

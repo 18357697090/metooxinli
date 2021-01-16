@@ -47,6 +47,7 @@ public class PsConsultController {
         vo.setUserId(ThreadLocal.getUserId());
         return psConsultApi.psConsultList(vo);
     }
+
     /**
      * 咨询师详情
      * @param vo

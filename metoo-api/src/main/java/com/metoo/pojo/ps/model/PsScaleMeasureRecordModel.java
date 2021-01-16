@@ -1,5 +1,6 @@
 package com.metoo.pojo.ps.model;
 
+import com.metoo.pojo.tj.model.TjUserInfoModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -21,9 +22,17 @@ import java.util.Date;
 @NoArgsConstructor
 public class PsScaleMeasureRecordModel implements Serializable {
 
+    private TjUserInfoModel tjUserInfoModel;
+    private PsScaleModel psScaleModel;
     private Integer scaleId;
     private Integer score;
     private String content;
     private String scaleName;
     private Date createTime;
+    private Integer id;
+    private Integer uid;
+
+    private Integer count;
+
+    private Integer state;
 }

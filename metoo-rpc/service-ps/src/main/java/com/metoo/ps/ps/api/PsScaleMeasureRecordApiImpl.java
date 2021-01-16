@@ -1,20 +1,27 @@
 package com.metoo.ps.ps.api;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.loongya.core.exception.LoongyaException;
-import com.loongya.core.util.ConstantUtil;
-import com.loongya.core.util.CopyUtils;
-import com.loongya.core.util.OU;
-import com.loongya.core.util.RE;
+import com.loongya.core.util.*;
+import com.loongya.core.util.aliyun.OSSUtil;
 import com.metoo.api.ps.PsScaleMeasureRecordApi;
 import com.metoo.api.tj.TjUserAccountApi;
 import com.metoo.api.tj.TjUserAccountCoinDetailApi;
+import com.metoo.api.tj.TjUserInfoApi;
 import com.metoo.pojo.old.model.Result;
 import com.metoo.pojo.old.vo.MeasureRecordDTO;
+import com.metoo.pojo.ps.model.PsConsultModel;
+import com.metoo.pojo.ps.model.PsConsultOrderModel;
 import com.metoo.pojo.ps.model.PsScaleMeasureRecordModel;
+import com.metoo.pojo.ps.model.PsScaleModel;
 import com.metoo.pojo.ps.vo.PsScaleMeasureRecordVo;
+import com.metoo.pojo.ps.vo.PsScaleVo;
 import com.metoo.pojo.tj.model.TjUserAccountCoinDetailModel;
 import com.metoo.pojo.tj.model.TjUserAccountDetailAddDetailModel;
 import com.metoo.pojo.tj.model.TjUserAccountModel;
+import com.metoo.ps.ps.dao.entity.PsConsult;
+import com.metoo.ps.ps.dao.entity.PsConsultOrder;
 import com.metoo.ps.ps.dao.entity.PsScale;
 import com.metoo.ps.ps.dao.entity.PsScaleMeasureRecord;
 import com.metoo.ps.ps.service.PsScaleMeasureRecordService;
@@ -29,6 +36,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * <p>
@@ -54,6 +63,8 @@ public class PsScaleMeasureRecordApiImpl implements PsScaleMeasureRecordApi {
 
     @DubboReference
     private TjUserAccountApi tjUserAccountApi;
+    @DubboReference
+    private TjUserInfoApi tjUserInfoApi;
 
     @DubboReference
     private TjUserAccountCoinDetailApi tjUserAccountCoinDetailApi;
@@ -147,5 +158,28 @@ public class PsScaleMeasureRecordApiImpl implements PsScaleMeasureRecordApi {
     public void updateRecord(PsScaleMeasureRecordModel model) {
         PsScaleMeasureRecord pojo = CopyUtils.copy(model, new PsScaleMeasureRecord());
         psScaleMeasureRecordService.updateById(pojo);
+    }
+
+    @Override
+    public RE myScaleOrderList(PsScaleVo vo) {
+        Page<PsScaleMeasureRecord> page = new Page(vo.getPagenum(), vo.getPagesize());
+        LambdaQueryWrapper<PsScaleMeasureRecord> lqw = new LambdaQueryWrapper<>();
+        lqw.eq(PsScaleMeasureRecord::getUid, vo.getUserId());
+        page = psScaleMeasureRecordService.page(page, lqw);
+        List<PsScaleMeasureRecord> list = page.getRecords();
+        if(OU.isBlack(list)){
+            return RE.noData();
+        }
+        return REPage.ok(vo.getPagenum(), vo.getPagesize(), page.getTotal(), list.stream().flatMap(e->{
+            PsScaleMeasureRecordModel model = CopyUtils.copy(e, new PsScaleMeasureRecordModel());
+            model.setTjUserInfoModel(tjUserInfoApi.findByUid(model.getUid()));
+            PsScale psScale = psScaleService.getById(model.getScaleId());
+            if(OU.isNotBlack(psScale)){
+                PsScaleModel psScaleModel = CopyUtils.copy(psScale, new PsScaleModel());
+                psScaleModel.setPicture(OSSUtil.fillPath(psScaleModel.getPicture()));
+                model.setPsScaleModel(psScaleModel);
+            }
+            return Stream.of(model);
+        }).collect(Collectors.toList()));
     }
 }

@@ -53,9 +53,10 @@ public class WechatLoginApiImpl implements WechatLoginApi {
         WechatLoginModel model = wechatLogin(vo);
         // 根据openId获取用户信息
         RE userResult = tjUserApi.findByOpenId(model.getOpenId());
+        vo.setOpenId(model.getOpenId());
         if(userResult.isFail()){
             // 如果没有数据,返回,绑定迷途心理账号,或者直接注册新账号
-            return RE.fail("999", model.getOpenId());
+            return register(vo);
         }else {
             TjUserModel userModel = (TjUserModel) userResult.getData();
             userId = userModel.getId();
@@ -85,35 +86,17 @@ public class WechatLoginApiImpl implements WechatLoginApi {
     public RE register(LoginVo vo) {
         Integer userId = null;
         String extendId = null;
-        WechatLoginModel model = wechatLogin(vo);
-        vo.setOpenId(model.getOpenId());
-        if(vo.getType() == 1){
-            // 绑定用户名和密码
-            LoginVo loginVo = new LoginVo();
-            loginVo.setUsername(vo.getUsername());
-            loginVo.setPassword(vo.getPassword());
-            RE re = tjUserApi.logIn(loginVo);
-            if(re.isFail()){
-                return re;
-            }
-            LoginModel loginModel = (LoginModel) re.getData();
-            userId = loginModel.getUserId();
-            extendId = loginModel.getExtendId();
-            // 更新openId
-            model.setUid(userId);
-            tjUserApi.saveToken(model);
-        }else if (vo.getType() == 2){
-            // 新注册用户
-            vo.setUsername(vo.getOpenId());
-            vo.setPassword(vo.getPassword());
-            vo.setRepeatPassword(vo.getPassword());
-            RE registerRe  = tjUserApi.register(vo);
-            if(!registerRe.isFail()){
-                LoginModel loginModel = (LoginModel) registerRe.getData();
-                userId = loginModel.getUserId();
-                extendId = loginModel.getExtendId();
-            }
+        // 新注册用户
+        vo.setUsername(vo.getOpenId());
+        vo.setPassword(ConstantUtil.DEFAULT_PASSWORD);
+        vo.setRepeatPassword(vo.getPassword());
+        RE registerRe  = tjUserApi.register(vo);
+        if(registerRe.isFail()) {
+            return registerRe;
         }
+        LoginModel loginModel = (LoginModel) registerRe.getData();
+        userId = loginModel.getUserId();
+        extendId = loginModel.getExtendId();
         updateUserInfo(userId, vo);
         // 获取assectToken逻辑
         // 获取token
@@ -127,8 +110,6 @@ public class WechatLoginApiImpl implements WechatLoginApi {
         ValueOperations valueOperations = redisTemplate.opsForValue();
         valueOperations.set(ConstantUtil.REDIS_ASSECTTOKEN_KEY, assectToken, expiresIn);
         // 定时任务,定时刷新token,保存到数据库 todo.
-
-
         return getToken(userId, extendId);
     }
 

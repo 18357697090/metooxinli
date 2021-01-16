@@ -3,6 +3,7 @@ package com.metoo.api.ps;
 import com.loongya.core.util.RE;
 import com.metoo.pojo.ps.vo.PsCapsuleVo;
 import com.metoo.pojo.ps.vo.PsConsultOrderVo;
+import com.metoo.pojo.ps.vo.PsConsultVo;
 
 /**
  * <p>
@@ -15,4 +16,6 @@ import com.metoo.pojo.ps.vo.PsConsultOrderVo;
 public interface PsConsultOrderApi {
 
     RE buyConsult(PsConsultOrderVo vo);
+
+    RE psConsulOrdertList(PsConsultVo vo);
 }

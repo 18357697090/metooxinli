@@ -15,4 +15,6 @@ import com.metoo.pojo.ps.vo.PsPourOutVo;
 public interface PsPourOutOrderApi {
 
     RE buyPour(PsPourOutVo vo);
+
+    RE getPourOrderList(PsPourOutVo vo);
 }

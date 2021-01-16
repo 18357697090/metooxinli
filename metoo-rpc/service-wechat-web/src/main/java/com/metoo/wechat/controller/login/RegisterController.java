@@ -14,12 +14,4 @@ public class RegisterController {
     @Autowired
     private WechatLoginApi wechatLoginApi;
 
-    @RequestMapping(value = "/register")
-    public RE register(LoginVo vo) {
-        AssertUtils.checkParam(vo.getType(), vo.getJsCode(), vo.getOpenId());
-        if(vo.getType() == 1){
-            AssertUtils.checkParam(vo.getUsername(), vo.getPassword());
-        }
-        return wechatLoginApi.register(vo);
-    }
 }

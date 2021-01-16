@@ -39,5 +39,16 @@ public  class PsConsultOrderController {
         vo.setUserId(ThreadLocal.getUserId());
         return psConsultOrderApi.buyConsult(vo);
     }
+    /**
+     * 咨询师订单列表
+     * @param vo
+     * @return
+     */
+    @PostMapping("/psConsulOrdertList")
+    public RE psConsulOrdertList(PsConsultVo vo){
+        vo.setUserId(ThreadLocal.getUserId());
+        return psConsultOrderApi.psConsulOrdertList(vo);
+    }
+
 
 }

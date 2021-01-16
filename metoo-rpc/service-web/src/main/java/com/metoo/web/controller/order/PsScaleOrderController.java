@@ -43,5 +43,13 @@ public class PsScaleOrderController {
         }
         return psScaleMeasureRecordApi.pay(userId, vo.getScaleId());
     }
+    /**
+     * 心理测量订单列表
+     */
+    @PostMapping("/myScaleOrderList")
+    public RE myScaleOrderList(PsScaleVo vo){
+        vo.setUserId(ThreadLocal.getUserId());
+        return psScaleMeasureRecordApi.myScaleOrderList(vo);
+    }
 
 }

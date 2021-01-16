@@ -4,6 +4,7 @@ import com.loongya.core.util.RE;
 import com.metoo.pojo.old.model.Result;
 import com.metoo.pojo.ps.model.PsScaleMeasureRecordModel;
 import com.metoo.pojo.ps.vo.PsScaleMeasureRecordVo;
+import com.metoo.pojo.ps.vo.PsScaleVo;
 
 /**
  * <p>
@@ -26,4 +27,6 @@ public interface PsScaleMeasureRecordApi {
     PsScaleMeasureRecordModel findByUserIdAndScaleId(Integer userId, Integer scaleId);
 
     void updateRecord(PsScaleMeasureRecordModel model);
+
+    RE myScaleOrderList(PsScaleVo vo);
 }

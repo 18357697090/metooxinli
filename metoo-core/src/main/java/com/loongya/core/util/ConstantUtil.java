@@ -14,6 +14,7 @@ public class ConstantUtil {
     public static final String HEAD_IMG_DEFAULT = ""; // 默认头像
     public static final String LEVEL_DICT = "LEVEL_DICT"; // 用户等级归属key
     public static final String REDIS_ASSECTTOKEN_KEY = "WECHAT:ASSECTTOKEN"; // 微信token
+    public static final String DEFAULT_PASSWORD = MD5Util.encrypt("123456"); // 密码
 
     /**
      * 0表示正常，1表示被封
