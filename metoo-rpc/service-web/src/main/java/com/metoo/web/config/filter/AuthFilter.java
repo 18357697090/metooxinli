@@ -7,6 +7,7 @@ import com.metoo.web.config.exception.BizExceptionEnum;
 import com.metoo.web.config.properties.JwtProperties;
 import com.metoo.web.config.tools.JwtTokenUtil;
 import io.jsonwebtoken.JwtException;
+import lombok.extern.log4j.Log4j2;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ import java.io.IOException;
  * @author fengshuonan
  * @Date 2017/8/24 14:04
  */
+@Log4j2
 public class AuthFilter extends OncePerRequestFilter {
 
     private final Log logger = LogFactory.getLog(this.getClass());

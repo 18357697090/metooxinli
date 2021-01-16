@@ -1,24 +1,16 @@
 package com.metoo.user.tj.api;
 
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
-import com.baomidou.mybatisplus.core.toolkit.IdWorker;
-import com.loongya.core.exception.LoongyaException;
 import com.loongya.core.util.*;
 import com.loongya.core.util.aliyun.OSSUtil;
 import com.metoo.api.tj.TjUserApi;
-import com.metoo.pojo.login.enums.AuthEnum;
 import com.metoo.pojo.login.model.LoginModel;
-import com.metoo.pojo.login.model.LoginUserInfoModel;
 import com.metoo.pojo.login.vo.LoginUploadPasswordVo;
 import com.metoo.pojo.login.vo.LoginVo;
-import com.metoo.pojo.old.model.LoginPojo;
-import com.metoo.pojo.old.model.SecretGuardPojo;
 import com.metoo.pojo.old.vo.FriendListDto;
 import com.metoo.pojo.tj.model.TjUserInfoModel;
 import com.metoo.pojo.tj.model.TjUserModel;
 import com.metoo.pojo.wechat.tj.login.model.WechatLoginModel;
-import com.metoo.tools.CreateID;
-import com.metoo.tools.zc;
 import com.metoo.user.tj.dao.entity.TjSecretGuard;
 import com.metoo.user.tj.dao.entity.TjUser;
 import com.metoo.user.tj.dao.entity.TjUserAccount;
@@ -31,9 +23,7 @@ import org.apache.dubbo.config.annotation.DubboService;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

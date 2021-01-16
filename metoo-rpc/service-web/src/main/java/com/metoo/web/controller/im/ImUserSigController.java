@@ -3,6 +3,7 @@ package com.metoo.web.controller.im;
 
 import com.loongya.core.util.RE;
 import com.metoo.api.im.ImUserSigApi;
+import com.metoo.web.config.auth.ThreadLocal;
 import io.swagger.annotations.ApiOperation;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,8 +32,8 @@ public class ImUserSigController {
 
     @ApiOperation("获取用户sig")
     @PostMapping("/getusersig")
-    public RE getusersig(@RequestHeader("UID") Integer uid){
-     return imUserSigApi.getusersig(uid);
+    public RE getusersig(){
+     return imUserSigApi.getusersig(ThreadLocal.getUserId());
     }
 
 
