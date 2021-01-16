@@ -25,7 +25,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Component
 @ServerEndpoint("/app/{uid}")
-public class WebSocketController extends TextWebSocketHandler {
+public class    WebSocketController extends TextWebSocketHandler {
     //<用户uid，用户的session>
     private static final Map<Integer,Session> userSession = new ConcurrentHashMap<>();
 

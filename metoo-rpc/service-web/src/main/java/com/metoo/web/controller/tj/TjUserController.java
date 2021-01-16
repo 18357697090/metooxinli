@@ -28,7 +28,7 @@ public class TjUserController {
      * ok
      * @return
      */
-
+    @CrossOrigin(origins = "*")
     @PostMapping("/getUserInfo")
     public RE getUserInfo(){
         return tjUserApi.getUserInfo(ThreadLocal.getUserId());

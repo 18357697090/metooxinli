@@ -9,6 +9,7 @@ import com.metoo.user.tj.dao.mapper.TjUserMapper;
 import com.metoo.user.tj.dao.repository.TjUserRepository;
 import com.metoo.user.tj.service.TjUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +32,7 @@ public class TjUserServiceImpl extends ServiceImpl<TjUserMapper, TjUser> impleme
 
     @Resource
     private TjUserMapper tjUserMapper;
+
 
     @Override
     public TjUser findByUsername(String username) {

@@ -13,5 +13,5 @@ import com.loongya.core.util.RE;
  */
 public interface ImUserSigApi {
 
-    RE getusersig(Integer uid);
+    RE getusersig(Integer id);
 }

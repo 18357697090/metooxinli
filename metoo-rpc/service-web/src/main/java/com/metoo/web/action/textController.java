@@ -17,6 +17,6 @@ public class textController {
 
         @PostMapping("/sctx")
     public RE sctx(@RequestParam(name="file") MultipartFile file) throws IOException {
-        return new imageUtil().saveImage(file);
+        return new imageUtil().saveImage(file,1f);
     }
 }

@@ -1,28 +1,20 @@
 package com.metoo.web.controller.login;
 
 
-import com.alibaba.dubbo.config.annotation.Reference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.loongya.core.util.AssertUtils;
 import com.loongya.core.util.CommsEnum;
-import com.loongya.core.util.OU;
 import com.loongya.core.util.RE;
-import com.metoo.api.login.LoginApi;
 import com.metoo.api.tj.TjUserApi;
 import com.metoo.pojo.login.model.LoginModel;
-import com.metoo.pojo.login.model.LoginUserInfoModel;
 import com.metoo.pojo.login.vo.LoginUploadPasswordVo;
 import com.metoo.pojo.login.vo.LoginVo;
-import com.metoo.pojo.old.model.LoginPojo;
-import com.metoo.pojo.old.model.SecretGuardPojo;
-import com.metoo.pojo.tj.model.TjUserInfoModel;
-import com.metoo.pojo.tj.model.TjUserModel;
 import com.metoo.web.config.tools.JwtTokenUtil;
 import com.metoo.web.controller.login.dto.AuthResponse;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>

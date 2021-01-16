@@ -10,11 +10,12 @@ import java.util.*;
 
 public class imageUtil {
 
-    private static final String SAVE_PATH = "/usr/local/image/";
+    //private static final String SAVE_PATH = "/usr/local/image/";
+    private static final String SAVE_PATH = "D:\\";
 
     private static final List<String> ALLOW_TYPES= Arrays.asList("image/jpeg","image/png","image/bmp","image/jpg");
 
-    public static RE saveImage(MultipartFile file){
+    public static RE saveImage(MultipartFile file,double x){
         if(file.isEmpty()){
             return RE.noData();
         }
@@ -38,7 +39,7 @@ public class imageUtil {
                 files.mkdirs();
             }
             File dest = new File(path + originalFilename);
-            Thumbnails.of(file.getInputStream()).scale(1f).outputQuality(0.25f).toFile(dest);
+            Thumbnails.of(file.getInputStream()).scale(1f).outputQuality(x).toFile(dest);
             String subPath = "/image/"+year+"/"+hourse+"/"+day+"/"+originalFilename;
             Map<String, String> map = new HashMap<>();
             map.put("path", subPath);

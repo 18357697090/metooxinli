@@ -11,7 +11,7 @@ import java.io.InputStream;
 public class WXConfigUtil implements WXPayConfig {
     private byte[] certData;
     public static final String APP_ID = "wx3ba632a4eb6ac0ce";
-    public static final String KEY = "8keRkl8IXEmkriRh4ZxC4npS43H24hcy";
+    public static final String KEY = "VaQzPIJ33sfEhMcIVGOmTZX1p77vCTS7";
     public static final String MCH_ID = "1605407877";
     public static final String NOTIFY_URL = "http://www.metooxinli.com:8088/wxorder/notify";//必须是外网地址，带域名的
     public static final String TRADE_TYPE_APP = "APP";//类型 APP、JSPI......

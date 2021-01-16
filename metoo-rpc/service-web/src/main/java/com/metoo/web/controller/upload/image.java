@@ -13,6 +13,11 @@ public class image {
 
     @RequestMapping("/image")
     public RE image(@RequestParam(name="file") MultipartFile file){
-        return imageUtil.saveImage(file);
+        return imageUtil.saveImage(file,0.5f);
+    }
+
+    @RequestMapping("/headImage")
+    public RE headImage(@RequestParam(name="file") MultipartFile file){
+        return imageUtil.saveImage(file,1f);
     }
 }

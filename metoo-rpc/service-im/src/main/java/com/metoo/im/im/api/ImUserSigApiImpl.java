@@ -34,13 +34,13 @@ public class ImUserSigApiImpl implements ImUserSigApi {
     private ImUserSigService imUserSigService;
 
     @Override
-    public RE getusersig(Integer uid) {
-        ImUserSig userSig=imUserSigService.findByUid(uid);
-        String identifier = ""+uid;
+    public RE getusersig(Integer id) {
+        ImUserSig userSig=imUserSigService.findByUid(id);
+        String identifier = ""+id;
         if(userSig==null){
             ImUserSig userSig1=new ImUserSig();
             String usersig= api.genSig(identifier, 30*86400);
-            userSig1.setUid(uid);
+            userSig1.setUid(id);
             userSig1.setUsersig(usersig);
             imUserSigService.save(userSig1);
             if (OU.isBlack(userSig)){
@@ -55,7 +55,7 @@ public class ImUserSigApiImpl implements ImUserSigApi {
             if(b>c){
                 String usersig= api.genSig(identifier, 30*86400);
                 Date date1=new Date();
-                imUserSigService.updatausersig(usersig,date1,uid);
+                imUserSigService.updatausersig(usersig,date1,id);
                 if (OU.isBlack(userSig)){
                     return RE.noData();
                 }
