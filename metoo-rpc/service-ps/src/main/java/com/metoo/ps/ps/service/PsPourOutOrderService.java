@@ -1,5 +1,6 @@
 package com.metoo.ps.ps.service;
 
+import com.metoo.pojo.ps.vo.PsConsultVo;
 import com.metoo.ps.ps.dao.entity.PsPourOutOrder;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -13,4 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface PsPourOutOrderService extends IService<PsPourOutOrder> {
 
+    PsPourOutOrder UnfinishedConsult(PsConsultVo vo);
 }

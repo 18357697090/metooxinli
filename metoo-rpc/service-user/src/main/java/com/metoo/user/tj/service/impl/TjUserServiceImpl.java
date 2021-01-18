@@ -3,6 +3,7 @@ package com.metoo.user.tj.service.impl;
 import com.metoo.pojo.login.model.LoginModel;
 import com.metoo.pojo.login.vo.LoginVo;
 import com.metoo.pojo.tj.model.TjUserInfoModel;
+import com.metoo.pojo.tj.model.TjUserModel;
 import com.metoo.user.tj.dao.entity.TjUser;
 import com.metoo.user.tj.dao.entity.TjUserInfo;
 import com.metoo.user.tj.dao.mapper.TjUserMapper;
@@ -33,6 +34,9 @@ public class TjUserServiceImpl extends ServiceImpl<TjUserMapper, TjUser> impleme
     @Resource
     private TjUserMapper tjUserMapper;
 
+    @Autowired
+    private Mapper mapper;
+
 
     @Override
     public TjUser findByUsername(String username) {
@@ -52,4 +56,6 @@ public class TjUserServiceImpl extends ServiceImpl<TjUserMapper, TjUser> impleme
     public TjUser findByOpenId(String openId) {
         return tjUserRepository.findFirstByOpenId(openId);
     }
+
+
 }

@@ -1,5 +1,8 @@
 package com.metoo.web.action;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.metoo.web.action.util.Message;
+import net.sf.json.JSONObject;
 import org.springframework.stereotype.Component;
 
 import javax.websocket.OnClose;
@@ -18,43 +21,58 @@ import java.util.concurrent.ConcurrentHashMap;
 public class PsWebSocket {
 
     //<AudioRoomId,Set<uid>>
-    private static final Map<Integer,Set<Integer>> room = new ConcurrentHashMap<>();
+    private static final Map<String,Set<String>> room = new ConcurrentHashMap<>();
 
     //<用户uid，用户的session>
-    private static final Map<Integer,Session> userSession = new ConcurrentHashMap<>();
+    private static final Map<String,Session> userSession = new ConcurrentHashMap<>();
 
-    //<AudioRoomId,Set<uid>>
-    private static final Map<Integer, Set<Integer>> rooms = new ConcurrentHashMap<>();
 
     @OnOpen
-    public void connect(@PathParam("uid") Integer uid,@PathParam("roomId") Integer roomId, Session session) throws Exception{
+    public void connect(@PathParam("roomId") String roomId,@PathParam("uid") String uid, Session session) throws Exception{
         userSession.put(uid,session);
-        if (!rooms.containsKey(roomId)) {
-            Set<Integer> room = new HashSet<>();
+        System.out.println(uid+"-------"+roomId);
+        if (!room.containsKey(roomId)) {
+            Set<String> user = new HashSet<>();
             // 添加用户
-            room.add(uid);
-            rooms.put(roomId, room);
+            user.add(uid);
+            room.put(roomId, user);
         } else {
             // 房间已存在，直接添加用户到相应的房间
-            rooms.get(roomId).add(uid);
+            room.get(roomId).add(uid);
         }
     }
 
     @OnMessage
-    public void receiveMsg(@PathParam("uid") Integer uid,@PathParam("roomId") Integer roomId,String message, Session session) {
-
+    public void receiveMsg(@PathParam("roomId") String roomId,@PathParam("uid") String uid,String message, Session session) {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            Message message1 = new Message();
+            message1 = mapper.readValue(message,Message.class);
+            System.out.println(room);
+            if(!room.get(roomId).contains(uid)){
+                message1.setType("system");
+            }
+            JSONObject json = JSONObject.fromObject(message1);
+            this.broadcast(roomId,json.toString(),uid);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @OnClose
-    public void disConnect(@PathParam("uid") Integer uid,@PathParam("roomId") Integer roomId,Session session) throws Exception {
-        room.get(roomId).remove(uid);
+    public void disConnect(@PathParam("roomId") String roomId,@PathParam("uid") String uid,Session session) throws Exception {
+        System.out.println(uid+"推出房间");
+        if(room.containsKey(roomId)) {
+            if (room.get(roomId).contains(uid)) {
+                room.get(roomId).remove(uid);
+            }
+        }
+
     }
 
-    public static void broadcast(Integer AudioRoomId, String msg,Integer uid) {
-        System.out.println("发送数据11--"+msg);
+    public static void broadcast(String roomId, String msg,String uid) {
         try {
-            for (Integer uid1 : rooms.get(AudioRoomId)) {
-                if (uid1.equals(uid)){continue;}
+            for (String uid1 : room.get(roomId)) {
                 if (userSession.containsKey(uid1)){
                     userSession.get(uid1).getBasicRemote().sendText(msg);
                 }

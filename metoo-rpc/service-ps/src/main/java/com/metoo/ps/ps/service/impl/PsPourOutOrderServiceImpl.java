@@ -1,9 +1,12 @@
 package com.metoo.ps.ps.service.impl;
 
+import com.metoo.pojo.ps.vo.PsConsultVo;
 import com.metoo.ps.ps.dao.entity.PsPourOutOrder;
 import com.metoo.ps.ps.dao.mapper.PsPourOutOrderMapper;
+import com.metoo.ps.ps.dao.repository.PsPourOutOrderRepository;
 import com.metoo.ps.ps.service.PsPourOutOrderService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,4 +20,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class PsPourOutOrderServiceImpl extends ServiceImpl<PsPourOutOrderMapper, PsPourOutOrder> implements PsPourOutOrderService {
 
+    @Autowired
+    PsPourOutOrderRepository psPourOutOrderRepository;
+
+    @Override
+    public PsPourOutOrder UnfinishedConsult(PsConsultVo vo) {
+        return psPourOutOrderRepository.UnfinishedConsult(vo.getUserId(),vo.getConId());
+
+    }
 }

@@ -14,6 +14,7 @@ import com.metoo.pojo.old.model.PourOutPojo;
 import com.metoo.pojo.ps.model.PsCapsuleDetailModel;
 import com.metoo.pojo.ps.model.PsPourOutIndexModel;
 import com.metoo.pojo.ps.model.PsPourOutModel;
+import com.metoo.pojo.ps.vo.PsConsultVo;
 import com.metoo.pojo.ps.vo.PsPourOutVo;
 import com.metoo.pojo.tj.model.TjUserInfoModel;
 import com.metoo.ps.ps.dao.entity.PsCapsule;
@@ -92,6 +93,8 @@ public class PsPourOutApiImpl implements PsPourOutApi {
         pushPourOutModel(model, vo.getUserId());
         return RE.ok(model);
     }
+
+
 
     private void pushPourOutModel(PsPourOutModel model, Integer userId) {
         // 查询当前倾诉师状态 1: 是否在进行中 2：进行中是否是自己的订单

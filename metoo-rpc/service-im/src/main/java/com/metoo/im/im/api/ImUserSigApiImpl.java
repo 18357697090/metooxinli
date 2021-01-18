@@ -4,9 +4,12 @@ package com.metoo.im.im.api;
 import com.loongya.core.util.OU;
 import com.loongya.core.util.RE;
 import com.metoo.api.im.ImUserSigApi;
+import com.metoo.api.tj.TjUserApi;
 import com.metoo.im.im.dao.entity.ImUserSig;
 import com.metoo.im.im.service.ImUserSigService;
+import com.metoo.pojo.tj.model.TjUserModel;
 import com.tencentyun.TLSSigAPIv2;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -33,10 +36,14 @@ public class ImUserSigApiImpl implements ImUserSigApi {
     @Autowired
     private ImUserSigService imUserSigService;
 
+    @DubboReference
+    private TjUserApi tjUserApi;
+
     @Override
     public RE getusersig(Integer id) {
+        TjUserModel tjUserModel = tjUserApi.getTjUser(id);
         ImUserSig userSig=imUserSigService.findByUid(id);
-        String identifier = ""+id;
+        String identifier = tjUserModel.getExtendId();
         if(userSig==null){
             ImUserSig userSig1=new ImUserSig();
             String usersig= api.genSig(identifier, 30*86400);

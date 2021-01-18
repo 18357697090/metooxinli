@@ -15,6 +15,7 @@ import com.metoo.pojo.ps.model.PsConsultOrderModel;
 import com.metoo.pojo.ps.model.PsPourOutModel;
 import com.metoo.pojo.ps.model.PsPourOutOrderModel;
 import com.metoo.pojo.ps.vo.PsConsultOrderVo;
+import com.metoo.pojo.ps.vo.PsConsultVo;
 import com.metoo.pojo.ps.vo.PsPourOutVo;
 import com.metoo.pojo.tj.model.TjUserAccountCoinDetailModel;
 import com.metoo.pojo.tj.model.TjUserAccountDetailAddDetailModel;
@@ -126,5 +127,21 @@ public class PsPourOutOrderApiImpl implements PsPourOutOrderApi {
             }
             return Stream.of(model);
         }).collect(Collectors.toList()));
+    }
+
+    @Override
+    public String UnfinishedConsult(PsConsultVo vo) {
+        PsPourOutOrder psPourOutOrder = psPourOutOrderService.UnfinishedConsult(vo);
+        if (psPourOutOrder!=null){
+            Date x = new Date();
+            long y = x.getTime() - psPourOutOrder.getCreateTime().getTime();
+            if(y<3600000){
+                return"yes";
+            }else {
+                return "no";
+            }
+        }else {
+            return "no";
+        }
     }
 }

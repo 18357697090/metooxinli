@@ -21,7 +21,7 @@ public interface PsScaleMeasureRecordRepository extends JpaRepository<PsScaleMea
     Integer updateMeasure(@Param("uid") Integer uid,@Param("scaleId")  Integer scaleId);
 
     @Modifying
-    @Query(value = "update ps_scale_measure_record set `count`=`count`+1 where id= :id ",nativeQuery = true)
+    @Query(value = "update ps_scale_measure_record set `count`=`count`+1,'state'=1 where id= :id ",nativeQuery = true)
     Integer updateCount(@Param("id") Integer id);
 
     PsScaleMeasureRecord findByUidAndScaleId(Integer uid, Integer scaleId);

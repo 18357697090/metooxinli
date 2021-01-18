@@ -41,6 +41,7 @@ import java.util.List;
 @Component
 @DubboService
 @Transactional
+
 public class TjUserApiImpl implements TjUserApi {
 
     @Autowired
@@ -192,6 +193,11 @@ public class TjUserApiImpl implements TjUserApi {
         if(OU.isBlack(model))
             return RE.fail("没有该用户信息！");
         return RE.ok(model);
+    }
+
+    @Override
+    public TjUserModel getTjUser(Integer id) {
+        return mapper.map(tjUserService.getById(id),TjUserModel.class);
     }
 
     private TjUserModel getUserInfoInner(Integer userId) {

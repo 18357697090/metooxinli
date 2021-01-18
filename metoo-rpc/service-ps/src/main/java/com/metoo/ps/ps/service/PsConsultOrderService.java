@@ -13,4 +13,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface PsConsultOrderService extends IService<PsConsultOrder> {
 
+    PsConsultOrder UnfinishedConsult(Integer userId,Integer ConId);
 }
