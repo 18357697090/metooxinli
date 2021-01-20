@@ -18,5 +18,5 @@ import java.util.List;
 public interface PsScaleResultService extends IService<PsScaleResult> {
 
 
-    List<PsScaleResultModel> PsScaleResultModel(Integer scaleId);
+    List<PsScaleResultModel> getScaleResult(Integer scaleId);
 }

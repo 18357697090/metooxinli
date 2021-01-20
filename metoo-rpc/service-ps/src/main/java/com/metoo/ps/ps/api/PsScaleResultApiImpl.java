@@ -19,7 +19,7 @@ public class PsScaleResultApiImpl implements PsScaleResultApi {
     private PsScaleResultService psScaleResultService;
 
     @Override
-    public List<PsScaleResultModel> PsScaleResultModel(Integer scaleId) {
-        return psScaleResultService.PsScaleResultModel(scaleId);
+    public List<PsScaleResultModel> getScaleResult(Integer scaleId) {
+        return psScaleResultService.getScaleResult(scaleId);
     }
 }

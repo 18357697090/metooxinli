@@ -34,7 +34,7 @@ public class PsScaleResultServiceImpl extends ServiceImpl<PsScaleResultMapper, P
     private Mapper mapper;
 
     @Override
-    public List<PsScaleResultModel> PsScaleResultModel(Integer scaleId) {
+    public List<PsScaleResultModel> getScaleResult(Integer scaleId) {
         List<PsScaleResult> psScaleResults = psScaleResultRepository.findByScaleId(scaleId);
         if (OU.isBlack(psScaleResults)){
             return null;
