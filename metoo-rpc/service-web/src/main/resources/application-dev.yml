@@ -19,6 +19,13 @@ jwt:
 spring:
   application:
     name: metoo-web
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    password:
+    timeout: 1000
+
   activemq:
     user: admin
     password: admin
