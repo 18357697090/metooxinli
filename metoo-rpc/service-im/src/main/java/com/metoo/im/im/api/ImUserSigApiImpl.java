@@ -4,9 +4,12 @@ package com.metoo.im.im.api;
 import com.loongya.core.util.OU;
 import com.loongya.core.util.RE;
 import com.metoo.api.im.ImUserSigApi;
+import com.metoo.api.tj.TjUserApi;
 import com.metoo.im.im.dao.entity.ImUserSig;
 import com.metoo.im.im.service.ImUserSigService;
+import com.metoo.pojo.tj.model.TjUserModel;
 import com.tencentyun.TLSSigAPIv2;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -33,33 +36,33 @@ public class ImUserSigApiImpl implements ImUserSigApi {
     @Autowired
     private ImUserSigService imUserSigService;
 
+    @DubboReference
+    private TjUserApi tjUserApi;
+
     @Override
     public RE getusersig(Integer id) {
+        TjUserModel tjUserModel = tjUserApi.getTjUser(id);
         ImUserSig userSig=imUserSigService.findByUid(id);
-        String identifier = ""+id;
+        String identifier = tjUserModel.getExtendId();
         if(userSig==null){
             ImUserSig userSig1=new ImUserSig();
             String usersig= api.genSig(identifier, 30*86400);
             userSig1.setUid(id);
             userSig1.setUsersig(usersig);
+            userSig1.setCreateTime(new Date());
+            userSig1.setUpdateTime(new Date());
             imUserSigService.save(userSig1);
-            if (OU.isBlack(userSig)){
-                return RE.noData();
-            }
-            return RE.ok(userSig);
+            return RE.ok(usersig);
         }else {
             long a = userSig.getUpdateTime().getTime();
             Date date=new Date();
             long b=date.getTime()-a;
-            long c= 2292000000L;
+            long c= 2592000000L;
             if(b>c){
                 String usersig= api.genSig(identifier, 30*86400);
                 Date date1=new Date();
                 imUserSigService.updatausersig(usersig,date1,id);
-                if (OU.isBlack(userSig)){
-                    return RE.noData();
-                }
-                return RE.ok(userSig);
+                return RE.ok(usersig);
             }else {
                 return RE.ok(userSig.getUsersig());
             }

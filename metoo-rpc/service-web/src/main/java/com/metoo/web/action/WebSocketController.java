@@ -45,13 +45,14 @@ public class    WebSocketController extends TextWebSocketHandler {
     private static final Map<String, AppMessage> deliveryMessage = new ConcurrentHashMap<>();
 
     Repository repository=new Repository();
-    AppMessage appMessage = new AppMessage();
+
 
 
     @OnOpen
     public void connect(@PathParam("uid") Integer uid, Session session) throws Exception{
         System.out.println("open: "+uid+"  --  -- --  session："+session);
         //tomcat发送数据默认8192b，现在设置成1MB
+        AppMessage appMessage = new AppMessage();
         session.setMaxTextMessageBufferSize(5*1024*1024);
         session.setMaxBinaryMessageBufferSize(5*1024*1024);
         //获取加入房间的人的个人信息
@@ -76,6 +77,7 @@ public class    WebSocketController extends TextWebSocketHandler {
     @OnMessage
     public void receiveMsg(@PathParam("uid") Integer uid,String message, Session session) {
         try {
+            AppMessage appMessage = new AppMessage();
             ObjectMapper mapper = new ObjectMapper();
             appMessage = mapper.readValue(message,AppMessage.class);
             System.out.println("------收到"+appMessage.getType()+"消息----"+appMessage);
@@ -381,6 +383,7 @@ public class    WebSocketController extends TextWebSocketHandler {
 
     @OnClose
     public void disConnect(@PathParam("uid") Integer uid,Session session) throws Exception {
+        AppMessage appMessage = new AppMessage();
         System.out.println("disConnect : "+uid);
         boolean x = userSession.remove(uid,session);
         if(x){

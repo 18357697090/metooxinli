@@ -15,6 +15,7 @@ import com.metoo.pojo.ps.model.PsConsultOrderModel;
 import com.metoo.pojo.ps.model.PsPourOutModel;
 import com.metoo.pojo.ps.model.PsPourOutOrderModel;
 import com.metoo.pojo.ps.vo.PsConsultOrderVo;
+import com.metoo.pojo.ps.vo.PsConsultVo;
 import com.metoo.pojo.ps.vo.PsPourOutVo;
 import com.metoo.pojo.tj.model.TjUserAccountCoinDetailModel;
 import com.metoo.pojo.tj.model.TjUserAccountDetailAddDetailModel;
@@ -76,28 +77,28 @@ public class PsPourOutOrderApiImpl implements PsPourOutOrderApi {
         }
         // 判断用户余额是否充足
         TjUserAccountModel accountModel =tjUserAccountApi.findByUid(vo.getUserId());
-        if(accountModel.getPsCoin().compareTo(pojo.getPrices())<0){
+        if(accountModel.getPsCoin().compareTo(pojo.getPrice())<0){
             throw new LoongyaException("心理币不足");
         }
         // 修改余额
-        tjUserAccountApi.updatePsCoin(pojo.getPrices(), vo.getUserId());
+        tjUserAccountApi.updatePsCoin(pojo.getPrice(), vo.getUserId());
         // 明细添加  todo. need asyn
         TjUserAccountCoinDetailModel acModel = new TjUserAccountCoinDetailModel();
         acModel.setUid(vo.getUserId());
         acModel.setRemark("心理倾诉支出心理币");
-        acModel.setContent("心理倾诉,支出" + pojo.getPrices() + "兔币" + ", 心理倾诉师id:{" + pojo.getId() + "}" + "心理倾诉师名称: {" + pojo.getName() + "}");
-        acModel.setPrice(pojo.getPrices());
+        acModel.setContent("心理倾诉,支出" + pojo.getPrice() + "兔币" + ", 心理倾诉师id:{" + pojo.getId() + "}" + "心理倾诉师名称: {" + pojo.getName() + "}");
+        acModel.setPrice(pojo.getPrice());
         acModel.setAccountId(accountModel.getId());
         acModel.setType(ConstantUtil.TjUserAccountCoinDetailTypeEnum.BUY_POUROUT.getCode());
         acModel.setTypeName(ConstantUtil.TjUserAccountCoinDetailTypeEnum.BUY_POUROUT.getMsg());
-        acModel.setAfterPrice(accountModel.getPsCoin().subtract(pojo.getPrices()));
+        acModel.setAfterPrice(accountModel.getPsCoin().subtract(pojo.getPrice()));
         acModel.setPrePrice(accountModel.getPsCoin());
         tjUserAccountCoinDetailApi.insertDetails(acModel);
         // 新增倾诉订单
         PsPourOutOrder pourPojo = new PsPourOutOrder();
         pourPojo.setUpdateTime(new Date());
         pourPojo.setStatus(1);
-        pourPojo.setPrice(pojo.getPrices());
+        pourPojo.setPrice(pojo.getPrice());
         pourPojo.setCreateTime(new Date());
         pourPojo.setUserId(vo.getUserId());
         pourPojo.setPourId(vo.getPourId());
@@ -126,5 +127,21 @@ public class PsPourOutOrderApiImpl implements PsPourOutOrderApi {
             }
             return Stream.of(model);
         }).collect(Collectors.toList()));
+    }
+
+    @Override
+    public String UnfinishedConsult(PsConsultVo vo) {
+        PsPourOutOrder psPourOutOrder = psPourOutOrderService.UnfinishedConsult(vo);
+        if (psPourOutOrder!=null){
+            Date x = new Date();
+            long y = x.getTime() - psPourOutOrder.getCreateTime().getTime();
+            if(y<3600000){
+                return"yes";
+            }else {
+                return "no";
+            }
+        }else {
+            return "no";
+        }
     }
 }

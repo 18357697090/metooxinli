@@ -26,7 +26,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/ps/psPourOut")
-public class PsPourOutController {
+public class    PsPourOutController {
 
     @DubboReference
     private PsPourOutApi psPourOutApi;

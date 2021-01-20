@@ -3,6 +3,7 @@ package com.metoo.user.tj.service;
 import com.metoo.pojo.login.model.LoginModel;
 import com.metoo.pojo.login.vo.LoginVo;
 import com.metoo.pojo.tj.model.TjUserInfoModel;
+import com.metoo.pojo.tj.model.TjUserModel;
 import com.metoo.user.tj.dao.entity.TjUser;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.metoo.user.tj.dao.entity.TjUserInfo;
@@ -25,4 +26,5 @@ public interface TjUserService extends IService<TjUser> {
 
     Integer findByExtendId(Integer extendId);
     TjUser findByOpenId(String openId);
+
 }

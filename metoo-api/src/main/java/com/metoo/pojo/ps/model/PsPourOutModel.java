@@ -34,7 +34,7 @@ public class PsPourOutModel implements Serializable {
 
     private String content;
 
-    private BigDecimal prices;
+    private BigDecimal price;
 
     private String headImg;
 

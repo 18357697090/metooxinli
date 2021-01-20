@@ -6,6 +6,7 @@ import com.metoo.api.im.*;
 import com.metoo.api.order.ImGiftRecordApi;
 import com.metoo.api.ps.PsScaleOptionsApi;
 import com.metoo.api.ps.PsScaleProblemApi;
+import com.metoo.api.ps.PsScaleResultApi;
 import com.metoo.api.tj.TjUserAccountApi;
 import com.metoo.api.tj.TjUserAccountDetailApi;
 import com.metoo.api.tj.TjUserInfoApi;
@@ -15,6 +16,7 @@ import com.metoo.pojo.old.vo.ReturnGivingGiftDTO;
 import com.metoo.pojo.order.model.ImGiftRecordModel;
 import com.metoo.pojo.ps.model.PsScaleOptionsModel;
 import com.metoo.pojo.ps.model.PsScaleProblemModel;
+import com.metoo.pojo.ps.model.PsScaleResultModel;
 import com.metoo.pojo.tj.model.TjUserAccountDetailModel;
 import com.metoo.pojo.tj.model.TjUserAccountModel;
 import com.metoo.pojo.tj.model.TjUserInfoModel;
@@ -33,6 +35,8 @@ import java.util.List;
 @Component
 public class Repository {
 
+    @DubboReference
+    private PsScaleResultApi psScaleResultApi;
     @DubboReference
     private TjUserInfoApi tjUserInfoApi;
     @DubboReference
@@ -64,6 +68,12 @@ public class Repository {
     @PostConstruct
     public void init() {
         repository = this;
+    }
+
+
+    /**                          ps                             */
+    public List<PsScaleResultModel> getScaleResult(Integer scaleId){
+        return psScaleResultApi.getScaleResult(scaleId);
     }
 
     /**                          聊天室                             */

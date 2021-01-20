@@ -18,4 +18,6 @@ public interface PsConsultOrderApi {
     RE buyConsult(PsConsultOrderVo vo);
 
     RE psConsulOrdertList(PsConsultVo vo);
+
+    RE UnfinishedConsult(PsConsultVo vo);
 }

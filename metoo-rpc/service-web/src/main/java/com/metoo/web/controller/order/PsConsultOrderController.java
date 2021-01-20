@@ -50,5 +50,12 @@ public  class PsConsultOrderController {
         return psConsultOrderApi.psConsulOrdertList(vo);
     }
 
+    //判断是否有未完成的测量
+    @PostMapping("/UnfinishedConsult")
+    public RE UnfinishedConsult(PsConsultVo vo){
+        vo.setUserId(ThreadLocal.getUserId());
+        return psConsultOrderApi.UnfinishedConsult(vo);
+    }
+
 
 }

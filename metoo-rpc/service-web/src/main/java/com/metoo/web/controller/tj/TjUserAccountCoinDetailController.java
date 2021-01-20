@@ -16,4 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/tj/tjUserAccountCoinDetail")
 public class TjUserAccountCoinDetailController {
 
+
+
 }

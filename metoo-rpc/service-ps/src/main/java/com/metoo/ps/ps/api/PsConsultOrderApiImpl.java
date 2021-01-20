@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.loongya.core.util.*;
 import com.loongya.core.util.aliyun.OSSUtil;
 import com.metoo.api.ps.PsConsultOrderApi;
+import com.metoo.api.ps.PsPourOutApi;
+import com.metoo.api.ps.PsPourOutOrderApi;
 import com.metoo.api.tj.TjUserAccountApi;
 import com.metoo.api.tj.TjUserAccountCoinDetailApi;
 import com.metoo.api.tj.TjUserApi;
@@ -55,13 +57,16 @@ public class PsConsultOrderApiImpl implements PsConsultOrderApi {
     private TjUserAccountApi tjUserAccountApi;
 
     @DubboReference
+    private PsPourOutOrderApi psPourOutOrderApi;
+
+    @DubboReference
     private TjUserInfoApi tjUserInfoApi;
 
     @DubboReference
     private TjUserAccountCoinDetailApi tjUserAccountCoinDetailApi;
 
     @Override
-    public RE buyConsult(PsConsultOrderVo vo) {
+    public RE   buyConsult(PsConsultOrderVo vo) {
         // 判断咨询师是否在线
         PsConsult psConsult = psConsultService.getById(vo.getConsultId());
         if(OU.isBlack(psConsult)||psConsult.getOnLine() == 0 ){
@@ -120,5 +125,26 @@ public class PsConsultOrderApiImpl implements PsConsultOrderApi {
             }
             return Stream.of(model);
         }).collect(Collectors.toList()));
+    }
+
+    @Override
+    public RE UnfinishedConsult(PsConsultVo vo) {
+        PsConsultOrder psConsultOrder = psConsultOrderService.UnfinishedConsult(vo.getUserId(),vo.getConId());
+        String state = psPourOutOrderApi.UnfinishedConsult(vo);
+        if (state.equals("yes")){
+            return RE.ok("yes");
+        }else {
+            if (psConsultOrder!=null){
+                Date x = new Date();
+                long y = x.getTime() - psConsultOrder.getCreateTime().getTime();
+                if(y<3600000){
+                    return RE.ok("yes");
+                }else {
+                    return RE.ok("no");
+                }
+            }else {
+                return RE.ok("no");
+            }
+        }
     }
 }
