@@ -2,6 +2,7 @@ package com.metoo.web.config.tools;
 
 import com.metoo.pojo.ps.model.PsScaleOptionsModel;
 import com.metoo.pojo.ps.model.PsScaleProblemModel;
+import com.metoo.pojo.ps.model.PsScaleResultModel;
 
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ public class CalculateTheScore {
     public static String calculate(Result result){
         int scaleId=result.getScaleId();
         Repository repository=new Repository();
+        List<PsScaleResultModel> psScaleResultModels = repository.getScaleResult(scaleId);
         List<OptionsResult> results=result.getResults();
         PsScaleOptionsModel options = repository.findOptions(scaleId);
         List<PsScaleProblemModel> problem = repository.findProblem(scaleId);

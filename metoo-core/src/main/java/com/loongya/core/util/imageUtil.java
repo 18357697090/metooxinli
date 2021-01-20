@@ -10,8 +10,8 @@ import java.util.*;
 
 public class imageUtil {
 
-    //private static final String SAVE_PATH = "/usr/local/image/";
-    private static final String SAVE_PATH = "D:\\";
+    private static final String SAVE_PATH = "/usr/local/image/";
+//    private static final String SAVE_PATH = "D:\\";
 
     private static final List<String> ALLOW_TYPES= Arrays.asList("image/jpeg","image/png","image/bmp","image/jpg");
 

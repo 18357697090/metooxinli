@@ -17,7 +17,7 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Component
-@ServerEndpoint("/ps/{roomId}/{uid}")
+@ServerEndpoint("/wsps/{roomId}/{uid}")
 public class PsWebSocket {
 
     //<AudioRoomId,Set<uid>>

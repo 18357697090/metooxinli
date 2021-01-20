@@ -52,7 +52,7 @@ public class PsPourOut extends Model<PsPourOut> {
     private String content;
 
     @ApiModelProperty(value = "倾诉师的价格")
-    private BigDecimal prices;
+    private BigDecimal price;
 
     @ApiModelProperty(value = "倾诉师的头像")
     private String headImg;

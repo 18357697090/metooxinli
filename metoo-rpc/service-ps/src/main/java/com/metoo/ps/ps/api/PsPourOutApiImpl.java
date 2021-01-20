@@ -69,7 +69,7 @@ public class PsPourOutApiImpl implements PsPourOutApi {
     @Override
     public RE getPourList(PsPourOutVo vo) {
         PsPourOutIndexModel model = new PsPourOutIndexModel();
-        Pageable pageable = PageRequest.of(vo.getPagenum()-1,vo.getPagesize(), Sort.Direction.DESC,"prices");
+        Pageable pageable = PageRequest.of(vo.getPagenum()-1,vo.getPagesize(), Sort.Direction.DESC,"price");
         List<PsPourOutModel> modelList = psPourOutService.findByOnLine(1, pageable);
         modelList.stream().forEach(e->{
             e.setHeadImg(OSSUtil.fillPath(e.getHeadImg()));
