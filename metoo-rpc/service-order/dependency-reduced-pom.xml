@@ -48,7 +48,7 @@
               <mainClass>com.metoo.order.MetooOrderApplication</mainClass>
             </manifest>
             <manifestEntries>
-              <Class-Path>metooOrderconfig/</Class-Path>
+              <Class-Path>metooorderconfig/</Class-Path>
             </manifestEntries>
           </archive>
           <excludes>
